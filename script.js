@@ -1,127 +1,501 @@
-﻿const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
+﻿const STORAGE_KEY = "gts_profile_v2";
+const DAILY_QUESTIONS = 5;
 
-document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+const dataNode = document.querySelector("#quiz-data");
+const dailyDateNode = document.querySelector("#daily-date");
+const dailyStatusNode = document.querySelector("#daily-status");
+const dailyGameNode = document.querySelector("#daily-game");
+const leaderboardBody = document.querySelector("#leaderboard-body");
+const historyList = document.querySelector("#history-list");
+const resetTimerNode = document.querySelector("#reset-timer");
+const playersTodayNode = document.querySelector("#players-today");
 
-const immersiveNode = document.querySelector("#quiz-data");
-const appNode = document.querySelector("#quiz-app");
+const statStreak = document.querySelector("#stat-streak");
+const statBestStreak = document.querySelector("#stat-best-streak");
+const statAccuracy = document.querySelector("#stat-accuracy");
+const statRank = document.querySelector("#stat-rank");
 
-let quizData = null;
-let questionIndex = 0;
-let score = 0;
-let locked = false;
+const appState = {
+  quizData: null,
+  todayKey: "",
+  dailyQuestions: [],
+  inProgress: false,
+  locked: false,
+  questionIndex: 0,
+  score: 0,
+  startedAt: 0,
+  todayResult: null,
+  profile: null,
+  playerCount: 0
+};
 
-function getCorrectOption(question) {
-  return question.options.find((option) => option.isCorrect);
+function createDefaultProfile() {
+  return {
+    displayName: "You",
+    streakCurrent: 0,
+    streakBest: 0,
+    totalMatches: 0,
+    totalCorrect: 0,
+    totalAnswers: 0,
+    lastPlayedDate: "",
+    history: []
+  };
+}
+
+function toDateKey(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function getYesterdayKey(todayKey) {
+  const parts = todayKey.split("-").map(Number);
+  const date = new Date(parts[0], parts[1] - 1, parts[2]);
+  date.setDate(date.getDate() - 1);
+  return toDateKey(date);
+}
+
+function formatDate(dateKey) {
+  const [year, month, day] = dateKey.split("-");
+  return `${day}/${month}/${year}`;
+}
+
+function hashString(value) {
+  let hash = 2166136261;
+  for (let i = 0; i < value.length; i += 1) {
+    hash ^= value.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function mulberry32(seed) {
+  let t = seed >>> 0;
+  return function random() {
+    t += 0x6d2b79f5;
+    let x = Math.imul(t ^ (t >>> 15), 1 | t);
+    x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function shuffleWithRandom(list, random) {
+  const copy = [...list];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    const tmp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = tmp;
+  }
+  return copy;
+}
+
+function loadQuizData() {
+  if (!dataNode) return null;
+  try {
+    return JSON.parse(dataNode.textContent);
+  } catch (error) {
+    return null;
+  }
+}
+
+function loadProfile() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return createDefaultProfile();
+    const parsed = JSON.parse(raw);
+    return {
+      ...createDefaultProfile(),
+      ...parsed,
+      history: Array.isArray(parsed.history) ? parsed.history : []
+    };
+  } catch (error) {
+    return createDefaultProfile();
+  }
+}
+
+function saveProfile() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(appState.profile));
+}
+
+function buildDailyQuestionSet() {
+  const pool = appState.quizData.questions.map((question) => ({
+    ...question,
+    options: question.options.map((option) => ({ ...option }))
+  }));
+
+  const questionRandom = mulberry32(hashString(`${appState.todayKey}:questions`));
+  const daily = shuffleWithRandom(pool, questionRandom).slice(0, Math.min(DAILY_QUESTIONS, pool.length));
+
+  return daily.map((question) => {
+    const optionRandom = mulberry32(hashString(`${appState.todayKey}:${question.id}:options`));
+    return {
+      ...question,
+      options: shuffleWithRandom(question.options, optionRandom)
+    };
+  });
+}
+
+function getTodayResult() {
+  return appState.profile.history.find((entry) => entry.date === appState.todayKey) || null;
+}
+
+function getAccuracy() {
+  if (!appState.profile.totalAnswers) return 0;
+  return Math.round((appState.profile.totalCorrect / appState.profile.totalAnswers) * 100);
+}
+
+function randomPlayersCount() {
+  const random = mulberry32(hashString(`${appState.todayKey}:players`));
+  return 4200 + Math.floor(random() * 8600);
+}
+
+function updateCountdown() {
+  const now = new Date();
+  const midnight = new Date(now);
+  midnight.setHours(24, 0, 0, 0);
+  const diff = midnight.getTime() - now.getTime();
+
+  const totalSeconds = Math.max(0, Math.floor(diff / 1000));
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+  const seconds = String(totalSeconds % 60).padStart(2, "0");
+
+  if (resetTimerNode) resetTimerNode.textContent = `${hours}:${minutes}:${seconds}`;
+
+  const liveDate = toDateKey(new Date());
+  if (liveDate !== appState.todayKey) {
+    location.reload();
+  }
+}
+
+function renderProfileStats(playerRank) {
+  statStreak.textContent = String(appState.profile.streakCurrent);
+  statBestStreak.textContent = String(appState.profile.streakBest);
+  statAccuracy.textContent = `${getAccuracy()}%`;
+  statRank.textContent = playerRank ? `#${playerRank}` : "--";
+}
+
+function renderDailyStatus() {
+  const total = appState.dailyQuestions.length;
+
+  if (appState.inProgress) {
+    dailyStatusNode.innerHTML = `<p>Partida en curso. <strong>${appState.questionIndex + 1}/${total}</strong></p>`;
+    return;
+  }
+
+  if (appState.todayResult) {
+    dailyStatusNode.innerHTML = `
+      <p>Partida completada hoy.</p>
+      <p><strong>${appState.todayResult.score}/${appState.todayResult.total}</strong> (${appState.todayResult.percent}%)</p>
+    `;
+    return;
+  }
+
+  dailyStatusNode.innerHTML = `
+    <p>Una partida oficial al dia.</p>
+    <button id="daily-start" class="btn btn-primary" type="button">Empezar partida</button>
+  `;
+
+  const startButton = document.querySelector("#daily-start");
+  startButton.addEventListener("click", startDailyMatch);
+}
+
+function renderIdleState() {
+  dailyGameNode.innerHTML = `
+    <div class="daily-idle">
+      <h4>Daily Match preparado</h4>
+      <p>Responde ${appState.dailyQuestions.length} citas para registrar tu resultado oficial de hoy.</p>
+    </div>
+  `;
+}
+
+function renderLockedState() {
+  const remaining = resetTimerNode ? resetTimerNode.textContent : "--:--:--";
+  dailyGameNode.innerHTML = `
+    <div class="daily-locked">
+      <h4>Ya jugaste la partida de hoy</h4>
+      <p>Resultado: <strong>${appState.todayResult.score}/${appState.todayResult.total}</strong> (${appState.todayResult.percent}%).</p>
+      <p>Tu siguiente intento oficial se desbloquea en <strong>${remaining}</strong>.</p>
+    </div>
+  `;
 }
 
 function renderQuestion() {
-  const question = quizData.questions[questionIndex];
-  const progress = `${questionIndex + 1}/${quizData.questions.length}`;
+  const question = appState.dailyQuestions[appState.questionIndex];
+  const total = appState.dailyQuestions.length;
 
-  appNode.innerHTML = `
-    <div class="quiz-top">
-      <p class="quiz-progress">Question ${progress}</p>
-      <p class="quiz-score">Score: ${score}</p>
+  dailyGameNode.innerHTML = `
+    <div class="daily-head">
+      <p>Pregunta ${appState.questionIndex + 1}/${total}</p>
+      <p>Puntaje actual: ${appState.score}</p>
     </div>
-    <p class="quiz-theme">${question.theme}</p>
-    <blockquote class="quiz-quote">"${question.quote}"</blockquote>
-    <div class="quiz-options">
+    <p class="daily-theme">${question.theme}</p>
+    <blockquote class="daily-quote">"${question.quote}"</blockquote>
+    <div class="daily-options">
       ${question.options
         .map(
-          (option, idx) =>
-            `<button class="quiz-option" data-index="${idx}" type="button">${option.name}</button>`
+          (option, index) =>
+            `<button class="daily-option" data-index="${index}" type="button">${option.name}</button>`
         )
         .join("")}
     </div>
-    <div id="quiz-feedback" class="quiz-feedback"></div>
-    <button id="quiz-next" class="btn btn-outline quiz-next" type="button" disabled>Next</button>
+    <div id="daily-feedback" class="daily-feedback"></div>
+    <button id="daily-next" class="btn btn-outline daily-next" type="button" disabled>Siguiente</button>
   `;
 
-  appNode.querySelectorAll(".quiz-option").forEach((button) => {
+  dailyGameNode.querySelectorAll(".daily-option").forEach((button) => {
     button.addEventListener("click", () => onAnswer(button));
   });
-  appNode.querySelector("#quiz-next").addEventListener("click", onNext);
+
+  dailyGameNode.querySelector("#daily-next").addEventListener("click", onNextQuestion);
 }
 
 function onAnswer(button) {
-  if (locked) return;
-  locked = true;
+  if (appState.locked) return;
+  appState.locked = true;
 
-  const question = quizData.questions[questionIndex];
-  const pickedIndex = Number(button.dataset.index);
-  const pickedOption = question.options[pickedIndex];
-  const correctOption = getCorrectOption(question);
-  const feedbackNode = appNode.querySelector("#quiz-feedback");
+  const question = appState.dailyQuestions[appState.questionIndex];
+  const picked = question.options[Number(button.dataset.index)];
+  const correct = question.options.find((option) => option.isCorrect);
 
-  if (pickedOption.isCorrect) {
-    score += 1;
-  }
+  if (picked.isCorrect) appState.score += 1;
 
-  appNode.querySelectorAll(".quiz-option").forEach((optionButton, idx) => {
-    const option = question.options[idx];
+  dailyGameNode.querySelectorAll(".daily-option").forEach((optionButton, index) => {
+    const option = question.options[index];
     optionButton.disabled = true;
     optionButton.classList.add(option.isCorrect ? "is-correct" : "is-wrong");
   });
 
-  feedbackNode.innerHTML = `
-    <p class="quiz-result ${pickedOption.isCorrect ? "ok" : "bad"}">
-      ${pickedOption.isCorrect ? "Correct" : "Wrong"}.
-    </p>
-    <p class="quiz-rationale"><strong>Right answer:</strong> ${correctOption.name}. ${correctOption.rationale}</p>
-    ${
-      pickedOption.isCorrect
-        ? ""
-        : `<p class="quiz-rationale"><strong>Your pick:</strong> ${pickedOption.rationale}</p>`
-    }
+  const feedback = dailyGameNode.querySelector("#daily-feedback");
+  feedback.innerHTML = `
+    <p class="daily-result ${picked.isCorrect ? "ok" : "bad"}">${picked.isCorrect ? "Correcto" : "Incorrecto"}.</p>
+    <p><strong>Respuesta:</strong> ${correct.name}. ${correct.rationale}</p>
+    ${picked.isCorrect ? "" : `<p><strong>Tu eleccion:</strong> ${picked.rationale}</p>`}
   `;
 
-  appNode.querySelector("#quiz-next").disabled = false;
+  dailyGameNode.querySelector("#daily-next").disabled = false;
 }
 
-function onNext() {
-  questionIndex += 1;
-  locked = false;
+function onNextQuestion() {
+  appState.questionIndex += 1;
+  appState.locked = false;
 
-  if (questionIndex >= quizData.questions.length) {
-    const percent = Math.round((score / quizData.questions.length) * 100);
-    appNode.innerHTML = `
-      <div class="quiz-finish">
-        <h3>Final score</h3>
-        <p>You got <strong>${score}/${quizData.questions.length}</strong> (${percent}%).</p>
-        <button id="quiz-restart" class="btn btn-primary" type="button">Play again</button>
-      </div>
-    `;
-    appNode.querySelector("#quiz-restart").addEventListener("click", () => {
-      questionIndex = 0;
-      score = 0;
-      locked = false;
-      renderQuestion();
+  if (appState.questionIndex >= appState.dailyQuestions.length) {
+    finishDailyMatch();
+    return;
+  }
+
+  renderDailyStatus();
+  renderQuestion();
+}
+
+function saveTodayResult(result) {
+  const profile = appState.profile;
+  const existing = profile.history.find((entry) => entry.date === result.date);
+  if (existing) return;
+
+  const yesterday = getYesterdayKey(result.date);
+  if (!profile.lastPlayedDate) {
+    profile.streakCurrent = 1;
+  } else if (profile.lastPlayedDate === yesterday) {
+    profile.streakCurrent += 1;
+  } else if (profile.lastPlayedDate === result.date) {
+    return;
+  } else {
+    profile.streakCurrent = 1;
+  }
+
+  profile.streakBest = Math.max(profile.streakBest, profile.streakCurrent);
+  profile.lastPlayedDate = result.date;
+  profile.totalMatches += 1;
+  profile.totalCorrect += result.score;
+  profile.totalAnswers += result.total;
+  profile.history.unshift(result);
+  profile.history.sort((a, b) => b.date.localeCompare(a.date));
+  profile.history = profile.history.slice(0, 30);
+}
+
+function finishDailyMatch() {
+  const total = appState.dailyQuestions.length;
+  const percent = Math.round((appState.score / total) * 100);
+  const duration = Math.max(1, Math.round((Date.now() - appState.startedAt) / 1000));
+
+  const result = {
+    date: appState.todayKey,
+    score: appState.score,
+    total,
+    percent,
+    durationSec: duration
+  };
+
+  saveTodayResult(result);
+  saveProfile();
+
+  appState.inProgress = false;
+  appState.todayResult = getTodayResult();
+
+  dailyGameNode.innerHTML = `
+    <div class="daily-finish">
+      <h4>Partida terminada</h4>
+      <p>Hoy hiciste <strong>${result.score}/${result.total}</strong> (${result.percent}%).</p>
+      <p>Tiempo: <strong>${result.durationSec}s</strong>. Vuelve manana para extender tu racha.</p>
+    </div>
+  `;
+
+  const rank = renderLeaderboard();
+  renderProfileStats(rank);
+  renderDailyStatus();
+  renderHistory();
+}
+
+function startDailyMatch() {
+  if (appState.todayResult) {
+    renderDailyStatus();
+    renderLockedState();
+    return;
+  }
+
+  appState.inProgress = true;
+  appState.locked = false;
+  appState.questionIndex = 0;
+  appState.score = 0;
+  appState.startedAt = Date.now();
+
+  renderDailyStatus();
+  renderQuestion();
+}
+
+function formatSeconds(value) {
+  const minutes = Math.floor(value / 60);
+  const seconds = String(value % 60).padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
+function buildLeaderboardData() {
+  const names = [
+    "NovaFox",
+    "AtlasMind",
+    "RavenIQ",
+    "EchoPulse",
+    "SignalShift",
+    "OrbitNode",
+    "PixelJudge",
+    "DeltaVox",
+    "NeonTrace",
+    "MeritLoop",
+    "LogicLynx",
+    "RapidCore",
+    "ZenCipher",
+    "PrimeGauge",
+    "CobaltLine"
+  ];
+
+  const total = appState.dailyQuestions.length;
+  const random = mulberry32(hashString(`${appState.todayKey}:leaderboard`));
+  const rows = [];
+
+  for (let i = 0; i < 24; i += 1) {
+    const score = Math.max(1, Math.round(total * (0.45 + random() * 0.55)));
+    const durationSec = 35 + Math.floor(random() * 210);
+    rows.push({
+      name: names[Math.floor(random() * names.length)] + Math.floor(10 + random() * 90),
+      score,
+      durationSec,
+      isMe: false
     });
+  }
+
+  if (appState.todayResult) {
+    rows.push({
+      name: appState.profile.displayName,
+      score: appState.todayResult.score,
+      durationSec: appState.todayResult.durationSec,
+      isMe: true
+    });
+  }
+
+  rows.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return a.durationSec - b.durationSec;
+  });
+
+  return rows;
+}
+
+function renderLeaderboard() {
+  const total = appState.dailyQuestions.length;
+  const rows = buildLeaderboardData();
+  let myRank = null;
+
+  rows.forEach((row, index) => {
+    if (row.isMe) myRank = index + 1;
+  });
+
+  const topRows = rows.slice(0, 10);
+  const htmlRows = topRows
+    .map((row, index) => {
+      const label = row.isMe ? "You" : row.name;
+      const rowClass = row.isMe ? " class=\"me\"" : "";
+      return `<tr${rowClass}><td>${index + 1}</td><td>${label}</td><td>${row.score}/${total}</td><td>${formatSeconds(row.durationSec)}</td></tr>`;
+    })
+    .join("");
+
+  let myRow = "";
+  if (myRank && myRank > 10) {
+    const me = rows[myRank - 1];
+    myRow = `<tr><td colspan=\"4\">...</td></tr><tr class=\"me\"><td>${myRank}</td><td>You</td><td>${me.score}/${total}</td><td>${formatSeconds(me.durationSec)}</td></tr>`;
+  }
+
+  leaderboardBody.innerHTML = htmlRows + myRow;
+  return myRank;
+}
+
+function renderHistory() {
+  if (!appState.profile.history.length) {
+    historyList.innerHTML = "<li><span>No hay partidas aun.</span><span class=\"date\">Hoy puede ser la primera.</span></li>";
     return;
   }
 
-  renderQuestion();
+  historyList.innerHTML = appState.profile.history
+    .slice(0, 12)
+    .map(
+      (entry) =>
+        `<li><span><strong>${entry.score}/${entry.total}</strong> (${entry.percent}%)</span><span class=\"date\">${formatDate(entry.date)}</span></li>`
+    )
+    .join("");
 }
 
-function initQuiz() {
-  if (!immersiveNode || !appNode) return;
-  try {
-    quizData = JSON.parse(immersiveNode.textContent);
-  } catch (error) {
-    appNode.textContent = "Quiz data could not be loaded.";
+function init() {
+  appState.quizData = loadQuizData();
+  if (!appState.quizData || !Array.isArray(appState.quizData.questions) || !appState.quizData.questions.length) {
+    dailyGameNode.textContent = "No se pudo cargar la partida diaria.";
     return;
   }
 
-  renderQuestion();
+  appState.todayKey = toDateKey(new Date());
+  appState.profile = loadProfile();
+  appState.dailyQuestions = buildDailyQuestionSet();
+  appState.todayResult = getTodayResult();
+  appState.playerCount = randomPlayersCount();
+
+  if (dailyDateNode) dailyDateNode.textContent = `Fecha: ${formatDate(appState.todayKey)}`;
+  if (playersTodayNode) playersTodayNode.textContent = appState.playerCount.toLocaleString("en-US");
+
+  renderDailyStatus();
+  if (appState.todayResult) {
+    renderLockedState();
+  } else {
+    renderIdleState();
+  }
+
+  const rank = renderLeaderboard();
+  renderProfileStats(rank);
+  renderHistory();
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 }
 
-initQuiz();
+init();

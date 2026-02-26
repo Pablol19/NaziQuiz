@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GuessTheSpeaker — Quien Dijo La Frase</title>
+  <title>GuessTheSpeaker | Daily Match</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,125 +14,97 @@
   <div class="bg-orb orb-b"></div>
 
   <header class="topbar">
-    <div class="brand">
+    <a class="brand" href="#daily">
       <span class="brand-mark">GS</span>
       <span class="brand-name">GuessTheSpeaker</span>
-    </div>
+    </a>
     <nav class="nav">
-      <a href="#experiencia">Como jugar</a>
-      <a href="#contenido">Categorias</a>
-      <a href="#etica">Ética</a>
-      <a href="#probar" class="btn btn-ghost">Probar</a>
+      <a href="#daily">Partida diaria</a>
+      <a href="#ranking">Ranking</a>
+      <a href="#history">Historial</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="hero-text">
-        <p class="kicker">Pensamiento critico • Lenguaje • Contexto</p>
-        <h1>Un quiz para adivinar quien dijo cada frase.</h1>
-        <p class="lead">Compara declaraciones publicas y entrena criterio para detectar tono, narrativa y contexto.</p>
+      <div class="hero-copy">
+        <p class="kicker">Daily Match • Streak System • Competitive Board</p>
+        <h1>Juega una partida al dia, protege tu racha y sube en el ranking.</h1>
+        <p class="lead">Cada dia hay un set nuevo de frases. Tienes una oportunidad oficial para sumar puntos y mantener tu streak.</p>
         <div class="hero-actions">
-          <a href="#probar" class="btn btn-primary">Empezar ahora</a>
-          <a href="#contenido" class="btn btn-outline">Ver el contenido</a>
+          <a class="btn btn-primary" href="#daily">Jugar hoy</a>
+          <a class="btn btn-outline" href="#history">Ver mis dias anteriores</a>
         </div>
-        <div class="meta">
-          <span>Actualizado</span>
-          <span>•</span>
-          <span>Rondas rapidas y puntuacion en vivo</span>
-        </div>
-      </div>
-      <div class="hero-card" aria-hidden="true">
-        <div class="score">
-          <span class="score-title">Ronda</span>
-          <span class="score-big">07</span>
-          <span class="score-sub">5/8 correctas</span>
-        </div>
-        <div class="question">
-          <p class="question-label">Pregunta</p>
-          <p class="question-text">Who said this quote?</p>
-          <div class="answers">
-            <div class="answer">Donald Trump</div>
-            <div class="answer answer-active">Kanye West</div>
-            <div class="answer">Adolf Hitler</div>
-          </div>
+        <div class="hero-metrics">
+          <span class="metric-pill">Jugadores hoy: <strong id="players-today">-</strong></span>
+          <span class="metric-pill">Reset en <strong id="reset-timer">--:--:--</strong></span>
         </div>
       </div>
-    </section>
-
-    <section id="experiencia" class="section">
-      <div class="section-head">
-        <h2>Disenado para analizar discurso, no para glorificarlo.</h2>
-        <p>La idea es identificar autor, epoca y carga retorica con una mirada critica.</p>
-      </div>
-      <div class="grid">
-        <article class="card reveal">
-          <h3>Ronda directa</h3>
-          <p>Lees una frase, eliges entre Trump, Kanye o Hitler y ves el resultado al instante.</p>
+      <div class="hero-panel">
+        <article class="stat-card">
+          <p>Racha actual</p>
+          <strong id="stat-streak">0</strong>
         </article>
-        <article class="card reveal">
-          <h3>Puntaje inmediato</h3>
-          <p>El marcador te muestra aciertos por ronda para comparar resultados con amigos.</p>
+        <article class="stat-card">
+          <p>Mejor racha</p>
+          <strong id="stat-best-streak">0</strong>
         </article>
-        <article class="card reveal">
-          <h3>Fuentes trazables</h3>
-          <p>Cada frase debe estar asociada a una fuente verificable antes de publicarse.</p>
+        <article class="stat-card">
+          <p>Precision total</p>
+          <strong id="stat-accuracy">0%</strong>
+        </article>
+        <article class="stat-card">
+          <p>Posicion estimada</p>
+          <strong id="stat-rank">--</strong>
         </article>
       </div>
     </section>
 
-    <section id="contenido" class="section alt">
-      <div class="section-head">
-        <h2>Categorias del quiz</h2>
-        <p>Frases politicas y mediaticas para poner a prueba intuicion y lectura critica.</p>
+    <section id="daily" class="panel">
+      <div class="panel-head">
+        <div>
+          <p class="panel-kicker">Partida oficial del dia</p>
+          <h2 id="daily-title">Daily Match</h2>
+          <p id="daily-date" class="panel-sub">Fecha: -</p>
+        </div>
+        <div id="daily-status" class="daily-status"></div>
       </div>
-      <div class="timeline">
-        <div class="timeline-item reveal">
-          <span class="timeline-tag">Ronda 1</span>
-          <h3>Frases cortas</h3>
-          <p>Declaraciones breves para entrar rapido al juego.</p>
-        </div>
-        <div class="timeline-item reveal">
-          <span class="timeline-tag">Ronda 2</span>
-          <h3>Frases ambiguas</h3>
-          <p>Citas con tono similar para aumentar dificultad.</p>
-        </div>
-        <div class="timeline-item reveal">
-          <span class="timeline-tag">Ronda 3</span>
-          <h3>Contexto historico</h3>
-          <p>Incluye fecha y situacion para evaluar interpretacion.</p>
-        </div>
-        <div class="timeline-item reveal">
-          <span class="timeline-tag">Final</span>
-          <h3>Modo reto</h3>
-          <p>10 frases seguidas con tiempo limite.</p>
-        </div>
-      </div>
+      <div id="daily-game" class="daily-game" aria-live="polite"></div>
     </section>
 
-    <section id="etica" class="section">
-      <div class="section-head">
-        <h2>Compromiso etico</h2>
-        <p>El contenido se usa para analisis critico. No se promueve ideologia ni apologia.</p>
-      </div>
-      <div class="callout reveal">
-        <p>Si una frase es sensible, debe mostrarse con contexto y fuente para evitar normalizacion.</p>
-      </div>
-    </section>
-
-    <section id="probar" class="section cta">
-      <div class="quiz-shell">
-        <h2>Who said it? Trump, Hitler, or Ye</h2>
-        <p>Read the quote and choose the speaker. Explanations include source and date context.</p>
-        <div id="quiz-app" class="quiz-app" aria-live="polite">
-          <p>Loading quiz...</p>
+    <section id="ranking" class="panel split">
+      <article class="module">
+        <div class="module-head">
+          <h3>Ranking global de hoy</h3>
+          <p>Preview visual para modo competitivo diario.</p>
         </div>
-      </div>
+        <div class="table-wrap">
+          <table class="leaderboard" aria-label="Ranking diario">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Jugador</th>
+                <th>Aciertos</th>
+                <th>Tiempo</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article id="history" class="module">
+        <div class="module-head">
+          <h3>Log de dias anteriores</h3>
+          <p>Tus resultados recientes para seguir tu progreso.</p>
+        </div>
+        <ul id="history-list" class="history-list"></ul>
+      </article>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© 2026 GuessTheSpeaker. Quiz de frases con enfoque critico.</p>
+    <p>© 2026 GuessTheSpeaker. Daily quote challenge. Reset diario a medianoche local.</p>
   </footer>
 
   <immersive id="quiz-data">
@@ -323,4 +295,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
