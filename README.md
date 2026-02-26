@@ -1,4 +1,4 @@
-﻿# NaziQuiz
+﻿# MemoriaQuiz
 
 Sitio estático listo para GitHub Pages.
 
@@ -11,3 +11,4 @@ Sitio estático listo para GitHub Pages.
 
 ## Desarrollo local
 Abre `index.html` en el navegador.
+
