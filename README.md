@@ -1,4 +1,4 @@
-﻿# CitaClave
+﻿# GuessTheSpeaker
 
 Sitio estatico listo para GitHub Pages para un quiz de "quien dijo la frase".
 
@@ -11,5 +11,6 @@ Sitio estatico listo para GitHub Pages para un quiz de "quien dijo la frase".
 
 ## Desarrollo local
 Abre `index.html` en el navegador.
+
 
 
