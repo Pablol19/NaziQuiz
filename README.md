@@ -1,6 +1,6 @@
-﻿# MemoriaQuiz
+﻿# CitaClave
 
-Sitio estático listo para GitHub Pages.
+Sitio estatico listo para GitHub Pages para un quiz de "quien dijo la frase".
 
 ## Publicar en GitHub Pages
 1. Crea un repositorio en GitHub y sube estos archivos.
@@ -11,4 +11,5 @@ Sitio estático listo para GitHub Pages.
 
 ## Desarrollo local
 Abre `index.html` en el navegador.
+
 
