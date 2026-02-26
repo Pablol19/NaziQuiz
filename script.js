@@ -1,5 +1,6 @@
 ﻿const STORAGE_KEY = "gts_profile_v2";
-const DAILY_QUESTIONS = 5;
+const DAILY_QUESTIONS = 10;
+const SPEAKERS = ["Donald Trump", "Adolf Hitler", "Ye"];
 
 const dataNode = document.querySelector("#quiz-data");
 const dailyDateNode = document.querySelector("#daily-date");
@@ -91,13 +92,139 @@ function shuffleWithRandom(list, random) {
   return copy;
 }
 
-function loadQuizData() {
+function inferTheme(quote) {
+  const text = (quote || "").toLowerCase();
+  if (/god|chosen|destiny|providence|heaven/.test(text)) {
+    return "A. God complex / Messiah / Destiny";
+  }
+  if (/unfair|blame|fault|victim|persecut/.test(text)) {
+    return "B. Paranoia / Persecution / Victimhood";
+  }
+  if (/media|press|news|propaganda|truth|lie/.test(text)) {
+    return "C. Media hostility / Fake News / Propaganda";
+  }
+  if (/genius|greatest|best|smart|brain|number one|i\s+am/.test(text)) {
+    return "D. Extreme narcissism / self-aggrandizement";
+  }
+  if (/win|winner|loser|fight|force|strength|victor|brutal|defeat/.test(text)) {
+    return "E. Social Darwinism / winning at all costs / retaliation";
+  }
+  if (/dream|sleep|magnet|future|present|volcanic/.test(text)) {
+    return "F. Surreal metaphors / stream of consciousness";
+  }
+  if (/intellectual|school|book|education|professor|intelligence/.test(text)) {
+    return "G. Anti-intellectualism / instinct over academics";
+  }
+  return "H. Loyalty, purity, and mass manipulation";
+}
+
+function themeHint(theme) {
+  if (theme.startsWith("A")) return "messianic self-image";
+  if (theme.startsWith("B")) return "persecution framing";
+  if (theme.startsWith("C")) return "anti-media rhetoric";
+  if (theme.startsWith("D")) return "ego-heavy language";
+  if (theme.startsWith("E")) return "aggressive winner-take-all logic";
+  if (theme.startsWith("F")) return "surreal phrasing";
+  if (theme.startsWith("G")) return "anti-intellectual tone";
+  return "mass-influence language";
+}
+
+function makeDistractorRationale(optionName, actualSpeaker, theme) {
+  return `This can sound like ${optionName} because of ${themeHint(theme)}, but the documented source points to ${actualSpeaker}.`;
+}
+
+function parseInlineData() {
   if (!dataNode) return null;
   try {
     return JSON.parse(dataNode.textContent);
   } catch (error) {
     return null;
   }
+}
+
+function normalizeQuestion(rawQuestion, index) {
+  const quote = String(rawQuestion.quote || "").trim();
+  if (!quote) return null;
+
+  const theme = rawQuestion.theme || inferTheme(quote);
+
+  if (Array.isArray(rawQuestion.options) && rawQuestion.options.length) {
+    const options = rawQuestion.options.map((option) => ({
+      name: option.name,
+      isCorrect: Boolean(option.isCorrect),
+      rationale: option.rationale || ""
+    }));
+
+    const correct = options.find((option) => option.isCorrect);
+    const speaker = rawQuestion.speaker || (correct ? correct.name : "Unknown");
+    const context = rawQuestion.context || (correct ? correct.rationale : "");
+
+    return {
+      id: rawQuestion.id || index + 1,
+      quote,
+      theme,
+      speaker,
+      context,
+      options
+    };
+  }
+
+  const speaker = rawQuestion.speaker || rawQuestion.answer || "Unknown";
+  const context = rawQuestion.context || "Source listed in the question bank.";
+  const optionSeed = mulberry32(hashString(`options:${index}:${quote}`));
+
+  const options = shuffleWithRandom(
+    SPEAKERS.map((name) => ({
+      name,
+      isCorrect: name === speaker,
+      rationale:
+        name === speaker
+          ? `Correct. ${context}`
+          : makeDistractorRationale(name, speaker, theme)
+    })),
+    optionSeed
+  );
+
+  return {
+    id: rawQuestion.id || index + 1,
+    quote,
+    theme,
+    speaker,
+    context,
+    options
+  };
+}
+
+function normalizeQuizData(rawData) {
+  if (!rawData || !Array.isArray(rawData.questions)) return null;
+
+  const questions = rawData.questions
+    .map((question, index) => normalizeQuestion(question, index))
+    .filter(Boolean);
+
+  return {
+    title: rawData.title || "Who said it? Trump, Hitler, or Ye",
+    language: rawData.language || "English",
+    questions
+  };
+}
+
+async function loadQuizData() {
+  try {
+    const response = await fetch("question-bank.json", { cache: "no-store" });
+    if (response.ok) {
+      const remoteData = await response.json();
+      const normalizedRemote = normalizeQuizData(remoteData);
+      if (normalizedRemote && normalizedRemote.questions.length) {
+        return normalizedRemote;
+      }
+    }
+  } catch (error) {
+    // Fallback to inline data if remote file is not available.
+  }
+
+  const inlineData = parseInlineData();
+  return normalizeQuizData(inlineData);
 }
 
 function loadProfile() {
@@ -119,16 +246,67 @@ function saveProfile() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(appState.profile));
 }
 
+function buildBalancedDailyPool(pool, count) {
+  const groups = new Map();
+  SPEAKERS.forEach((speaker) => groups.set(speaker, []));
+
+  pool.forEach((question) => {
+    if (!groups.has(question.speaker)) groups.set(question.speaker, []);
+    groups.get(question.speaker).push(question);
+  });
+
+  groups.forEach((questions, speaker) => {
+    const random = mulberry32(hashString(`${appState.todayKey}:${speaker}:group`));
+    groups.set(speaker, shuffleWithRandom(questions, random));
+  });
+
+  const target = Math.min(count, pool.length);
+  const base = Math.floor(target / SPEAKERS.length);
+  const remainder = target % SPEAKERS.length;
+  const extraOrder = shuffleWithRandom(
+    [...SPEAKERS],
+    mulberry32(hashString(`${appState.todayKey}:speaker-order`))
+  );
+
+  const picks = [];
+  SPEAKERS.forEach((speaker) => {
+    const take = base + (extraOrder.indexOf(speaker) < remainder ? 1 : 0);
+    const bucket = groups.get(speaker) || [];
+    picks.push(...bucket.slice(0, take));
+    groups.set(speaker, bucket.slice(take));
+  });
+
+  if (picks.length < target) {
+    const leftovers = [];
+    groups.forEach((items) => leftovers.push(...items));
+    const random = mulberry32(hashString(`${appState.todayKey}:leftovers`));
+    picks.push(...shuffleWithRandom(leftovers, random).slice(0, target - picks.length));
+  }
+
+  return picks.slice(0, target);
+}
+
 function buildDailyQuestionSet() {
   const pool = appState.quizData.questions.map((question) => ({
     ...question,
     options: question.options.map((option) => ({ ...option }))
   }));
 
-  const questionRandom = mulberry32(hashString(`${appState.todayKey}:questions`));
-  const daily = shuffleWithRandom(pool, questionRandom).slice(0, Math.min(DAILY_QUESTIONS, pool.length));
+  const target = Math.min(DAILY_QUESTIONS, pool.length);
+  const hasSpeakers = pool.every((question) => question.speaker);
 
-  return daily.map((question) => {
+  let selected;
+  if (hasSpeakers) {
+    selected = buildBalancedDailyPool(pool, target);
+  } else {
+    const random = mulberry32(hashString(`${appState.todayKey}:questions`));
+    selected = shuffleWithRandom(pool, random).slice(0, target);
+  }
+
+  const orderRandom = mulberry32(hashString(`${appState.todayKey}:daily-order`));
+  const ordered = shuffleWithRandom(selected, orderRandom);
+
+  return ordered.map((question) => {
     const optionRandom = mulberry32(hashString(`${appState.todayKey}:${question.id}:options`));
     return {
       ...question,
@@ -437,7 +615,7 @@ function renderLeaderboard() {
   const htmlRows = topRows
     .map((row, index) => {
       const label = row.isMe ? "You" : row.name;
-      const rowClass = row.isMe ? " class=\"me\"" : "";
+      const rowClass = row.isMe ? ' class="me"' : "";
       return `<tr${rowClass}><td>${index + 1}</td><td>${label}</td><td>${row.score}/${total}</td><td>${formatSeconds(row.durationSec)}</td></tr>`;
     })
     .join("");
@@ -445,7 +623,7 @@ function renderLeaderboard() {
   let myRow = "";
   if (myRank && myRank > 10) {
     const me = rows[myRank - 1];
-    myRow = `<tr><td colspan=\"4\">...</td></tr><tr class=\"me\"><td>${myRank}</td><td>You</td><td>${me.score}/${total}</td><td>${formatSeconds(me.durationSec)}</td></tr>`;
+    myRow = `<tr><td colspan="4">...</td></tr><tr class="me"><td>${myRank}</td><td>You</td><td>${me.score}/${total}</td><td>${formatSeconds(me.durationSec)}</td></tr>`;
   }
 
   leaderboardBody.innerHTML = htmlRows + myRow;
@@ -454,7 +632,8 @@ function renderLeaderboard() {
 
 function renderHistory() {
   if (!appState.profile.history.length) {
-    historyList.innerHTML = "<li><span>No hay partidas aun.</span><span class=\"date\">Hoy puede ser la primera.</span></li>";
+    historyList.innerHTML =
+      '<li><span>No hay partidas aun.</span><span class="date">Hoy puede ser la primera.</span></li>';
     return;
   }
 
@@ -462,13 +641,13 @@ function renderHistory() {
     .slice(0, 12)
     .map(
       (entry) =>
-        `<li><span><strong>${entry.score}/${entry.total}</strong> (${entry.percent}%)</span><span class=\"date\">${formatDate(entry.date)}</span></li>`
+        `<li><span><strong>${entry.score}/${entry.total}</strong> (${entry.percent}%)</span><span class="date">${formatDate(entry.date)}</span></li>`
     )
     .join("");
 }
 
-function init() {
-  appState.quizData = loadQuizData();
+async function init() {
+  appState.quizData = await loadQuizData();
   if (!appState.quizData || !Array.isArray(appState.quizData.questions) || !appState.quizData.questions.length) {
     dailyGameNode.textContent = "No se pudo cargar la partida diaria.";
     return;
