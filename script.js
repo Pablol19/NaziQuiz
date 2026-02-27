@@ -1,6 +1,7 @@
 ﻿const STORAGE_KEY_BASE = "gts_profile_v4";
 const DAILY_QUESTIONS = 10;
 const ANSWER_TRANSITION_MS = 1800;
+const HOME_SWAP_MS = 260;
 
 /* ── Quiz Catalog (categories + quizzes) ── */
 const QUIZ_CATALOG = {
@@ -144,6 +145,8 @@ const dataNode = document.querySelector("#quiz-data");
 const dailyDateNode = document.querySelector("#daily-date");
 const dailyStatusNode = document.querySelector("#daily-status");
 const dailyGameNode = document.querySelector("#daily-game");
+const dailySectionNode = document.querySelector("#daily");
+const rankingSectionNode = document.querySelector("#ranking");
 const leaderboardBody = document.querySelector("#leaderboard-body");
 const historyList = document.querySelector("#history-list");
 const resetTimerNode = document.querySelector("#reset-timer");
@@ -160,7 +163,6 @@ const achievementsNode = document.querySelector("#achievements");
 const nextAchievementNode = document.querySelector("#next-achievement");
 const percentileChipNode = document.querySelector("#percentile-chip");
 const comebackPromptNode = document.querySelector("#comeback-prompt");
-const returnPromptNode = document.querySelector("#return-prompt");
 const trendChartNode = document.querySelector("#score-trend-chart");
 const rankingViewNode = document.querySelector("#ranking-view-mode");
 const rankingModeNode = document.querySelector("#ranking-mode");
@@ -192,12 +194,10 @@ const topThemeSelect = document.querySelector("#top-theme-select");
 const statStreak = document.querySelector("#stat-streak");
 const statBestStreak = document.querySelector("#stat-best-streak");
 const statAccuracy = document.querySelector("#stat-accuracy");
-const statRank = document.querySelector("#stat-rank");
 const statPercentile = document.querySelector("#stat-percentile");
 const statShield = document.querySelector("#stat-shield");
 const statLevel = document.querySelector("#stat-level");
 const statXp = document.querySelector("#stat-xp");
-const statRankDelta = document.querySelector("#stat-rank-delta");
 const streakFireNode = document.querySelector("#streak-fire");
 const streakStatCardNode = document.querySelector("#streak-stat-card");
 const xpBarNode = document.querySelector("#xp-bar");
@@ -851,10 +851,9 @@ function getStreakFireState(streak) {
 }
 
 function renderProfileStats(playerRank) {
-  statStreak.textContent = String(appState.profile.streakCurrent);
-  statBestStreak.textContent = String(appState.profile.streakBest);
-  statAccuracy.textContent = `${getAccuracy()}%`;
-  statRank.textContent = playerRank ? `#${playerRank}` : "--";
+  if (statStreak) statStreak.textContent = String(appState.profile.streakCurrent);
+  if (statBestStreak) statBestStreak.textContent = String(appState.profile.streakBest);
+  if (statAccuracy) statAccuracy.textContent = `${getAccuracy()}%`;
   if (statPercentile) statPercentile.textContent = appState.percentile ? `Top ${appState.percentile}%` : "--";
   if (statShield) statShield.textContent = appState.shieldAvailable ? "Disponible" : "Usado";
 
@@ -889,21 +888,6 @@ function renderProfileStats(playerRank) {
     badge.className = `league-badge tier-${tier.id}`;
     badge.textContent = tier.icon;
     badge.title = `Liga ${tier.name}`;
-  }
-
-  if (statRankDelta) {
-    statRankDelta.classList.remove("delta-up", "delta-down");
-    if (appState.rankDelta === null) {
-      statRankDelta.textContent = "--";
-    } else if (appState.rankDelta > 0) {
-      statRankDelta.textContent = `+${appState.rankDelta}`;
-      statRankDelta.classList.add("delta-up");
-    } else if (appState.rankDelta < 0) {
-      statRankDelta.textContent = `${appState.rankDelta}`;
-      statRankDelta.classList.add("delta-down");
-    } else {
-      statRankDelta.textContent = "0";
-    }
   }
 
   const fire = getStreakFireState(appState.profile.streakCurrent);
@@ -963,11 +947,6 @@ function renderInsights() {
     `;
   }
 
-  if (returnPromptNode) {
-    const rankHint = appState.percentile ? `Ventana de subida abierta: puedes mejorar tu top ${appState.percentile}%.` : "Ventana de subida abierta: hoy puedes escalar el ranking.";
-    returnPromptNode.textContent = rankHint;
-  }
-
   if (comebackPromptNode) {
     const recent = appState.profile.history.slice(0, 3);
     const drop = recent.length === 3 && recent[0].score < recent[1].score && recent[1].score < recent[2].score;
@@ -976,6 +955,7 @@ function renderInsights() {
 }
 
 function renderDailyStatus() {
+  if (!dailyStatusNode) return;
   const total = appState.dailyQuestions.length;
 
   if (appState.inProgress) {
@@ -991,6 +971,35 @@ function renderDailyStatus() {
   }
 
   dailyStatusNode.innerHTML = "";
+}
+
+function renderHomePrimarySection(animate = false) {
+  if (!dailySectionNode || !rankingSectionNode) return;
+  const hasPlayedToday = Boolean(appState.todayResult);
+  const showNode = hasPlayedToday ? rankingSectionNode : dailySectionNode;
+  const hideNode = hasPlayedToday ? dailySectionNode : rankingSectionNode;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const shouldAnimate = animate && !reducedMotion && !hideNode.classList.contains("is-hidden");
+
+  if (!shouldAnimate) {
+    dailySectionNode.classList.toggle("is-hidden", hasPlayedToday);
+    rankingSectionNode.classList.toggle("is-hidden", !hasPlayedToday);
+    dailySectionNode.classList.remove("panel-swap-enter", "panel-swap-enter-active", "panel-swap-exit");
+    rankingSectionNode.classList.remove("panel-swap-enter", "panel-swap-enter-active", "panel-swap-exit");
+    return;
+  }
+
+  showNode.classList.remove("is-hidden", "panel-swap-exit");
+  showNode.classList.add("panel-swap-enter");
+  requestAnimationFrame(() => showNode.classList.add("panel-swap-enter-active"));
+
+  hideNode.classList.remove("panel-swap-enter", "panel-swap-enter-active");
+  hideNode.classList.add("panel-swap-exit");
+  window.setTimeout(() => {
+    hideNode.classList.add("is-hidden");
+    hideNode.classList.remove("panel-swap-exit");
+    showNode.classList.remove("panel-swap-enter", "panel-swap-enter-active");
+  }, HOME_SWAP_MS);
 }
 
 function renderIdleState() {
@@ -1013,7 +1022,7 @@ function renderLockedState() {
       <h4>Ya jugaste la partida de hoy</h4>
       <p>Resultado: <strong>${appState.todayResult.score}/${appState.todayResult.total}</strong> (${appState.todayResult.percent}%).</p>
       <p>Tu siguiente intento oficial se desbloquea en <strong>${remaining}</strong>.</p>
-      <p><a class="btn btn-outline" href="#ranking">Ver ranking</a> <a class="btn btn-outline" href="#history">Ver historial</a></p>
+      <p><a class="btn btn-outline" href="#ranking">Ver ranking</a> <a class="btn btn-outline" href="estadisticas.html">Ver estadisticas</a></p>
       <div class="practice-banner">
         <span class="practice-note">Puedes seguir practicando sin afectar la partida oficial.</span>
         <button id="practice-start" class="btn btn-outline" type="button">Revancha no oficial</button>
@@ -1269,6 +1278,17 @@ function finishDailyMatch() {
       <p>Ranking: <strong>${rankDeltaText}</strong></p>
       <p>Racha actual: <strong>${appState.profile.streakCurrent}</strong> dia(s)</p>
       <p>Vs ayer: <strong class="${yesterdayDeltaClass}">${yesterdayDeltaText}</strong></p>
+      <div class="finish-mini-summary">
+        <div class="mini-item">
+          <span>Precision total</span>
+          <strong>${getAccuracy()}%</strong>
+        </div>
+        <div class="mini-item">
+          <span>Nivel</span>
+          <strong>Lv.${getLevelInfo(appState.profile.xp).level}</strong>
+          <div class="mini-xp"><span style="width:${getLevelInfo(appState.profile.xp).xpInLevel}%"></span></div>
+        </div>
+      </div>
       <div class="finish-streak-meter">
         <div class="finish-streak-bar is-cold"><span id="finish-streak-fill" style="width:0%"></span></div>
       </div>
@@ -1324,12 +1344,17 @@ function finishDailyMatch() {
     });
   }
   animateFinishStreakBar(appState.profile.streakCurrent);
+  const finishSummary = dailyGameNode.querySelector(".finish-mini-summary");
+  if (finishSummary) {
+    requestAnimationFrame(() => finishSummary.classList.add("is-visible"));
+  }
 
   renderProfileStats(ranking.myRank);
   renderDailyStatus();
   renderInsights();
   renderHistory();
   renderWeeklyLeague();
+  setTimeout(() => renderHomePrimarySection(true), 1400);
 }
 
 function startDailyMatch() {
@@ -1503,6 +1528,15 @@ function buildLeaderboardData() {
 }
 
 function renderLeaderboard() {
+  if (!leaderboardBody) {
+    appState.leaderboardRows = [];
+    appState.leaderboardSize = 0;
+    appState.bestScoreToday = 0;
+    appState.percentile = null;
+    if (percentileChipNode) percentileChipNode.textContent = "Percentil: --";
+    return { myRank: null, top10Cut: 0 };
+  }
+
   const total = appState.dailyQuestions.length;
   const rows = buildLeaderboardData();
   appState.leaderboardRows = rows;
@@ -1878,6 +1912,7 @@ function renderTrendChart() {
 }
 
 function renderHistory() {
+  if (!historyList) return;
   if (!appState.profile.history.length) {
     historyList.innerHTML = '<li><span>No hay partidas aun.</span><span class="date">Hoy puede ser la primera.</span></li>';
     renderWeeklySummary();
@@ -2196,7 +2231,7 @@ async function init() {
 
   appState.quizData = await loadQuizData(appState.quizId);
   if (!appState.quizData || !Array.isArray(appState.quizData.questions) || !appState.quizData.questions.length) {
-    dailyGameNode.textContent = "No se pudo cargar la partida diaria.";
+    if (dailyGameNode) dailyGameNode.textContent = "No se pudo cargar la partida diaria.";
     return;
   }
 
@@ -2220,11 +2255,13 @@ async function init() {
   if (dailyDateNode) dailyDateNode.textContent = `Fecha: ${formatDate(appState.todayKey)} `;
   if (playersTodayNode) playersTodayNode.textContent = appState.playerCount.toLocaleString("en-US");
 
-  renderDailyStatus();
-  if (appState.todayResult) {
-    renderLockedState();
-  } else {
-    renderIdleState();
+  if (dailyGameNode) {
+    renderDailyStatus();
+    if (appState.todayResult) {
+      renderLockedState();
+    } else {
+      renderIdleState();
+    }
   }
 
   const ranking = renderLeaderboard();
@@ -2239,6 +2276,7 @@ async function init() {
   renderInsights();
   renderHistory();
   renderWeeklyLeague();
+  renderHomePrimarySection(false);
 
   updateCountdown();
   setInterval(updateCountdown, 1000);

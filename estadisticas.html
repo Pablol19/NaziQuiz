@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GuessTheSpeaker | Estadisticas</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html#daily">
+      <span class="brand-mark">GS</span>
+      <span class="brand-name">GuessTheSpeaker</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html#daily">Partida diaria</a>
+      <a href="index.html#ranking">Ranking</a>
+      <a href="estadisticas.html">Estadisticas</a>
+      <a href="explore.html">Explorar</a>
+    </nav>
+    <div class="topbar-actions">
+      <select id="top-theme-select" class="top-theme-select" aria-label="Tema visual"></select>
+      <button id="social-toggle" class="btn btn-outline" type="button">Social</button>
+      <div class="profile-chip">
+        <span class="avatar-basic" aria-hidden="true">👤</span>
+        <span id="profile-name-chip">You</span>
+      </div>
+    </div>
+  </header>
+
+  <aside id="social-drawer" class="social-drawer" aria-hidden="true">
+    <div class="social-drawer-head">
+      <h3>Social</h3>
+      <button id="social-close" class="btn btn-outline" type="button">Cerrar</button>
+    </div>
+    <p class="panel-sub">Agrega y gestiona amigos para ranking privado.</p>
+    <div class="profile-row">
+      <input id="friend-name-input" type="text" maxlength="18" placeholder="Nombre de amigo" />
+      <button id="friend-add" class="btn btn-outline" type="button">Agregar</button>
+    </div>
+    <ul id="friends-list" class="history-list"></ul>
+    <hr />
+    <label for="profile-name-input">Nombre de jugador</label>
+    <div class="profile-row">
+      <input id="profile-name-input" type="text" maxlength="18" placeholder="Tu nombre" />
+      <button id="profile-save" class="btn btn-outline" type="button">Guardar</button>
+    </div>
+    <button id="avatar-pro" class="btn btn-outline" type="button" disabled>Cambiar avatar (Proximamente · Pro)</button>
+  </aside>
+  <div id="social-backdrop" class="social-backdrop" hidden></div>
+
+  <main>
+    <section id="history" class="panel">
+      <div class="module-head">
+        <h3>Estadisticas</h3>
+        <p>Consistencia de 14 dias, hitos y evolucion.</p>
+      </div>
+      <div id="weekly-summary" class="summary-card"></div>
+      <div id="ux-summary" class="summary-card"></div>
+      <div class="history-mid-row">
+        <article class="history-mid-card">
+          <h4>Actividad 14 dias</h4>
+          <div id="consistency-heatmap" class="consistency-heatmap" aria-label="Calendario de consistencia"></div>
+        </article>
+        <article class="history-mid-card">
+          <h4>Radar historico</h4>
+          <div id="history-radar" class="history-radar"></div>
+        </article>
+      </div>
+      <div id="history-insights-row" class="history-insights-row">
+        <article id="achievements-card" class="history-insight-card">
+          <h4>Logros</h4>
+          <div id="achievements" class="achievements"></div>
+        </article>
+        <article id="next-achievement-card" class="history-insight-card">
+          <h4>Proximo hito</h4>
+          <div id="next-achievement"></div>
+        </article>
+      </div>
+      <div class="trend-chart-wrap">
+        <svg id="score-trend-chart" class="score-trend-chart" viewBox="0 0 600 180"
+          aria-label="Evolucion de puntaje"></svg>
+      </div>
+      <div class="table-wrap">
+        <table class="leaderboard records-table" aria-label="Records personales">
+          <thead>
+            <tr>
+              <th>Quiz</th>
+              <th>Mejor score</th>
+              <th>Mejor tiempo</th>
+              <th>Mejor racha</th>
+            </tr>
+          </thead>
+          <tbody id="personal-records"></tbody>
+        </table>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 GuessTheSpeaker. Daily quote challenge. Reset diario a medianoche local.</p>
+  </footer>
+
+  <immersive id="quiz-data">
+{
+  "title": "Fallback",
+  "language": "English",
+  "questions": [
+    {
+      "id": 1,
+      "quote": "I alone can fix it.",
+      "speaker": "Donald Trump",
+      "context": "Fallback local question"
+    }
+  ]
+}
+  </immersive>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

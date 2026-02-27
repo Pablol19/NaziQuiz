@@ -25,7 +25,7 @@
     <nav class="nav">
       <a href="#daily">Partida diaria</a>
       <a href="#ranking">Ranking</a>
-      <a href="#history">Historial</a>
+      <a href="estadisticas.html">Estadisticas</a>
       <a href="explore.html">Explorar</a>
     </nav>
     <div class="topbar-actions">
@@ -70,16 +70,7 @@
       <div id="comeback-prompt" class="comeback-prompt" aria-live="polite"></div>
     </section>
 
-    <a href="explore.html" class="explore-banner">
-      <div class="explore-banner-bg"></div>
-      <div class="explore-banner-content">
-        <span class="explore-banner-label">MODOS DE PRÁCTICA</span>
-        <strong class="explore-banner-title">Explorar más quizzes</strong>
-      </div>
-      <span class="explore-banner-arrow">›</span>
-    </a>
-
-    <section id="ranking" class="panel">
+    <section id="ranking" class="panel is-hidden">
       <div class="module-head">
         <h3>Ranking</h3>
         <p id="ranking-view-hint">Top 5 del dia en Global o Amigos.</p>
@@ -93,7 +84,6 @@
           <span class="metric-pill">Jugadores hoy: <strong id="players-today">-</strong></span>
           <span class="metric-pill metric-risk">Tu racha se reinicia en <strong
               id="reset-timer">--:--:--</strong></span>
-          <span id="return-prompt" class="metric-pill">Ventana de subida abierta: hoy puedes escalar el ranking.</span>
         </div>
         <div class="ranking-controls">
           <div id="ranking-mode" class="quiz-segmented" role="tablist" aria-label="Modo de ranking">
@@ -140,10 +130,6 @@
             <strong id="stat-accuracy">0%</strong>
           </article>
           <article class="stat-card">
-            <p>Posicion estimada</p>
-            <strong id="stat-rank">--</strong>
-          </article>
-          <article class="stat-card">
             <p>Percentil hoy</p>
             <strong id="stat-percentile">--</strong>
           </article>
@@ -158,10 +144,6 @@
             <div class="xp-meter">
               <div id="xp-bar" class="xp-bar"></div>
             </div>
-          </article>
-          <article class="stat-card">
-            <p>Delta ranking</p>
-            <strong id="stat-rank-delta">--</strong>
           </article>
         </div>
       </div>
@@ -186,52 +168,15 @@
       </section>
     </section>
 
-    <section id="history" class="panel">
-      <div class="module-head">
-        <h3>Historial</h3>
-        <p>Consistencia de 14 dias, hitos y evolucion.</p>
+    <a href="explore.html" class="explore-banner">
+      <div class="explore-banner-bg"></div>
+      <div class="explore-banner-content">
+        <span class="explore-banner-label">MODOS DE PRÁCTICA</span>
+        <strong class="explore-banner-title">Explorar más quizzes</strong>
       </div>
-      <div id="weekly-summary" class="summary-card"></div>
-      <div id="ux-summary" class="summary-card"></div>
-      <div class="history-mid-row">
-        <article class="history-mid-card">
-          <h4>Actividad 14 dias</h4>
-          <div id="consistency-heatmap" class="consistency-heatmap" aria-label="Calendario de consistencia"></div>
-        </article>
-        <article class="history-mid-card">
-          <h4>Radar historico</h4>
-          <div id="history-radar" class="history-radar"></div>
-        </article>
-      </div>
-      <div id="history-insights-row" class="history-insights-row">
-        <article id="achievements-card" class="history-insight-card">
-          <h4>Logros</h4>
-          <div id="achievements" class="achievements"></div>
-        </article>
-        <article id="next-achievement-card" class="history-insight-card">
-          <h4>Proximo hito</h4>
-          <div id="next-achievement"></div>
-        </article>
-      </div>
-      <div class="trend-chart-wrap">
-        <svg id="score-trend-chart" class="score-trend-chart" viewBox="0 0 600 180"
-          aria-label="Evolucion de puntaje"></svg>
-      </div>
-      <div class="table-wrap">
-        <table class="leaderboard records-table" aria-label="Records personales">
-          <thead>
-            <tr>
-              <th>Quiz</th>
-              <th>Mejor score</th>
-              <th>Mejor tiempo</th>
-              <th>Mejor racha</th>
-            </tr>
-          </thead>
-          <tbody id="personal-records"></tbody>
-        </table>
-      </div>
-      <ul id="history-list" class="history-list"></ul>
-    </section>
+      <span class="explore-banner-arrow">›</span>
+    </a>
+
   </main>
 
   <footer class="footer">
