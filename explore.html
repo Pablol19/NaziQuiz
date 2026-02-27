@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GuessTheSpeaker | Explorar Modos</title>
+    <meta name="description"
+        content="Explora diferentes modos de quiz en GuessTheSpeaker. Practica con distintas temáticas y desbloquea nuevos retos." />
+    <link rel="stylesheet" href="explore.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+    <header class="ex-header">
+        <a class="ex-brand" href="index.html">
+            <span class="ex-brand-mark">GS</span>
+            <span class="ex-brand-name">GuessTheSpeaker</span>
+        </a>
+        <a class="ex-back" href="index.html">← Partida diaria</a>
+    </header>
+
+    <section class="ex-hero">
+        <h1>Explorar Modos</h1>
+        <p>Practica con diferentes quizzes. Solo el Daily Match cuenta para tu racha y ranking oficial.</p>
+    </section>
+
+    <main id="explore-grid" class="ex-grid">
+        <!-- Rendered by JS -->
+    </main>
+
+    <footer class="ex-footer">
+        <p>© 2026 GuessTheSpeaker. Modos de práctica — sin impacto en racha ni ranking.</p>
+    </footer>
+
+    <script>
+        /* ── Shared data (mirrors script.js catalog) ── */
+        const QUIZ_CATALOG = {
+            categories: [
+                {
+                    id: "politics",
+                    name: "Política & Poder",
+                    icon: "🏛️",
+                    quizzes: [
+                        { id: "classic", label: "Trump vs Hitler vs Ye", file: "question-bank.json", free: true },
+                        { id: "tye", label: "Trump vs Elon vs Ye", file: "question-bank-trump-elon-ye.json", free: true }
+                    ]
+                },
+                {
+                    id: "tech",
+                    name: "Tech Titans",
+                    icon: "💻",
+                    quizzes: [
+                        { id: "ejz", label: "Elon vs Jobs vs Zuck", file: "question-bank-elon-jobs-zuck.json", free: true }
+                    ]
+                }
+            ]
+        };
+
+        function hashString(value) {
+            let hash = 2166136261;
+            for (let i = 0; i < value.length; i++) {
+                hash ^= value.charCodeAt(i);
+                hash = Math.imul(hash, 16777619);
+            }
+            return hash >>> 0;
+        }
+
+        function toDateKey(date) {
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+        }
+
+        function getDailyQuizId() {
+            const allIds = [];
+            QUIZ_CATALOG.categories.forEach(c => c.quizzes.forEach(q => allIds.push(q.id)));
+            const hash = hashString(`daily-quiz-rotation:${toDateKey(new Date())}`);
+            return allIds[hash % allIds.length];
+        }
+
+        function getPlayerLevel() {
+            try {
+                const allIds = [];
+                QUIZ_CATALOG.categories.forEach(c => c.quizzes.forEach(q => allIds.push(q.id)));
+                // Check all quiz profiles for max XP
+                let maxXp = 0;
+                allIds.forEach(id => {
+                    try {
+                        const raw = localStorage.getItem(`gts_profile_v4:${id}`);
+                        if (raw) {
+                            const p = JSON.parse(raw);
+                            if ((p.xp || 0) > maxXp) maxXp = p.xp;
+                        }
+                    } catch (e) { /* skip */ }
+                });
+                return Math.floor(maxXp / 100) + 1;
+            } catch (e) { return 1; }
+        }
+
+        function renderExplore() {
+            const grid = document.getElementById("explore-grid");
+            if (!grid) return;
+
+            const dailyId = getDailyQuizId();
+            const playerLevel = getPlayerLevel();
+            let globalIndex = 0;
+
+            grid.innerHTML = QUIZ_CATALOG.categories.map(cat => {
+                const cards = cat.quizzes.map(q => {
+                    globalIndex++;
+                    const unlocked = q.free || playerLevel >= (q.unlockLevel || 999);
+                    const isDaily = q.id === dailyId;
+                    const lockTag = q.free ? "GRATIS" : (unlocked ? "DESBLOQUEADO" : `🔒 Lv.${q.unlockLevel || "?"}`);
+                    const tagClass = q.free ? "tag-free" : (unlocked ? "tag-unlocked" : "tag-locked");
+
+                    return `
+            <button class="ex-card${unlocked ? "" : " is-locked"}${isDaily ? " is-daily" : ""}"
+                    data-quiz="${q.id}" data-category="${cat.id}"
+                    ${unlocked ? "" : "disabled"} type="button">
+              <div class="card-art"></div>
+              ${isDaily ? '<span class="card-daily-badge">HOY</span>' : ""}
+              <span class="card-number">${globalIndex}</span>
+              <div class="card-content">
+                <span class="card-tag ${tagClass}">${lockTag}</span>
+                <span class="card-label">${q.label}</span>
+              </div>
+            </button>
+          `;
+                }).join("");
+
+                return `
+          <div class="ex-category">
+            <h3 class="ex-cat-title"><span class="cat-icon">${cat.icon}</span> ${cat.name}</h3>
+            <div class="ex-row">${cards}</div>
+          </div>
+        `;
+            }).join("");
+
+            // Click handler: navigate to main page with quiz param for practice
+            grid.querySelectorAll(".ex-card:not(.is-locked)").forEach(card => {
+                card.addEventListener("click", () => {
+                    const quizId = card.dataset.quiz;
+                    if (quizId) {
+                        window.location.href = `index.html?practice=${quizId}`;
+                    }
+                });
+            });
+        }
+
+        renderExplore();
+    </script>
+</body>
+
+</html>

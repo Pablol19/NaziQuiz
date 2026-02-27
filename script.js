@@ -1,16 +1,38 @@
 ﻿const STORAGE_KEY_BASE = "gts_profile_v4";
 const DAILY_QUESTIONS = 30;
-const QUIZ_CONFIGS = {
-  classic: {
-    label: "Trump vs Hitler vs Ye",
-    file: "question-bank.json"
-  },
-  tye: {
-    label: "Trump vs Elon vs Ye",
-    file: "question-bank-trump-elon-ye.json"
-  }
+const ANSWER_TRANSITION_MS = 1800;
+
+/* ── Quiz Catalog (categories + quizzes) ── */
+const QUIZ_CATALOG = {
+  categories: [
+    {
+      id: "politics",
+      name: "🏛️ Política & Poder",
+      quizzes: [
+        { id: "classic", label: "Trump vs Hitler vs Ye", file: "question-bank.json", free: true },
+        { id: "tye", label: "Trump vs Elon vs Ye", file: "question-bank-trump-elon-ye.json", free: true }
+      ]
+    },
+    {
+      id: "tech",
+      name: "💻 Tech Titans",
+      quizzes: [
+        { id: "ejz", label: "Elon vs Jobs vs Zuck", file: "question-bank-elon-jobs-zuck.json", free: true }
+      ]
+    }
+  ]
 };
-const DEFAULT_QUIZ_ID = "classic";
+
+// Derived flat lookup for backward compatibility
+const QUIZ_CONFIGS = {};
+QUIZ_CATALOG.categories.forEach(cat => {
+  cat.quizzes.forEach(q => {
+    QUIZ_CONFIGS[q.id] = { label: q.label, file: q.file };
+  });
+});
+
+const ALL_QUIZ_IDS = Object.keys(QUIZ_CONFIGS);
+const DEFAULT_QUIZ_ID = ALL_QUIZ_IDS[0] || "classic";
 const STREAK_MILESTONES = [3, 7, 14, 30];
 const MYSTERY_REWARDS = ["Fire Badge", "Neon Crown", "Iron Mind", "Night Owl", "Gold Pulse"];
 const FRIEND_NAMES = ["Ari", "Noa", "Sergi", "Luna", "Mia", "Diego", "Vera", "Iris", "Nico", "Alex"];
@@ -106,7 +128,7 @@ const leaderboardBody = document.querySelector("#leaderboard-body");
 const historyList = document.querySelector("#history-list");
 const resetTimerNode = document.querySelector("#reset-timer");
 const playersTodayNode = document.querySelector("#players-today");
-const quizSelectorNode = document.querySelector("#quiz-selector");
+// quiz-selector removed — daily quiz auto-rotates
 
 const goalCardNode = document.querySelector("#goal-card");
 const streakCardNode = document.querySelector("#streak-card");
@@ -191,15 +213,19 @@ const appState = {
   consecutiveCorrect: 0
 };
 
+function getDailyQuizId(dateKey) {
+  const hash = hashString(`daily-quiz-rotation:${dateKey}`);
+  return ALL_QUIZ_IDS[hash % ALL_QUIZ_IDS.length];
+}
+
+function isQuizUnlocked(quizEntry, playerLevel) {
+  if (quizEntry.free) return true;
+  return playerLevel >= (quizEntry.unlockLevel || 999);
+}
+
 function getSelectedQuizId() {
-  const params = new URLSearchParams(window.location.search);
-  const paramQuiz = params.get("quiz");
-  if (paramQuiz && QUIZ_CONFIGS[paramQuiz]) return paramQuiz;
-
-  const localQuiz = localStorage.getItem("gts_selected_quiz");
-  if (localQuiz && QUIZ_CONFIGS[localQuiz]) return localQuiz;
-
-  return DEFAULT_QUIZ_ID;
+  // For official daily matches, always use the rotation
+  return getDailyQuizId(toDateKey(new Date()));
 }
 
 function getStorageKey() {
@@ -1069,7 +1095,7 @@ function onAnswer(button) {
     if (appState.inProgress && appState.locked && appState.questionIndex === currentIndex) {
       onNextQuestion();
     }
-  }, 850);
+  }, ANSWER_TRANSITION_MS);
 }
 
 function onNextQuestion() {
@@ -1859,20 +1885,82 @@ function renderHistory() {
   renderWeeklyLeague();
 }
 
-function initQuizSelector() {
-  if (!quizSelectorNode) return;
-  const tabs = [...quizSelectorNode.querySelectorAll(".quiz-tab")];
+function renderExplorePanel() {
+  const exploreGrid = document.querySelector("#explore-grid");
+  if (!exploreGrid) return;
 
-  tabs.forEach((tab) => {
-    tab.classList.toggle("is-active", tab.dataset.quiz === appState.quizId);
-    tab.addEventListener("click", () => {
-      const selected = tab.dataset.quiz;
-      if (!selected || selected === appState.quizId) return;
-      const params = new URLSearchParams(window.location.search);
-      params.set("quiz", selected);
-      window.location.href = `${window.location.pathname}?${params.toString()}`;
+  const playerLevel = getLevelInfo(appState.profile.xp).level;
+
+  exploreGrid.innerHTML = QUIZ_CATALOG.categories.map(cat => {
+    const cards = cat.quizzes.map(q => {
+      const unlocked = isQuizUnlocked(q, playerLevel);
+      const isDaily = q.id === appState.quizId;
+      const lockTag = q.free ? 'GRATIS' : (unlocked ? 'DESBLOQUEADO' : `\uD83D\uDD12 Lv.${q.unlockLevel || '?'}`);
+      const tagClass = q.free ? 'tag-free' : (unlocked ? 'tag-unlocked' : 'tag-locked');
+      return `
+        <button class="explore-card${unlocked ? '' : ' is-locked'}${isDaily ? ' is-daily' : ''}" 
+                data-quiz="${q.id}" ${unlocked ? '' : 'disabled'} type="button">
+          <span class="card-tag ${tagClass}">${lockTag}</span>
+          ${isDaily ? '<span class="card-daily-badge">HOY</span>' : ''}
+          <span class="card-label">${q.label}</span>
+        </button>
+      `;
+    }).join('');
+
+    return `
+      <div class="explore-category">
+        <h3 class="explore-cat-title">${cat.name}</h3>
+        <div class="explore-row">${cards}</div>
+      </div>
+    `;
+  }).join('');
+
+  exploreGrid.querySelectorAll('.explore-card:not(.is-locked)').forEach(card => {
+    card.addEventListener('click', () => {
+      const quizId = card.dataset.quiz;
+      if (quizId) startExploreMatch(quizId);
     });
   });
+}
+
+async function startExploreMatch(quizId) {
+  const quizConfig = QUIZ_CONFIGS[quizId];
+  if (!quizConfig) return;
+
+  const quizData = await loadQuizData(quizId);
+  if (!quizData || !quizData.questions.length) return;
+
+  // Switch to the daily panel to show the game
+  document.querySelectorAll('.nav a').forEach(a => a.classList.remove('is-active'));
+  const dailyPanel = document.querySelector('#daily');
+  const explorePanel = document.querySelector('#explore');
+  if (dailyPanel) dailyPanel.style.display = '';
+  if (explorePanel) explorePanel.style.display = 'none';
+  window.location.hash = 'daily';
+
+  // Set up practice match with the selected quiz
+  appState.quizData = quizData;
+  appState.speakers = getSpeakerList(quizData.questions);
+  appState.practiceMode = true;
+  appState.inProgress = true;
+  appState.locked = false;
+  appState.questionIndex = 0;
+  appState.score = 0;
+  appState.consecutiveCorrect = 0;
+  appState.startedAt = Date.now();
+
+  const pool = quizData.questions.map(q => ({ ...q, options: q.options.map(o => ({ ...o })) }));
+  const random = mulberry32(hashString(`${Date.now()}:${Math.random()}:explore`));
+  appState.dailyQuestions = shuffleWithRandom(pool, random).slice(0, Math.min(DAILY_QUESTIONS, pool.length)).map(q => ({
+    ...q, options: shuffleWithRandom(q.options, mulberry32(hashString(`${q.id}:${Math.random()}`)))
+  }));
+
+  const dailyTitle = document.querySelector('#daily-title');
+  if (dailyTitle) dailyTitle.textContent = `Pr\u00e1ctica \u00b7 ${quizConfig.label}`;
+
+  trackMetric('practiceStarts', 1);
+  renderDailyStatus();
+  renderQuestion();
 }
 
 function rerenderCompetitiveViews() {
@@ -2087,7 +2175,6 @@ async function init() {
   appState.playerCount = randomPlayersCount();
 
   updateDerivedState();
-  initQuizSelector();
   initRankingControls();
   initProfileControls();
   renderProfileChip();
@@ -2095,7 +2182,7 @@ async function init() {
 
   const quizLabel = QUIZ_CONFIGS[appState.quizId]?.label || "";
   const dailyTitle = document.querySelector("#daily-title");
-  if (dailyTitle && quizLabel) dailyTitle.textContent = `Daily Match · ${quizLabel} `;
+  if (dailyTitle && quizLabel) dailyTitle.textContent = `Daily Match \u00b7 ${quizLabel}`;
   if (dailyDateNode) dailyDateNode.textContent = `Fecha: ${formatDate(appState.todayKey)} `;
   if (playersTodayNode) playersTodayNode.textContent = appState.playerCount.toLocaleString("en-US");
 
@@ -2129,6 +2216,14 @@ async function init() {
       clearSessionState();
     }
   });
+
+  // Auto-start practice match if arriving from explore page
+  const params = new URLSearchParams(window.location.search);
+  const practiceQuizId = params.get("practice");
+  if (practiceQuizId && QUIZ_CONFIGS[practiceQuizId]) {
+    history.replaceState(null, "", window.location.pathname);
+    startExploreMatch(practiceQuizId);
+  }
 }
 
 init();

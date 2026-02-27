@@ -1,5 +1,6 @@
 ﻿<!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,8 +8,11 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 </head>
+
 <body>
   <div class="bg-orb orb-a"></div>
   <div class="bg-orb orb-b"></div>
@@ -22,6 +26,7 @@
       <a href="#daily">Partida diaria</a>
       <a href="#ranking">Ranking</a>
       <a href="#history">Historial</a>
+      <a href="explore.html">Explorar</a>
     </nav>
     <div class="topbar-actions">
       <button id="social-toggle" class="btn btn-outline" type="button">Social</button>
@@ -58,10 +63,6 @@
         <div>
           <h2 id="daily-title">Daily Match</h2>
           <p id="daily-date" class="panel-sub">Fecha: -</p>
-          <div id="quiz-selector" class="quiz-segmented" role="tablist" aria-label="Seleccionar quiz">
-            <button type="button" class="quiz-tab" data-quiz="classic">Trump vs Hitler vs Ye</button>
-            <button type="button" class="quiz-tab" data-quiz="tye">Trump vs Elon vs Ye</button>
-          </div>
           <div id="daily-status" class="daily-status"></div>
         </div>
       </div>
@@ -87,7 +88,8 @@
       <div id="ranking-daily-view">
         <div class="hero-metrics">
           <span class="metric-pill">Jugadores hoy: <strong id="players-today">-</strong></span>
-          <span class="metric-pill metric-risk">Tu racha se reinicia en <strong id="reset-timer">--:--:--</strong></span>
+          <span class="metric-pill metric-risk">Tu racha se reinicia en <strong
+              id="reset-timer">--:--:--</strong></span>
           <span id="return-prompt" class="metric-pill">Ventana de subida abierta: hoy puedes escalar el ranking.</span>
         </div>
         <div class="ranking-controls">
@@ -105,7 +107,8 @@
             <button id="ranking-search-btn" class="btn btn-outline" type="button">Buscar</button>
           </div>
         </div>
-        <p id="ranking-search-result" class="ranking-search-result">Busca un jugador para ver su posicion en este ranking.</p>
+        <p id="ranking-search-result" class="ranking-search-result">Busca un jugador para ver su posicion en este
+          ranking.</p>
         <div class="table-wrap">
           <table class="leaderboard" aria-label="Ranking top 5">
             <thead>
@@ -208,7 +211,8 @@
         </article>
       </div>
       <div class="trend-chart-wrap">
-        <svg id="score-trend-chart" class="score-trend-chart" viewBox="0 0 600 180" aria-label="Evolucion de puntaje"></svg>
+        <svg id="score-trend-chart" class="score-trend-chart" viewBox="0 0 600 180"
+          aria-label="Evolucion de puntaje"></svg>
       </div>
       <div class="table-wrap">
         <table class="leaderboard records-table" aria-label="Records personales">
@@ -232,190 +236,193 @@
   </footer>
 
   <immersive id="quiz-data">
-{
-  "title": "Who said it? Trump, Hitler, or Ye",
-  "language": "English",
-  "questions": [
     {
-      "id": 1,
-      "theme": "A. God complex / Messiah / Destiny",
-      "quote": "I alone can fix it.",
-      "options": [
-        {
-          "name": "Donald Trump",
-          "isCorrect": true,
-          "rationale": "Correct. Said in his Republican National Convention acceptance speech in Cleveland on July 21, 2016."
-        },
-        {
-          "name": "Adolf Hitler",
-          "isCorrect": false,
-          "rationale": "It sounds like one-man savior rhetoric, but this exact line is not from Hitler."
-        },
-        {
-          "name": "Ye",
-          "isCorrect": false,
-          "rationale": "Ye often uses grand self-myth language, but this exact quote is Trump's convention line."
-        }
-      ]
+    "title": "Who said it? Trump, Hitler, or Ye",
+    "language": "English",
+    "questions": [
+    {
+    "id": 1,
+    "theme": "A. God complex / Messiah / Destiny",
+    "quote": "I alone can fix it.",
+    "options": [
+    {
+    "name": "Donald Trump",
+    "isCorrect": true,
+    "rationale": "Correct. Said in his Republican National Convention acceptance speech in Cleveland on July 21, 2016."
     },
     {
-      "id": 2,
-      "theme": "B. Paranoia / Persecution / Victimhood",
-      "quote": "What you're seeing and what you're reading is not what's happening.",
-      "options": [
-        {
-          "name": "Donald Trump",
-          "isCorrect": true,
-          "rationale": "Correct. Said at the Veterans of Foreign Wars convention in Kansas City on July 24, 2018."
-        },
-        {
-          "name": "Adolf Hitler",
-          "isCorrect": false,
-          "rationale": "Reality-reversal framing fits authoritarian language, but this exact quote is Trump."
-        },
-        {
-          "name": "Ye",
-          "isCorrect": false,
-          "rationale": "Ye challenges narratives too, but this precise sentence and event match Trump."
-        }
-      ]
+    "name": "Adolf Hitler",
+    "isCorrect": false,
+    "rationale": "It sounds like one-man savior rhetoric, but this exact line is not from Hitler."
     },
     {
-      "id": 3,
-      "theme": "C. Media hostility / Fake News / Propaganda",
-      "quote": "The FAKE NEWS media is the enemy of the American People!",
-      "options": [
-        {
-          "name": "Donald Trump",
-          "isCorrect": true,
-          "rationale": "Correct. Posted on Trump's Twitter account on February 17, 2017."
-        },
-        {
-          "name": "Adolf Hitler",
-          "isCorrect": false,
-          "rationale": "Enemy framing sounds similar, but this wording and casing are modern Trump style."
-        },
-        {
-          "name": "Ye",
-          "isCorrect": false,
-          "rationale": "Ye attacks media too, but this exact phrase is Trump's."
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "theme": "D. Extreme narcissism / bragging",
-      "quote": "I am Shakespeare in the flesh.",
-      "options": [
-        {
-          "name": "Donald Trump",
-          "isCorrect": false,
-          "rationale": "Trump brags often, but this artistic self-crowning line is not his."
-        },
-        {
-          "name": "Adolf Hitler",
-          "isCorrect": false,
-          "rationale": "Grandiosity fits, but the modern pop-culture tone points elsewhere."
-        },
-        {
-          "name": "Ye",
-          "isCorrect": true,
-          "rationale": "Correct. Said by Ye in the 'Sway in the Morning' interview on November 26, 2013."
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "theme": "E. Win-at-all-costs / retaliation logic",
-      "quote": "If somebody screws you, screw them back in spades.",
-      "options": [
-        {
-          "name": "Donald Trump",
-          "isCorrect": true,
-          "rationale": "Correct. From Trump's book The Art of the Deal (1987)."
-        },
-        {
-          "name": "Adolf Hitler",
-          "isCorrect": false,
-          "rationale": "The harsh revenge tone can mislead, but this quote is a Trump business-era line."
-        },
-        {
-          "name": "Ye",
-          "isCorrect": false,
-          "rationale": "Ye can be confrontational, but this exact phrase is not his."
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "theme": "F. Surreal metaphors / emotional mass imagery",
-      "quote": "All great movements are popular movements. They are the volcanic eruptions of human passions and emotions.",
-      "options": [
-        {
-          "name": "Donald Trump",
-          "isCorrect": false,
-          "rationale": "Populist tone overlaps, but the high-literary metaphor and source do not match Trump."
-        },
-        {
-          "name": "Adolf Hitler",
-          "isCorrect": true,
-          "rationale": "Correct. From Mein Kampf, Volume I, first published in 1925."
-        },
-        {
-          "name": "Ye",
-          "isCorrect": false,
-          "rationale": "Ye uses vivid imagery, but this exact line is from Hitler's text."
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "theme": "G. Anti-intellectualism / instinct over academics",
-      "quote": "All propaganda must be popular and its intellectual level must be adjusted to the most limited intelligence among those to whom it is addressed.",
-      "options": [
-        {
-          "name": "Donald Trump",
-          "isCorrect": false,
-          "rationale": "Simple-message strategy fits, but this is formal propaganda doctrine, not Trump's wording."
-        },
-        {
-          "name": "Adolf Hitler",
-          "isCorrect": true,
-          "rationale": "Correct. From Mein Kampf, Volume I, Chapter 6, published in 1925."
-        },
-        {
-          "name": "Ye",
-          "isCorrect": false,
-          "rationale": "Anti-elite tone can resemble Ye, but this systematic formulation is not his."
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "theme": "H. Loyalty / purity / mass manipulation",
-      "quote": "I like Hitler.",
-      "options": [
-        {
-          "name": "Donald Trump",
-          "isCorrect": false,
-          "rationale": "Provocative style can confuse the guess, but this exact statement is not Trump's."
-        },
-        {
-          "name": "Adolf Hitler",
-          "isCorrect": false,
-          "rationale": "It refers to Hitler in third person, so it cannot be Hitler quoting himself."
-        },
-        {
-          "name": "Ye",
-          "isCorrect": true,
-          "rationale": "Correct. Said by Ye on the Alex Jones show on December 1, 2022."
-        }
-      ]
+    "name": "Ye",
+    "isCorrect": false,
+    "rationale": "Ye often uses grand self-myth language, but this exact quote is Trump's convention line."
     }
-  ]
-}
+    ]
+    },
+    {
+    "id": 2,
+    "theme": "B. Paranoia / Persecution / Victimhood",
+    "quote": "What you're seeing and what you're reading is not what's happening.",
+    "options": [
+    {
+    "name": "Donald Trump",
+    "isCorrect": true,
+    "rationale": "Correct. Said at the Veterans of Foreign Wars convention in Kansas City on July 24, 2018."
+    },
+    {
+    "name": "Adolf Hitler",
+    "isCorrect": false,
+    "rationale": "Reality-reversal framing fits authoritarian language, but this exact quote is Trump."
+    },
+    {
+    "name": "Ye",
+    "isCorrect": false,
+    "rationale": "Ye challenges narratives too, but this precise sentence and event match Trump."
+    }
+    ]
+    },
+    {
+    "id": 3,
+    "theme": "C. Media hostility / Fake News / Propaganda",
+    "quote": "The FAKE NEWS media is the enemy of the American People!",
+    "options": [
+    {
+    "name": "Donald Trump",
+    "isCorrect": true,
+    "rationale": "Correct. Posted on Trump's Twitter account on February 17, 2017."
+    },
+    {
+    "name": "Adolf Hitler",
+    "isCorrect": false,
+    "rationale": "Enemy framing sounds similar, but this wording and casing are modern Trump style."
+    },
+    {
+    "name": "Ye",
+    "isCorrect": false,
+    "rationale": "Ye attacks media too, but this exact phrase is Trump's."
+    }
+    ]
+    },
+    {
+    "id": 4,
+    "theme": "D. Extreme narcissism / bragging",
+    "quote": "I am Shakespeare in the flesh.",
+    "options": [
+    {
+    "name": "Donald Trump",
+    "isCorrect": false,
+    "rationale": "Trump brags often, but this artistic self-crowning line is not his."
+    },
+    {
+    "name": "Adolf Hitler",
+    "isCorrect": false,
+    "rationale": "Grandiosity fits, but the modern pop-culture tone points elsewhere."
+    },
+    {
+    "name": "Ye",
+    "isCorrect": true,
+    "rationale": "Correct. Said by Ye in the 'Sway in the Morning' interview on November 26, 2013."
+    }
+    ]
+    },
+    {
+    "id": 5,
+    "theme": "E. Win-at-all-costs / retaliation logic",
+    "quote": "If somebody screws you, screw them back in spades.",
+    "options": [
+    {
+    "name": "Donald Trump",
+    "isCorrect": true,
+    "rationale": "Correct. From Trump's book The Art of the Deal (1987)."
+    },
+    {
+    "name": "Adolf Hitler",
+    "isCorrect": false,
+    "rationale": "The harsh revenge tone can mislead, but this quote is a Trump business-era line."
+    },
+    {
+    "name": "Ye",
+    "isCorrect": false,
+    "rationale": "Ye can be confrontational, but this exact phrase is not his."
+    }
+    ]
+    },
+    {
+    "id": 6,
+    "theme": "F. Surreal metaphors / emotional mass imagery",
+    "quote": "All great movements are popular movements. They are the volcanic eruptions of human passions and
+    emotions.",
+    "options": [
+    {
+    "name": "Donald Trump",
+    "isCorrect": false,
+    "rationale": "Populist tone overlaps, but the high-literary metaphor and source do not match Trump."
+    },
+    {
+    "name": "Adolf Hitler",
+    "isCorrect": true,
+    "rationale": "Correct. From Mein Kampf, Volume I, first published in 1925."
+    },
+    {
+    "name": "Ye",
+    "isCorrect": false,
+    "rationale": "Ye uses vivid imagery, but this exact line is from Hitler's text."
+    }
+    ]
+    },
+    {
+    "id": 7,
+    "theme": "G. Anti-intellectualism / instinct over academics",
+    "quote": "All propaganda must be popular and its intellectual level must be adjusted to the most limited
+    intelligence among those to whom it is addressed.",
+    "options": [
+    {
+    "name": "Donald Trump",
+    "isCorrect": false,
+    "rationale": "Simple-message strategy fits, but this is formal propaganda doctrine, not Trump's wording."
+    },
+    {
+    "name": "Adolf Hitler",
+    "isCorrect": true,
+    "rationale": "Correct. From Mein Kampf, Volume I, Chapter 6, published in 1925."
+    },
+    {
+    "name": "Ye",
+    "isCorrect": false,
+    "rationale": "Anti-elite tone can resemble Ye, but this systematic formulation is not his."
+    }
+    ]
+    },
+    {
+    "id": 8,
+    "theme": "H. Loyalty / purity / mass manipulation",
+    "quote": "I like Hitler.",
+    "options": [
+    {
+    "name": "Donald Trump",
+    "isCorrect": false,
+    "rationale": "Provocative style can confuse the guess, but this exact statement is not Trump's."
+    },
+    {
+    "name": "Adolf Hitler",
+    "isCorrect": false,
+    "rationale": "It refers to Hitler in third person, so it cannot be Hitler quoting himself."
+    },
+    {
+    "name": "Ye",
+    "isCorrect": true,
+    "rationale": "Correct. Said by Ye on the Alex Jones show on December 1, 2022."
+    }
+    ]
+    }
+    ]
+    }
   </immersive>
 
   <script src="script.js"></script>
 </body>
+
 </html>
