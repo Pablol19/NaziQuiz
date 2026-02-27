@@ -181,7 +181,7 @@ const personalRecordsNode = document.querySelector("#personal-records");
 const uxSummaryNode = document.querySelector("#ux-summary");
 const profileNameInput = document.querySelector("#profile-name-input");
 const profileSaveButton = document.querySelector("#profile-save");
-const profileNameChip = document.querySelector("#profile-name-chip");
+const profileNameChip = document.querySelector("#pd-name");
 const socialToggleButton = document.querySelector("#social-toggle");
 const socialCloseButton = document.querySelector("#social-close");
 const socialDrawer = document.querySelector("#social-drawer");
@@ -2128,7 +2128,81 @@ function initProfileControls() {
 }
 
 function renderProfileChip() {
-  if (profileNameChip) profileNameChip.textContent = appState.profile.displayName || "You";
+  const name = appState.profile.displayName || "You";
+  if (profileNameChip) profileNameChip.textContent = name;
+
+  // Update dropdown level
+  const pdLevel = document.querySelector("#pd-level");
+  if (pdLevel) {
+    const li = getLevelInfo(appState.profile.xp);
+    pdLevel.textContent = `Lv. ${li.level}`;
+  }
+
+  // League tier border on avatar button
+  const avatarBtn = document.querySelector("#profile-avatar-btn");
+  if (avatarBtn) {
+    const li = getLevelInfo(appState.profile.xp);
+    const tier = getLeagueTier(li.level);
+    avatarBtn.classList.remove("tier-bronze", "tier-silver", "tier-gold", "tier-platinum", "tier-diamond");
+    if (tier && tier.cssClass) {
+      avatarBtn.classList.add(tier.cssClass.replace('tier-', 'tier-'));
+    }
+  }
+}
+
+function initProfileDropdown() {
+  // Test/Dev button to reset daily game
+  const devResetBtn = document.querySelector("#dev-reset-btn");
+  if (devResetBtn) {
+    devResetBtn.addEventListener("click", () => {
+      if (confirm("¿Reiniciar partida diaria para probar de nuevo?")) {
+        // Remove today's history entry if it exists
+        if (appState.profile.history && appState.profile.history.length > 0) {
+          appState.profile.history = appState.profile.history.filter(
+            entry => entry.date !== appState.todayKey
+          );
+        }
+        appState.todayResult = null;
+        appState.inProgress = false;
+        appState.questionIndex = 0;
+        appState.score = 0;
+        appState.startTime = null;
+        clearSessionState();
+        saveProfile();
+        window.location.reload();
+      }
+    });
+  }
+
+  const avatarBtn = document.querySelector("#profile-avatar-btn");
+  const dropdown = document.querySelector("#profile-dropdown");
+  if (!avatarBtn || !dropdown) return;
+
+  avatarBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle("is-open");
+    avatarBtn.setAttribute("aria-expanded", String(isOpen));
+    dropdown.setAttribute("aria-hidden", String(!isOpen));
+  });
+
+  // Close on click outside
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target) && e.target !== avatarBtn) {
+      dropdown.classList.remove("is-open");
+      avatarBtn.setAttribute("aria-expanded", "false");
+      dropdown.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  // Social from dropdown
+  const pdSocial = document.querySelector("#pd-social-btn");
+  if (pdSocial) {
+    pdSocial.addEventListener("click", () => {
+      dropdown.classList.remove("is-open");
+      avatarBtn.setAttribute("aria-expanded", "false");
+      openSocialDrawer();
+    });
+  }
 }
 
 function initTopThemeControl() {
@@ -2247,6 +2321,7 @@ async function init() {
   initRankingControls();
   initProfileControls();
   initTopThemeControl();
+  initProfileDropdown();
   renderProfileChip();
   initSocialPanel();
 
