@@ -1,5 +1,5 @@
 ﻿const STORAGE_KEY_BASE = "gts_profile_v4";
-const DAILY_QUESTIONS = 30;
+const DAILY_QUESTIONS = 10;
 const ANSWER_TRANSITION_MS = 1800;
 
 /* ── Quiz Catalog (categories + quizzes) ── */
@@ -974,8 +974,8 @@ function renderIdleState() {
   const riskClass = appState.streakAtRisk && appState.profile.streakCurrent > 0 ? " streak-risk" : "";
   dailyGameNode.innerHTML = `
     <div class="daily-idle">
-      <h4>Daily Match preparado</h4>
-      <p>Responde ${appState.dailyQuestions.length} citas para registrar tu resultado oficial de hoy.</p>
+      <h4>Empieza tu Daily Match</h4>
+      <p>${appState.dailyQuestions.length} preguntas. Un intento oficial por dia.</p>
       <button id="daily-start-main" class="btn btn-primary btn-play-main${riskClass}" type="button">${riskClass ? "⚠️ Jugar ahora — racha en riesgo" : "Jugar ahora"}</button>
     </div>
   `;
@@ -2180,9 +2180,8 @@ async function init() {
   renderProfileChip();
   initSocialPanel();
 
-  const quizLabel = QUIZ_CONFIGS[appState.quizId]?.label || "";
   const dailyTitle = document.querySelector("#daily-title");
-  if (dailyTitle && quizLabel) dailyTitle.textContent = `Daily Match \u00b7 ${quizLabel}`;
+  if (dailyTitle) dailyTitle.textContent = `Daily Match · ${DAILY_QUESTIONS} preguntas`;
   if (dailyDateNode) dailyDateNode.textContent = `Fecha: ${formatDate(appState.todayKey)} `;
   if (playersTodayNode) playersTodayNode.textContent = appState.playerCount.toLocaleString("en-US");
 

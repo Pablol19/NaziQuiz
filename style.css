@@ -596,8 +596,8 @@ h1 {
 .btn-play-main {
   width: 100%;
   margin-top: 12px;
-  padding: 14px 20px;
-  font-size: 1.08rem;
+  padding: 16px 20px;
+  font-size: 1.2rem;
 }
 
 .btn-primary {
@@ -732,6 +732,9 @@ h1 {
 
 #daily {
   animation-delay: 0ms;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #ranking {
@@ -753,6 +756,7 @@ h1 {
 #daily .panel-head {
   justify-content: center;
   text-align: center;
+  margin-bottom: 24px;
 }
 
 #daily .panel-head>div:first-child {
@@ -770,7 +774,12 @@ h1 {
 
 #daily .daily-status {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 12px;
+  font-size: 1.05rem;
+}
+
+#daily-title {
+  font-size: clamp(2.4rem, 4.8vw, 3.5rem);
 }
 
 #ranking {
@@ -1046,7 +1055,7 @@ h1 {
   position: relative;
   background: linear-gradient(125deg, rgba(15, 23, 42, 0.97), rgba(14, 116, 144, 0.92));
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 30px;
   color: #fff;
   box-shadow: var(--elev-2);
   backdrop-filter: blur(12px);
@@ -1054,6 +1063,9 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.12);
   overflow: hidden;
   transition: box-shadow 300ms ease;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
 }
 
 /* Subtle dot pattern overlay for texture */
@@ -1100,7 +1112,7 @@ h1 {
   justify-content: space-between;
   gap: 10px;
   color: rgba(255, 255, 255, 0.86);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
 .progress-wrap {
@@ -1120,8 +1132,8 @@ h1 {
 }
 
 .daily-theme {
-  margin-top: 12px;
-  font-size: 0.8rem;
+  margin-top: 14px;
+  font-size: 0.88rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.72);
@@ -1131,7 +1143,7 @@ h1 {
   margin-top: 8px;
   padding-left: 18px;
   border-left: 3px solid rgba(255, 255, 255, 0.35);
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-size: clamp(1.28rem, 2.6vw, 1.7rem);
   line-height: 1.45;
   position: relative;
 }
@@ -1152,17 +1164,18 @@ h1 {
 .daily-options {
   margin-top: 16px;
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .daily-option {
   width: 100%;
-  border-radius: 11px;
+  border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   text-align: left;
-  padding: 11px 13px;
+  padding: 14px 16px;
+  font-size: 1.04rem;
   cursor: pointer;
   font: inherit;
   transition: transform 150ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
@@ -1293,6 +1306,7 @@ h1 {
 .daily-finish h4,
 .daily-idle h4 {
   margin-bottom: 8px;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
 }
 
 .daily-locked p,
@@ -1300,6 +1314,7 @@ h1 {
 .daily-idle p {
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.5;
+  font-size: 1.05rem;
 }
 
 .finish-streak-meter {
@@ -2335,4 +2350,167 @@ h1 {
     padding: 3px 7px;
     font-size: 0.7rem;
   }
+}
+
+/* Dark mode (default) */
+:root {
+  color-scheme: dark;
+  --ink: #e6ecf4;
+  --ink-soft: #98a5ba;
+  --line: rgba(148, 163, 184, 0.22);
+  --card: #0f172a;
+  --bg: #05070d;
+  --bg-alt: #0b1220;
+  --primary: #111827;
+  --pastel-sky: rgba(59, 130, 246, 0.18);
+  --pastel-mint: rgba(34, 197, 94, 0.18);
+  --pastel-peach: rgba(251, 146, 60, 0.18);
+  --pastel-lilac: rgba(167, 139, 250, 0.18);
+  --pastel-ink: #dbe7ff;
+  --pastel-border: rgba(148, 163, 184, 0.25);
+  --elev-1: 0 12px 28px rgba(0, 0, 0, 0.35);
+  --elev-2: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background:
+    radial-gradient(1100px 700px at -10% -20%, rgba(30, 58, 138, 0.35), transparent 70%),
+    radial-gradient(900px 520px at 110% 0%, rgba(14, 116, 144, 0.25), transparent 65%),
+    linear-gradient(160deg, var(--bg), var(--bg-alt));
+}
+
+.orb-a {
+  background: radial-gradient(circle, rgba(30, 64, 175, 0.35), transparent 65%);
+}
+
+.orb-b {
+  background: radial-gradient(circle, rgba(8, 145, 178, 0.32), transparent 65%);
+}
+
+.topbar,
+.panel,
+.hero-copy,
+.hero-panel,
+.module,
+.profile-card,
+.stat-card,
+.insight-card,
+.summary-card,
+.weekly-league,
+.weekly-league-summary span,
+.history-mid-card,
+.history-insight-card,
+.history-list li,
+.social-drawer {
+  background: rgba(15, 23, 42, 0.76);
+  border-color: rgba(148, 163, 184, 0.28);
+  box-shadow: var(--elev-1);
+}
+
+#goal-card,
+#streak-card,
+#next-reward,
+#mission-card,
+#ux-summary.summary-card,
+.history-mid-card,
+.history-insight-card {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(17, 24, 39, 0.82));
+}
+
+.profile-chip,
+.btn-outline,
+.metric-pill,
+.percentile-chip,
+.quiz-segmented,
+.quiz-tab.is-active,
+.heat-cell {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(148, 163, 184, 0.3);
+  color: var(--ink);
+}
+
+.btn-outline:hover,
+.quiz-tab:hover:not(.is-active),
+.leaderboard tbody tr:hover {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+.nav a,
+.module-head p,
+.panel-sub,
+.ranking-search-result,
+.history-radar p,
+.history-list .date,
+.streak-fire,
+.metric-pill,
+.weekly-league-head p,
+.leaderboard th {
+  color: var(--ink-soft);
+}
+
+.nav a:hover {
+  color: var(--ink);
+}
+
+#profile-name-input,
+#friend-name-input,
+.social-drawer #profile-name-input,
+#ranking-search-input,
+#room-code {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(148, 163, 184, 0.35);
+  color: var(--ink);
+}
+
+.social-drawer {
+  border-left-color: rgba(148, 163, 184, 0.35);
+}
+
+.social-drawer-head h3 {
+  background: linear-gradient(135deg, #dbeafe, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.social-drawer hr {
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.24), transparent);
+}
+
+.sound-toggle-row {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(96, 165, 250, 0.28);
+}
+
+.leaderboard tr.me {
+  background: rgba(14, 165, 233, 0.2);
+}
+
+.daily-locked,
+.daily-finish,
+.daily-idle {
+  background: rgba(15, 23, 42, 0.4);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.next-achievement-rare.comun,
+.achievement-badge.common {
+  background: rgba(59, 130, 246, 0.24);
+  border-color: rgba(96, 165, 250, 0.45);
+  color: #bfdbfe;
+}
+
+.next-achievement-rare.raro,
+.achievement-badge.rare {
+  background: rgba(167, 139, 250, 0.24);
+  border-color: rgba(167, 139, 250, 0.45);
+  color: #ddd6fe;
+}
+
+.next-achievement-rare.epic,
+.next-achievement-rare.epico,
+.achievement-badge.epic {
+  background: rgba(244, 114, 182, 0.2);
+  border-color: rgba(244, 114, 182, 0.4);
+  color: #fbcfe8;
 }
