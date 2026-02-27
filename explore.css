@@ -2,7 +2,7 @@
 
 /* ── Hero Banner ── */
 .ex-hero {
-    padding: 48px 28px 24px;
+    padding: 24px 28px 12px;
     text-align: center;
     max-width: 980px;
     margin: 0 auto;
@@ -30,7 +30,7 @@
 
 /* ── Category Rows ── */
 .ex-grid {
-    padding: 12px 0 60px;
+    padding: 0 0 60px;
     display: flex;
     flex-direction: column;
     gap: 36px;

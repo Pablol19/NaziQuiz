@@ -24,8 +24,8 @@
     </a>
     <nav class="nav">
       <a href="index.html#daily">Partida diaria</a>
+      <a href="explore.html">Jugar</a>
       <a href="estadisticas.html">Estadisticas</a>
-      <a href="explore.html">Explorar</a>
     </nav>
     <div class="topbar-actions">
       <button id="social-toggle" class="btn-social-pill" type="button">Social</button>
@@ -92,32 +92,23 @@
         </div>
       </div>
       <div id="weekly-summary" class="summary-card"></div>
-      <div id="ux-summary" class="summary-card"></div>
-      <div class="history-mid-row">
+
+      <div class="history-mid-row" style="grid-template-columns: 1fr;">
         <article class="history-mid-card">
           <h4>Actividad 14 días</h4>
-          <div id="consistency-heatmap" class="consistency-heatmap" aria-label="Calendario de consistencia"></div>
-        </article>
-        <article class="history-mid-card">
-          <h4>Radar histórico</h4>
-          <div id="history-radar" class="history-radar"></div>
+          <div id="consistency-heatmap" class="consistency-heatmap" aria-label="Calendario de consistencia"
+            style="justify-content: center;"></div>
         </article>
       </div>
-      <div id="history-insights-row" class="history-insights-row">
+
+      <div id="history-insights-row" class="history-insights-row" style="grid-template-columns: 1fr;">
         <article id="achievements-card" class="history-insight-card">
-          <h4>Logros</h4>
+          <h4>Logros Obtenidos</h4>
           <div id="achievements" class="achievements"></div>
         </article>
-        <article id="next-achievement-card" class="history-insight-card">
-          <h4>Próximo hito</h4>
-          <div id="next-achievement"></div>
-        </article>
       </div>
-      <div class="trend-chart-wrap">
-        <svg id="score-trend-chart" class="score-trend-chart" viewBox="0 0 600 180"
-          aria-label="Evolucion de puntaje"></svg>
-      </div>
-      <div class="table-wrap">
+
+      <div class="table-wrap" style="margin-bottom: 20px;">
         <table class="leaderboard records-table" aria-label="Records personales">
           <thead>
             <tr>

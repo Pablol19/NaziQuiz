@@ -1807,8 +1807,10 @@ function renderWeeklySummary() {
 
   if (!last7.length) {
     weeklySummaryNode.innerHTML = `
-      <strong>Resumen semanal:</strong> completa partidas para activar el reporte automatico.<br/>
-      <strong>${challenge.title}</strong>: ${challenge.description}
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink);">
+        Completa partidas para activar tu reporte automatico.<br/>
+        <strong>Reto: ${challenge.title}</strong> - ${challenge.description}
+      </div>
     `;
     return;
   }
@@ -1817,10 +1819,11 @@ function renderWeeklySummary() {
   const best = last7.reduce((acc, item) => (item.score > acc.score ? item : acc), last7[0]);
   const xpSum = last7.reduce((acc, item) => acc + (item.xpGained || 0), 0);
   weeklySummaryNode.innerHTML = `
-    <strong>Resumen semanal:</strong>
-    Precision media <strong>${avg}%</strong> · Mejor dia <strong>${best.score}/${best.total}</strong> · XP semanal <strong>+${xpSum}</strong><br/>
-    <strong>${challenge.title}</strong> · ${challenge.description}<br/>
-    Estado: <strong>${challengeState.done ? "Completado" : "En progreso"}</strong> (${challengeState.progress})
+    <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink);">
+      Precisión media: <strong style="color: #6366f1;">${avg}%</strong> &nbsp;·&nbsp; Mejor día: <strong style="color: #6366f1;">${best.score}/${best.total}</strong><br/>
+      <strong>Reto: ${challenge.title}</strong> - ${challenge.description}<br/>
+      Estado: <strong style="color: ${challengeState.done ? '#10b981' : '#f59e0b'};">${challengeState.done ? "Completado" : "En progreso"}</strong> <span style="font-size: 0.95rem; color: var(--ink-soft);">(${challengeState.progress})</span>
+    </div>
   `;
 }
 
