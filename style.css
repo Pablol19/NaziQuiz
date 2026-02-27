@@ -2834,7 +2834,7 @@ h1 {
   }
 
   .brand-name {
-    font-size: 0.88rem;
+    display: none;
   }
 
   /* Hide desktop nav from the topbar — it becomes bottom bar */
@@ -2847,9 +2847,9 @@ h1 {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 0;
-    padding: 8px 4px;
-    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    gap: 4px;
+    padding: 10px 8px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
     margin: 0;
     background: var(--surface-bg);
     border-top: 1px solid var(--surface-border);
@@ -2862,43 +2862,47 @@ h1 {
   .nav a {
     flex: 1;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 2px;
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    padding: 6px 4px;
-    border-radius: 10px;
-    border: none;
-    background: none;
-    text-decoration: none;
+    padding: 10px 4px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.64);
     color: var(--ink-soft);
     white-space: nowrap;
     transition: color 150ms ease, background 150ms ease;
   }
 
   .nav a::before {
-    font-size: 1.2rem;
-    display: block;
-    line-height: 1;
-  }
-
-  .nav a:nth-child(1)::before {
-    content: '🎯';
-  }
-
-  .nav a:nth-child(2)::before {
-    content: '🎮';
-  }
-
-  .nav a:nth-child(3)::before {
-    content: '📊';
+    display: none;
   }
 
   .nav a:hover,
   .nav a.is-active {
     color: var(--ink);
     background: rgba(99, 102, 241, 0.08);
+  }
+
+  /* ── Playing state adjustments ── */
+  body.is-playing .topbar {
+    margin-bottom: 6px;
+  }
+
+  body.is-playing #daily {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 4px;
+  }
+
+  body.is-playing #daily-title {
+    display: none;
+  }
+
+  body.is-playing .daily-status {
+    margin-top: 0;
+    font-size: 1.05rem;
   }
 
   /* Hide Social pill on topbar (moved into settings menu or accessible from bottom) */

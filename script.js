@@ -958,8 +958,10 @@ function renderDailyStatus() {
   if (!dailyStatusNode) return;
   const total = appState.dailyQuestions.length;
 
+  document.body.classList.toggle('is-playing', appState.inProgress);
+
   if (appState.inProgress) {
-    dailyStatusNode.innerHTML = `<p>${appState.practiceMode ? "Revancha en curso" : "Partida en curso"}. <strong>${appState.questionIndex + 1}/${total}</strong></p>`;
+    dailyStatusNode.innerHTML = `<p>${appState.practiceMode ? "Revancha" : "Partida"} en curso: <strong>${appState.questionIndex + 1}/${total}</strong></p>`;
     return;
   }
 
