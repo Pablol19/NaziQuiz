@@ -31,7 +31,9 @@ const streakCardNode = document.querySelector("#streak-card");
 const nextRewardNode = document.querySelector("#next-reward");
 const missionCardNode = document.querySelector("#mission-card");
 const heatmapNode = document.querySelector("#consistency-heatmap");
+const historyRadarNode = document.querySelector("#history-radar");
 const achievementsNode = document.querySelector("#achievements");
+const nextAchievementNode = document.querySelector("#next-achievement");
 const percentileChipNode = document.querySelector("#percentile-chip");
 const comebackPromptNode = document.querySelector("#comeback-prompt");
 const returnPromptNode = document.querySelector("#return-prompt");
@@ -39,11 +41,22 @@ const trendChartNode = document.querySelector("#score-trend-chart");
 const rankingModeNode = document.querySelector("#ranking-mode");
 const roomCodeNode = document.querySelector("#room-code");
 const applyRoomNode = document.querySelector("#apply-room");
+const rankingSearchInput = document.querySelector("#ranking-search-input");
+const rankingSearchButton = document.querySelector("#ranking-search-btn");
+const rankingSearchResultNode = document.querySelector("#ranking-search-result");
 const weeklySummaryNode = document.querySelector("#weekly-summary");
 const personalRecordsNode = document.querySelector("#personal-records");
 const uxSummaryNode = document.querySelector("#ux-summary");
 const profileNameInput = document.querySelector("#profile-name-input");
 const profileSaveButton = document.querySelector("#profile-save");
+const profileNameChip = document.querySelector("#profile-name-chip");
+const socialToggleButton = document.querySelector("#social-toggle");
+const socialCloseButton = document.querySelector("#social-close");
+const socialDrawer = document.querySelector("#social-drawer");
+const socialBackdrop = document.querySelector("#social-backdrop");
+const friendNameInput = document.querySelector("#friend-name-input");
+const friendAddButton = document.querySelector("#friend-add");
+const friendsListNode = document.querySelector("#friends-list");
 
 const statStreak = document.querySelector("#stat-streak");
 const statBestStreak = document.querySelector("#stat-best-streak");
@@ -81,6 +94,7 @@ const appState = {
   leaderboardSize: 0,
   bestScoreToday: 0,
   rankDelta: null,
+  leaderboardRows: [],
   dailyMission: null,
   rankingMode: "global",
   roomCode: "",
@@ -162,6 +176,7 @@ function createDefaultProfile() {
       completedOfficial: 0,
       abandonByQuestion: {}
     },
+    friends: [],
     consistencyMap: {},
     history: []
   };
@@ -360,7 +375,8 @@ function loadProfile() {
         ...createDefaultProfile().uxMetrics,
         ...(parsed.uxMetrics || {}),
         abandonByQuestion: (parsed.uxMetrics && parsed.uxMetrics.abandonByQuestion) || {}
-      }
+      },
+      friends: Array.isArray(parsed.friends) ? parsed.friends : []
     };
   } catch (error) {
     return createDefaultProfile();
@@ -785,15 +801,12 @@ function renderDailyStatus() {
 
   if (appState.todayResult) {
     dailyStatusNode.innerHTML = `
-      <p>Partida completada hoy.</p>
       <p><strong>${appState.todayResult.score}/${appState.todayResult.total}</strong> (${appState.todayResult.percent}%)</p>
     `;
     return;
   }
 
-  dailyStatusNode.innerHTML = `
-    <p>Una partida oficial al dia.</p>
-  `;
+  dailyStatusNode.innerHTML = "";
 }
 
 function renderIdleState() {
@@ -1210,7 +1223,11 @@ function buildLeaderboardData() {
   const rows = [];
 
   const baseCount = appState.rankingMode === "friends" ? 12 : 36;
-  const namesPool = appState.rankingMode === "friends" ? FRIEND_NAMES : names;
+  const friendPool =
+    Array.isArray(appState.profile.friends) && appState.profile.friends.length
+      ? appState.profile.friends
+      : FRIEND_NAMES;
+  const namesPool = appState.rankingMode === "friends" ? friendPool : names;
   for (let i = 0; i < baseCount; i += 1) {
     const score = Math.max(1, Math.round(total * (0.45 + random() * 0.55)));
     const durationSec = 35 + Math.floor(random() * 210);
@@ -1244,13 +1261,14 @@ function buildLeaderboardData() {
 function renderLeaderboard() {
   const total = appState.dailyQuestions.length;
   const rows = buildLeaderboardData();
+  appState.leaderboardRows = rows;
   let myRank = null;
 
   rows.forEach((row, index) => {
     if (row.isMe) myRank = index + 1;
   });
 
-  const topRows = rows.slice(0, 10);
+  const topRows = rows.slice(0, 5);
   const htmlRows = topRows
     .map((row, index) => {
       const label = row.isMe ? "You" : row.name;
@@ -1259,13 +1277,7 @@ function renderLeaderboard() {
     })
     .join("");
 
-  let myRow = "";
-  if (myRank && myRank > 10) {
-    const me = rows[myRank - 1];
-    myRow = `<tr><td colspan="4">...</td></tr><tr class="me"><td>${myRank}</td><td>You</td><td>${me.score}/${total}</td><td>${formatSeconds(me.durationSec)}</td></tr>`;
-  }
-
-  leaderboardBody.innerHTML = htmlRows + myRow;
+  leaderboardBody.innerHTML = htmlRows;
 
   appState.leaderboardSize = rows.length;
   appState.bestScoreToday = rows[0] ? rows[0].score : 0;
@@ -1284,6 +1296,49 @@ function renderLeaderboard() {
   return { myRank, top10Cut };
 }
 
+function runRankingSearch() {
+  if (!rankingSearchResultNode) return;
+  const query = (rankingSearchInput ? rankingSearchInput.value : "").trim().toLowerCase();
+  const modeLabel = appState.rankingMode === "friends" ? "Amigos" : "Global";
+
+  if (!query) {
+    rankingSearchResultNode.textContent = `Busca un jugador para ver su posicion en ${modeLabel}.`;
+    return;
+  }
+
+  const rows = appState.leaderboardRows || [];
+  let foundRank = -1;
+  let foundRow = null;
+
+  for (let i = 0; i < rows.length; i += 1) {
+    const name = String(rows[i].name || "").toLowerCase();
+    if (name === query) {
+      foundRank = i + 1;
+      foundRow = rows[i];
+      break;
+    }
+  }
+
+  if (!foundRow) {
+    for (let i = 0; i < rows.length; i += 1) {
+      const name = String(rows[i].name || "").toLowerCase();
+      if (name.includes(query)) {
+        foundRank = i + 1;
+        foundRow = rows[i];
+        break;
+      }
+    }
+  }
+
+  if (!foundRow) {
+    rankingSearchResultNode.textContent = `No encontrado en ${modeLabel}.`;
+    return;
+  }
+
+  const label = foundRow.isMe ? "You" : foundRow.name;
+  rankingSearchResultNode.textContent = `${label}: puesto #${foundRank} en ${modeLabel} (${foundRow.score}/${appState.dailyQuestions.length}).`;
+}
+
 function renderConsistencyHeatmap() {
   if (!heatmapNode) return;
   const cells = [];
@@ -1298,6 +1353,36 @@ function renderConsistencyHeatmap() {
   }
 
   heatmapNode.innerHTML = cells.join("");
+}
+
+function renderHistoryRadar() {
+  if (!historyRadarNode) return;
+  const history = appState.profile.history || [];
+  if (!history.length) {
+    historyRadarNode.innerHTML = `
+      <p><strong>Partidas totales:</strong> 0</p>
+      <p><strong>Media ultima semana:</strong> --</p>
+      <p><strong>Mejor score:</strong> --</p>
+      <p><strong>Mejor tiempo:</strong> --</p>
+    `;
+    return;
+  }
+
+  const totalMatches = appState.profile.totalMatches || history.length;
+  const last7 = history.slice(0, 7);
+  const avg7 = Math.round(last7.reduce((acc, item) => acc + item.percent, 0) / last7.length);
+  const bestScore = history.reduce((acc, item) => (item.score > acc.score ? item : acc), history[0]);
+  const bestTime = history.reduce((acc, item) => (item.durationSec < acc.durationSec ? item : acc), history[0]);
+  const rankedEntries = history.filter((item) => typeof item.rank === "number");
+  const bestRank = rankedEntries.length ? Math.min(...rankedEntries.map((item) => item.rank)) : null;
+
+  historyRadarNode.innerHTML = `
+    <p><strong>Partidas totales:</strong> ${totalMatches}</p>
+    <p><strong>Media ultima semana:</strong> ${avg7}%</p>
+    <p><strong>Mejor score:</strong> ${bestScore.score}/${bestScore.total}</p>
+    <p><strong>Mejor tiempo:</strong> ${formatSeconds(bestTime.durationSec)}</p>
+    <p><strong>Mejor ranking:</strong> ${bestRank ? `#${bestRank}` : "--"}</p>
+  `;
 }
 
 function renderAchievements() {
@@ -1317,6 +1402,38 @@ function renderAchievements() {
     .slice(0, 10)
     .map((item) => `<span class="achievement-badge ${rarityClass(item)}">${item}</span>`)
     .join("");
+}
+
+function renderNextAchievementCard() {
+  if (!nextAchievementNode) return;
+  const streak = appState.profile.streakCurrent || 0;
+  let target = null;
+
+  if (streak <= 2) target = 3;
+  else if (streak <= 6) target = 7;
+  else if (streak <= 13) target = 14;
+  else if (streak <= 29) target = 30;
+
+  if (!target) {
+    nextAchievementNode.innerHTML = `
+      <p>Todos los hitos principales completados.</p>
+      <p><span class="next-achievement-rare epico">epico</span></p>
+      <div class="next-achievement-progress"><span style="width:100%"></span></div>
+      <p class="next-achievement-meta">Racha actual: <strong>${streak}</strong> dias</p>
+    `;
+    return;
+  }
+
+  const rarity = target >= 30 ? "epico" : target >= 7 ? "raro" : "comun";
+  const progressPct = Math.max(8, Math.min(100, Math.round((streak / target) * 100)));
+  const remaining = Math.max(0, target - streak);
+
+  nextAchievementNode.innerHTML = `
+    <p>Objetivo: desbloquear hito de <strong>${target}</strong> dias.</p>
+    <p><span class="next-achievement-rare ${rarity}">${rarity}</span></p>
+    <div class="next-achievement-progress"><span style="width:${progressPct}%"></span></div>
+    <p class="next-achievement-meta">Progreso: <strong>${streak}/${target}</strong> · Te faltan <strong>${remaining}</strong> dia(s)</p>
+  `;
 }
 
 function renderWeeklySummary() {
@@ -1438,7 +1555,9 @@ function renderHistory() {
     renderWeeklySummary();
     renderUxSummary();
     renderConsistencyHeatmap();
+    renderHistoryRadar();
     renderAchievements();
+    renderNextAchievementCard();
     renderTrendChart();
     renderPersonalRecords();
     return;
@@ -1452,7 +1571,9 @@ function renderHistory() {
   renderWeeklySummary();
   renderUxSummary();
   renderConsistencyHeatmap();
+  renderHistoryRadar();
   renderAchievements();
+  renderNextAchievementCard();
   renderTrendChart();
   renderPersonalRecords();
 }
@@ -1478,6 +1599,7 @@ function rerenderCompetitiveViews() {
   appState.rankDelta = computeRankDelta(ranking.myRank);
   renderProfileStats(ranking.myRank);
   renderInsights();
+  runRankingSearch();
 }
 
 function initRankingControls() {
@@ -1503,6 +1625,7 @@ function initRankingControls() {
         tabs.forEach((item) => item.classList.toggle("is-active", item.dataset.mode === mode));
         localStorage.setItem(getRankingPrefKey(), JSON.stringify({ mode: appState.rankingMode, roomCode: appState.roomCode }));
         rerenderCompetitiveViews();
+        runRankingSearch();
       });
     });
   }
@@ -1513,6 +1636,14 @@ function initRankingControls() {
       appState.roomCode = (roomCodeNode ? roomCodeNode.value : "").trim().toUpperCase();
       localStorage.setItem(getRankingPrefKey(), JSON.stringify({ mode: appState.rankingMode, roomCode: appState.roomCode }));
       rerenderCompetitiveViews();
+      runRankingSearch();
+    });
+  }
+
+  if (rankingSearchButton) rankingSearchButton.addEventListener("click", runRankingSearch);
+  if (rankingSearchInput) {
+    rankingSearchInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") runRankingSearch();
     });
   }
 }
@@ -1524,12 +1655,78 @@ function initProfileControls() {
     const next = (profileNameInput.value || "").trim().slice(0, 18);
     appState.profile.displayName = next || "You";
     saveProfile();
+    renderProfileChip();
     rerenderCompetitiveViews();
     profileSaveButton.textContent = "Guardado";
     setTimeout(() => {
       profileSaveButton.textContent = "Guardar";
     }, 900);
   });
+}
+
+function renderProfileChip() {
+  if (profileNameChip) profileNameChip.textContent = appState.profile.displayName || "You";
+}
+
+function renderFriendsList() {
+  if (!friendsListNode) return;
+  const friends = Array.isArray(appState.profile.friends) ? appState.profile.friends : [];
+  if (!friends.length) {
+    friendsListNode.innerHTML = '<li><span>Sin amigos aun.</span><span class="date">Agrega para ranking social.</span></li>';
+    return;
+  }
+
+  friendsListNode.innerHTML = friends
+    .map(
+      (name, index) =>
+        `<li><span>${name}</span><button class="btn btn-outline" data-remove-friend="${index}" type="button">Quitar</button></li>`
+    )
+    .join("");
+
+  friendsListNode.querySelectorAll("[data-remove-friend]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const idx = Number(button.getAttribute("data-remove-friend"));
+      if (Number.isNaN(idx)) return;
+      appState.profile.friends.splice(idx, 1);
+      saveProfile();
+      renderFriendsList();
+      rerenderCompetitiveViews();
+    });
+  });
+}
+
+function openSocialDrawer() {
+  if (!socialDrawer) return;
+  socialDrawer.classList.add("is-open");
+  socialDrawer.setAttribute("aria-hidden", "false");
+  if (socialBackdrop) socialBackdrop.hidden = false;
+}
+
+function closeSocialDrawer() {
+  if (!socialDrawer) return;
+  socialDrawer.classList.remove("is-open");
+  socialDrawer.setAttribute("aria-hidden", "true");
+  if (socialBackdrop) socialBackdrop.hidden = true;
+}
+
+function initSocialPanel() {
+  renderFriendsList();
+  if (socialToggleButton) socialToggleButton.addEventListener("click", openSocialDrawer);
+  if (socialCloseButton) socialCloseButton.addEventListener("click", closeSocialDrawer);
+  if (socialBackdrop) socialBackdrop.addEventListener("click", closeSocialDrawer);
+
+  if (friendAddButton) {
+    friendAddButton.addEventListener("click", () => {
+      const value = (friendNameInput ? friendNameInput.value : "").trim().slice(0, 18);
+      if (!value) return;
+      if (!Array.isArray(appState.profile.friends)) appState.profile.friends = [];
+      if (!appState.profile.friends.includes(value)) appState.profile.friends.push(value);
+      if (friendNameInput) friendNameInput.value = "";
+      saveProfile();
+      renderFriendsList();
+      rerenderCompetitiveViews();
+    });
+  }
 }
 
 async function init() {
@@ -1558,6 +1755,8 @@ async function init() {
   initQuizSelector();
   initRankingControls();
   initProfileControls();
+  renderProfileChip();
+  initSocialPanel();
 
   const quizLabel = QUIZ_CONFIGS[appState.quizId]?.label || "";
   const dailyTitle = document.querySelector("#daily-title");

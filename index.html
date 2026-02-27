@@ -23,21 +23,47 @@
       <a href="#ranking">Ranking</a>
       <a href="#history">Historial</a>
     </nav>
+    <div class="topbar-actions">
+      <button id="social-toggle" class="btn btn-outline" type="button">Social</button>
+      <div class="profile-chip">
+        <span class="avatar-basic" aria-hidden="true">👤</span>
+        <span id="profile-name-chip">You</span>
+      </div>
+    </div>
   </header>
+  <aside id="social-drawer" class="social-drawer" aria-hidden="true">
+    <div class="social-drawer-head">
+      <h3>Social</h3>
+      <button id="social-close" class="btn btn-outline" type="button">Cerrar</button>
+    </div>
+    <p class="panel-sub">Agrega y gestiona amigos para ranking privado.</p>
+    <div class="profile-row">
+      <input id="friend-name-input" type="text" maxlength="18" placeholder="Nombre de amigo" />
+      <button id="friend-add" class="btn btn-outline" type="button">Agregar</button>
+    </div>
+    <ul id="friends-list" class="history-list"></ul>
+    <hr />
+    <label for="profile-name-input">Nombre de jugador</label>
+    <div class="profile-row">
+      <input id="profile-name-input" type="text" maxlength="18" placeholder="Tu nombre" />
+      <button id="profile-save" class="btn btn-outline" type="button">Guardar</button>
+    </div>
+    <button id="avatar-pro" class="btn btn-outline" type="button" disabled>Cambiar avatar (Proximamente · Pro)</button>
+  </aside>
+  <div id="social-backdrop" class="social-backdrop" hidden></div>
 
   <main>
     <section id="daily" class="panel">
       <div class="panel-head">
         <div>
-          <p class="panel-kicker">Partida oficial del dia</p>
           <h2 id="daily-title">Daily Match</h2>
           <p id="daily-date" class="panel-sub">Fecha: -</p>
           <div id="quiz-selector" class="quiz-segmented" role="tablist" aria-label="Seleccionar quiz">
             <button type="button" class="quiz-tab" data-quiz="classic">Trump vs Hitler vs Ye</button>
             <button type="button" class="quiz-tab" data-quiz="tye">Trump vs Elon vs Ye</button>
           </div>
+          <div id="daily-status" class="daily-status"></div>
         </div>
-        <div id="daily-status" class="daily-status"></div>
       </div>
       <div class="insight-grid">
         <article id="goal-card" class="insight-card"></article>
@@ -49,30 +75,44 @@
       <div id="comeback-prompt" class="comeback-prompt" aria-live="polite"></div>
     </section>
 
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="kicker">Daily Match • Ranking Live • Streak Pressure</p>
-        <h1>Un quiz al dia. Sube posiciones. No dejes caer tu racha.</h1>
-        <p class="lead">Una sola oportunidad diaria. Convierte precision en posicion, desbloquea recompensas y construye una racha que imponga respeto.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#daily">Jugar ahora</a>
+    <section id="ranking" class="panel">
+      <div class="module-head">
+        <h3>Ranking</h3>
+        <p>Top 5 del dia en Global o Amigos.</p>
+      </div>
+      <div class="hero-metrics">
+        <span class="metric-pill">Jugadores hoy: <strong id="players-today">-</strong></span>
+        <span class="metric-pill metric-risk">Tu racha se reinicia en <strong id="reset-timer">--:--:--</strong></span>
+        <span id="return-prompt" class="metric-pill">Ventana de subida abierta: hoy puedes escalar el ranking.</span>
+      </div>
+      <div class="ranking-controls">
+        <div id="ranking-mode" class="quiz-segmented" role="tablist" aria-label="Modo de ranking">
+          <button type="button" class="quiz-tab is-active" data-mode="global">Global</button>
+          <button type="button" class="quiz-tab" data-mode="friends">Amigos</button>
         </div>
-        <div class="profile-card">
-          <div class="avatar-basic" aria-hidden="true">👤</div>
-          <div class="profile-fields">
-            <label for="profile-name-input">Nombre de jugador</label>
-            <div class="profile-row">
-              <input id="profile-name-input" type="text" maxlength="18" placeholder="Tu nombre" />
-              <button id="profile-save" class="btn btn-outline" type="button">Guardar</button>
-            </div>
-            <button id="avatar-pro" class="btn btn-outline" type="button" disabled>Cambiar avatar (Proximamente · Pro)</button>
-          </div>
+        <div class="private-room">
+          <input id="room-code" type="text" maxlength="10" placeholder="Sala privada" />
+          <button id="apply-room" class="btn btn-outline" type="button">Aplicar</button>
         </div>
-        <div class="hero-metrics">
-          <span class="metric-pill">Jugadores hoy: <strong id="players-today">-</strong></span>
-          <span class="metric-pill metric-risk">Tu racha se reinicia en <strong id="reset-timer">--:--:--</strong></span>
-          <span id="return-prompt" class="metric-pill">Hoy puedes subir posiciones en el ranking.</span>
+        <span id="percentile-chip" class="percentile-chip">Percentil: --</span>
+        <div class="ranking-search">
+          <input id="ranking-search-input" type="text" maxlength="24" placeholder="Buscar jugador..." />
+          <button id="ranking-search-btn" class="btn btn-outline" type="button">Buscar</button>
         </div>
+      </div>
+      <p id="ranking-search-result" class="ranking-search-result">Busca un jugador para ver su posicion en este ranking.</p>
+      <div class="table-wrap">
+        <table class="leaderboard" aria-label="Ranking top 5">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Jugador</th>
+              <th>Aciertos</th>
+              <th>Tiempo</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
       </div>
       <div class="hero-panel">
         <article id="streak-stat-card" class="stat-card">
@@ -115,65 +155,50 @@
       </div>
     </section>
 
-    <section id="ranking" class="panel split">
-      <article class="module">
-        <div class="module-head">
-          <h3>Ranking global de hoy</h3>
-          <p>Rendimiento en tiempo real: cada punto puede mover tu posicion y tu percentil del dia.</p>
-          <span id="percentile-chip" class="percentile-chip">Percentil: --</span>
-          <div class="ranking-controls">
-            <div id="ranking-mode" class="quiz-segmented" role="tablist" aria-label="Modo de ranking">
-              <button type="button" class="quiz-tab is-active" data-mode="global">Global</button>
-              <button type="button" class="quiz-tab" data-mode="friends">Amigos</button>
-            </div>
-            <div class="private-room">
-              <input id="room-code" type="text" maxlength="10" placeholder="Sala privada" />
-              <button id="apply-room" class="btn btn-outline" type="button">Aplicar</button>
-            </div>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table class="leaderboard" aria-label="Ranking diario">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Jugador</th>
-                <th>Aciertos</th>
-                <th>Tiempo</th>
-              </tr>
-            </thead>
-            <tbody id="leaderboard-body"></tbody>
-          </table>
-        </div>
-      </article>
-
-      <article id="history" class="module">
-        <div class="module-head">
-          <h3>Progreso y logros</h3>
-          <p>Consistencia de 14 dias, hitos de racha y recompensas recientes.</p>
-        </div>
-        <div id="weekly-summary" class="summary-card"></div>
-        <div id="ux-summary" class="summary-card"></div>
-        <div id="consistency-heatmap" class="consistency-heatmap" aria-label="Calendario de consistencia"></div>
-        <div id="achievements" class="achievements"></div>
-        <div class="trend-chart-wrap">
-          <svg id="score-trend-chart" class="score-trend-chart" viewBox="0 0 600 180" aria-label="Evolucion de puntaje"></svg>
-        </div>
-        <div class="table-wrap">
-          <table class="leaderboard records-table" aria-label="Records personales">
-            <thead>
-              <tr>
-                <th>Quiz</th>
-                <th>Mejor score</th>
-                <th>Mejor tiempo</th>
-                <th>Mejor racha</th>
-              </tr>
-            </thead>
-            <tbody id="personal-records"></tbody>
-          </table>
-        </div>
-        <ul id="history-list" class="history-list"></ul>
-      </article>
+    <section id="history" class="panel">
+      <div class="module-head">
+        <h3>Historial</h3>
+        <p>Consistencia de 14 dias, hitos y evolucion.</p>
+      </div>
+      <div id="weekly-summary" class="summary-card"></div>
+      <div id="ux-summary" class="summary-card"></div>
+      <div class="history-mid-row">
+        <article class="history-mid-card">
+          <h4>Actividad 14 dias</h4>
+          <div id="consistency-heatmap" class="consistency-heatmap" aria-label="Calendario de consistencia"></div>
+        </article>
+        <article class="history-mid-card">
+          <h4>Radar historico</h4>
+          <div id="history-radar" class="history-radar"></div>
+        </article>
+      </div>
+      <div id="history-insights-row" class="history-insights-row">
+        <article id="achievements-card" class="history-insight-card">
+          <h4>Logros</h4>
+          <div id="achievements" class="achievements"></div>
+        </article>
+        <article id="next-achievement-card" class="history-insight-card">
+          <h4>Proximo hito</h4>
+          <div id="next-achievement"></div>
+        </article>
+      </div>
+      <div class="trend-chart-wrap">
+        <svg id="score-trend-chart" class="score-trend-chart" viewBox="0 0 600 180" aria-label="Evolucion de puntaje"></svg>
+      </div>
+      <div class="table-wrap">
+        <table class="leaderboard records-table" aria-label="Records personales">
+          <thead>
+            <tr>
+              <th>Quiz</th>
+              <th>Mejor score</th>
+              <th>Mejor tiempo</th>
+              <th>Mejor racha</th>
+            </tr>
+          </thead>
+          <tbody id="personal-records"></tbody>
+        </table>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
     </section>
   </main>
 
