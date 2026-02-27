@@ -1,16 +1,61 @@
 /* ── Explore Page — Netflix Dark Theme ── */
 :root {
-    --ex-bg: #1e1e30;
-    --ex-bg-alt: #252538;
-    --ex-surface: #2a2a42;
-    --ex-ink: #f0f0f5;
-    --ex-ink-soft: #9e9eb8;
-    --ex-accent: #e50914;
-    --ex-accent-soft: rgba(229, 9, 20, 0.3);
+    --ex-bg: #f3ede4;
+    --ex-bg-alt: #eaf1ff;
+    --ex-surface: #ffffff;
+    --ex-ink: #1f2937;
+    --ex-ink-soft: #5b6478;
+    --ex-accent: #e85d4f;
+    --ex-accent-soft: rgba(232, 93, 79, 0.28);
     --ex-card-radius: 10px;
-    --ex-glow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --ex-glow: 0 10px 26px rgba(40, 61, 102, 0.16);
     --font-title: "DM Serif Display", serif;
     --font-body: "Space Grotesk", system-ui, sans-serif;
+}
+
+body[data-theme="soft-night"] {
+    color-scheme: dark;
+    --ex-bg: #1a243b;
+    --ex-bg-alt: #233150;
+    --ex-surface: #2b3d63;
+    --ex-ink: #eef4ff;
+    --ex-ink-soft: #b8c6df;
+    --ex-accent: #ff6b5e;
+    --ex-accent-soft: rgba(255, 107, 94, 0.3);
+    --ex-glow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="sunset"] {
+    color-scheme: dark;
+    --ex-bg: #2a1823;
+    --ex-bg-alt: #3a2643;
+    --ex-surface: #4b315f;
+    --ex-ink: #fff8ec;
+    --ex-ink-soft: #f4d6be;
+    --ex-accent: #fb7185;
+    --ex-accent-soft: rgba(251, 113, 133, 0.3);
+}
+
+body[data-theme="mint"] {
+    color-scheme: dark;
+    --ex-bg: #102429;
+    --ex-bg-alt: #1b3a42;
+    --ex-surface: #27525e;
+    --ex-ink: #e9fffb;
+    --ex-ink-soft: #b9e8db;
+    --ex-accent: #14b8a6;
+    --ex-accent-soft: rgba(20, 184, 166, 0.3);
+}
+
+body[data-theme="midnight"] {
+    color-scheme: dark;
+    --ex-bg: #090d1b;
+    --ex-bg-alt: #121a2f;
+    --ex-surface: #202d52;
+    --ex-ink: #dde7ff;
+    --ex-ink-soft: #9ca9d1;
+    --ex-accent: #6366f1;
+    --ex-accent-soft: rgba(99, 102, 241, 0.3);
 }
 
 * {
@@ -21,7 +66,10 @@
 
 body {
     font-family: var(--font-body);
-    background: var(--ex-bg);
+    background:
+        radial-gradient(900px 520px at 0% -10%, rgba(56, 189, 248, 0.2), transparent 65%),
+        radial-gradient(820px 480px at 100% 0%, rgba(251, 146, 60, 0.16), transparent 65%),
+        linear-gradient(160deg, var(--ex-bg), var(--ex-bg-alt));
     color: var(--ex-ink);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -32,7 +80,7 @@ body {
     display: flex;
     justify-content: center;
     padding: 16px 28px;
-    background: linear-gradient(180deg, rgba(24, 24, 37, 0.95), transparent);
+    background: linear-gradient(180deg, rgba(23, 35, 58, 0.95), transparent);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -70,14 +118,36 @@ body {
     letter-spacing: -0.02em;
 }
 
+.ex-header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ex-theme-select {
+    border: 1px solid rgba(198, 215, 245, 0.28);
+    border-radius: 8px;
+    background: rgba(198, 215, 245, 0.1);
+    color: var(--ex-ink);
+    font: inherit;
+    font-size: 0.84rem;
+    padding: 7px 10px;
+}
+
+.ex-theme-select:focus {
+    outline: none;
+    border-color: rgba(198, 215, 245, 0.45);
+    box-shadow: 0 0 0 3px rgba(198, 215, 245, 0.12);
+}
+
 .ex-back {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 8px 16px;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(198, 215, 245, 0.22);
+    background: rgba(198, 215, 245, 0.08);
     color: var(--ex-ink);
     font: inherit;
     font-size: 0.88rem;
@@ -88,8 +158,8 @@ body {
 }
 
 .ex-back:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(198, 215, 245, 0.16);
+    border-color: rgba(198, 215, 245, 0.4);
 }
 
 /* ── Hero Banner ── */
@@ -103,7 +173,7 @@ body {
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.15;
     margin-bottom: 8px;
-    background: linear-gradient(135deg, #fff, #c0c0d0);
+    background: linear-gradient(135deg, #fef3c7, #e0e7ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -161,7 +231,7 @@ body {
     width: 220px;
     height: 310px;
     border-radius: var(--ex-card-radius);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(198, 215, 245, 0.2);
     background: var(--ex-surface);
     position: relative;
     overflow: hidden;
@@ -170,7 +240,7 @@ body {
     text-align: left;
     color: var(--ex-ink);
     scroll-snap-align: start;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 6px 20px rgba(8, 14, 28, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms ease, border-color 280ms ease;
 }
 
@@ -179,9 +249,9 @@ body {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg,
-            transparent 30%,
-            rgba(10, 10, 15, 0.6) 65%,
-            rgba(10, 10, 15, 0.95) 100%);
+            transparent 34%,
+            rgba(16, 26, 44, 0.55) 65%,
+            rgba(16, 26, 44, 0.88) 100%);
     z-index: 1;
     pointer-events: none;
 }
@@ -194,24 +264,24 @@ body {
 }
 
 .ex-card[data-category="politics"] .card-art {
-    background: linear-gradient(145deg, #1a1a3e, #3d1c3e, #5c2d40);
+    background: linear-gradient(145deg, #3a2e74, #74407f, #b45366);
 }
 
 .ex-card[data-category="tech"] .card-art {
-    background: linear-gradient(145deg, #0d1b2a, #1b2d4f, #0d3b66);
+    background: linear-gradient(145deg, #1c355b, #2563a8, #0f766e);
 }
 
 /* Fallback gradient when no category */
 .ex-card .card-art {
-    background: linear-gradient(145deg, #1a1a2e, #2d2d4e, #1a2a3e);
+    background: linear-gradient(145deg, #334155, #415c8d, #235f83);
 }
 
 .ex-card[data-category="politics"] .card-art {
-    background: linear-gradient(145deg, #2d1b3d, #4a1942, #6b213e);
+    background: linear-gradient(145deg, #472f6d, #7a2e70, #c2415d);
 }
 
 .ex-card[data-category="tech"] .card-art {
-    background: linear-gradient(145deg, #0a1628, #163462, #1a4a7a);
+    background: linear-gradient(145deg, #17325c, #205295, #0f766e);
 }
 
 /* Card Content */
@@ -232,7 +302,7 @@ body {
     font-weight: 700;
     line-height: 1.25;
     color: #fff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 8px rgba(10, 16, 30, 0.45);
 }
 
 .ex-card .card-tag {
@@ -299,19 +369,19 @@ body {
 /* ── Hover Effects ── */
 .ex-card:hover:not(:disabled) {
     transform: scale(1.05);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(198, 215, 245, 0.42);
     box-shadow:
-        0 16px 48px rgba(0, 0, 0, 0.55),
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        0 14px 42px rgba(8, 14, 28, 0.42),
+        0 0 0 1px rgba(198, 215, 245, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     z-index: 5;
 }
 
 .ex-card:active:not(:disabled) {
     transform: scale(1.02);
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(198, 215, 245, 0.45);
     box-shadow:
-        0 4px 16px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(8, 14, 28, 0.4),
         inset 0 0 20px rgba(255, 255, 255, 0.03);
 }
 
@@ -321,7 +391,7 @@ body {
 }
 
 .ex-card.is-locked .card-art {
-    filter: grayscale(0.8) brightness(0.4);
+    filter: grayscale(0.55) brightness(0.55);
 }
 
 .ex-card.is-locked::after {
@@ -389,6 +459,21 @@ body {
 }
 
 @media (max-width: 480px) {
+    .ex-header-actions {
+        gap: 8px;
+    }
+
+    .ex-theme-select {
+        max-width: 112px;
+        font-size: 0.78rem;
+        padding: 6px 8px;
+    }
+
+    .ex-back {
+        padding: 7px 10px;
+        font-size: 0.8rem;
+    }
+
     .ex-card {
         width: 180px;
         height: 260px;

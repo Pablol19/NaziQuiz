@@ -23,7 +23,16 @@
                 <span class="ex-brand-mark">GS</span>
                 <span class="ex-brand-name">GuessTheSpeaker</span>
             </a>
-            <a class="ex-back" href="index.html">← Volver a la partida</a>
+            <div class="ex-header-actions">
+                <select id="ex-theme-select" class="ex-theme-select" aria-label="Tema visual">
+                    <option value="light">Claro</option>
+                    <option value="soft-night">Suave</option>
+                    <option value="sunset">Atardecer</option>
+                    <option value="mint">Menta</option>
+                    <option value="midnight">Noche</option>
+                </select>
+                <a class="ex-back" href="index.html">← Volver a la partida</a>
+            </div>
         </div>
     </header>
 
@@ -41,6 +50,27 @@
     </footer>
 
     <script>
+        const THEME_KEY = "gts_profile_v4:theme";
+        const THEME_IDS = new Set(["light", "soft-night", "sunset", "mint", "midnight"]);
+
+        function applySavedTheme() {
+            const storedTheme = localStorage.getItem(THEME_KEY);
+            const nextTheme = THEME_IDS.has(storedTheme) ? storedTheme : "light";
+            document.body.setAttribute("data-theme", nextTheme);
+        }
+
+        function initThemeControl() {
+            const select = document.getElementById("ex-theme-select");
+            if (!select) return;
+            const activeTheme = document.body.getAttribute("data-theme") || "light";
+            select.value = THEME_IDS.has(activeTheme) ? activeTheme : "light";
+            select.addEventListener("change", () => {
+                const nextTheme = THEME_IDS.has(select.value) ? select.value : "light";
+                document.body.setAttribute("data-theme", nextTheme);
+                localStorage.setItem(THEME_KEY, nextTheme);
+            });
+        }
+
         /* ── Shared data (mirrors script.js catalog) ── */
         const QUIZ_CATALOG = {
             categories: [
@@ -152,9 +182,12 @@
                 });
             });
         }
-
+        applySavedTheme();
+        initThemeControl();
         renderExplore();
     </script>
 </body>
 
 </html>
+
+

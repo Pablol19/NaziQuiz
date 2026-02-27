@@ -131,6 +131,23 @@ immersive {
   gap: 10px;
 }
 
+.top-theme-select {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  min-width: 120px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.top-theme-select:focus {
+  outline: none;
+  border-color: rgba(54, 95, 207, 0.5);
+  box-shadow: 0 0 0 3px rgba(54, 95, 207, 0.12);
+}
+
 .profile-chip {
   display: inline-flex;
   align-items: center;
@@ -2140,6 +2157,12 @@ h1 {
     justify-self: end;
   }
 
+  .top-theme-select {
+    min-width: 102px;
+    padding: 7px 10px;
+    font-size: 0.85rem;
+  }
+
   .profile-chip {
     padding: 5px 8px;
     font-size: 0.86rem;
@@ -2352,39 +2375,219 @@ h1 {
   }
 }
 
-/* Dark mode (default) */
+/* Theme system */
 :root {
+  color-scheme: light;
+  --ink: #1f2937;
+  --ink-soft: #5b6478;
+  --line: rgba(56, 76, 115, 0.18);
+  --card: #ffffff;
+  --bg: #f3ede4;
+  --bg-alt: #eaf1ff;
+  --primary: #2c4c86;
+  --pastel-sky: rgba(59, 130, 246, 0.16);
+  --pastel-mint: rgba(74, 222, 128, 0.14);
+  --pastel-peach: rgba(251, 146, 60, 0.16);
+  --pastel-lilac: rgba(167, 139, 250, 0.15);
+  --pastel-ink: #334a7a;
+  --pastel-border: rgba(94, 120, 168, 0.24);
+  --elev-1: 0 10px 24px rgba(40, 61, 102, 0.12);
+  --elev-2: 0 20px 54px rgba(40, 61, 102, 0.18);
+  --bg-glow-a: rgba(56, 189, 248, 0.24);
+  --bg-glow-b: rgba(251, 146, 60, 0.16);
+  --orb-a: rgba(59, 130, 246, 0.22);
+  --orb-b: rgba(251, 146, 60, 0.2);
+  --surface-bg: rgba(255, 255, 255, 0.78);
+  --surface-border: rgba(94, 120, 168, 0.24);
+  --surface-gradient-a: rgba(255, 255, 255, 0.92);
+  --surface-gradient-b: rgba(243, 248, 255, 0.88);
+  --chip-bg: rgba(255, 255, 255, 0.9);
+  --chip-border: rgba(120, 144, 188, 0.34);
+  --hover-bg: rgba(227, 237, 255, 0.9);
+  --input-bg: rgba(255, 255, 255, 0.95);
+  --input-border: rgba(120, 144, 188, 0.38);
+  --drawer-title-a: #2b4f93;
+  --drawer-title-b: #167ea6;
+  --drawer-hr: rgba(120, 144, 188, 0.24);
+  --sound-row-bg: rgba(233, 241, 255, 0.85);
+  --sound-row-border: rgba(120, 144, 188, 0.24);
+  --daily-card-bg: rgba(255, 255, 255, 0.24);
+  --daily-card-border: rgba(255, 255, 255, 0.38);
+  --daily-game-a: rgba(54, 88, 152, 0.96);
+  --daily-game-b: rgba(47, 143, 183, 0.9);
+}
+
+body[data-theme="soft-night"] {
   color-scheme: dark;
-  --ink: #e6ecf4;
-  --ink-soft: #98a5ba;
-  --line: rgba(148, 163, 184, 0.22);
-  --card: #0f172a;
-  --bg: #05070d;
-  --bg-alt: #0b1220;
-  --primary: #111827;
-  --pastel-sky: rgba(59, 130, 246, 0.18);
-  --pastel-mint: rgba(34, 197, 94, 0.18);
-  --pastel-peach: rgba(251, 146, 60, 0.18);
-  --pastel-lilac: rgba(167, 139, 250, 0.18);
-  --pastel-ink: #dbe7ff;
-  --pastel-border: rgba(148, 163, 184, 0.25);
-  --elev-1: 0 12px 28px rgba(0, 0, 0, 0.35);
-  --elev-2: 0 24px 64px rgba(0, 0, 0, 0.5);
+  --ink: #eef4ff;
+  --ink-soft: #bac8e1;
+  --line: rgba(173, 190, 220, 0.28);
+  --card: #1b2742;
+  --bg: #121a2b;
+  --bg-alt: #1d2740;
+  --primary: #22314f;
+  --pastel-sky: rgba(96, 165, 250, 0.26);
+  --pastel-mint: rgba(74, 222, 128, 0.22);
+  --pastel-peach: rgba(251, 146, 60, 0.24);
+  --pastel-lilac: rgba(196, 181, 253, 0.24);
+  --pastel-ink: #e4ecff;
+  --pastel-border: rgba(173, 190, 220, 0.3);
+  --elev-1: 0 12px 28px rgba(11, 18, 32, 0.28);
+  --elev-2: 0 24px 64px rgba(11, 18, 32, 0.4);
+  --bg-glow-a: rgba(56, 189, 248, 0.28);
+  --bg-glow-b: rgba(251, 146, 60, 0.2);
+  --orb-a: rgba(59, 130, 246, 0.32);
+  --orb-b: rgba(251, 146, 60, 0.24);
+  --surface-bg: rgba(27, 39, 66, 0.74);
+  --surface-border: rgba(173, 190, 220, 0.3);
+  --surface-gradient-a: rgba(27, 39, 66, 0.9);
+  --surface-gradient-b: rgba(35, 49, 80, 0.82);
+  --chip-bg: rgba(35, 49, 80, 0.7);
+  --chip-border: rgba(173, 190, 220, 0.34);
+  --hover-bg: rgba(54, 76, 120, 0.86);
+  --input-bg: rgba(31, 45, 74, 0.9);
+  --input-border: rgba(173, 190, 220, 0.36);
+  --drawer-title-a: #dbeafe;
+  --drawer-title-b: #93c5fd;
+  --drawer-hr: rgba(173, 190, 220, 0.26);
+  --sound-row-bg: rgba(47, 66, 104, 0.66);
+  --sound-row-border: rgba(96, 165, 250, 0.28);
+  --daily-card-bg: rgba(36, 52, 86, 0.46);
+  --daily-card-border: rgba(173, 190, 220, 0.38);
+  --daily-game-a: rgba(32, 49, 84, 0.96);
+  --daily-game-b: rgba(29, 111, 150, 0.9);
+}
+
+body[data-theme="sunset"] {
+  color-scheme: dark;
+  --ink: #fff8ec;
+  --ink-soft: #f4d6be;
+  --line: rgba(246, 199, 164, 0.3);
+  --card: #442b2b;
+  --bg: #2a1823;
+  --bg-alt: #3a2643;
+  --primary: #5a2f42;
+  --pastel-sky: rgba(248, 113, 113, 0.24);
+  --pastel-mint: rgba(251, 191, 36, 0.22);
+  --pastel-peach: rgba(251, 146, 60, 0.28);
+  --pastel-lilac: rgba(244, 114, 182, 0.24);
+  --pastel-ink: #ffedd5;
+  --pastel-border: rgba(246, 199, 164, 0.32);
+  --bg-glow-a: rgba(251, 113, 133, 0.3);
+  --bg-glow-b: rgba(251, 191, 36, 0.2);
+  --orb-a: rgba(251, 113, 133, 0.34);
+  --orb-b: rgba(251, 191, 36, 0.28);
+  --surface-bg: rgba(74, 39, 57, 0.74);
+  --surface-border: rgba(246, 199, 164, 0.3);
+  --surface-gradient-a: rgba(86, 45, 61, 0.9);
+  --surface-gradient-b: rgba(62, 39, 78, 0.82);
+  --chip-bg: rgba(94, 54, 82, 0.72);
+  --chip-border: rgba(246, 199, 164, 0.34);
+  --hover-bg: rgba(124, 69, 102, 0.84);
+  --input-bg: rgba(81, 45, 70, 0.9);
+  --input-border: rgba(246, 199, 164, 0.36);
+  --drawer-title-a: #fde68a;
+  --drawer-title-b: #fda4af;
+  --drawer-hr: rgba(246, 199, 164, 0.3);
+  --sound-row-bg: rgba(100, 60, 89, 0.66);
+  --sound-row-border: rgba(251, 191, 36, 0.3);
+  --daily-card-bg: rgba(88, 48, 74, 0.5);
+  --daily-card-border: rgba(246, 199, 164, 0.4);
+  --daily-game-a: rgba(91, 52, 80, 0.94);
+  --daily-game-b: rgba(185, 82, 91, 0.82);
+}
+
+body[data-theme="mint"] {
+  color-scheme: dark;
+  --ink: #e9fffb;
+  --ink-soft: #b9e8db;
+  --line: rgba(159, 235, 212, 0.28);
+  --card: #163137;
+  --bg: #102429;
+  --bg-alt: #1b3a42;
+  --primary: #1f4a52;
+  --pastel-sky: rgba(56, 189, 248, 0.22);
+  --pastel-mint: rgba(74, 222, 128, 0.26);
+  --pastel-peach: rgba(45, 212, 191, 0.22);
+  --pastel-lilac: rgba(125, 211, 252, 0.2);
+  --pastel-ink: #d1fae5;
+  --pastel-border: rgba(159, 235, 212, 0.3);
+  --bg-glow-a: rgba(45, 212, 191, 0.24);
+  --bg-glow-b: rgba(110, 231, 183, 0.2);
+  --orb-a: rgba(45, 212, 191, 0.3);
+  --orb-b: rgba(110, 231, 183, 0.26);
+  --surface-bg: rgba(26, 59, 66, 0.74);
+  --surface-border: rgba(159, 235, 212, 0.3);
+  --surface-gradient-a: rgba(27, 70, 72, 0.9);
+  --surface-gradient-b: rgba(33, 80, 85, 0.82);
+  --chip-bg: rgba(32, 82, 85, 0.7);
+  --chip-border: rgba(159, 235, 212, 0.34);
+  --hover-bg: rgba(43, 108, 111, 0.84);
+  --input-bg: rgba(25, 70, 72, 0.9);
+  --input-border: rgba(159, 235, 212, 0.36);
+  --drawer-title-a: #a7f3d0;
+  --drawer-title-b: #67e8f9;
+  --drawer-hr: rgba(159, 235, 212, 0.28);
+  --sound-row-bg: rgba(35, 96, 92, 0.64);
+  --sound-row-border: rgba(110, 231, 183, 0.3);
+  --daily-card-bg: rgba(31, 86, 86, 0.46);
+  --daily-card-border: rgba(159, 235, 212, 0.38);
+  --daily-game-a: rgba(30, 86, 91, 0.95);
+  --daily-game-b: rgba(30, 128, 113, 0.88);
+}
+
+body[data-theme="midnight"] {
+  color-scheme: dark;
+  --ink: #dde7ff;
+  --ink-soft: #9ca9d1;
+  --line: rgba(129, 148, 198, 0.26);
+  --card: #11182e;
+  --bg: #090d1b;
+  --bg-alt: #121a2f;
+  --primary: #1b2645;
+  --pastel-sky: rgba(99, 102, 241, 0.22);
+  --pastel-mint: rgba(56, 189, 248, 0.18);
+  --pastel-peach: rgba(96, 165, 250, 0.2);
+  --pastel-lilac: rgba(129, 140, 248, 0.22);
+  --pastel-ink: #dbeafe;
+  --pastel-border: rgba(129, 148, 198, 0.3);
+  --bg-glow-a: rgba(79, 70, 229, 0.3);
+  --bg-glow-b: rgba(37, 99, 235, 0.22);
+  --orb-a: rgba(99, 102, 241, 0.32);
+  --orb-b: rgba(37, 99, 235, 0.26);
+  --surface-bg: rgba(21, 29, 56, 0.78);
+  --surface-border: rgba(129, 148, 198, 0.3);
+  --surface-gradient-a: rgba(24, 33, 66, 0.9);
+  --surface-gradient-b: rgba(18, 27, 54, 0.84);
+  --chip-bg: rgba(27, 40, 77, 0.72);
+  --chip-border: rgba(129, 148, 198, 0.34);
+  --hover-bg: rgba(40, 57, 106, 0.86);
+  --input-bg: rgba(24, 35, 70, 0.92);
+  --input-border: rgba(129, 148, 198, 0.36);
+  --drawer-title-a: #c7d2fe;
+  --drawer-title-b: #93c5fd;
+  --drawer-hr: rgba(129, 148, 198, 0.26);
+  --sound-row-bg: rgba(33, 48, 95, 0.68);
+  --sound-row-border: rgba(96, 165, 250, 0.28);
+  --daily-card-bg: rgba(26, 38, 76, 0.5);
+  --daily-card-border: rgba(129, 148, 198, 0.38);
+  --daily-game-a: rgba(21, 33, 70, 0.96);
+  --daily-game-b: rgba(22, 78, 130, 0.88);
 }
 
 body {
   background:
-    radial-gradient(1100px 700px at -10% -20%, rgba(30, 58, 138, 0.35), transparent 70%),
-    radial-gradient(900px 520px at 110% 0%, rgba(14, 116, 144, 0.25), transparent 65%),
+    radial-gradient(1100px 700px at -10% -20%, var(--bg-glow-a), transparent 70%),
+    radial-gradient(920px 560px at 110% 0%, var(--bg-glow-b), transparent 65%),
     linear-gradient(160deg, var(--bg), var(--bg-alt));
 }
 
 .orb-a {
-  background: radial-gradient(circle, rgba(30, 64, 175, 0.35), transparent 65%);
+  background: radial-gradient(circle, var(--orb-a), transparent 65%);
 }
 
 .orb-b {
-  background: radial-gradient(circle, rgba(8, 145, 178, 0.32), transparent 65%);
+  background: radial-gradient(circle, var(--orb-b), transparent 65%);
 }
 
 .topbar,
@@ -2402,8 +2605,8 @@ body {
 .history-insight-card,
 .history-list li,
 .social-drawer {
-  background: rgba(15, 23, 42, 0.76);
-  border-color: rgba(148, 163, 184, 0.28);
+  background: var(--surface-bg);
+  border-color: var(--surface-border);
   box-shadow: var(--elev-1);
 }
 
@@ -2414,7 +2617,7 @@ body {
 #ux-summary.summary-card,
 .history-mid-card,
 .history-insight-card {
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(17, 24, 39, 0.82));
+  background: linear-gradient(180deg, var(--surface-gradient-a), var(--surface-gradient-b));
 }
 
 .profile-chip,
@@ -2423,16 +2626,17 @@ body {
 .percentile-chip,
 .quiz-segmented,
 .quiz-tab.is-active,
-.heat-cell {
-  background: rgba(15, 23, 42, 0.72);
-  border-color: rgba(148, 163, 184, 0.3);
+.heat-cell,
+.top-theme-select {
+  background: var(--chip-bg);
+  border-color: var(--chip-border);
   color: var(--ink);
 }
 
 .btn-outline:hover,
 .quiz-tab:hover:not(.is-active),
 .leaderboard tbody tr:hover {
-  background: rgba(30, 41, 59, 0.9);
+  background: var(--hover-bg);
 }
 
 .nav a,
@@ -2456,30 +2660,31 @@ body {
 #friend-name-input,
 .social-drawer #profile-name-input,
 #ranking-search-input,
-#room-code {
-  background: rgba(15, 23, 42, 0.9);
-  border-color: rgba(148, 163, 184, 0.35);
+#room-code,
+.top-theme-select {
+  background: var(--input-bg);
+  border-color: var(--input-border);
   color: var(--ink);
 }
 
 .social-drawer {
-  border-left-color: rgba(148, 163, 184, 0.35);
+  border-left-color: var(--input-border);
 }
 
 .social-drawer-head h3 {
-  background: linear-gradient(135deg, #dbeafe, #93c5fd);
+  background: linear-gradient(135deg, var(--drawer-title-a), var(--drawer-title-b));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .social-drawer hr {
-  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.24), transparent);
+  background: linear-gradient(90deg, transparent, var(--drawer-hr), transparent);
 }
 
 .sound-toggle-row {
-  background: rgba(30, 41, 59, 0.8);
-  border-color: rgba(96, 165, 250, 0.28);
+  background: var(--sound-row-bg);
+  border-color: var(--sound-row-border);
 }
 
 .leaderboard tr.me {
@@ -2489,8 +2694,12 @@ body {
 .daily-locked,
 .daily-finish,
 .daily-idle {
-  background: rgba(15, 23, 42, 0.4);
-  border-color: rgba(148, 163, 184, 0.35);
+  background: var(--daily-card-bg);
+  border-color: var(--daily-card-border);
+}
+
+.daily-game {
+  background: linear-gradient(130deg, var(--daily-game-a), var(--daily-game-b));
 }
 
 .next-achievement-rare.comun,

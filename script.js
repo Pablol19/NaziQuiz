@@ -37,6 +37,26 @@ const STREAK_MILESTONES = [3, 7, 14, 30];
 const MYSTERY_REWARDS = ["Fire Badge", "Neon Crown", "Iron Mind", "Night Owl", "Gold Pulse"];
 const FRIEND_NAMES = ["Ari", "Noa", "Sergi", "Luna", "Mia", "Diego", "Vera", "Iris", "Nico", "Alex"];
 const SESSION_KEY = `${STORAGE_KEY_BASE}:session_state`;
+const THEME_KEY = `${STORAGE_KEY_BASE}:theme`;
+const THEME_OPTIONS = [
+  { id: "light", label: "Claro" },
+  { id: "soft-night", label: "Suave" },
+  { id: "sunset", label: "Atardecer" },
+  { id: "mint", label: "Menta" },
+  { id: "midnight", label: "Noche" }
+];
+const THEME_IDS = new Set(THEME_OPTIONS.map((option) => option.id));
+
+function getSavedTheme() {
+  const stored = localStorage.getItem(THEME_KEY);
+  return THEME_IDS.has(stored) ? stored : "light";
+}
+
+function applyTheme(themeId) {
+  const next = THEME_IDS.has(themeId) ? themeId : "light";
+  if (document.body) document.body.setAttribute("data-theme", next);
+  localStorage.setItem(THEME_KEY, next);
+}
 
 /* ── Subtle SFX Engine (Web Audio API) ── */
 const SFX = (() => {
@@ -167,6 +187,7 @@ const socialBackdrop = document.querySelector("#social-backdrop");
 const friendNameInput = document.querySelector("#friend-name-input");
 const friendAddButton = document.querySelector("#friend-add");
 const friendsListNode = document.querySelector("#friends-list");
+const topThemeSelect = document.querySelector("#top-theme-select");
 
 const statStreak = document.querySelector("#stat-streak");
 const statBestStreak = document.querySelector("#stat-best-streak");
@@ -212,6 +233,8 @@ const appState = {
   practiceMode: false,
   consecutiveCorrect: 0
 };
+
+applyTheme(getSavedTheme());
 
 function getDailyQuizId(dateKey) {
   const hash = hashString(`daily-quiz-rotation:${dateKey}`);
@@ -2073,6 +2096,17 @@ function renderProfileChip() {
   if (profileNameChip) profileNameChip.textContent = appState.profile.displayName || "You";
 }
 
+function initTopThemeControl() {
+  if (!topThemeSelect) return;
+  topThemeSelect.innerHTML = THEME_OPTIONS
+    .map((option) => `<option value="${option.id}">${option.label}</option>`)
+    .join("");
+  topThemeSelect.value = getSavedTheme();
+  topThemeSelect.addEventListener("change", () => {
+    applyTheme(topThemeSelect.value);
+  });
+}
+
 function renderFriendsList() {
   if (!friendsListNode) return;
   const friends = Array.isArray(appState.profile.friends) ? appState.profile.friends : [];
@@ -2177,6 +2211,7 @@ async function init() {
   updateDerivedState();
   initRankingControls();
   initProfileControls();
+  initTopThemeControl();
   renderProfileChip();
   initSocialPanel();
 
