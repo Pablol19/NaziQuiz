@@ -1699,6 +1699,10 @@ h1 {
   padding: 16px;
 }
 
+.daily-idle .btn-play-main {
+  margin-top: 0;
+}
+
 /* ── Question slide-in transition ── */
 .daily-game.is-transitioning {
   opacity: 0;

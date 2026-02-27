@@ -1003,12 +1003,9 @@ function renderHomePrimarySection(animate = false) {
 }
 
 function renderIdleState() {
-  const riskClass = appState.streakAtRisk && appState.profile.streakCurrent > 0 ? " streak-risk" : "";
   dailyGameNode.innerHTML = `
     <div class="daily-idle">
-      <h4>Empieza tu Daily Match</h4>
-      <p>${appState.dailyQuestions.length} preguntas. Un intento oficial por dia.</p>
-      <button id="daily-start-main" class="btn btn-primary btn-play-main${riskClass}" type="button">${riskClass ? "⚠️ Jugar ahora — racha en riesgo" : "Jugar ahora"}</button>
+      <button id="daily-start-main" class="btn btn-primary btn-play-main" type="button">Jugar ahora</button>
     </div>
   `;
   const startButton = document.querySelector("#daily-start-main");
@@ -1019,13 +1016,11 @@ function renderLockedState() {
   const remaining = resetTimerNode ? resetTimerNode.textContent : "--:--:--";
   dailyGameNode.innerHTML = `
     <div class="daily-locked">
-      <h4>Ya jugaste la partida de hoy</h4>
-      <p>Resultado: <strong>${appState.todayResult.score}/${appState.todayResult.total}</strong> (${appState.todayResult.percent}%).</p>
-      <p>Tu siguiente intento oficial se desbloquea en <strong>${remaining}</strong>.</p>
-      <p><a class="btn btn-outline" href="#ranking">Ver ranking</a> <a class="btn btn-outline" href="estadisticas.html">Ver estadisticas</a></p>
-      <div class="practice-banner">
-        <span class="practice-note">Puedes seguir practicando sin afectar la partida oficial.</span>
-        <button id="practice-start" class="btn btn-outline" type="button">Revancha no oficial</button>
+      <h4>Vuelve mañana</h4>
+      <p>Resultado: <strong>${appState.todayResult.score}/${appState.todayResult.total}</strong> (${appState.todayResult.percent}%)</p>
+      <div style="margin-top: 16px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+        <a class="btn btn-outline" href="#ranking">Ranking</a>
+        <button id="practice-start" class="btn btn-outline" type="button">Practicar</button>
       </div>
     </div>
   `;
