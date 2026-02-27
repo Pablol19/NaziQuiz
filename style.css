@@ -37,8 +37,8 @@ body {
   font-family: var(--font-body);
   color: var(--ink);
   background: radial-gradient(1000px 600px at -10% -20%, #ffe1b8, transparent 70%),
-              radial-gradient(900px 500px at 110% 0%, #d4efff, transparent 65%),
-              linear-gradient(160deg, var(--bg), var(--bg-alt));
+    radial-gradient(900px 500px at 110% 0%, #d4efff, transparent 65%),
+    linear-gradient(160deg, var(--bg), var(--bg-alt));
   min-height: 100vh;
   padding: 30px 7vw 44px;
   overflow-x: hidden;
@@ -55,12 +55,49 @@ immersive {
   filter: blur(12px);
 }
 
+@keyframes floatOrbA {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(20px, -30px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-15px, -10px) scale(0.95);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes floatOrbB {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(-25px, 20px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(15px, 15px) scale(0.95);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
 .orb-a {
   width: 280px;
   height: 280px;
   left: 3%;
   bottom: 6%;
   background: radial-gradient(circle, rgba(251, 146, 60, 0.28), transparent 65%);
+  animation: floatOrbA 18s ease-in-out infinite;
 }
 
 .orb-b {
@@ -69,6 +106,7 @@ immersive {
   right: 4%;
   top: 10%;
   background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 65%);
+  animation: floatOrbB 22s ease-in-out infinite;
 }
 
 .topbar,
@@ -97,11 +135,103 @@ immersive {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid var(--line);
+  border: 2px solid var(--line);
   background: rgba(255, 255, 255, 0.86);
   border-radius: 999px;
   padding: 6px 10px;
   font-weight: 600;
+  transition: border-color 400ms ease, box-shadow 400ms ease;
+}
+
+/* ── League Tier Borders on profile chip ── */
+.profile-chip.tier-bronze {
+  border-color: #cd7f32;
+  box-shadow: 0 0 8px rgba(205, 127, 50, 0.3);
+}
+
+.profile-chip.tier-silver {
+  border-color: #a8a9ad;
+  box-shadow: 0 0 10px rgba(168, 169, 173, 0.35);
+}
+
+.profile-chip.tier-gold {
+  border-color: #ffd700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.profile-chip.tier-platinum {
+  border-color: #5ce1e6;
+  box-shadow: 0 0 14px rgba(92, 225, 230, 0.4);
+}
+
+.profile-chip.tier-diamond {
+  border-color: #b9f2ff;
+  box-shadow: 0 0 18px rgba(185, 242, 255, 0.5), 0 0 6px rgba(147, 112, 219, 0.3);
+}
+
+/* ── League Badge Icon ── */
+.league-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.league-badge.tier-bronze {
+  background: linear-gradient(135deg, #cd7f32, #a0522d);
+  color: #fff;
+}
+
+.league-badge.tier-silver {
+  background: linear-gradient(135deg, #c0c0c0, #a8a9ad);
+  color: #333;
+}
+
+.league-badge.tier-gold {
+  background: linear-gradient(135deg, #ffd700, #daa520);
+  color: #5a3e00;
+}
+
+.league-badge.tier-platinum {
+  background: linear-gradient(135deg, #5ce1e6, #40c9cf);
+  color: #0d4f52;
+}
+
+.league-badge.tier-diamond {
+  background: linear-gradient(135deg, #b9f2ff, #9370db);
+  color: #1a0a3e;
+}
+
+/* ── Stat-level card tier coloring ── */
+.stat-card.tier-bronze {
+  border-color: rgba(205, 127, 50, 0.4);
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.08), rgba(255, 255, 255, 0.9));
+}
+
+.stat-card.tier-silver {
+  border-color: rgba(168, 169, 173, 0.4);
+  background: linear-gradient(135deg, rgba(168, 169, 173, 0.08), rgba(255, 255, 255, 0.9));
+}
+
+.stat-card.tier-gold {
+  border-color: rgba(255, 215, 0, 0.4);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.92));
+}
+
+.stat-card.tier-platinum {
+  border-color: rgba(92, 225, 230, 0.4);
+  background: linear-gradient(135deg, rgba(92, 225, 230, 0.08), rgba(255, 255, 255, 0.9));
+}
+
+.stat-card.tier-diamond {
+  border-color: rgba(147, 112, 219, 0.4);
+  background: linear-gradient(135deg, rgba(185, 242, 255, 0.12), rgba(147, 112, 219, 0.06), rgba(255, 255, 255, 0.9));
 }
 
 .social-drawer {
@@ -156,6 +286,12 @@ immersive {
   color: #fff;
   font-family: var(--font-title);
   font-size: 20px;
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.brand:hover .brand-mark {
+  box-shadow: 0 0 18px rgba(54, 95, 207, 0.35);
+  transform: scale(1.06);
 }
 
 .brand-name {
@@ -172,10 +308,28 @@ immersive {
   text-decoration: none;
   color: var(--ink-soft);
   font-weight: 600;
+  position: relative;
+  transition: color 200ms ease;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #365fcf, #22d3ee);
+  border-radius: 999px;
+  transition: width 250ms ease;
 }
 
 .nav a:hover {
   color: var(--ink);
+}
+
+.nav a:hover::after {
+  width: 100%;
 }
 
 .hero {
@@ -294,6 +448,15 @@ h1 {
   border: 1px solid transparent;
   font: inherit;
   cursor: pointer;
+  transition: transform 150ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.97);
 }
 
 .btn-play-main {
@@ -307,6 +470,10 @@ h1 {
   background: linear-gradient(120deg, #1b2742, #365fcf);
   color: #fff;
   box-shadow: 0 8px 18px rgba(54, 95, 207, 0.26);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 10px 24px rgba(54, 95, 207, 0.38);
 }
 
 .btn-outline {
@@ -352,6 +519,12 @@ h1 {
   border-radius: var(--radius-md);
   padding: 14px;
   box-shadow: var(--elev-1);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(18, 24, 38, 0.13);
 }
 
 .stat-card p {
@@ -423,6 +596,18 @@ h1 {
   animation: fadeUp 420ms ease both;
 }
 
+#daily {
+  animation-delay: 0ms;
+}
+
+#ranking {
+  animation-delay: 80ms;
+}
+
+#history {
+  animation-delay: 160ms;
+}
+
 .panel-head {
   display: flex;
   justify-content: space-between;
@@ -436,7 +621,7 @@ h1 {
   text-align: center;
 }
 
-#daily .panel-head > div:first-child {
+#daily .panel-head>div:first-child {
   width: 100%;
   max-width: 920px;
   display: flex;
@@ -494,6 +679,16 @@ h1 {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 120ms ease;
+}
+
+.quiz-tab:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--ink);
+}
+
+.quiz-tab:active {
+  transform: scale(0.96);
 }
 
 .quiz-tab.is-active {
@@ -524,6 +719,33 @@ h1 {
   border-radius: 12px;
   padding: 12px;
   box-shadow: var(--elev-1);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.insight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(18, 24, 38, 0.12);
+}
+
+/* Unique soft pastel tint per insight card */
+#goal-card {
+  background: linear-gradient(135deg, rgba(232, 242, 255, 0.7), rgba(255, 255, 255, 0.88));
+  border-color: rgba(96, 165, 250, 0.22);
+}
+
+#streak-card {
+  background: linear-gradient(135deg, rgba(255, 239, 230, 0.7), rgba(255, 255, 255, 0.88));
+  border-color: rgba(251, 146, 60, 0.22);
+}
+
+#next-reward {
+  background: linear-gradient(135deg, rgba(241, 236, 255, 0.7), rgba(255, 255, 255, 0.88));
+  border-color: rgba(167, 139, 250, 0.22);
+}
+
+#mission-card {
+  background: linear-gradient(135deg, rgba(232, 248, 239, 0.7), rgba(255, 255, 255, 0.88));
+  border-color: rgba(74, 222, 128, 0.22);
 }
 
 .insight-card h4 {
@@ -687,11 +909,56 @@ h1 {
 }
 
 .daily-game {
-  background: linear-gradient(125deg, rgba(15, 23, 42, 0.95), rgba(14, 116, 144, 0.95));
+  position: relative;
+  background: linear-gradient(125deg, rgba(15, 23, 42, 0.97), rgba(14, 116, 144, 0.92));
   border-radius: var(--radius-md);
   padding: 20px;
   color: #fff;
   box-shadow: var(--elev-2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  transition: box-shadow 300ms ease;
+}
+
+/* Subtle dot pattern overlay for texture */
+.daily-game::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 18px 18px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.daily-game>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* Flash overlay on correct/wrong */
+.daily-game.flash-correct::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(34, 197, 94, 0.2), transparent 70%);
+  border-radius: inherit;
+  animation: flashFade 600ms ease forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.daily-game.flash-wrong::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.18), transparent 70%);
+  border-radius: inherit;
+  animation: flashFade 600ms ease forwards;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .daily-head {
@@ -714,6 +981,8 @@ h1 {
   height: 100%;
   background: linear-gradient(90deg, #86efac, #22d3ee);
   transition: width 220ms ease;
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
 }
 
 .daily-theme {
@@ -726,10 +995,24 @@ h1 {
 
 .daily-quote {
   margin-top: 8px;
-  padding-left: 14px;
+  padding-left: 18px;
   border-left: 3px solid rgba(255, 255, 255, 0.35);
   font-size: clamp(1.1rem, 2vw, 1.3rem);
   line-height: 1.45;
+  position: relative;
+}
+
+/* Decorative giant opening quote */
+.daily-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: -18px;
+  left: -6px;
+  font-size: 4.5rem;
+  font-family: var(--font-title);
+  color: rgba(255, 255, 255, 0.1);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .daily-options {
@@ -748,10 +1031,17 @@ h1 {
   padding: 11px 13px;
   cursor: pointer;
   font: inherit;
+  transition: transform 150ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
-.daily-option:hover {
+.daily-option:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 rgba(255, 255, 255, 0.3);
+}
+
+.daily-option:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .daily-option:disabled {
@@ -761,11 +1051,21 @@ h1 {
 .daily-option.is-correct {
   border-color: rgba(74, 222, 128, 0.9);
   background: rgba(34, 197, 94, 0.25);
+  animation: correctPop 350ms ease;
 }
 
 .daily-option.is-wrong {
   border-color: rgba(252, 165, 165, 0.9);
   background: rgba(220, 38, 38, 0.22);
+  animation: wrongShake 400ms ease;
+}
+
+/* Non-selected options fade out after answer */
+.daily-option.is-dimmed {
+  opacity: 0.35;
+  transform: scale(0.97);
+  transition: opacity 350ms ease, transform 350ms ease;
+  pointer-events: none;
 }
 
 .daily-feedback {
@@ -919,6 +1219,12 @@ h1 {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.75);
   border: 1px solid var(--pastel-border);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.heat-cell:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(18, 24, 38, 0.1);
 }
 
 .heat-cell.is-on {
@@ -940,6 +1246,12 @@ h1 {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 239, 230, 0.2));
   box-shadow: 0 8px 18px rgba(18, 24, 38, 0.05);
   padding: 10px;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.history-mid-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(18, 24, 38, 0.1);
 }
 
 .history-mid-card h4 {
@@ -973,6 +1285,12 @@ h1 {
   box-shadow: 0 8px 18px rgba(18, 24, 38, 0.05);
   padding: 10px;
   overflow-wrap: anywhere;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.history-insight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(18, 24, 38, 0.1);
 }
 
 .history-insight-card h4 {
@@ -1119,6 +1437,14 @@ h1 {
   background: rgba(14, 165, 233, 0.14);
 }
 
+.leaderboard tbody tr {
+  transition: background 180ms ease;
+}
+
+.leaderboard tbody tr:hover {
+  background: rgba(14, 165, 233, 0.06);
+}
+
 .history-list {
   list-style: none;
   display: grid;
@@ -1133,6 +1459,12 @@ h1 {
   display: flex;
   justify-content: space-between;
   gap: 12px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.history-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(18, 24, 38, 0.08);
 }
 
 .history-list .date {
@@ -1152,6 +1484,7 @@ h1 {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1163,6 +1496,7 @@ h1 {
     opacity: 0;
     transform: scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -1170,9 +1504,121 @@ h1 {
 }
 
 @keyframes xpPulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ── On-Fire glow animation ── */
+@keyframes fireGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.3), 0 14px 28px rgba(239, 68, 68, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 18px rgba(249, 115, 22, 0.5), 0 14px 28px rgba(239, 68, 68, 0.35);
+  }
+}
+
+#streak-stat-card.is-onfire {
+  animation: fireGlow 2s ease-in-out infinite;
+}
+
+/* ── Streak-at-risk pulsing play button ── */
+@keyframes riskPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 8px 18px rgba(54, 95, 207, 0.26);
+  }
+
+  50% {
+    box-shadow: 0 4px 24px rgba(239, 68, 68, 0.45), 0 0 0 4px rgba(239, 68, 68, 0.15);
+  }
+}
+
+.btn-play-main.streak-risk {
+  animation: riskPulse 1.6s ease-in-out infinite;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* ── Flash fade for correct/wrong game container ── */
+@keyframes flashFade {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes correctPop {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.03);
+  }
+
+  60% {
+    transform: scale(0.98);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wrongShake {
+  0% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-6px);
+  }
+
+  40% {
+    transform: translateX(5px);
+  }
+
+  60% {
+    transform: translateX(-3px);
+  }
+
+  80% {
+    transform: translateX(2px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @media (max-width: 1080px) {
@@ -1253,7 +1699,7 @@ h1 {
     margin-bottom: 12px;
   }
 
-  #daily .panel-head > div:first-child {
+  #daily .panel-head>div:first-child {
     max-width: 100%;
   }
 

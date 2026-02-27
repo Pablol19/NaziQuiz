@@ -457,6 +457,14 @@ function getLevelInfo(xpValue) {
   return { level, xpInLevel, xpToNext: 100 - xpInLevel };
 }
 
+function getLeagueTier(level) {
+  if (level >= 20) return { id: "diamond", name: "Diamante", icon: "💎" };
+  if (level >= 12) return { id: "platinum", name: "Platino", icon: "⚜️" };
+  if (level >= 7) return { id: "gold", name: "Oro", icon: "🥇" };
+  if (level >= 3) return { id: "silver", name: "Plata", icon: "🥈" };
+  return { id: "bronze", name: "Bronce", icon: "🥉" };
+}
+
 function setXpBarProgress(percent, withTransition = false) {
   if (!xpBarNode) return;
   if (!withTransition) xpBarNode.style.transition = "none";
@@ -717,12 +725,40 @@ function renderProfileStats(playerRank) {
   statRank.textContent = playerRank ? `#${playerRank}` : "--";
   if (statPercentile) statPercentile.textContent = appState.percentile ? `Top ${appState.percentile}%` : "--";
   if (statShield) statShield.textContent = appState.shieldAvailable ? "Disponible" : "Usado";
+
+  const lv = getLevelInfo(appState.profile.xp);
+  const tier = getLeagueTier(lv.level);
+
   if (statLevel || statXp) {
-    const lv = getLevelInfo(appState.profile.xp);
     if (statLevel) statLevel.textContent = `Lv.${lv.level}`;
     if (statXp) statXp.textContent = `${lv.xpInLevel}/100 XP`;
     setXpBarProgress(lv.xpInLevel, false);
   }
+
+  // Apply league tier to stat-level card
+  const levelCard = statLevel ? statLevel.closest(".stat-card") : null;
+  if (levelCard) {
+    levelCard.classList.remove("tier-bronze", "tier-silver", "tier-gold", "tier-platinum", "tier-diamond");
+    levelCard.classList.add(`tier-${tier.id}`);
+  }
+
+  // Apply league tier to profile chip in topbar
+  const chipNode = document.querySelector(".profile-chip");
+  if (chipNode) {
+    chipNode.classList.remove("tier-bronze", "tier-silver", "tier-gold", "tier-platinum", "tier-diamond");
+    chipNode.classList.add(`tier-${tier.id}`);
+    // Insert or update league badge
+    let badge = chipNode.querySelector(".league-badge");
+    if (!badge) {
+      badge = document.createElement("span");
+      badge.className = "league-badge";
+      chipNode.prepend(badge);
+    }
+    badge.className = `league-badge tier-${tier.id}`;
+    badge.textContent = tier.icon;
+    badge.title = `Liga ${tier.name}`;
+  }
+
   if (statRankDelta) {
     statRankDelta.classList.remove("delta-up", "delta-down");
     if (appState.rankDelta === null) {
@@ -826,11 +862,12 @@ function renderDailyStatus() {
 }
 
 function renderIdleState() {
+  const riskClass = appState.streakAtRisk && appState.profile.streakCurrent > 0 ? " streak-risk" : "";
   dailyGameNode.innerHTML = `
     <div class="daily-idle">
       <h4>Daily Match preparado</h4>
       <p>Responde ${appState.dailyQuestions.length} citas para registrar tu resultado oficial de hoy.</p>
-      <button id="daily-start-main" class="btn btn-primary btn-play-main" type="button">Jugar ahora</button>
+      <button id="daily-start-main" class="btn btn-primary btn-play-main${riskClass}" type="button">${riskClass ? "⚠️ Jugar ahora — racha en riesgo" : "Jugar ahora"}</button>
     </div>
   `;
   const startButton = document.querySelector("#daily-start-main");
@@ -896,10 +933,23 @@ function onAnswer(button) {
 
   if (picked.isCorrect) appState.score += 1;
 
+  // Flash the game container green or red
+  dailyGameNode.classList.remove("flash-correct", "flash-wrong");
+  void dailyGameNode.offsetWidth;
+  dailyGameNode.classList.add(picked.isCorrect ? "flash-correct" : "flash-wrong");
+  setTimeout(() => dailyGameNode.classList.remove("flash-correct", "flash-wrong"), 650);
+
   dailyGameNode.querySelectorAll(".daily-option").forEach((optionButton, index) => {
     const option = question.options[index];
     optionButton.disabled = true;
-    optionButton.classList.add(option.isCorrect ? "is-correct" : "is-wrong");
+    if (option.isCorrect) {
+      optionButton.classList.add("is-correct");
+    } else if (optionButton === button && !picked.isCorrect) {
+      optionButton.classList.add("is-wrong");
+    } else {
+      // Dim non-selected, non-correct options
+      optionButton.classList.add("is-dimmed");
+    }
   });
 
   const feedback = dailyGameNode.querySelector("#daily-feedback");
