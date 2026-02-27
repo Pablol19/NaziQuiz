@@ -239,13 +239,15 @@ immersive {
   top: 0;
   right: 0;
   height: 100vh;
-  width: min(360px, 92vw);
-  background: rgba(255, 255, 255, 0.98);
-  border-left: 1px solid var(--line);
-  box-shadow: var(--elev-2);
-  padding: 18px;
+  width: min(380px, 92vw);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: -8px 0 40px rgba(18, 24, 38, 0.12);
+  padding: 22px 20px;
   transform: translateX(102%);
-  transition: transform 240ms ease;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 20;
   overflow-y: auto;
 }
@@ -257,15 +259,147 @@ immersive {
 .social-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.28);
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 19;
+  transition: opacity 280ms ease;
 }
 
 .social-drawer-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(18, 24, 38, 0.08);
+}
+
+.social-drawer-head h3 {
+  font-size: 1.3rem;
+  background: linear-gradient(135deg, var(--ink), #365fcf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.social-drawer .panel-sub {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.social-drawer hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(18, 24, 38, 0.1), transparent);
+  margin: 16px 0;
+}
+
+.social-drawer label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.social-drawer .btn-outline {
+  border-radius: 10px;
+  font-size: 0.88rem;
+  transition: background 180ms ease, border-color 180ms ease, transform 120ms ease;
+}
+
+.social-drawer .btn-outline:hover {
+  background: rgba(54, 95, 207, 0.06);
+  border-color: rgba(54, 95, 207, 0.3);
+}
+
+.social-drawer .btn-outline:active {
+  transform: scale(0.97);
+}
+
+#friend-name-input,
+.social-drawer #profile-name-input {
+  flex: 1;
+  border: 1.5px solid rgba(18, 24, 38, 0.12);
+  border-radius: 10px;
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+#friend-name-input:focus,
+.social-drawer #profile-name-input:focus {
+  outline: none;
+  border-color: rgba(54, 95, 207, 0.5);
+  box-shadow: 0 0 0 3px rgba(54, 95, 207, 0.1);
+}
+
+#avatar-pro {
+  width: 100%;
+  margin-top: 8px;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  border-style: dashed;
+  opacity: 0.7;
+}
+
+/* Sound toggle in drawer */
+.sound-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(232, 242, 255, 0.4);
+  border: 1px solid rgba(54, 95, 207, 0.12);
+}
+
+.sound-toggle-row span {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.sound-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(18, 24, 38, 0.15);
+  border: none;
+  cursor: pointer;
+  transition: background 200ms ease;
+  padding: 0;
+}
+
+.sound-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 200ms ease;
+}
+
+.sound-toggle.is-on {
+  background: linear-gradient(135deg, #365fcf, #22d3ee);
+}
+
+.sound-toggle.is-on::after {
+  transform: translateX(20px);
 }
 
 .brand {
@@ -1118,6 +1252,43 @@ h1 {
   padding: 16px;
 }
 
+/* ── Question slide-in transition ── */
+.daily-game.is-transitioning {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.daily-game.is-entering {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+/* ── In-game streak tension ── */
+.daily-game.tension-10 {
+  border-color: rgba(251, 146, 60, 0.5);
+  box-shadow: var(--elev-2), 0 0 20px rgba(251, 146, 60, 0.15);
+}
+
+.daily-game.tension-20 {
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: var(--elev-2), 0 0 28px rgba(239, 68, 68, 0.2);
+  animation: tensionPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes tensionPulse {
+
+  0%,
+  100% {
+    box-shadow: var(--elev-2), 0 0 28px rgba(239, 68, 68, 0.15);
+  }
+
+  50% {
+    box-shadow: var(--elev-2), 0 0 40px rgba(239, 68, 68, 0.3);
+  }
+}
+
 .daily-locked h4,
 .daily-finish h4,
 .daily-idle h4 {
@@ -1133,6 +1304,7 @@ h1 {
 
 .finish-streak-meter {
   margin: 8px 0 10px;
+  position: relative;
 }
 
 .finish-streak-bar {
@@ -1165,6 +1337,49 @@ h1 {
 
 .finish-streak-bar.is-onfire span {
   background: linear-gradient(90deg, #ffc2bb, #ff8f83);
+}
+
+/* Particle burst on hot/onfire streak bar fill */
+.finish-streak-meter.streak-burst::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+  animation: burstParticle 800ms ease forwards;
+  pointer-events: none;
+}
+
+.finish-streak-meter.streak-burst.is-hot-burst::after {
+  background: #ffae7b;
+  box-shadow: 0 0 8px #ffae7b, 8px -8px 0 #ffd2b2, -6px -10px 0 #ffcc9f,
+    10px 6px 0 #ffe4c7, -8px 8px 0 #ffd2b2;
+}
+
+.finish-streak-meter.streak-burst.is-fire-burst::after {
+  background: #ff6b6b;
+  box-shadow: 0 0 12px #ff8f83, 10px -10px 0 #ff6b6b, -8px -12px 0 #fca5a5,
+    12px 8px 0 #ffc2bb, -10px 8px 0 #ff8f83, 6px -14px 0 #ff6b6b;
+}
+
+@keyframes burstParticle {
+  0% {
+    opacity: 1;
+    transform: translate(50%, -50%) scale(1);
+  }
+
+  60% {
+    opacity: 0.8;
+    transform: translate(50%, -50%) scale(3);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(50%, -50%) scale(5);
+  }
 }
 
 .split {

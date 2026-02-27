@@ -1,5 +1,5 @@
 ﻿const STORAGE_KEY_BASE = "gts_profile_v4";
-const DAILY_QUESTIONS = 10;
+const DAILY_QUESTIONS = 30;
 const QUIZ_CONFIGS = {
   classic: {
     label: "Trump vs Hitler vs Ye",
@@ -15,6 +15,88 @@ const STREAK_MILESTONES = [3, 7, 14, 30];
 const MYSTERY_REWARDS = ["Fire Badge", "Neon Crown", "Iron Mind", "Night Owl", "Gold Pulse"];
 const FRIEND_NAMES = ["Ari", "Noa", "Sergi", "Luna", "Mia", "Diego", "Vera", "Iris", "Nico", "Alex"];
 const SESSION_KEY = `${STORAGE_KEY_BASE}:session_state`;
+
+/* ── Subtle SFX Engine (Web Audio API) ── */
+const SFX = (() => {
+  let ctx = null;
+  let enabled = localStorage.getItem("gts_sfx") !== "off";
+
+  function getCtx() {
+    if (!ctx) {
+      try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; }
+    }
+    if (ctx.state === "suspended") ctx.resume();
+    return ctx;
+  }
+
+  function play(fn) {
+    if (!enabled) return;
+    const c = getCtx();
+    if (!c) return;
+    try { fn(c); } catch (e) { /* silent */ }
+  }
+
+  return {
+    get on() { return enabled; },
+    toggle() {
+      enabled = !enabled;
+      localStorage.setItem("gts_sfx", enabled ? "on" : "off");
+      return enabled;
+    },
+    pop() {
+      play(c => {
+        const o = c.createOscillator();
+        const g = c.createGain();
+        o.type = "sine"; o.frequency.setValueAtTime(600, c.currentTime);
+        o.frequency.exponentialRampToValueAtTime(900, c.currentTime + 0.06);
+        g.gain.setValueAtTime(0.12, c.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.1);
+        o.connect(g); g.connect(c.destination);
+        o.start(c.currentTime); o.stop(c.currentTime + 0.1);
+      });
+    },
+    correct() {
+      play(c => {
+        [523, 659, 784].forEach((freq, i) => {
+          const o = c.createOscillator();
+          const g = c.createGain();
+          o.type = "sine"; o.frequency.value = freq;
+          const t = c.currentTime + i * 0.08;
+          g.gain.setValueAtTime(0.1, t);
+          g.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+          o.connect(g); g.connect(c.destination);
+          o.start(t); o.stop(t + 0.18);
+        });
+      });
+    },
+    wrong() {
+      play(c => {
+        const o = c.createOscillator();
+        const g = c.createGain();
+        o.type = "triangle"; o.frequency.setValueAtTime(220, c.currentTime);
+        o.frequency.exponentialRampToValueAtTime(140, c.currentTime + 0.15);
+        g.gain.setValueAtTime(0.12, c.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.2);
+        o.connect(g); g.connect(c.destination);
+        o.start(c.currentTime); o.stop(c.currentTime + 0.2);
+      });
+    },
+    fanfare() {
+      play(c => {
+        [523, 659, 784, 1047].forEach((freq, i) => {
+          const o = c.createOscillator();
+          const g = c.createGain();
+          o.type = "sine"; o.frequency.value = freq;
+          const t = c.currentTime + i * 0.12;
+          g.gain.setValueAtTime(0.08, t);
+          g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+          o.connect(g); g.connect(c.destination);
+          o.start(t); o.stop(t + 0.35);
+        });
+      });
+    }
+  };
+})();
 
 const dataNode = document.querySelector("#quiz-data");
 const dailyDateNode = document.querySelector("#daily-date");
@@ -105,7 +187,8 @@ const appState = {
   rankingView: "daily",
   rankingMode: "global",
   roomCode: "",
-  practiceMode: false
+  practiceMode: false,
+  consecutiveCorrect: 0
 };
 
 function getSelectedQuizId() {
@@ -907,15 +990,26 @@ function renderQuestion() {
     <blockquote class="daily-quote">"${question.quote}"</blockquote>
     <div class="daily-options">
       ${question.options
-        .map((option, index) => `<button class="daily-option" data-index="${index}" type="button">${option.name}</button>`)
-        .join("")}
+      .map((option, index) => `<button class="daily-option" data-index="${index}" type="button">${option.name}</button>`)
+      .join("")}
     </div>
     <div id="daily-feedback" class="daily-feedback"></div>
     <button id="daily-next" class="btn btn-outline daily-next" type="button" disabled>Siguiente</button>
   `;
 
+  // Apply in-game tension based on consecutive correct streak
+  dailyGameNode.classList.remove("tension-10", "tension-20");
+  if (appState.consecutiveCorrect >= 20) {
+    dailyGameNode.classList.add("tension-20");
+  } else if (appState.consecutiveCorrect >= 10) {
+    dailyGameNode.classList.add("tension-10");
+  }
+
   dailyGameNode.querySelectorAll(".daily-option").forEach((button) => {
-    button.addEventListener("click", () => onAnswer(button));
+    button.addEventListener("click", () => {
+      SFX.pop();
+      onAnswer(button);
+    });
   });
 
   const nextBtn = dailyGameNode.querySelector("#daily-next");
@@ -931,7 +1025,14 @@ function onAnswer(button) {
   const picked = question.options[Number(button.dataset.index)];
   const correct = question.options.find((option) => option.isCorrect);
 
-  if (picked.isCorrect) appState.score += 1;
+  if (picked.isCorrect) {
+    appState.score += 1;
+    appState.consecutiveCorrect += 1;
+    SFX.correct();
+  } else {
+    appState.consecutiveCorrect = 0;
+    SFX.wrong();
+  }
 
   // Flash the game container green or red
   dailyGameNode.classList.remove("flash-correct", "flash-wrong");
@@ -986,8 +1087,15 @@ function onNextQuestion() {
     return;
   }
 
-  renderDailyStatus();
-  renderQuestion();
+  // Smooth transition: fade out → render → slide in
+  dailyGameNode.classList.add("is-transitioning");
+  setTimeout(() => {
+    renderDailyStatus();
+    renderQuestion();
+    dailyGameNode.classList.remove("is-transitioning");
+    dailyGameNode.classList.add("is-entering");
+    setTimeout(() => dailyGameNode.classList.remove("is-entering"), 280);
+  }, 200);
 }
 
 function saveTodayResult(result) {
@@ -1455,6 +1563,7 @@ function animateFinishStreakBar(streak) {
   const bar = document.querySelector("#finish-streak-fill");
   if (!bar) return;
   const meter = bar.parentElement;
+  const meterWrap = meter ? meter.parentElement : null;
   const visual = getFinishStreakVisual(streak);
   if (meter) {
     meter.classList.remove("is-cold", "is-warm", "is-hot", "is-onfire");
@@ -1466,6 +1575,15 @@ function animateFinishStreakBar(streak) {
       bar.style.width = `${visual.pct}%`;
     }, 120);
   });
+
+  // Particle burst on hot/onfire after fill animation completes
+  if (meterWrap && (visual.tone === "hot" || visual.tone === "onfire") && visual.pct >= 50) {
+    setTimeout(() => {
+      meterWrap.classList.add("streak-burst", visual.tone === "onfire" ? "is-fire-burst" : "is-hot-burst");
+      if (visual.tone === "onfire") SFX.fanfare();
+      setTimeout(() => meterWrap.classList.remove("streak-burst", "is-fire-burst", "is-hot-burst"), 900);
+    }, 1100);
+  }
 }
 
 function renderWeeklyLeague() {
@@ -1697,9 +1815,8 @@ function renderTrendChart() {
   const polyline = coords.map((p) => `${p.x},${p.y}`).join(" ");
 
   const dots = coords
-    .map((p, idx) => `<circle class="trend-dot" cx="${p.x}" cy="${p.y}" r="3"></circle>${
-      idx === coords.length - 1 ? `<text class="trend-label" x="${p.x - 12}" y="${p.y - 10}">${p.score}</text>` : ""
-    }`)
+    .map((p, idx) => `<circle class="trend-dot" cx="${p.x}" cy="${p.y}" r="3"></circle>${idx === coords.length - 1 ? `<text class="trend-label" x="${p.x - 12}" y="${p.y - 10}">${p.score}</text>` : ""
+      }`)
     .join("");
 
   trendChartNode.innerHTML = `
@@ -1911,6 +2028,24 @@ function closeSocialDrawer() {
 
 function initSocialPanel() {
   renderFriendsList();
+
+  // Inject sound toggle into the social drawer
+  if (socialDrawer) {
+    const toggleRow = document.createElement("div");
+    toggleRow.className = "sound-toggle-row";
+    const onClass = SFX.on ? " is-on" : "";
+    toggleRow.innerHTML = '<span>\ud83d\udd0a Sonidos</span><button class="sound-toggle' + onClass + '" type="button" id="sfx-toggle" aria-label="Toggle sound"></button>';
+    socialDrawer.appendChild(toggleRow);
+    const sfxBtn = document.querySelector("#sfx-toggle");
+    if (sfxBtn) {
+      sfxBtn.addEventListener("click", () => {
+        const on = SFX.toggle();
+        sfxBtn.classList.toggle("is-on", on);
+        if (on) SFX.pop();
+      });
+    }
+  }
+
   if (socialToggleButton) socialToggleButton.addEventListener("click", openSocialDrawer);
   if (socialCloseButton) socialCloseButton.addEventListener("click", closeSocialDrawer);
   if (socialBackdrop) socialBackdrop.addEventListener("click", closeSocialDrawer);
@@ -1931,7 +2066,7 @@ function initSocialPanel() {
 
 async function init() {
   if (window.location.hash) {
-    history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+    history.replaceState(null, "", `${window.location.pathname}${window.location.search} `);
   }
 
   appState.quizId = getSelectedQuizId();
@@ -1960,8 +2095,8 @@ async function init() {
 
   const quizLabel = QUIZ_CONFIGS[appState.quizId]?.label || "";
   const dailyTitle = document.querySelector("#daily-title");
-  if (dailyTitle && quizLabel) dailyTitle.textContent = `Daily Match · ${quizLabel}`;
-  if (dailyDateNode) dailyDateNode.textContent = `Fecha: ${formatDate(appState.todayKey)}`;
+  if (dailyTitle && quizLabel) dailyTitle.textContent = `Daily Match · ${quizLabel} `;
+  if (dailyDateNode) dailyDateNode.textContent = `Fecha: ${formatDate(appState.todayKey)} `;
   if (playersTodayNode) playersTodayNode.textContent = appState.playerCount.toLocaleString("en-US");
 
   renderDailyStatus();
