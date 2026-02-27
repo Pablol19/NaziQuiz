@@ -2801,67 +2801,200 @@ h1 {
 }
 
 @media (max-width: 760px) {
+
+  /* ── Global overflow locks ── */
+  html,
   body {
-    padding: 16px 4vw 28px;
+    overflow-x: hidden !important;
+    max-width: 100vw;
   }
 
+  body {
+    padding: 10px 12px 80px;
+  }
+
+  /* ── Compact Topbar ── */
   .topbar {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
     align-items: center;
-    gap: 10px 12px;
-    margin-bottom: 18px;
-    padding: 8px 14px;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 8px 12px;
     border-radius: 14px;
   }
 
   .brand {
     min-width: 0;
+    gap: 6px;
+  }
+
+  .brand-mark {
+    font-size: 1.2rem;
   }
 
   .brand-name {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
 
-  .topbar-actions {
-    justify-self: end;
-    gap: 8px;
-  }
-
-  .profile-avatar-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-  }
-
-  .profile-dropdown {
-    width: 220px;
-    right: -4px;
-  }
-
+  /* Hide desktop nav from the topbar — it becomes bottom bar */
   .nav {
-    grid-column: 1 / -1;
-    width: 100%;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+    padding: 8px 4px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    margin: 0;
+    background: var(--surface-bg);
+    border-top: 1px solid var(--surface-border);
+    box-shadow: 0 -4px 20px rgba(18, 24, 38, 0.08);
+    border-radius: 0;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   .nav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 6px 4px;
+    border-radius: 10px;
+    border: none;
+    background: none;
+    text-decoration: none;
+    color: var(--ink-soft);
     white-space: nowrap;
-    font-size: 0.88rem;
-    padding: 6px 10px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.64);
+    transition: color 150ms ease, background 150ms ease;
   }
 
+  .nav a::before {
+    font-size: 1.2rem;
+    display: block;
+    line-height: 1;
+  }
+
+  .nav a:nth-child(1)::before {
+    content: '🎯';
+  }
+
+  .nav a:nth-child(2)::before {
+    content: '🎮';
+  }
+
+  .nav a:nth-child(3)::before {
+    content: '📊';
+  }
+
+  .nav a:hover,
+  .nav a.is-active {
+    color: var(--ink);
+    background: rgba(99, 102, 241, 0.08);
+  }
+
+  /* Hide Social pill on topbar (moved into settings menu or accessible from bottom) */
+  .btn-social-pill {
+    padding: 7px 14px;
+    font-size: 0.85rem;
+  }
+
+  /* Profile pill compact */
+  .profile-pill-btn {
+    padding: 4px 10px 4px 4px;
+    gap: 6px;
+  }
+
+  .profile-pill-btn .profile-name {
+    font-size: 0.85rem;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .profile-pill-btn .tier-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 0.85rem;
+  }
+
+  .avatar-svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Profile dropdown full-width on mobile */
+  .profile-dropdown {
+    position: fixed;
+    top: auto;
+    bottom: 60px;
+    right: 8px;
+    left: 8px;
+    width: auto;
+    border-radius: 16px;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .settings-menu {
+    width: auto;
+  }
+
+  /* ── Social Drawer: Full-screen on mobile ── */
+  .social-drawer {
+    width: 100%;
+    height: 100%;
+    border-left: none;
+    border-radius: 0;
+    padding: 20px 16px;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+
+  .social-drawer-head {
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+  }
+
+  .social-drawer-head h3 {
+    font-size: 1.4rem;
+  }
+
+  .social-drawer .profile-row {
+    gap: 8px;
+  }
+
+  .social-drawer .profile-row input {
+    font-size: 1rem;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .social-drawer .btn-outline {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+
+  .social-drawer .history-list li {
+    padding: 12px 10px;
+    font-size: 0.95rem;
+  }
+
+  /* ── Main Page Content ── */
   .panel,
   .hero-copy,
   .hero-panel {
-    padding: 16px;
-    margin-bottom: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
   }
 
   .hero-panel {
@@ -2870,7 +3003,7 @@ h1 {
 
   .panel-head {
     flex-direction: column;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   #daily .panel-head>div:first-child {
@@ -2878,11 +3011,11 @@ h1 {
   }
 
   #daily-title {
-    font-size: clamp(2rem, 7.2vw, 2.35rem);
+    font-size: clamp(1.8rem, 7vw, 2.2rem);
   }
 
   #daily-date {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 
   .quiz-segmented {
@@ -2893,19 +3026,19 @@ h1 {
   .quiz-tab {
     flex: 1;
     text-align: center;
-    padding: 9px 10px;
-    font-size: 0.95rem;
+    padding: 8px 8px;
+    font-size: 0.9rem;
   }
 
   .daily-status {
     text-align: center;
-    margin-top: 8px;
+    margin-top: 6px;
   }
 
   .insight-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 8px;
+    margin-bottom: 10px;
   }
 
   .insight-card {
@@ -2918,34 +3051,34 @@ h1 {
 
   .daily-head {
     gap: 6px;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
   }
 
   .daily-quote {
-    font-size: clamp(1rem, 4.9vw, 1.14rem);
+    font-size: clamp(0.95rem, 4.5vw, 1.1rem);
     line-height: 1.35;
   }
 
   .daily-option {
     padding: 10px 11px;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
 
   .btn-play-main {
-    margin-top: 10px;
-    padding: 13px 14px;
-    font-size: 1rem;
+    margin-top: 8px;
+    padding: 12px 14px;
+    font-size: 0.95rem;
   }
 
   .hero-metrics {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 6px;
   }
 
   .metric-pill {
     width: 100%;
-    font-size: 0.86rem;
+    font-size: 0.84rem;
   }
 
   .ranking-controls {
@@ -2978,7 +3111,7 @@ h1 {
   }
 
   .leaderboard {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   .leaderboard th,
@@ -2987,11 +3120,7 @@ h1 {
   }
 
   .module-head h3 {
-    font-size: 1.45rem;
-  }
-
-  .social-drawer {
-    width: 100%;
+    font-size: 1.35rem;
   }
 
   .history-mid-row {
@@ -3000,6 +3129,35 @@ h1 {
 
   .history-insights-row {
     grid-template-columns: 1fr;
+  }
+
+  /* ── Stats Page Mobile ── */
+  .stats-page {
+    padding: 20px 14px;
+    border-radius: 16px;
+  }
+
+  .stats-title {
+    font-size: 2rem;
+  }
+
+  .stats-page .summary-card {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .consistency-heatmap {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  /* ── #ranking section mobile ── */
+  #ranking {
+    padding: 14px;
+  }
+
+  #ranking .panel-head h2 {
+    font-size: 1.6rem;
   }
 }
 

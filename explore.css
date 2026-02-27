@@ -282,16 +282,61 @@
 }
 
 @media (max-width: 480px) {
-    .ex-card {
-        width: 190px;
-        height: 270px;
-    }
-
-    .ex-card .card-number {
-        font-size: 4rem;
+    .ex-hero {
+        padding: 16px 16px 8px;
     }
 
     .ex-hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+    }
+
+    .ex-hero p {
+        font-size: 0.9rem;
+    }
+
+    .ex-grid {
+        padding-bottom: 80px;
+        gap: 24px;
+    }
+
+    .ex-card {
+        width: 160px;
+        height: 230px;
+        border-radius: 14px;
+    }
+
+    .ex-card .card-number {
+        font-size: 3.5rem;
+    }
+
+    .ex-card .card-content {
+        padding: 12px;
+        gap: 4px;
+    }
+
+    .ex-card .card-label {
+        font-size: 0.9rem;
+    }
+
+    .ex-card .card-tag {
+        font-size: 0.58rem;
+        padding: 3px 7px;
+    }
+
+    .ex-card .card-daily-badge {
+        top: 10px;
+        left: 10px;
+        font-size: 0.55rem;
+        padding: 3px 8px;
+    }
+
+    .ex-row {
+        padding: 4px 16px 12px;
+        gap: 12px;
+    }
+
+    .ex-cat-title {
+        padding-left: 16px;
+        font-size: 1.3rem;
     }
 }
