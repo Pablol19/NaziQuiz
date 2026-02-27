@@ -13,6 +13,8 @@ const QUIZ_CONFIGS = {
 const DEFAULT_QUIZ_ID = "classic";
 const STREAK_MILESTONES = [3, 7, 14, 30];
 const MYSTERY_REWARDS = ["Fire Badge", "Neon Crown", "Iron Mind", "Night Owl", "Gold Pulse"];
+const FRIEND_NAMES = ["Ari", "Noa", "Sergi", "Luna", "Mia", "Diego", "Vera", "Iris", "Nico", "Alex"];
+const SESSION_KEY = `${STORAGE_KEY_BASE}:session_state`;
 
 const dataNode = document.querySelector("#quiz-data");
 const dailyDateNode = document.querySelector("#daily-date");
@@ -27,11 +29,21 @@ const quizSelectorNode = document.querySelector("#quiz-selector");
 const goalCardNode = document.querySelector("#goal-card");
 const streakCardNode = document.querySelector("#streak-card");
 const nextRewardNode = document.querySelector("#next-reward");
+const missionCardNode = document.querySelector("#mission-card");
 const heatmapNode = document.querySelector("#consistency-heatmap");
 const achievementsNode = document.querySelector("#achievements");
 const percentileChipNode = document.querySelector("#percentile-chip");
 const comebackPromptNode = document.querySelector("#comeback-prompt");
 const returnPromptNode = document.querySelector("#return-prompt");
+const trendChartNode = document.querySelector("#score-trend-chart");
+const rankingModeNode = document.querySelector("#ranking-mode");
+const roomCodeNode = document.querySelector("#room-code");
+const applyRoomNode = document.querySelector("#apply-room");
+const weeklySummaryNode = document.querySelector("#weekly-summary");
+const personalRecordsNode = document.querySelector("#personal-records");
+const uxSummaryNode = document.querySelector("#ux-summary");
+const profileNameInput = document.querySelector("#profile-name-input");
+const profileSaveButton = document.querySelector("#profile-save");
 
 const statStreak = document.querySelector("#stat-streak");
 const statBestStreak = document.querySelector("#stat-best-streak");
@@ -39,6 +51,12 @@ const statAccuracy = document.querySelector("#stat-accuracy");
 const statRank = document.querySelector("#stat-rank");
 const statPercentile = document.querySelector("#stat-percentile");
 const statShield = document.querySelector("#stat-shield");
+const statLevel = document.querySelector("#stat-level");
+const statXp = document.querySelector("#stat-xp");
+const statRankDelta = document.querySelector("#stat-rank-delta");
+const streakFireNode = document.querySelector("#streak-fire");
+const streakStatCardNode = document.querySelector("#streak-stat-card");
+const xpBarNode = document.querySelector("#xp-bar");
 
 const appState = {
   quizId: DEFAULT_QUIZ_ID,
@@ -61,7 +79,12 @@ const appState = {
   nearMiss: false,
   lastReward: "",
   leaderboardSize: 0,
-  bestScoreToday: 0
+  bestScoreToday: 0,
+  rankDelta: null,
+  dailyMission: null,
+  rankingMode: "global",
+  roomCode: "",
+  practiceMode: false
 };
 
 function getSelectedQuizId() {
@@ -77,6 +100,10 @@ function getSelectedQuizId() {
 
 function getStorageKey() {
   return `${STORAGE_KEY_BASE}:${appState.quizId}`;
+}
+
+function getRankingPrefKey() {
+  return `${STORAGE_KEY_BASE}:ranking_pref`;
 }
 
 function getSpeakerList(questions) {
@@ -127,6 +154,14 @@ function createDefaultProfile() {
     achievements: [],
     lastRewardDate: "",
     lastReward: "",
+    xp: 0,
+    uxMetrics: {
+      ctaClicks: 0,
+      startsOfficial: 0,
+      practiceStarts: 0,
+      completedOfficial: 0,
+      abandonByQuestion: {}
+    },
     consistencyMap: {},
     history: []
   };
@@ -320,7 +355,12 @@ function loadProfile() {
       achievements: Array.isArray(parsed.achievements) ? parsed.achievements : [],
       shieldUsesMonth: parsed.shieldUsesMonth || {},
       weeklyCompletions: parsed.weeklyCompletions || {},
-      consistencyMap: parsed.consistencyMap || {}
+      consistencyMap: parsed.consistencyMap || {},
+      uxMetrics: {
+        ...createDefaultProfile().uxMetrics,
+        ...(parsed.uxMetrics || {}),
+        abandonByQuestion: (parsed.uxMetrics && parsed.uxMetrics.abandonByQuestion) || {}
+      }
     };
   } catch (error) {
     return createDefaultProfile();
@@ -329,6 +369,163 @@ function loadProfile() {
 
 function saveProfile() {
   localStorage.setItem(getStorageKey(), JSON.stringify(appState.profile));
+}
+
+function ensureUxMetrics() {
+  if (!appState.profile.uxMetrics) appState.profile.uxMetrics = createDefaultProfile().uxMetrics;
+  if (!appState.profile.uxMetrics.abandonByQuestion) appState.profile.uxMetrics.abandonByQuestion = {};
+}
+
+function trackMetric(key, amount = 1) {
+  ensureUxMetrics();
+  appState.profile.uxMetrics[key] = (appState.profile.uxMetrics[key] || 0) + amount;
+}
+
+function trackAbandon(questionNumber) {
+  ensureUxMetrics();
+  const key = String(questionNumber);
+  appState.profile.uxMetrics.abandonByQuestion[key] = (appState.profile.uxMetrics.abandonByQuestion[key] || 0) + 1;
+}
+
+function persistSessionState() {
+  const payload = {
+    inProgress: appState.inProgress,
+    practiceMode: appState.practiceMode,
+    date: appState.todayKey,
+    questionIndex: appState.questionIndex + 1,
+    completedToday: Boolean(appState.todayResult)
+  };
+  localStorage.setItem(SESSION_KEY, JSON.stringify(payload));
+}
+
+function clearSessionState() {
+  localStorage.removeItem(SESSION_KEY);
+}
+
+function recoverAbandonIfNeeded() {
+  const raw = localStorage.getItem(SESSION_KEY);
+  if (!raw) return;
+  try {
+    const prev = JSON.parse(raw);
+    const sameDay = prev && prev.date === appState.todayKey;
+    if (sameDay && prev.inProgress && !prev.practiceMode && !appState.todayResult) {
+      trackAbandon(prev.questionIndex || 1);
+      saveProfile();
+    }
+  } catch (error) {
+    // ignore parse error
+  }
+  clearSessionState();
+}
+
+function getLevelInfo(xpValue) {
+  const xp = Math.max(0, Number(xpValue) || 0);
+  const level = Math.floor(xp / 100) + 1;
+  const xpInLevel = xp % 100;
+  return { level, xpInLevel, xpToNext: 100 - xpInLevel };
+}
+
+function setXpBarProgress(percent, withTransition = false) {
+  if (!xpBarNode) return;
+  if (!withTransition) xpBarNode.style.transition = "none";
+  xpBarNode.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+  if (!withTransition) {
+    requestAnimationFrame(() => {
+      xpBarNode.style.transition = "width 900ms ease";
+    });
+  }
+}
+
+function animateXpGain(prevXp, nextXp) {
+  if (!xpBarNode) return;
+  const meter = xpBarNode.parentElement;
+  const prevLevel = Math.floor(prevXp / 100);
+  const nextLevel = Math.floor(nextXp / 100);
+  const prevPct = prevXp % 100;
+  const nextPct = nextXp % 100;
+
+  if (nextLevel === prevLevel) {
+    setXpBarProgress(prevPct, false);
+    requestAnimationFrame(() => setXpBarProgress(nextPct, true));
+    return;
+  }
+
+  setXpBarProgress(prevPct, false);
+  requestAnimationFrame(() => setXpBarProgress(100, true));
+
+  setTimeout(() => {
+    if (meter) {
+      meter.classList.remove("is-levelup");
+      void meter.offsetWidth;
+      meter.classList.add("is-levelup");
+    }
+  }, 920);
+
+  setTimeout(() => {
+    setXpBarProgress(0, false);
+    requestAnimationFrame(() => setXpBarProgress(nextPct, true));
+  }, 1180);
+}
+
+function getDailyMission(dateKey) {
+  const random = mulberry32(hashString(`${dateKey}:${appState.quizId}:mission`));
+  const target = 6 + Math.floor(random() * 4);
+  return {
+    id: `${dateKey}:${appState.quizId}`,
+    target,
+    text: `Consigue ${target}/10 o mas en la partida oficial.`
+  };
+}
+
+function isMissionCompleted(result, mission) {
+  if (!result || !mission) return false;
+  return result.score >= mission.target;
+}
+
+function getWeeklyThemeChallenge(weekKey) {
+  const options = [
+    {
+      id: "accuracy",
+      title: "Tema: Precision sostenida",
+      description: "Logra promedio semanal >= 70% en al menos 3 partidas.",
+      evaluate: (history) => {
+        if (history.length < 3) return { done: false, progress: `${history.length}/3 partidas` };
+        const avg = Math.round(history.reduce((acc, item) => acc + item.percent, 0) / history.length);
+        return { done: avg >= 70, progress: `Promedio ${avg}%` };
+      }
+    },
+    {
+      id: "consistency",
+      title: "Tema: Consistencia elite",
+      description: "Completa 5 partidas esta semana.",
+      evaluate: (history) => ({ done: history.length >= 5, progress: `${history.length}/5 partidas` })
+    },
+    {
+      id: "highscore",
+      title: "Tema: Golpe de autoridad",
+      description: "Consigue 2 dias de 8/10 o mas.",
+      evaluate: (history) => {
+        const strong = history.filter((item) => item.score >= 8).length;
+        return { done: strong >= 2, progress: `${strong}/2 dias fuertes` };
+      }
+    }
+  ];
+  const random = mulberry32(hashString(`${weekKey}:${appState.quizId}:weekly-theme`));
+  return options[Math.floor(random() * options.length)];
+}
+
+function getThisWeekHistory() {
+  const weekKey = getWeekKey(appState.todayKey);
+  return appState.profile.history.filter((entry) => getWeekKey(entry.date) === weekKey).slice(0, 7);
+}
+
+function computeRankDelta(currentRank) {
+  if (!currentRank) return null;
+  const previous = appState.profile.history.find(
+    (entry) => entry.date !== appState.todayKey && typeof entry.rank === "number"
+  );
+  if (!previous) return null;
+  return previous.rank - currentRank;
 }
 
 function hasShieldAvailable(dateKey) {
@@ -417,6 +614,20 @@ function buildDailyQuestionSet() {
   });
 }
 
+function buildPracticeQuestionSet() {
+  const pool = appState.quizData.questions.map((question) => ({
+    ...question,
+    options: question.options.map((option) => ({ ...option }))
+  }));
+  const random = mulberry32(hashString(`${Date.now()}:${Math.random()}:practice`));
+  const picked = shuffleWithRandom(pool, random).slice(0, Math.min(DAILY_QUESTIONS, pool.length));
+
+  return picked.map((question) => ({
+    ...question,
+    options: shuffleWithRandom(question.options, mulberry32(hashString(`${question.id}:${Math.random()}`)))
+  }));
+}
+
 function getTodayResult() {
   return appState.profile.history.find((entry) => entry.date === appState.todayKey) || null;
 }
@@ -458,6 +669,15 @@ function updateDerivedState() {
   appState.lastReward = appState.profile.lastReward || "Pending";
 }
 
+function getStreakFireState(streak) {
+  if (streak <= 1) return { flames: 0, tone: "cold", label: "Sin fuego" };
+
+  const flames = Math.min(8, streak - 1);
+  if (streak >= 14) return { flames, tone: "onfire", label: `ON FIRE ${"🔥".repeat(flames)}` };
+  if (streak >= 7) return { flames, tone: "hot", label: `${"🔥".repeat(flames)} Racha caliente` };
+  return { flames, tone: "warm", label: `${"🔥".repeat(flames)} Calentando motor` };
+}
+
 function renderProfileStats(playerRank) {
   statStreak.textContent = String(appState.profile.streakCurrent);
   statBestStreak.textContent = String(appState.profile.streakBest);
@@ -465,6 +685,35 @@ function renderProfileStats(playerRank) {
   statRank.textContent = playerRank ? `#${playerRank}` : "--";
   if (statPercentile) statPercentile.textContent = appState.percentile ? `Top ${appState.percentile}%` : "--";
   if (statShield) statShield.textContent = appState.shieldAvailable ? "Disponible" : "Usado";
+  if (statLevel || statXp) {
+    const lv = getLevelInfo(appState.profile.xp);
+    if (statLevel) statLevel.textContent = `Lv.${lv.level}`;
+    if (statXp) statXp.textContent = `${lv.xpInLevel}/100 XP`;
+    setXpBarProgress(lv.xpInLevel, false);
+  }
+  if (statRankDelta) {
+    statRankDelta.classList.remove("delta-up", "delta-down");
+    if (appState.rankDelta === null) {
+      statRankDelta.textContent = "--";
+    } else if (appState.rankDelta > 0) {
+      statRankDelta.textContent = `+${appState.rankDelta}`;
+      statRankDelta.classList.add("delta-up");
+    } else if (appState.rankDelta < 0) {
+      statRankDelta.textContent = `${appState.rankDelta}`;
+      statRankDelta.classList.add("delta-down");
+    } else {
+      statRankDelta.textContent = "0";
+    }
+  }
+
+  const fire = getStreakFireState(appState.profile.streakCurrent);
+  if (streakFireNode) streakFireNode.textContent = fire.label;
+  if (streakStatCardNode) {
+    streakStatCardNode.classList.remove("is-warm", "is-hot", "is-onfire");
+    if (fire.tone === "warm") streakStatCardNode.classList.add("is-warm");
+    if (fire.tone === "hot") streakStatCardNode.classList.add("is-hot");
+    if (fire.tone === "onfire") streakStatCardNode.classList.add("is-onfire");
+  }
 }
 
 function renderInsights() {
@@ -477,7 +726,7 @@ function renderInsights() {
   if (goalCardNode) {
     goalCardNode.innerHTML = `
       <h4>Goal Card</h4>
-      <p>Hoy estas a <strong>${needed}</strong> acierto(s) de superar tu mejor marca (${best}/${total}).</p>
+      <p>Objetivo del dia: te faltan <strong>${needed}</strong> acierto(s) para romper tu mejor marca (${best}/${total}).</p>
     `;
   }
 
@@ -485,11 +734,13 @@ function renderInsights() {
     const streakText = appState.todayResult
       ? "Racha protegida hoy."
       : appState.streakAtRisk
-        ? "Racha en riesgo: quedan pocas horas."
-        : "Racha activa, manten el ritmo.";
+        ? "Racha en riesgo: quedan pocas horas para salvarla."
+        : "Racha activa: mantienes ventaja competitiva.";
+    const fire = getStreakFireState(appState.profile.streakCurrent);
     streakCardNode.innerHTML = `
       <h4>Streak Card</h4>
       <p>${streakText} Escudo mensual: <strong>${appState.shieldAvailable ? "Disponible" : "Usado"}</strong>.</p>
+      <p><strong>Intensidad:</strong> ${fire.label}</p>
     `;
   }
 
@@ -497,13 +748,23 @@ function renderInsights() {
   if (nextRewardNode) {
     nextRewardNode.innerHTML = `
       <h4>Next Reward</h4>
-      <p>${nextMilestone ? `Te faltan ${nextMilestone - appState.profile.streakCurrent} dia(s) para hito ${nextMilestone}.` : "Todos los hitos principales desbloqueados."}</p>
-      <p>Meta semanal: <strong>${appState.weeklyProgress}/5</strong>.</p>
+      <p>${nextMilestone ? `Te faltan ${nextMilestone - appState.profile.streakCurrent} dia(s) para desbloquear el hito ${nextMilestone}.` : "Todos los hitos principales desbloqueados."}</p>
+      <p>Meta semanal premium: <strong>${appState.weeklyProgress}/5</strong>.</p>
+    `;
+  }
+
+  if (missionCardNode) {
+    const mission = appState.dailyMission || getDailyMission(appState.todayKey);
+    const done = isMissionCompleted(appState.todayResult, mission);
+    missionCardNode.innerHTML = `
+      <h4>Mision diaria</h4>
+      <p>${mission.text}</p>
+      <p><strong>${done ? "Completada" : "Pendiente"}</strong>${done && appState.todayResult ? ` · +${appState.todayResult.missionXp || 0} XP` : ""}</p>
     `;
   }
 
   if (returnPromptNode) {
-    const rankHint = appState.percentile ? `Hoy puedes mejorar tu top ${appState.percentile}%.` : "Hoy puedes subir posiciones en el ranking.";
+    const rankHint = appState.percentile ? `Ventana de subida abierta: puedes mejorar tu top ${appState.percentile}%.` : "Ventana de subida abierta: hoy puedes escalar el ranking.";
     returnPromptNode.textContent = rankHint;
   }
 
@@ -518,7 +779,7 @@ function renderDailyStatus() {
   const total = appState.dailyQuestions.length;
 
   if (appState.inProgress) {
-    dailyStatusNode.innerHTML = `<p>Partida en curso. <strong>${appState.questionIndex + 1}/${total}</strong></p>`;
+    dailyStatusNode.innerHTML = `<p>${appState.practiceMode ? "Revancha en curso" : "Partida en curso"}. <strong>${appState.questionIndex + 1}/${total}</strong></p>`;
     return;
   }
 
@@ -532,11 +793,7 @@ function renderDailyStatus() {
 
   dailyStatusNode.innerHTML = `
     <p>Una partida oficial al dia.</p>
-    <button id="daily-start" class="btn btn-primary" type="button">Jugar ahora</button>
   `;
-
-  const startButton = document.querySelector("#daily-start");
-  if (startButton) startButton.addEventListener("click", startDailyMatch);
 }
 
 function renderIdleState() {
@@ -544,8 +801,11 @@ function renderIdleState() {
     <div class="daily-idle">
       <h4>Daily Match preparado</h4>
       <p>Responde ${appState.dailyQuestions.length} citas para registrar tu resultado oficial de hoy.</p>
+      <button id="daily-start-main" class="btn btn-primary btn-play-main" type="button">Jugar ahora</button>
     </div>
   `;
+  const startButton = document.querySelector("#daily-start-main");
+  if (startButton) startButton.addEventListener("click", startDailyMatch);
 }
 
 function renderLockedState() {
@@ -556,8 +816,14 @@ function renderLockedState() {
       <p>Resultado: <strong>${appState.todayResult.score}/${appState.todayResult.total}</strong> (${appState.todayResult.percent}%).</p>
       <p>Tu siguiente intento oficial se desbloquea en <strong>${remaining}</strong>.</p>
       <p><a class="btn btn-outline" href="#ranking">Ver ranking</a> <a class="btn btn-outline" href="#history">Ver historial</a></p>
+      <div class="practice-banner">
+        <span class="practice-note">Puedes seguir practicando sin afectar la partida oficial.</span>
+        <button id="practice-start" class="btn btn-outline" type="button">Revancha no oficial</button>
+      </div>
     </div>
   `;
+  const practiceButton = document.querySelector("#practice-start");
+  if (practiceButton) practiceButton.addEventListener("click", startPracticeMatch);
 }
 
 function renderQuestion() {
@@ -630,9 +896,14 @@ function onNextQuestion() {
   if (!appState.inProgress) return;
   appState.questionIndex += 1;
   appState.locked = false;
+  persistSessionState();
 
   if (appState.questionIndex >= appState.dailyQuestions.length) {
-    finishDailyMatch();
+    if (appState.practiceMode) {
+      finishPracticeMatch();
+    } else {
+      finishDailyMatch();
+    }
     return;
   }
 
@@ -707,13 +978,38 @@ function finishDailyMatch() {
   };
 
   saveTodayResult(result);
-  saveProfile();
 
   appState.inProgress = false;
   appState.todayResult = getTodayResult();
   updateDerivedState();
 
   const ranking = renderLeaderboard();
+  const mission = appState.dailyMission || getDailyMission(appState.todayKey);
+  const missionDone = isMissionCompleted(result, mission);
+  const baseXp = 20 + result.score * 8;
+  const streakXp = Math.min(20, appState.profile.streakCurrent * 2);
+  const missionXp = missionDone ? 25 : 0;
+  const xpGain = baseXp + streakXp + missionXp;
+
+  const prevXp = appState.profile.xp || 0;
+  appState.profile.xp = (appState.profile.xp || 0) + xpGain;
+  result.xpGained = xpGain;
+  result.missionXp = missionXp;
+  result.rank = ranking.myRank || null;
+
+  const todayEntry = appState.profile.history.find((entry) => entry.date === appState.todayKey);
+  if (todayEntry) {
+    todayEntry.xpGained = result.xpGained;
+    todayEntry.missionXp = result.missionXp;
+    todayEntry.rank = result.rank;
+  }
+
+  appState.rankDelta = computeRankDelta(ranking.myRank);
+  trackMetric("completedOfficial", 1);
+  saveProfile();
+  animateXpGain(prevXp, appState.profile.xp);
+  clearSessionState();
+
   appState.nearMiss = Boolean(ranking.myRank && ranking.myRank === ranking.top10Cut + 1);
 
   dailyGameNode.innerHTML = `
@@ -721,9 +1017,11 @@ function finishDailyMatch() {
       <h4>Partida terminada</h4>
       <p>Hoy hiciste <strong>${result.score}/${result.total}</strong> (${result.percent}%).</p>
       <p>Tiempo: <strong>${result.durationSec}s</strong>. Vuelve manana para mantener tu ventaja.</p>
+      <p>XP ganado: <strong>+${xpGain}</strong>${missionDone ? " (incluye bonus de mision)" : ""}.</p>
       ${appState.nearMiss ? `<p><strong>Near miss:</strong> te falto 1 puesto para entrar en el top 10%.</p>` : ""}
       <p>Mystery bonus desbloqueado: <strong>${result.reward}</strong>.</p>
-      <button id="share-result" class="btn btn-outline" type="button">Compartir resultado</button>
+      <button id="share-result" class="btn btn-outline" type="button">Copiar texto</button>
+      <button id="share-visual" class="btn btn-outline" type="button">Compartir visual</button>
     </div>
   `;
 
@@ -736,6 +1034,37 @@ function finishDailyMatch() {
         shareButton.textContent = "Copiado";
       } catch (error) {
         shareButton.textContent = "No se pudo copiar";
+      }
+    });
+  }
+  const shareVisualButton = document.querySelector("#share-visual");
+  if (shareVisualButton) {
+    shareVisualButton.addEventListener("click", async () => {
+      const blob = await createResultVisualCard(result);
+      if (!blob) {
+        shareVisualButton.textContent = "No disponible";
+        return;
+      }
+      const file = new File([blob], "gts-result.png", { type: "image/png" });
+      try {
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: "GuessTheSpeaker Result",
+            text: `${result.score}/${result.total} (${result.percent}%)`,
+            files: [file]
+          });
+          shareVisualButton.textContent = "Compartido";
+        } else {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "gts-result.png";
+          a.click();
+          URL.revokeObjectURL(url);
+          shareVisualButton.textContent = "Descargado";
+        }
+      } catch (error) {
+        shareVisualButton.textContent = "Cancelado";
       }
     });
   }
@@ -753,20 +1082,107 @@ function startDailyMatch() {
     return;
   }
 
+  trackMetric("ctaClicks", 1);
+  trackMetric("startsOfficial", 1);
+  saveProfile();
+
   appState.inProgress = true;
+  appState.practiceMode = false;
   appState.locked = false;
   appState.questionIndex = 0;
   appState.score = 0;
   appState.startedAt = Date.now();
+  persistSessionState();
 
   renderDailyStatus();
   renderQuestion();
+}
+
+function startPracticeMatch() {
+  trackMetric("practiceStarts", 1);
+  saveProfile();
+
+  appState.inProgress = true;
+  appState.practiceMode = true;
+  appState.locked = false;
+  appState.questionIndex = 0;
+  appState.score = 0;
+  appState.startedAt = Date.now();
+  appState.dailyQuestions = buildPracticeQuestionSet();
+  persistSessionState();
+
+  renderDailyStatus();
+  renderQuestion();
+}
+
+function finishPracticeMatch() {
+  const total = appState.dailyQuestions.length;
+  const percent = Math.round((appState.score / total) * 100);
+  const duration = Math.max(1, Math.round((Date.now() - appState.startedAt) / 1000));
+
+  appState.inProgress = false;
+  appState.practiceMode = false;
+  appState.dailyQuestions = buildDailyQuestionSet();
+  clearSessionState();
+
+  dailyGameNode.innerHTML = `
+    <div class="daily-finish">
+      <h4>Revancha terminada</h4>
+      <p>Resultado de practica: <strong>${appState.score}/${total}</strong> (${percent}%).</p>
+      <p>Tiempo: <strong>${duration}s</strong>. No afecta tu ranking oficial.</p>
+      <button id="practice-retry" class="btn btn-outline" type="button">Otra revancha</button>
+    </div>
+  `;
+
+  const retry = document.querySelector("#practice-retry");
+  if (retry) retry.addEventListener("click", startPracticeMatch);
+
+  renderDailyStatus();
 }
 
 function formatSeconds(value) {
   const minutes = Math.floor(value / 60);
   const seconds = String(value % 60).padStart(2, "0");
   return `${minutes}:${seconds}`;
+}
+
+async function createResultVisualCard(result) {
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1200;
+    canvas.height = 630;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+
+    const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+    gradient.addColorStop(0, "#0f172a");
+    gradient.addColorStop(1, "#1e3a8a");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 1200, 630);
+
+    ctx.fillStyle = "rgba(255,255,255,0.12)";
+    ctx.fillRect(60, 60, 1080, 510);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "700 56px 'Space Grotesk', sans-serif";
+    ctx.fillText("GuessTheSpeaker", 100, 170);
+
+    ctx.font = "600 42px 'Space Grotesk', sans-serif";
+    ctx.fillText(`${QUIZ_CONFIGS[appState.quizId].label}`, 100, 250);
+
+    ctx.font = "700 92px 'Space Grotesk', sans-serif";
+    ctx.fillStyle = "#bbf7d0";
+    ctx.fillText(`${result.score}/${result.total}`, 100, 390);
+
+    ctx.font = "500 36px 'Space Grotesk', sans-serif";
+    ctx.fillStyle = "#e2e8f0";
+    ctx.fillText(`${result.percent}% · Racha ${appState.profile.streakCurrent} · Lv.${getLevelInfo(appState.profile.xp).level}`, 100, 460);
+    ctx.fillText(`Fecha ${formatDate(result.date)}`, 100, 520);
+
+    return await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+  } catch (error) {
+    return null;
+  }
 }
 
 function buildLeaderboardData() {
@@ -789,14 +1205,19 @@ function buildLeaderboardData() {
   ];
 
   const total = appState.dailyQuestions.length;
-  const random = mulberry32(hashString(`${appState.todayKey}:${appState.quizId}:leaderboard`));
+  const seed = `${appState.todayKey}:${appState.quizId}:leaderboard:${appState.rankingMode}:${appState.roomCode || "public"}`;
+  const random = mulberry32(hashString(seed));
   const rows = [];
 
-  for (let i = 0; i < 36; i += 1) {
+  const baseCount = appState.rankingMode === "friends" ? 12 : 36;
+  const namesPool = appState.rankingMode === "friends" ? FRIEND_NAMES : names;
+  for (let i = 0; i < baseCount; i += 1) {
     const score = Math.max(1, Math.round(total * (0.45 + random() * 0.55)));
     const durationSec = 35 + Math.floor(random() * 210);
     rows.push({
-      name: names[Math.floor(random() * names.length)] + Math.floor(10 + random() * 90),
+      name:
+        namesPool[Math.floor(random() * namesPool.length)] +
+        (appState.rankingMode === "friends" ? "" : Math.floor(10 + random() * 90)),
       score,
       durationSec,
       isMe: false
@@ -882,21 +1303,144 @@ function renderConsistencyHeatmap() {
 function renderAchievements() {
   if (!achievementsNode) return;
   if (!appState.profile.achievements.length) {
-    achievementsNode.innerHTML = '<span class="achievement-badge">Sin logros todavia</span>';
+    achievementsNode.innerHTML = '<span class="achievement-badge common">Sin logros todavia</span>';
     return;
   }
 
+  const rarityClass = (text) => {
+    if (/30|Perfect|Shield|ON FIRE|epic/i.test(text)) return "epic";
+    if (/14|7|Meta semanal|Mystery/i.test(text)) return "rare";
+    return "common";
+  };
+
   achievementsNode.innerHTML = appState.profile.achievements
     .slice(0, 10)
-    .map((item) => `<span class="achievement-badge">${item}</span>`)
+    .map((item) => `<span class="achievement-badge ${rarityClass(item)}">${item}</span>`)
     .join("");
+}
+
+function renderWeeklySummary() {
+  if (!weeklySummaryNode) return;
+  const last7 = appState.profile.history.slice(0, 7);
+  const weekKey = getWeekKey(appState.todayKey);
+  const weekHistory = getThisWeekHistory();
+  const challenge = getWeeklyThemeChallenge(weekKey);
+  const challengeState = challenge.evaluate(weekHistory);
+  if (challengeState.done) {
+    grantAchievement(`Reto semanal: ${challenge.title}`);
+  }
+
+  if (!last7.length) {
+    weeklySummaryNode.innerHTML = `
+      <strong>Resumen semanal:</strong> completa partidas para activar el reporte automatico.<br/>
+      <strong>${challenge.title}</strong>: ${challenge.description}
+    `;
+    return;
+  }
+
+  const avg = Math.round(last7.reduce((acc, item) => acc + item.percent, 0) / last7.length);
+  const best = last7.reduce((acc, item) => (item.score > acc.score ? item : acc), last7[0]);
+  const xpSum = last7.reduce((acc, item) => acc + (item.xpGained || 0), 0);
+  weeklySummaryNode.innerHTML = `
+    <strong>Resumen semanal:</strong>
+    Precision media <strong>${avg}%</strong> · Mejor dia <strong>${best.score}/${best.total}</strong> · XP semanal <strong>+${xpSum}</strong><br/>
+    <strong>${challenge.title}</strong> · ${challenge.description}<br/>
+    Estado: <strong>${challengeState.done ? "Completado" : "En progreso"}</strong> (${challengeState.progress})
+  `;
+}
+
+function loadProfileForQuiz(quizId) {
+  try {
+    const raw = localStorage.getItem(`${STORAGE_KEY_BASE}:${quizId}`);
+    if (!raw) return createDefaultProfile();
+    const parsed = JSON.parse(raw);
+    return { ...createDefaultProfile(), ...parsed, history: Array.isArray(parsed.history) ? parsed.history : [] };
+  } catch (error) {
+    return createDefaultProfile();
+  }
+}
+
+function renderPersonalRecords() {
+  if (!personalRecordsNode) return;
+  const rows = Object.entries(QUIZ_CONFIGS).map(([quizId, config]) => {
+    const profile = loadProfileForQuiz(quizId);
+    const history = profile.history || [];
+    if (!history.length) {
+      return `<tr><td>${config.label}</td><td>--</td><td>--</td><td>${profile.streakBest || 0}</td></tr>`;
+    }
+    const bestScore = history.reduce((acc, item) => (item.score > acc.score ? item : acc), history[0]);
+    const bestTime = history.reduce((acc, item) => (item.durationSec < acc.durationSec ? item : acc), history[0]);
+    return `<tr><td>${config.label}</td><td>${bestScore.score}/${bestScore.total}</td><td>${formatSeconds(bestTime.durationSec)}</td><td>${profile.streakBest || 0}</td></tr>`;
+  });
+  personalRecordsNode.innerHTML = rows.join("");
+}
+
+function renderUxSummary() {
+  if (!uxSummaryNode) return;
+  ensureUxMetrics();
+  const ux = appState.profile.uxMetrics;
+  const abandonPairs = Object.entries(ux.abandonByQuestion || {});
+  const topAbandon = abandonPairs.sort((a, b) => Number(b[1]) - Number(a[1]))[0];
+  uxSummaryNode.innerHTML = `
+    <strong>Feedback UX local:</strong>
+    CTA clicks <strong>${ux.ctaClicks || 0}</strong> · Inicios oficiales <strong>${ux.startsOfficial || 0}</strong> · Completadas <strong>${ux.completedOfficial || 0}</strong> · Practicas <strong>${ux.practiceStarts || 0}</strong><br/>
+    ${topAbandon ? `Mayor abandono en pregunta <strong>${topAbandon[0]}</strong> (${topAbandon[1]} veces)` : "Sin datos de abandono todavia"}
+  `;
+}
+
+function renderTrendChart() {
+  if (!trendChartNode) return;
+  const points = appState.profile.history.slice(0, 10).reverse();
+  if (points.length < 2) {
+    trendChartNode.innerHTML = `
+      <line class="trend-grid-line" x1="24" y1="140" x2="576" y2="140"></line>
+      <text class="trend-label" x="24" y="95">Juega mas dias para ver la tendencia</text>
+    `;
+    return;
+  }
+
+  const width = 600;
+  const height = 180;
+  const left = 24;
+  const right = width - 24;
+  const top = 20;
+  const bottom = 140;
+  const total = points[0].total || 10;
+
+  const buildPoint = (entry, index) => {
+    const x = left + (index / (points.length - 1)) * (right - left);
+    const ratio = Math.max(0, Math.min(1, entry.score / total));
+    const y = bottom - ratio * (bottom - top);
+    return { x, y, score: entry.score };
+  };
+
+  const coords = points.map(buildPoint);
+  const polyline = coords.map((p) => `${p.x},${p.y}`).join(" ");
+
+  const dots = coords
+    .map((p, idx) => `<circle class="trend-dot" cx="${p.x}" cy="${p.y}" r="3"></circle>${
+      idx === coords.length - 1 ? `<text class="trend-label" x="${p.x - 12}" y="${p.y - 10}">${p.score}</text>` : ""
+    }`)
+    .join("");
+
+  trendChartNode.innerHTML = `
+    <line class="trend-grid-line" x1="${left}" y1="${top}" x2="${right}" y2="${top}"></line>
+    <line class="trend-grid-line" x1="${left}" y1="${(top + bottom) / 2}" x2="${right}" y2="${(top + bottom) / 2}"></line>
+    <line class="trend-grid-line" x1="${left}" y1="${bottom}" x2="${right}" y2="${bottom}"></line>
+    <polyline class="trend-line" points="${polyline}"></polyline>
+    ${dots}
+  `;
 }
 
 function renderHistory() {
   if (!appState.profile.history.length) {
     historyList.innerHTML = '<li><span>No hay partidas aun.</span><span class="date">Hoy puede ser la primera.</span></li>';
+    renderWeeklySummary();
+    renderUxSummary();
     renderConsistencyHeatmap();
     renderAchievements();
+    renderTrendChart();
+    renderPersonalRecords();
     return;
   }
 
@@ -905,8 +1449,12 @@ function renderHistory() {
     .map((entry) => `<li><span><strong>${entry.score}/${entry.total}</strong> (${entry.percent}%)</span><span class="date">${formatDate(entry.date)}</span></li>`)
     .join("");
 
+  renderWeeklySummary();
+  renderUxSummary();
   renderConsistencyHeatmap();
   renderAchievements();
+  renderTrendChart();
+  renderPersonalRecords();
 }
 
 function initQuizSelector() {
@@ -920,12 +1468,75 @@ function initQuizSelector() {
       if (!selected || selected === appState.quizId) return;
       const params = new URLSearchParams(window.location.search);
       params.set("quiz", selected);
-      window.location.search = params.toString();
+      window.location.href = `${window.location.pathname}?${params.toString()}`;
     });
   });
 }
 
+function rerenderCompetitiveViews() {
+  const ranking = renderLeaderboard();
+  appState.rankDelta = computeRankDelta(ranking.myRank);
+  renderProfileStats(ranking.myRank);
+  renderInsights();
+}
+
+function initRankingControls() {
+  const prefRaw = localStorage.getItem(getRankingPrefKey());
+  if (prefRaw) {
+    try {
+      const pref = JSON.parse(prefRaw);
+      if (pref && (pref.mode === "global" || pref.mode === "friends")) appState.rankingMode = pref.mode;
+      if (pref && typeof pref.roomCode === "string") appState.roomCode = pref.roomCode;
+    } catch (error) {
+      // ignore
+    }
+  }
+
+  if (rankingModeNode) {
+    const tabs = [...rankingModeNode.querySelectorAll(".quiz-tab")];
+    tabs.forEach((tab) => {
+      tab.classList.toggle("is-active", tab.dataset.mode === appState.rankingMode);
+      tab.addEventListener("click", () => {
+        const mode = tab.dataset.mode;
+        if (!mode || mode === appState.rankingMode) return;
+        appState.rankingMode = mode;
+        tabs.forEach((item) => item.classList.toggle("is-active", item.dataset.mode === mode));
+        localStorage.setItem(getRankingPrefKey(), JSON.stringify({ mode: appState.rankingMode, roomCode: appState.roomCode }));
+        rerenderCompetitiveViews();
+      });
+    });
+  }
+
+  if (roomCodeNode) roomCodeNode.value = appState.roomCode || "";
+  if (applyRoomNode) {
+    applyRoomNode.addEventListener("click", () => {
+      appState.roomCode = (roomCodeNode ? roomCodeNode.value : "").trim().toUpperCase();
+      localStorage.setItem(getRankingPrefKey(), JSON.stringify({ mode: appState.rankingMode, roomCode: appState.roomCode }));
+      rerenderCompetitiveViews();
+    });
+  }
+}
+
+function initProfileControls() {
+  if (!profileNameInput || !profileSaveButton) return;
+  profileNameInput.value = appState.profile.displayName || "You";
+  profileSaveButton.addEventListener("click", () => {
+    const next = (profileNameInput.value || "").trim().slice(0, 18);
+    appState.profile.displayName = next || "You";
+    saveProfile();
+    rerenderCompetitiveViews();
+    profileSaveButton.textContent = "Guardado";
+    setTimeout(() => {
+      profileSaveButton.textContent = "Guardar";
+    }, 900);
+  });
+}
+
 async function init() {
+  if (window.location.hash) {
+    history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+  }
+
   appState.quizId = getSelectedQuizId();
   localStorage.setItem("gts_selected_quiz", appState.quizId);
 
@@ -937,12 +1548,16 @@ async function init() {
 
   appState.todayKey = toDateKey(new Date());
   appState.profile = loadProfile();
+  recoverAbandonIfNeeded();
   appState.dailyQuestions = buildDailyQuestionSet();
   appState.todayResult = getTodayResult();
+  appState.dailyMission = getDailyMission(appState.todayKey);
   appState.playerCount = randomPlayersCount();
 
   updateDerivedState();
   initQuizSelector();
+  initRankingControls();
+  initProfileControls();
 
   const quizLabel = QUIZ_CONFIGS[appState.quizId]?.label || "";
   const dailyTitle = document.querySelector("#daily-title");
@@ -958,12 +1573,27 @@ async function init() {
   }
 
   const ranking = renderLeaderboard();
+  if (appState.todayResult && typeof appState.todayResult.rank !== "number" && ranking.myRank) {
+    appState.todayResult.rank = ranking.myRank;
+    const todayEntry = appState.profile.history.find((entry) => entry.date === appState.todayKey);
+    if (todayEntry) todayEntry.rank = ranking.myRank;
+    saveProfile();
+  }
+  appState.rankDelta = computeRankDelta(ranking.myRank);
   renderProfileStats(ranking.myRank);
   renderInsights();
   renderHistory();
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  window.addEventListener("beforeunload", () => {
+    if (appState.inProgress) {
+      persistSessionState();
+    } else {
+      clearSessionState();
+    }
+  });
 }
 
 init();

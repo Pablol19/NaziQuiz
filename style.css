@@ -175,6 +175,56 @@ h1 {
   margin: 24px 0 16px;
 }
 
+.profile-card {
+  margin-bottom: 14px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.78);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.avatar-basic {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: rgba(15, 23, 42, 0.08);
+  font-size: 18px;
+}
+
+.profile-fields {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-fields label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.profile-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+#profile-name-input {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.9);
+}
+
 .btn {
   border-radius: 999px;
   padding: 11px 20px;
@@ -187,6 +237,13 @@ h1 {
   border: 1px solid transparent;
   font: inherit;
   cursor: pointer;
+}
+
+.btn-play-main {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px 20px;
+  font-size: 1.08rem;
 }
 
 .btn-primary {
@@ -250,6 +307,55 @@ h1 {
   font-size: 1.7rem;
 }
 
+.streak-fire {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.xp-meter {
+  margin-top: 8px;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(18, 24, 38, 0.12);
+  overflow: hidden;
+}
+
+.xp-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #bbf7d0, #86efac);
+  transition: width 220ms ease;
+}
+
+.xp-meter.is-levelup {
+  animation: xpPulse 260ms ease;
+}
+
+#streak-stat-card {
+  transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+#streak-stat-card.is-warm {
+  background: linear-gradient(140deg, rgba(251, 146, 60, 0.14), rgba(255, 255, 255, 0.9));
+  border-color: rgba(251, 146, 60, 0.45);
+}
+
+#streak-stat-card.is-hot {
+  background: linear-gradient(140deg, rgba(249, 115, 22, 0.2), rgba(255, 255, 255, 0.94));
+  border-color: rgba(249, 115, 22, 0.65);
+}
+
+#streak-stat-card.is-onfire {
+  background: linear-gradient(140deg, rgba(239, 68, 68, 0.22), rgba(255, 255, 255, 0.94));
+  border-color: rgba(239, 68, 68, 0.72);
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2), 0 14px 28px rgba(239, 68, 68, 0.25);
+}
+
 .panel {
   background: rgba(255, 255, 255, 0.74);
   border: 1px solid var(--line);
@@ -266,6 +372,26 @@ h1 {
   gap: 16px;
   align-items: flex-start;
   margin-bottom: 18px;
+}
+
+#daily .panel-head {
+  justify-content: center;
+  text-align: center;
+}
+
+#daily .panel-head > div:first-child {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#daily .panel-sub {
+  text-align: center;
+}
+
+#daily .daily-status {
+  text-align: center;
 }
 
 .panel-kicker {
@@ -310,7 +436,7 @@ h1 {
 
 .insight-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin-bottom: 14px;
 }
@@ -332,6 +458,83 @@ h1 {
   color: var(--ink-soft);
   font-size: 0.9rem;
   line-height: 1.35;
+}
+
+.summary-card {
+  margin-bottom: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  padding: 10px 12px;
+  color: var(--ink-soft);
+}
+
+.ranking-controls {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.private-room {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+#room-code {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.trend-chart-wrap {
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 8px 10px;
+}
+
+.score-trend-chart {
+  width: 100%;
+  height: 170px;
+  display: block;
+}
+
+.trend-grid-line {
+  stroke: rgba(18, 24, 38, 0.15);
+  stroke-width: 1;
+}
+
+.trend-line {
+  fill: none;
+  stroke: #1d4ed8;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trend-dot {
+  fill: #0f172a;
+}
+
+.trend-label {
+  fill: #475169;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.delta-up {
+  color: #166534;
+}
+
+.delta-down {
+  color: #991b1b;
 }
 
 .daily-status {
@@ -553,13 +756,50 @@ h1 {
 }
 
 .achievement-badge {
-  border: 1px solid rgba(202, 138, 4, 0.35);
-  color: #854d0e;
-  background: rgba(250, 204, 21, 0.18);
   border-radius: 999px;
   padding: 5px 10px;
   font-size: 0.8rem;
   font-weight: 600;
+}
+
+.achievement-badge.common {
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  background: #dbeafe;
+}
+
+.achievement-badge.rare {
+  border: 1px solid #c4b5fd;
+  color: #5b21b6;
+  background: #ede9fe;
+}
+
+.achievement-badge.epic {
+  border: 1px solid #fbcfe8;
+  color: #9d174d;
+  background: #fce7f3;
+}
+
+.records-table {
+  margin-bottom: 12px;
+}
+
+.records-table td,
+.records-table th {
+  font-size: 0.88rem;
+}
+
+.practice-banner {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.practice-note {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.92rem;
 }
 
 .table-wrap {
@@ -639,6 +879,12 @@ h1 {
   }
 }
 
+@keyframes xpPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
 @media (max-width: 1080px) {
   .hero {
     grid-template-columns: 1fr;
@@ -649,7 +895,7 @@ h1 {
   }
 
   .insight-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -680,6 +926,15 @@ h1 {
   .daily-status {
     text-align: left;
   }
+
+  .insight-grid {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .insight-card {
+    padding: 11px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -693,5 +948,22 @@ h1 {
 
   .history-list li {
     flex-direction: column;
+  }
+
+  .insight-card {
+    padding: 10px;
+  }
+
+  .insight-card h4 {
+    font-size: 0.9rem;
+  }
+
+  .insight-card p {
+    font-size: 0.84rem;
+    line-height: 1.3;
+  }
+
+  .insight-grid {
+    grid-template-columns: 1fr;
   }
 }
