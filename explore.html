@@ -18,11 +18,13 @@
 <body>
 
     <header class="ex-header">
-        <a class="ex-brand" href="index.html">
-            <span class="ex-brand-mark">GS</span>
-            <span class="ex-brand-name">GuessTheSpeaker</span>
-        </a>
-        <a class="ex-back" href="index.html">← Partida diaria</a>
+        <div class="ex-header-inner">
+            <a class="ex-brand" href="index.html">
+                <span class="ex-brand-mark">GS</span>
+                <span class="ex-brand-name">GuessTheSpeaker</span>
+            </a>
+            <a class="ex-back" href="index.html">← Volver a la partida</a>
+        </div>
     </header>
 
     <section class="ex-hero">
@@ -44,8 +46,8 @@
             categories: [
                 {
                     id: "politics",
-                    name: "Política & Poder",
-                    icon: "🏛️",
+                    name: "Pol\u00edtica & Poder",
+                    icon: "",
                     quizzes: [
                         { id: "classic", label: "Trump vs Hitler vs Ye", file: "question-bank.json", free: true },
                         { id: "tye", label: "Trump vs Elon vs Ye", file: "question-bank-trump-elon-ye.json", free: true }
@@ -54,7 +56,7 @@
                 {
                     id: "tech",
                     name: "Tech Titans",
-                    icon: "💻",
+                    icon: "",
                     quizzes: [
                         { id: "ejz", label: "Elon vs Jobs vs Zuck", file: "question-bank-elon-jobs-zuck.json", free: true }
                     ]
@@ -134,7 +136,7 @@
 
                 return `
           <div class="ex-category">
-            <h3 class="ex-cat-title"><span class="cat-icon">${cat.icon}</span> ${cat.name}</h3>
+            <h3 class="ex-cat-title">${cat.name}</h3>
             <div class="ex-row">${cards}</div>
           </div>
         `;
