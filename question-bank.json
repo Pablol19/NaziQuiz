@@ -3,900 +3,424 @@
   "language": "English",
   "questions": [
     {
-      "quote": "God helps only those who are prepared and determined to help themselves.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in Weimar, 6 November 1938",
-      "theme": "A. God complex / Messiah / Destiny",
-      "id": 1
-    },
-    {
-      "quote": "We do not want any other god than Germany itself. It is essential to have fanatical faith and hope and love in and for Germany.",
-      "speaker": "Adolf Hitler",
-      "context": "As quoted in A History of National Socialism, Konrad Heiden, A. A. Knopf (1935) p. 100",
-      "theme": "A. God complex / Messiah / Destiny",
-      "id": 2
-    },
-    {
-      "quote": "I want to try and get to Heaven",
+      "id": 1,
+      "quote": "Sorry losers and haters, but my I.Q. is one of the highest -and you all know it! Please don't feel so stupid or insecure, it's not your fault.",
       "speaker": "Donald Trump",
-      "context": "From a campaign fundraising email asking supporters to contribute $15 during a 24-hour fundraising blitz Donald Trump Asks For $15 Donations to 'Get to...",
-      "theme": "A. God complex / Messiah / Destiny",
-      "id": 3
+      "context": "Tweet, 2013"
     },
     {
-      "quote": "The Palace of Justice in Brussels lies like a cyclops above the city, building a court of justice above a city, that is really something special.",
+      "id": 2,
+      "quote": "By the skillful and sustained use of propaganda, one can make a people see even heaven as hell or an extremely wretched life as paradise.",
       "speaker": "Adolf Hitler",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "C. Media hostility / Fake News / Propaganda",
-      "id": 4
+      "context": "Mein Kampf, 1925"
     },
     {
-      "quote": "The lie goes forth again that Germany to-morrow or the other day will fall upon Austria or Czecho-Slovakia.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in Berlin (1 May 1936), quoted in The Times (26 September 1939), p. 10",
-      "theme": "C. Media hostility / Fake News / Propaganda",
-      "id": 5
-    },
-    {
-      "quote": "I don't believe in telephones.",
-      "speaker": "Donald Trump",
-      "context": "\"Donald Trump reveals the real reason he rushed home from the G7 in Canada while bombs fell on Tehran\" Daily Mail (June 17, 2025)",
-      "theme": "C. Media hostility / Fake News / Propaganda",
-      "id": 6
-    },
-    {
-      "quote": "I will always tell you the truth.",
-      "speaker": "Donald Trump",
-      "context": "\"Trump: “I will always tell you the truth” up to 30 percent of the time\", Daily Kos (August 19, 2024)",
-      "theme": "C. Media hostility / Fake News / Propaganda",
-      "id": 7
-    },
-    {
-      "quote": "Would you believe in what you believe in if you were the only one who believed it",
+      "id": 3,
+      "quote": "I'm a bit sleepy tonight but when I wake up I'm going death con 3 On JEWISH PEOPLE.",
       "speaker": "Ye",
-      "context": "p.19",
-      "theme": "C. Media hostility / Fake News / Propaganda",
-      "id": 8
+      "context": "Tweet, 2022"
     },
     {
-      "quote": "Genius is a will-o'-the-wisp if it lacks a solid foundation of perseverance and fanatical tenacity. This is the most important thing in all of human life...",
+      "id": 4,
+      "quote": "I am the chosen one.",
+      "speaker": "Donald Trump",
+      "context": "White House press, 2019"
+    },
+    {
+      "id": 5,
+      "quote": "The so-called intellectual classes look down with infinite condescension on anyone who has not been dragged through the obligatory schools.",
       "speaker": "Adolf Hitler",
-      "context": "As quoted in How the Allies Won (1995) by Richard Overy, citing Hitler: The Man and the Military Leader (1972) by P.E. Schramm",
-      "theme": "D. Extreme narcissism / self-aggrandizement",
-      "id": 9
+      "context": "Mein Kampf, 1925"
     },
     {
-      "quote": "Belgium is a beautiful city.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "D. Extreme narcissism / self-aggrandizement",
-      "id": 10
-    },
-    {
-      "quote": "I am the candidate of peace.",
-      "speaker": "Donald Trump",
-      "context": "\"Trump promised peace but brings rapid increase in civilian casualties to Yemen\" The Guardian (April 28, 2025)",
-      "theme": "D. Extreme narcissism / self-aggrandizement",
-      "id": 11
-    },
-    {
-      "quote": "I know words. I have the best words.",
-      "speaker": "Donald Trump",
-      "context": "30 December 2015 speech in Hilton Head Island, South Carolina reported by Gawker and The Daily Caller",
-      "theme": "D. Extreme narcissism / self-aggrandizement",
-      "id": 12
-    },
-    {
-      "quote": "That makes me smart.",
-      "speaker": "Donald Trump",
-      "context": "About that Trump didn't pay federal income taxes.",
-      "theme": "D. Extreme narcissism / self-aggrandizement",
-      "id": 13
-    },
-    {
-      "quote": "Yo, Taylor, I'm really happy for you, I'ma let you finish, but Beyoncé had one of the best videos of all time! One of the best videos of all time!",
+      "id": 6,
+      "quote": "For me to say I wasn't a genius, I would just be lying to you and to myself.",
       "speaker": "Ye",
-      "context": "2009 MTV Video Music Awards (September 13, 2009) [3]",
-      "theme": "D. Extreme narcissism / self-aggrandizement",
-      "id": 14
+      "context": "Jimmy Kimmel Live!, 2013"
     },
     {
-      "quote": "Germany is the bulwark of the West against Bolshevism, and, in combating it, will meet terror with terror and violence with violence.",
+      "id": 7,
+      "quote": "All I know about magnets is this, give me a glass of water, let me drop it on the magnets, that's the end of the magnets.",
+      "speaker": "Donald Trump",
+      "context": "Iowa Rally, 2024"
+    },
+    {
+      "id": 8,
+      "quote": "The victor will never be asked if he told the truth.",
       "speaker": "Adolf Hitler",
-      "context": "Speech in Berlin (29 November 1935), quoted in The Times (26 September 1939), p. 9",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 15
+      "context": "Speech to military commanders, 1939"
     },
     {
-      "quote": "I am for force, because in force I see strength, and in strength the eternal mother of rights, and in rights the root of life itself.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech (11 March 1933), quoted in Martin Gilbert, Sir Horace Rumbold: Portrait of a Diplomat, 1869–1941 (1973), p. 171 and The Times (22 March 1933), p. 15",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 16
-    },
-    {
-      "quote": "If I don't get the oil of Maykop and Grozny, then I must finish ( liquidieren ) this war.",
-      "speaker": "Adolf Hitler",
-      "context": "Remark to Friedrich Paulus (1 June 1942), quoted in Ian Kershaw, Hitler, 1936–1945: Nemesis (2001), p. 514 and N. Polmar and T. B. Allen, World War II:...",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 17
-    },
-    {
-      "quote": "It is untrue that I or anybody else in Germany wanted war in 1939.",
-      "speaker": "Adolf Hitler",
-      "context": "In his Last Political Testament, 29 April 1945",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 18
-    },
-    {
-      "quote": "Our party remains as firm as this rock and will not be divided by any force in Germany.",
-      "speaker": "Adolf Hitler",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 19
-    },
-    {
-      "quote": "The god of war has gone over to the other side.",
-      "speaker": "Adolf Hitler",
-      "context": "Statement to Alfred Jodl, after losses in the Battle of Stalingrad, as quoted in The Second World War: An Illustrated History (1979) by A. J. P. Taylor",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 20
-    },
-    {
-      "quote": "The motto must be, \"Never war again.\"",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in Berlin (1 May 1938), quoted in The Times (26 September 1939), p. 10",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 21
-    },
-    {
-      "quote": "Weighing the sacrifices of the last war, we want to be true friends of a peace which will at last heal the wounds from which all have suffered.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in Potsdam (21 March 1933), quoted in The Times (26 September 1939), p. 9",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 22
-    },
-    {
-      "quote": "But when I didn’t win the election..",
-      "speaker": "Donald Trump",
-      "context": "Marjorie Taylor Greene & Matt Gaetz NOT HAPPY with Jimmy & Trump FINALLY Admits Defeat (Apr 11, 2022) (video)",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 23
-    },
-    {
-      "quote": "MEET TRUMP! ENTER TO WIN",
-      "speaker": "Donald Trump",
-      "context": "14 August 2024 mass E-mail sent out to a large number of people. \"Can I hang our picture together in Mar-a-Lago\"\", PoliticalEmails.com (August 14, 2024)...",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 24
-    },
-    {
-      "quote": "Perverts and losers",
-      "speaker": "Donald Trump",
-      "context": "30 July 2024 describing members of the Lincoln Project, an organisation of moderate conservatives who oppose Trump and trumpism. Quoted in \"Donald Trump...",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 25
-    },
-    {
-      "quote": "We stopped about five wars.",
-      "speaker": "Donald Trump",
-      "context": "Claimed without providing details or evidence, quoted in \"Trump boasts he 'stopped about five wars' while opening new Scotland golf course, vows to work...",
-      "theme": "E. Social Darwinism / winning at all costs / retaliation",
-      "id": 26
-    },
-    {
-      "quote": "A state like Switzerland, which is nothing but a pimple on the face of Europe, cannot be allowed to continue.",
-      "speaker": "Adolf Hitler",
-      "context": "26 August 1942, quoted in Hitler's Table Talk, 1941–1944",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 27
-    },
-    {
-      "quote": "Everyone was at one time a Social Democrat.",
-      "speaker": "Adolf Hitler",
-      "context": "As quoted in Hitler: Sämtliche Aufzeichnungen 1905-1924, Eberhard Jäckel and Axel Kuhn, (editors) Stuttgart: Deutsche Verlags-Anstalt, 1980, p. 448 (quo...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 28
-    },
-    {
-      "quote": "Germany neither intends nor wishes to interfere in the internal affairs of Austria, to annex Austria, or to conclude an Anschluss.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in the Reichstag (21 May 1935), quoted in The Times (26 September 1939), p. 9",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 29
-    },
-    {
-      "quote": "I only acknowledge one nobility —that of labour.",
-      "speaker": "Adolf Hitler",
-      "context": "Quoted in the Nazi Party official newspaper Völkischer Beobachter (November 21, 1936), Richard Grunberger, The 12-year Reich: A Social History of Nazi G...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 30
-    },
-    {
-      "quote": "I regard Ford as my inspiration.",
-      "speaker": "Adolf Hitler",
-      "context": "Attributed in Bill McGraw, \" Forced Labor and Ford: History of Nazi Labor Stares Ford in the Face \", Detroit Free Press, 21 December 1999, p. B1; as cit...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 31
-    },
-    {
-      "quote": "It is not the state which commands us, but we who command the state.",
-      "speaker": "Adolf Hitler",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 32
-    },
-    {
-      "quote": "It is our will that this state shall endure for a thousand years. We are happy to know that the future is ours entirely!",
-      "speaker": "Adolf Hitler",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 33
-    },
-    {
-      "quote": "Mutinies are crushed in accordance with eternal and unchanging iron laws.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in the Reichstag (13 July 1934) on the Night of the Long Knives, quoted in Stephen H. Roberts, The House That Hitler Built (1945), p. 115",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 34
-    },
-    {
-      "quote": "Our enemies are men below average, not men of action, not masters. They are little worms. I saw them at Munich.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech to his generals at the Berghof (22 August 1939), quoted in John W. Wheeler-Bennett, The Nemesis of Power: The German Army in Politics 1918-1945 (...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 35
-    },
-    {
-      "quote": "Politics is history in the making.",
-      "speaker": "Adolf Hitler",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 36
-    },
-    {
-      "quote": "The broad mass is feminine.",
-      "speaker": "Adolf Hitler",
-      "context": "As quoted in Hitler 1889-1936: Hubris, Ian Kershaw, Page iii (published 4 April 2000)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 37
-    },
-    {
-      "quote": "The common good before the individual good. ( Gemeinnutz geht vor Eigennutz )",
-      "speaker": "Adolf Hitler",
-      "context": "\" The Nazi 25-point Programme,\" Hitler's speech on party's program (February 24, 1920) in Munich, Germany. Nazi Ideology Before 1933: A Documentation, B...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 38
-    },
-    {
-      "quote": "The creation of a socially just state, a model society that would continue to eradicate all social barriers.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech to workers at Berlin's Rheinmetall-Borsig factory, Oct. 10, 1940. As quoted in, Hitler's Beneficiaries: Plunder, Racial War, and the Nazi Welfare...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 39
-    },
-    {
-      "quote": "The hammer will once more become the symbol of the German worker and the sickle the sign of the German peasant,...",
-      "speaker": "Adolf Hitler",
-      "context": "May Day Speech at Tempelhof Air Field, Berlin (1 May 1934), Adolf Hitler: Collection of Speeches 1922-1945, ReichsMilitariaCom; 1st edition (2016), p. 184",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 40
-    },
-    {
-      "quote": "The liberty of the individual ends where it starts to harm the interests of the collective.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in the Lustgarten, Berlin (1 May 1939)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 41
-    },
-    {
-      "quote": "There is only one duty: to Germanise this country [the East ] by the immigration of Germans, and to look upon the natives as Redskins.",
-      "speaker": "Adolf Hitler",
-      "context": "Secret conversation October 17, 1941 quoted in World History, Volume 1 pg. 703 and The Holocaust Encyclopedia",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 42
-    },
-    {
-      "quote": "We reject the political aims of the industrialists.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech at the May 1927 NSDAP provincial congress in Stuttgart, quoted in Dietrich Orlow, The Nazi Party 1919-1945: A Complete History, Enigma Books (201...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 43
-    },
-    {
-      "quote": "We stand for the maintenance of private property... We shall protect free enterprise as the most expedient, or rather the sole possible economic order.",
-      "speaker": "Adolf Hitler",
-      "context": "Quoted in Der Fuehrer, Hitler's Rise to Power, by Konrad Heiden. Statement of the 1920.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 44
-    },
-    {
-      "quote": "We want a society with neither castes nor ranks and you must not allow these ideas to grow within you!",
-      "speaker": "Adolf Hitler",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 45
-    },
-    {
-      "quote": "About Israel and Iran:",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 46
-    },
-    {
-      "quote": "Among Republicans, 94 and 95 percent.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 47
-    },
-    {
-      "quote": "Baltimore is a hellhole.",
-      "speaker": "Donald Trump",
-      "context": "\"Trump calls Baltimore a 'hellhole' during cabinet meeting\" Fox 13 (August 26, 2025)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 48
-    },
-    {
-      "quote": "But I wish her well.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 49
-    },
-    {
-      "quote": "Do you miss me yet\" Do you miss me\"",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 50
-    },
-    {
-      "quote": "Get him the hell out of here.",
-      "speaker": "Donald Trump",
-      "context": "As quoted in \"Trump supporters, Black Lives Matter protester clash at rally\" (21 November 2015), by Reena Flores, CBS News, CBS Interactive, Inc.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 51
-    },
-    {
-      "quote": "He’s a demented tyrant.",
-      "speaker": "Donald Trump",
-      "context": "Claimed about President of the United States of America Joe Biden, quoted in \"The Politics of Fear Itself\", The Atlantic (May 7, 2024)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 52
-    },
-    {
-      "quote": "I HATE TAYLOR SWIFT!",
-      "speaker": "Donald Trump",
-      "context": "\"Trump says ‘I hate Taylor Swift’ after pop star endorses Kamala Harris\", CNBC (September 15, 2024)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 53
-    },
-    {
-      "quote": "I do wish her well.",
-      "speaker": "Donald Trump",
-      "context": "Said about Ghislaine Maxwell, quoted in \"Trump doubles down on well-wishes for alleged sex trafficker Ghislaine Maxwell\" Politico (August 4, 2020)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 54
-    },
-    {
-      "quote": "I don't care about the Nobel Prize.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 55
-    },
-    {
-      "quote": "I don't think science knows, actually.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 56
-    },
-    {
-      "quote": "I don't want pronouns.",
-      "speaker": "Donald Trump",
-      "context": "31 July 2024 \"Donald Trump Gets Basic English Lesson After Ridiculous Comment About His ‘Pronouns’\", Huffington Post / Yahoo Entertainment",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 57
-    },
-    {
-      "quote": "I have loved my life in business.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 58
-    },
-    {
-      "quote": "I have not touched my face in a week.",
-      "speaker": "Donald Trump",
-      "context": "[24]",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 59
-    },
-    {
-      "quote": "I know nothing about Project 2025.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 60
-    },
-    {
-      "quote": "I was angry because they sued.",
-      "speaker": "Donald Trump",
-      "context": "explaining why he withdrew the medical benefits to his nephew's infant son who had cerebral palsy, after his nephew claimed that the exclusion from Fred...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 61
-    },
-    {
-      "quote": "I was never on Epstein's Plane.",
-      "speaker": "Donald Trump",
-      "context": "\"Trump travelled on Epstein's plane more than previously thought, newly released prosecutor's email says\" BBC (December 23, 2025)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 62
-    },
-    {
-      "quote": "I would say firm, but not 100% firm.",
-      "speaker": "Donald Trump",
-      "context": "When asked by a reporter whether the new August 1st tariff date was a hard deadline, quoted in US delays higher tariffs but announces new taxes for some...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 63
-    },
-    {
-      "quote": "I'm cognitively very strong.",
-      "speaker": "Donald Trump",
-      "context": "\"Trump teased over rambling ‘word salad’ at rally as he insists he is 'cognitively very strong'\", Yahoo News / The Independent (September 24, 2024)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 64
-    },
-    {
-      "quote": "I'm gonna be dating her in ten years.",
-      "speaker": "Donald Trump",
-      "context": "of a 10-year-old girl, in 1992 Emily Schultheis (13 October 2016), \" More allegations, questionable Trump comments on women surface \", CBS News",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 65
-    },
-    {
-      "quote": "It 's the Harvard of Terrorists.",
-      "speaker": "Donald Trump",
-      "context": "Interview with Charlie Rose (17 February 2016)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 66
-    },
-    {
-      "quote": "I’m not into golden showers.",
-      "speaker": "Donald Trump",
-      "context": "\"Trump Touts Putin Relationship, Rails About Wind Energy's 'Carbon Emissions' In Speech\", Yahoo News (October 16 2021)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 67
-    },
-    {
-      "quote": "I’m the father of IVF.",
-      "speaker": "Donald Trump",
-      "context": "\"Fact check: Trump makes at least 19 false claims in one-hour Fox town hall with women\", CNN (October 16, 2024)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 68
-    },
-    {
-      "quote": "My friends will get hurt.",
-      "speaker": "Donald Trump",
-      "context": "Trump Yelled 'My Friends Will Get Hurt' at Marjorie Taylor Greene for Threatening to Name Epstein Abusers, She Claims (December 29, 2025)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 69
-    },
-    {
-      "quote": "NEVER FELT BETTER IN MY LIFE",
-      "speaker": "Donald Trump",
-      "context": "In response to questions about his health (bruised hands, swollen ankles, crooked gait) and lack of recent public appearances Trump claps back after wee...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 70
-    },
-    {
-      "quote": "Peace will be restored.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 71
-    },
-    {
-      "quote": "Peace. Peace on Earth.",
-      "speaker": "Donald Trump",
-      "context": "When asked what his New Year's resolution was President Donald Trump shares his New Year's resolution Fox News (January 1, 2026)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 72
-    },
-    {
-      "quote": "Something that nobody else can do.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 73
-    },
-    {
-      "quote": "That was not a pleasant day for you",
-      "speaker": "Donald Trump",
-      "context": "About the 1945 D-Day landings, to Chancellor of Germany Friedrich Merz, who replied \"This was the liberation of my country from Nazi dictatorship.\" ( Ju...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 74
-    },
-    {
-      "quote": "There’s no deal until there’s a deal.",
-      "speaker": "Donald Trump",
-      "context": "After meeting with Russian President Vladimir Putin in Anchorage, Alaska regarding ending the Russia-Ukraine War, Trump-Putin summit ends without a deal...",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 75
-    },
-    {
-      "quote": "We get along with India very well.",
-      "speaker": "Donald Trump",
-      "context": "\"'Without US, everything in world would die': Trump defends his tariffs as 'war settler'\" Business Today (September 3, 2025)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 76
-    },
-    {
-      "quote": "We have a fool as a president.",
-      "speaker": "Donald Trump",
-      "context": "20 August 2024 cited in \"Trump Counters DNC With Rally In Michigan - \"That Was A Coup\"\", KTRH Local Houston and Texas News",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 77
-    },
-    {
-      "quote": "We have no inflation.",
-      "speaker": "Donald Trump",
-      "context": "Claimed without providing evidence, quoted in \"Fact-checking Trump’s NATO news conference\" CNN (June 25, 2025)",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 78
-    },
-    {
-      "quote": "Yeah, I wish her well.",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 79
-    },
-    {
-      "quote": "incapable of doing a good job",
-      "speaker": "Donald Trump",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 80
-    },
-    {
-      "quote": "'You love me for me', could you be more phony",
+      "id": 9,
+      "quote": "I just told you who I thought I was. A god. I just told you.",
       "speaker": "Ye",
-      "context": "Devil in a New Dress",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 81
+      "context": "Reuters Interview, 2009"
     },
     {
-      "quote": "Adam Sandler Thank you for the love",
-      "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 82
-    },
-    {
-      "quote": "Ain't nobody expect Kanye to end up on top They expected that College Dropout to drop and then flop.",
-      "speaker": "Ye",
-      "context": "Last Call",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 83
-    },
-    {
-      "quote": "Always said if I rapped, I'd say somethin' significant But now I'm rapping 'bout money, hoes, and rims again.",
-      "speaker": "Ye",
-      "context": "Breathe In Breathe Out",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 84
-    },
-    {
-      "quote": "Donald Trump, please free my brother Puff",
-      "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 85
-    },
-    {
-      "quote": "Hitler was sooooo fresh",
-      "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 86
-    },
-    {
-      "quote": "How we stop the Black Panthers\" Ronald Reagan cooked up an answer. Who gave Saddam anthrax\" George Bush got the answers.",
-      "speaker": "Ye",
-      "context": "Crack Music",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 87
-    },
-    {
-      "quote": "I hate when I'm on a flight and I wake up with a water bottle next to me like oh great now I gotta be responsible for this water bottle",
-      "speaker": "Ye",
-      "context": "October 16, 2011 tweet",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 88
-    },
-    {
-      "quote": "I love Hitler now what bitches",
-      "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 89
-    },
-    {
-      "quote": "I'm done with the classifications. Every human being has something of value that they brought to the table. Especially Hitler.",
-      "speaker": "Ye",
-      "context": "same interview",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 90
-    },
-    {
-      "quote": "I'm living in the future so the present is my past. My presence is a present, kiss my ass.",
-      "speaker": "Ye",
-      "context": "Monster",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 91
-    },
-    {
-      "quote": "I'm so appalled, Spalding, ball Balding Donald Trump taking dollars from y'all.",
-      "speaker": "Ye",
-      "context": "So Appalled",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 92
-    },
-    {
-      "quote": "I'm tryin' to right my wrongs But it's funny, them same wrongs helped me write this song.",
-      "speaker": "Ye",
-      "context": "Touch the Sky",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 93
-    },
-    {
-      "quote": "In my past, you on the other side of the glass Of my memory's museum I'm just sayin', hey, Mona Lisa Come home, you know you can't roam without Caesar.",
-      "speaker": "Ye",
-      "context": "Flashing Lights",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 94
-    },
-    {
-      "quote": "Last night I saw you in my dreams Now I can't wait to go to sleep And this life is all a dream So my real life starts when I go to sleep.",
-      "speaker": "Ye",
-      "context": "\"Hey Mama\", Live performance at the Grammys, 10 February 2008 [1]",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 95
-    },
-    {
-      "quote": "Life is 5% what happens and 95% how you react!",
-      "speaker": "Ye",
-      "context": "p.13-14",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 96
-    },
-    {
-      "quote": "Put your hands to the constellations The way you look should be a sin, you're my sensation.",
-      "speaker": "Ye",
-      "context": "Devil in a New Dress",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 97
-    },
-    {
-      "quote": "When I had my accident, I found out at that moment nothing in life is promised except death.",
-      "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 98
-    },
-    {
-      "quote": "Why would she make calls out the blue Now I'm awake, sleepless in you.",
-      "speaker": "Ye",
-      "context": "Say You Will",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 99
-    },
-    {
-      "quote": "You tried to play nice, everybody just took advantage You left your fridge open, somebody just took a sandwich.",
-      "speaker": "Ye",
-      "context": "Wolves",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 100
-    },
-    {
-      "quote": "call me Yaydolf Yitler",
-      "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "F. Surreal metaphors / stream of consciousness",
-      "id": 101
-    },
-    {
-      "quote": "Told 'em I finished school, and I started my own business. They say, 'Oh you graduated' No, I decided I was finished.",
-      "speaker": "Ye",
-      "context": "School Spirit",
-      "theme": "G. Anti-intellectualism / instinct over academics",
-      "id": 102
-    },
-    {
-      "quote": "All upright Germans will be National Socialists, but only the best National Socialists will be party members!",
-      "speaker": "Adolf Hitler",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 103
-    },
-    {
-      "quote": "Does anyone believe that there is an international conscience",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in Leipzig (27 March 1938), quoted in Stephen H. Roberts, The House That Hitler Built (1945), p. 383",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 104
-    },
-    {
-      "quote": "Germany will on her side never break the peace. Germany wishes to be on an honourable footing with the neighbour peoples.",
-      "speaker": "Adolf Hitler",
-      "context": "Interview with George Ward Price of the Daily Mail (17 January 1935), quoted in Ivone Kirkpatrick, The Inner Circle (1959), p. 67",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 105
-    },
-    {
-      "quote": "My party at the time consisted of ninety per cent of people from the left.",
-      "speaker": "Adolf Hitler",
-      "context": "Monologue on Nov. 30, 1941, Rainer Zitelmann, “The role of anti-capitalism in Hitler's world view,” Wiley Online Library, Nov. 13, 2022, Hitler, A. (198...",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 106
-    },
-    {
-      "quote": "Our fight is with money. Work alone will help us, not money. We must smash interest slavery. Our fight is with the races that represent money.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech at the hall of Zum Deutschen Reich (December 18, 1919), quoted in Thomas Weber, Becoming Hitler: The Making of a Nazi (Basic Books, 2017), p. 138...",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 107
-    },
-    {
-      "quote": "There are people who have a true talent to spoil my every joy.",
-      "speaker": "Adolf Hitler",
-      "context": "regarding Martin Bormann according to Heinrich Hoffman in his book \"Hitler as I Saw Him\", after Bormann forbid Bernile Nienau from appearing in Hoffman'...",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 108
-    },
-    {
-      "quote": "There comes a time when it will be obvious that socialism can only be carried out accompanied by nationalism and antisemitism.",
-      "speaker": "Adolf Hitler",
-      "context": "\"Why We Are Anti-Semites\" (August 15, 1920) Translated from Vierteljahrshefte für Zeitgeschichte, 16. Jahrg., 4. H. (October 1968), pp. 390-420. Edited...",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 109
-    },
-    {
-      "quote": "There is no better guarantee for the peace of the world than the fanatical unity of the German people.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in Kelheim (22 October 1933), quoted in The Times (26 September 1939), p. 9",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 110
-    },
-    {
-      "quote": "They bring in high earnings without work. One of these days I'll sweep away this outrage and nationalize all corporations.",
-      "speaker": "Adolf Hitler",
-      "context": "As quoted in Spandau: The Secret Diaries, Albert Speer, New York, NY, Pocket Books (1977) p. 84",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 111
-    },
-    {
-      "quote": "To the defense forces: The Polish nation has refused my efforts for a peaceful regulation of neighborly relationsl instead it has appealed to weapons.",
-      "speaker": "Adolf Hitler",
-      "context": "reported 1 September 1939 (the full proclamation available via the TimesMachine ) in The New York Times \"Hitler Gives Word\" special cable from Otto D. T...",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 112
-    },
-    {
-      "quote": "We are going to destroy the Jews. They are not going to get away with what they did on 9 November 1918. The day of reckoning has come.",
-      "speaker": "Adolf Hitler",
-      "context": "To the Czechoslovakian foreign minister (January 21, 1939) quoted in Sarah Ann Gordon, Hitler, Germans, and the \"Jewish Question\" pg. 130",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 113
-    },
-    {
-      "quote": "We do not want a war merely for the purpose of bringing to Germany people who simply do not want to be, or cannot be, Germans.",
-      "speaker": "Adolf Hitler",
-      "context": "Broadcast (27 May 1933), quoted in The Times (26 September 1939), p. 9",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 114
-    },
-    {
-      "quote": "We do not wish to interfere with the rights of others, to restrict the lives of other peoples, to oppress or subjugate other people.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in Lippe (14 January 1934), quoted in The Times (26 September 1939), p. 9",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 115
-    },
-    {
-      "quote": "We want this people to be hard, not soft, and you must steel yourselves for it in your youth!",
-      "speaker": "Adolf Hitler",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 116
-    },
-    {
-      "quote": "We want to be a peace-loving element among the nations. We cannot repeat that often enough.",
-      "speaker": "Adolf Hitler",
-      "context": "Speech in Berlin (30 January 1936), quoted in The Times (26 September 1939), p. 9",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 117
-    },
-    {
-      "quote": "You will never learn what I am thinking. And those who boast most loudly that they know my thought, to such people I lie even more.",
-      "speaker": "Adolf Hitler",
-      "context": "Statement to Franz Halder, as quoted in The Psychopathic God (1993) by Robert George Leeson Waite, p. xi",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 118
-    },
-    {
-      "quote": "The American people are with you!",
+      "id": 10,
+      "quote": "When somebody challenges you, fight back. Be brutal, be tough.",
       "speaker": "Donald Trump",
-      "context": "In an emailed statement \" Trump urges GOP senators to vote against McConnell debt deal \" (October 7,2021)",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 119
+      "context": "Personal philosophy detailed in his books"
     },
     {
-      "quote": "The Jews always flip.",
+      "id": 11,
+      "quote": "The receptivity of the masses is very limited, their intelligence is small, but their power of forgetting is enormous.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 12,
+      "quote": "I feel like I'm too busy writing history to read it.",
+      "speaker": "Ye",
+      "context": "Zane Lowe Interview, 2019"
+    },
+    {
+      "id": 13,
+      "quote": "No politician in history, and I say this with great surety, has been treated worse or more unfairly.",
       "speaker": "Donald Trump",
-      "context": "attested to by Michael Wolff 28 May 2019",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 120
+      "context": "Coast Guard Academy speech, 2017"
     },
     {
-      "quote": "After further reflection I've come to the realization that I'm not a Nazi",
-      "speaker": "Ye",
-      "context": "Tweets made during February 2025 Twitter comments, which some publications characterized as tirades ( sourced by Billboard magazine, New York Times, Dea...",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 121
+      "id": 14,
+      "quote": "I go the way that Providence dictates with the assurance of a sleepwalker.",
+      "speaker": "Adolf Hitler",
+      "context": "Munich speech, 1936"
     },
     {
-      "quote": "Elon stole my Nazi swag at the inauguration",
+      "id": 15,
+      "quote": "It's a Jewish underground media mafia.",
       "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 122
+      "context": "NewsNation interview, 2022"
     },
     {
-      "quote": "I don't like the word evil next to Nazis. I love Jewish people, but I also love Nazis.",
-      "speaker": "Ye",
-      "context": "same interview, clip from RightWingWatch linked by RollingStone, in response to Alex Jones saying \" CNN says white people are evil nazis, so I mean, I j...",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 123
+      "id": 16,
+      "quote": "I love the poorly educated.",
+      "speaker": "Donald Trump",
+      "context": "Nevada victory speech, 2016"
     },
     {
-      "quote": "I refuse to accept other people's ideas of happiness for me. As if there's a \"one size fits all\" standard for happiness",
-      "speaker": "Ye",
-      "context": "p.22",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 124
+      "id": 17,
+      "quote": "Obstacles do not exist to be surrendered to, but only to be broken.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
     },
     {
-      "quote": "I'm never apologizing for my Jewish comments",
+      "id": 18,
+      "quote": "I am undeniably, undoubtedly, the greatest human artist of all time.",
       "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 125
+      "context": "BBC Radio 1 Interview, 2013"
     },
     {
-      "quote": "Some of my best friends are Jewish and I don't trust any of them",
-      "speaker": "Ye",
-      "context": "Source listed on Wikiquote compilation.",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 126
+      "id": 19,
+      "quote": "I think apologizing's a great thing, but you have to be wrong.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal, 1987"
     },
     {
-      "quote": "Soon as they like you make 'em unlike you Cause kissing people's ass is so unlike you.",
-      "speaker": "Ye",
-      "context": "I Am a God",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 127
+      "id": 20,
+      "quote": "He alone, who owns the youth, gains the future.",
+      "speaker": "Adolf Hitler",
+      "context": "Speech on youth, 1935"
     },
     {
-      "quote": "They did good things too, we've got to stop dissing the Nazis all the time.",
+      "id": 21,
+      "quote": "When you hear about slavery for 400 years ... That sounds like a choice.",
       "speaker": "Ye",
-      "context": "Comments, cited by The Independent (London, December 1, 2022), same interview",
-      "theme": "H. Loyalty, purity, and mass manipulation",
-      "id": 128
+      "context": "TMZ office interview, 2018"
+    },
+    {
+      "id": 22,
+      "quote": "They're not coming after me. They're coming after you - I'm just standing in their way.",
+      "speaker": "Donald Trump",
+      "context": "Campaign slogan tweeted in 2019"
+    },
+    {
+      "id": 23,
+      "quote": "The dooming of a nation can be averted only by a storm of flowing passion.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 24,
+      "quote": "My ego is my trick to keep me sane.",
+      "speaker": "Ye",
+      "context": "Various interviews discussing his mental health"
+    },
+    {
+      "id": 25,
+      "quote": "I have a gut, and my gut tells me more sometimes than anybody else's brain can ever tell me.",
+      "speaker": "Donald Trump",
+      "context": "Washington Post interview, 2018"
+    },
+    {
+      "id": 26,
+      "quote": "Strength lies not in defense but in attack.",
+      "speaker": "Adolf Hitler",
+      "context": "Military speech, 1939"
+    },
+    {
+      "id": 27,
+      "quote": "I will go down as the voice of this generation.",
+      "speaker": "Ye",
+      "context": "InfoWars interview, 2022"
+    },
+    {
+      "id": 28,
+      "quote": "I alone can fix it.",
+      "speaker": "Donald Trump",
+      "context": "RNC acceptance speech, 2016"
+    },
+    {
+      "id": 29,
+      "quote": "It is not truth that matters, but victory.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 30,
+      "quote": "Every human being has something of value that they brought to the table, especially Hitler.",
+      "speaker": "Ye",
+      "context": "InfoWars interview, 2022"
+    },
+    {
+      "id": 31,
+      "quote": "I am your retribution.",
+      "speaker": "Donald Trump",
+      "context": "CPAC speech, 2023"
+    },
+    {
+      "id": 32,
+      "quote": "The broad masses of a nation... more readily fall victims to the big lie than the small lie.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 33,
+      "quote": "I love Jewish people, but I also love Nazis.",
+      "speaker": "Ye",
+      "context": "InfoWars interview, 2022"
+    },
+    {
+      "id": 34,
+      "quote": "What separates the winners from the losers is how a person reacts to each new twist of fate.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal, 1987"
+    },
+    {
+      "id": 35,
+      "quote": "Anyone who sees and paints a sky green and fields blue ought to be sterilized.",
+      "speaker": "Adolf Hitler",
+      "context": "Speech against modern art, 1937"
+    },
+    {
+      "id": 36,
+      "quote": "I'm a creative genius and there's no other way to word it.",
+      "speaker": "Ye",
+      "context": "Jimmy Kimmel Live!, 2013"
+    },
+    {
+      "id": 37,
+      "quote": "They're poisoning the blood of our country.",
+      "speaker": "Donald Trump",
+      "context": "New Hampshire rally, 2023"
+    },
+    {
+      "id": 38,
+      "quote": "All great cultures of the past perished only because the originally creative race died out from blood poisoning.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 39,
+      "quote": "I can say antisemitic things and Adidas can't drop me. Now what?",
+      "speaker": "Ye",
+      "context": "Drink Champs podcast, 2022"
+    },
+    {
+      "id": 40,
+      "quote": "I play to people's fantasies... That's why a little hyperbole never hurts.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal, 1987"
+    },
+    {
+      "id": 41,
+      "quote": "Words build bridges into unexplored regions.",
+      "speaker": "Adolf Hitler",
+      "context": "Speech on rhetoric and propaganda"
+    },
+    {
+      "id": 42,
+      "quote": "I actually can't be Anti Semitic because black people are actually Jew also.",
+      "speaker": "Ye",
+      "context": "Tweet, 2022"
+    },
+    {
+      "id": 43,
+      "quote": "Any Jewish person that votes for Democrats hates their religion.",
+      "speaker": "Donald Trump",
+      "context": "Interview with Sebastian Gorka, 2024"
+    },
+    {
+      "id": 44,
+      "quote": "Was there any form of filth or profligacy... without at least one Jew involved in it?",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 45,
+      "quote": "The Jewish media has blocked me out.",
+      "speaker": "Ye",
+      "context": "Drink Champs podcast, 2022"
+    },
+    {
+      "id": 46,
+      "quote": "We will root out the communists, Marxists, fascists, and the radical left thugs that live like vermin within the confines of our country.",
+      "speaker": "Donald Trump",
+      "context": "Veterans Day rally, 2023"
+    },
+    {
+      "id": 47,
+      "quote": "The leader of genius must have the ability to make different opponents appear as if they belonged to one category.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 48,
+      "quote": "Society has put up so many boundaries... that it's almost impossible to get a pure thought out.",
+      "speaker": "Ye",
+      "context": "BBC Radio 1 Interview, 2013"
+    },
+    {
+      "id": 49,
+      "quote": "Jews have to get their act together and appreciate what they have in Israel - Before it is too late!",
+      "speaker": "Donald Trump",
+      "context": "Truth Social post, 2022"
+    },
+    {
+      "id": 50,
+      "quote": "Any violence which does not spring from a firm, spiritual base, will be wavering and uncertain.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 51,
+      "quote": "I am a proud non-reader of books.",
+      "speaker": "Donald Trump",
+      "context": "Various 2024 rallies"
+    },
+    {
+      "id": 52,
+      "quote": "The late, great Hannibal Lecter. He is a wonderful man. He oftentimes would have a friend for dinner.",
+      "speaker": "Donald Trump",
+      "context": "Fundraising dinner, 2019"
+    },
+    {
+      "id": 53,
+      "quote": "I know that fewer people are won over by the written word than by the spoken word.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 54,
+      "quote": "I am the new Moses.",
+      "speaker": "Ye",
+      "context": "Leaked SNL audio, 2016"
+    },
+    {
+      "id": 55,
+      "quote": "If you have a windmill anywhere near your house... the noise causes cancer.",
+      "speaker": "Donald Trump",
+      "context": "New York Post interview, 2011"
+    },
+    {
+      "id": 56,
+      "quote": "As soon as one's own propaganda admits even a glimmer of right on the other side, the foundation for doubt... has been laid.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 57,
+      "quote": "I am fifty percent more influential than Stanley Kubrick, Apostle Paul, Pablo Picasso... and Escobar.",
+      "speaker": "Ye",
+      "context": "Cannes Lions festival, 2014"
+    },
+    {
+      "id": 58,
+      "quote": "My fingers are long and beautiful, as, it has been well documented, are various other parts of my body.",
+      "speaker": "Donald Trump",
+      "context": "Playboy magazine interview, 1990"
+    },
+    {
+      "id": 59,
+      "quote": "The art of reading and studying consists in remembering the essentials and forgetting what is not essential.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 60,
+      "quote": "I'm like a vessel, and God has chosen me to be the voice and the connector.",
+      "speaker": "Ye",
+      "context": "Oxford University address, 2015"
+    },
+    {
+      "id": 61,
+      "quote": "I think if this country gets any kinder or gentler, it's literally going to cease to exist.",
+      "speaker": "Donald Trump",
+      "context": "Playboy magazine interview, 1990"
+    },
+    {
+      "id": 62,
+      "quote": "I believe today that my conduct is in accordance with the will of the Almighty Creator.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 63,
+      "quote": "We have the resources as a civilization to find a utopia, but we're led by the most greedy and the least noble.",
+      "speaker": "Ye",
+      "context": "Oxford University address, 2015"
+    },
+    {
+      "id": 64,
+      "quote": "You know what uranium is, right? It's this thing called nuclear weapons. And other things.",
+      "speaker": "Donald Trump",
+      "context": "Press conference, 2017"
+    },
+    {
+      "id": 65,
+      "quote": "It is always more difficult to fight against faith than against knowledge.",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 66,
+      "quote": "I am so credible and so influential and so relevant that I will change things.",
+      "speaker": "Ye",
+      "context": "BBC Radio 1 Interview, 2013"
+    },
+    {
+      "id": 67,
+      "quote": "My strongest asset, maybe by far, is my temperament. I have a winning temperament.",
+      "speaker": "Donald Trump",
+      "context": "MSNBC interview, 2016"
+    },
+    {
+      "id": 68,
+      "quote": "All great movements are popular movements. They are the volcanic eruptions of human passions...",
+      "speaker": "Adolf Hitler",
+      "context": "Mein Kampf, 1925"
+    },
+    {
+      "id": 69,
+      "quote": "I'm doing pretty good as far as geniuses go.",
+      "speaker": "Ye",
+      "context": "Various casual interviews"
+    },
+    {
+      "id": 70,
+      "quote": "I'm speaking with myself, number one, because I have a very good brain and I've said a lot of things.",
+      "speaker": "Donald Trump",
+      "context": "Press interview, 2017"
     }
   ]
 }

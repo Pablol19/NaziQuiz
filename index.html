@@ -28,16 +28,16 @@
   <main>
     <section class="hero">
       <div class="hero-copy">
-        <p class="kicker">Daily Match • Streak System • Competitive Board</p>
-        <h1>Juega una partida al dia, protege tu racha y sube en el ranking.</h1>
-        <p class="lead">Cada dia hay un set nuevo de frases. Tienes una oportunidad oficial para sumar puntos y mantener tu streak.</p>
+        <p class="kicker">Daily Match • Ranking Live • Streak Pressure</p>
+        <h1>Un quiz al dia. Sube posiciones. No dejes caer tu racha.</h1>
+        <p class="lead">Tienes una sola partida oficial por dia. Gana puntos, desbloquea recompensas y compite por entrar al top del dia.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#daily">Jugar hoy</a>
-          <a class="btn btn-outline" href="#history">Ver mis dias anteriores</a>
+          <a class="btn btn-primary" href="#daily">Jugar ahora</a>
         </div>
         <div class="hero-metrics">
           <span class="metric-pill">Jugadores hoy: <strong id="players-today">-</strong></span>
-          <span class="metric-pill">Reset en <strong id="reset-timer">--:--:--</strong></span>
+          <span class="metric-pill metric-risk">Tu racha se reinicia en <strong id="reset-timer">--:--:--</strong></span>
+          <span id="return-prompt" class="metric-pill">Hoy puedes subir posiciones en el ranking.</span>
         </div>
       </div>
       <div class="hero-panel">
@@ -57,6 +57,14 @@
           <p>Posicion estimada</p>
           <strong id="stat-rank">--</strong>
         </article>
+        <article class="stat-card">
+          <p>Percentil hoy</p>
+          <strong id="stat-percentile">--</strong>
+        </article>
+        <article class="stat-card">
+          <p>Escudo mensual</p>
+          <strong id="stat-shield">Disponible</strong>
+        </article>
       </div>
     </section>
 
@@ -66,17 +74,28 @@
           <p class="panel-kicker">Partida oficial del dia</p>
           <h2 id="daily-title">Daily Match</h2>
           <p id="daily-date" class="panel-sub">Fecha: -</p>
+          <div id="quiz-selector" class="quiz-segmented" role="tablist" aria-label="Seleccionar quiz">
+            <button type="button" class="quiz-tab" data-quiz="classic">Trump vs Hitler vs Ye</button>
+            <button type="button" class="quiz-tab" data-quiz="tye">Trump vs Elon vs Ye</button>
+          </div>
         </div>
         <div id="daily-status" class="daily-status"></div>
       </div>
+      <div class="insight-grid">
+        <article id="goal-card" class="insight-card"></article>
+        <article id="streak-card" class="insight-card"></article>
+        <article id="next-reward" class="insight-card"></article>
+      </div>
       <div id="daily-game" class="daily-game" aria-live="polite"></div>
+      <div id="comeback-prompt" class="comeback-prompt" aria-live="polite"></div>
     </section>
 
     <section id="ranking" class="panel split">
       <article class="module">
         <div class="module-head">
           <h3>Ranking global de hoy</h3>
-          <p>Preview visual para modo competitivo diario.</p>
+          <p>Compites contra jugadores simulados del dia. Tu posicion y percentil se actualizan al terminar.</p>
+          <span id="percentile-chip" class="percentile-chip">Percentil: --</span>
         </div>
         <div class="table-wrap">
           <table class="leaderboard" aria-label="Ranking diario">
@@ -95,9 +114,11 @@
 
       <article id="history" class="module">
         <div class="module-head">
-          <h3>Log de dias anteriores</h3>
-          <p>Tus resultados recientes para seguir tu progreso.</p>
+          <h3>Progreso y logros</h3>
+          <p>Consistencia de 14 dias y ultimos hitos desbloqueados.</p>
         </div>
+        <div id="consistency-heatmap" class="consistency-heatmap" aria-label="Calendario de consistencia"></div>
+        <div id="achievements" class="achievements"></div>
         <ul id="history-list" class="history-list"></ul>
       </article>
     </section>

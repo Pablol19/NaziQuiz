@@ -1,0 +1,426 @@
+{
+  "title": "Who said it? Trump, Elon, or Ye",
+  "language": "English",
+  "questions": [
+    {
+      "id": 1,
+      "quote": "I know more about manufacturing than anyone currently alive on earth.",
+      "speaker": "Elon Musk",
+      "context": "Interview with Chris Anderson at TED, 2022"
+    },
+    {
+      "id": 2,
+      "quote": "We have the resources as a civilization to find a utopia, but we're led by the most greedy and the least noble.",
+      "speaker": "Ye",
+      "context": "Oxford Guild Society address, 2015"
+    },
+    {
+      "id": 3,
+      "quote": "Nobody knows more about technology than me.",
+      "speaker": "Donald Trump",
+      "context": "Campaign-rally claim"
+    },
+    {
+      "id": 4,
+      "quote": "If I die under mysterious circumstances, it's been nice knowin ya.",
+      "speaker": "Elon Musk",
+      "context": "Tweet, May 2022"
+    },
+    {
+      "id": 5,
+      "quote": "I feel like I'm too busy writing history to read it.",
+      "speaker": "Ye",
+      "context": "Reuters interview, 2009"
+    },
+    {
+      "id": 6,
+      "quote": "The woke mind virus is either defeated or nothing else matters.",
+      "speaker": "Elon Musk",
+      "context": "Tweeted repeatedly since 2022"
+    },
+    {
+      "id": 7,
+      "quote": "I alone can fix it.",
+      "speaker": "Donald Trump",
+      "context": "RNC acceptance speech, 2016"
+    },
+    {
+      "id": 8,
+      "quote": "There's a billion-to-one chance we're living in base reality.",
+      "speaker": "Elon Musk",
+      "context": "Code Conference simulation-theory remarks, 2016"
+    },
+    {
+      "id": 9,
+      "quote": "I am the chosen one.",
+      "speaker": "Donald Trump",
+      "context": "White House lawn remarks, 2019"
+    },
+    {
+      "id": 10,
+      "quote": "I am a god. I just told you who I thought I was. A god.",
+      "speaker": "Ye",
+      "context": "BBC Radio 1 / Zane Lowe interview, 2013"
+    },
+    {
+      "id": 11,
+      "quote": "I am an alien.",
+      "speaker": "Elon Musk",
+      "context": "Tweet, February 2021"
+    },
+    {
+      "id": 12,
+      "quote": "All I know about magnets is this, give me a glass of water, let me drop it on the magnets, that's the end of the magnets.",
+      "speaker": "Donald Trump",
+      "context": "Iowa campaign rally, 2024"
+    },
+    {
+      "id": 13,
+      "quote": "For me to say I wasn't a genius, I would just be lying to you and to myself.",
+      "speaker": "Ye",
+      "context": "Jimmy Kimmel Live!, 2013"
+    },
+    {
+      "id": 14,
+      "quote": "Pronouns suck.",
+      "speaker": "Elon Musk",
+      "context": "Tweet, July 2020"
+    },
+    {
+      "id": 15,
+      "quote": "I'm a bit sleepy tonight but when I wake up I'm going death con 3 On JEWISH PEOPLE.",
+      "speaker": "Ye",
+      "context": "Tweet, October 2022"
+    },
+    {
+      "id": 16,
+      "quote": "My mind is a storm... I don't think most people would want to be me.",
+      "speaker": "Elon Musk",
+      "context": "Joe Rogan Experience, 2023"
+    },
+    {
+      "id": 17,
+      "quote": "I'm a very smart person. I don't have to be told the same thing in the same words every single day.",
+      "speaker": "Donald Trump",
+      "context": "Fox News Sunday, 2016"
+    },
+    {
+      "id": 18,
+      "quote": "Society has put up so many boundaries... that it's almost impossible to get a pure thought out.",
+      "speaker": "Ye",
+      "context": "BBC Radio 1 interview, 2013"
+    },
+    {
+      "id": 19,
+      "quote": "I think apologizing's a great thing, but you have to be wrong.",
+      "speaker": "Donald Trump",
+      "context": "The Tonight Show, 2015"
+    },
+    {
+      "id": 20,
+      "quote": "I play to people's fantasies... That's why a little hyperbole never hurts.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal, 1987"
+    },
+    {
+      "id": 21,
+      "quote": "I am the new Moses.",
+      "speaker": "Ye",
+      "context": "Tweet, September 2020"
+    },
+    {
+      "id": 22,
+      "quote": "I'm doing pretty good as far as geniuses go.",
+      "speaker": "Ye",
+      "context": "Interview quote"
+    },
+    {
+      "id": 23,
+      "quote": "You know what uranium is, right? It's this thing called nuclear weapons. And other things.",
+      "speaker": "Donald Trump",
+      "context": "Press conference, 2017"
+    },
+    {
+      "id": 24,
+      "quote": "I think it is possible for ordinary people to choose to be extraordinary.",
+      "speaker": "Elon Musk",
+      "context": "Interview, 2012"
+    },
+    {
+      "id": 25,
+      "quote": "My ego is my trick to keep me sane.",
+      "speaker": "Ye",
+      "context": "Interview quote"
+    },
+    {
+      "id": 26,
+      "quote": "Nobody has better respect for intelligence than I do.",
+      "speaker": "Donald Trump",
+      "context": "Campaign/interview line"
+    },
+    {
+      "id": 27,
+      "quote": "Some people don't like change, but you need to embrace change if the alternative is disaster.",
+      "speaker": "Elon Musk",
+      "context": "Quote about technological disruption, 2014"
+    },
+    {
+      "id": 28,
+      "quote": "I actually can't be Anti Semitic because black people are actually Jew also.",
+      "speaker": "Ye",
+      "context": "Tweet, October 2022"
+    },
+    {
+      "id": 29,
+      "quote": "My fingers are long and beautiful, as, it has been well documented, are various other parts of my body.",
+      "speaker": "Donald Trump",
+      "context": "New York Post quote"
+    },
+    {
+      "id": 30,
+      "quote": "I have a gut, and my gut tells me more sometimes than anybody else's brain can ever tell me.",
+      "speaker": "Donald Trump",
+      "context": "Interview, 2018"
+    },
+    {
+      "id": 31,
+      "quote": "Who controls the memes, controls the Universe.",
+      "speaker": "Elon Musk",
+      "context": "Tweet, June 2020"
+    },
+    {
+      "id": 32,
+      "quote": "Part of the beauty of me is that I am very rich.",
+      "speaker": "Donald Trump",
+      "context": "Good Morning America interview, 2011"
+    },
+    {
+      "id": 33,
+      "quote": "I realize that my place and position in history is that I will go down as the voice of this generation.",
+      "speaker": "Ye",
+      "context": "Early-career interview boast"
+    },
+    {
+      "id": 34,
+      "quote": "Sometimes people write novels and they just be so wordy and so self-absorbed.",
+      "speaker": "Ye",
+      "context": "Reuters interview, 2009"
+    },
+    {
+      "id": 35,
+      "quote": "I'm nauseatingly pro-human.",
+      "speaker": "Elon Musk",
+      "context": "Interview quote on AI/human future"
+    },
+    {
+      "id": 36,
+      "quote": "I think the only difference between me and the other candidates is that I'm more honest and my women are more beautiful.",
+      "speaker": "Donald Trump",
+      "context": "Interview about Reform Party run, 1999"
+    },
+    {
+      "id": 37,
+      "quote": "My mentality is that of a samurai. I would rather commit seppuku than fail.",
+      "speaker": "Elon Musk",
+      "context": "Early-company stress era quote"
+    },
+    {
+      "id": 38,
+      "quote": "I try to learn from the past, but I plan for the future by focusing exclusively on the present.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal, 1987"
+    },
+    {
+      "id": 39,
+      "quote": "You can't look at a glass half full or empty if it's overflowing.",
+      "speaker": "Ye",
+      "context": "Tweet, 2010"
+    },
+    {
+      "id": 40,
+      "quote": "If you get up in the morning and think the future is going to be better, it is a bright day. Otherwise, it's not.",
+      "speaker": "Elon Musk",
+      "context": "Speech/interview, 2017"
+    },
+    {
+      "id": 41,
+      "quote": "I don't hire a lot of number-crunchers, and I don't trust fancy marketing surveys.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal"
+    },
+    {
+      "id": 42,
+      "quote": "I'm not comfortable with comfort.",
+      "speaker": "Ye",
+      "context": "Interview quote"
+    },
+    {
+      "id": 43,
+      "quote": "I am a free speech absolutist.",
+      "speaker": "Elon Musk",
+      "context": "Statement during Twitter acquisition period, 2022"
+    },
+    {
+      "id": 44,
+      "quote": "Show me someone without an ego, and I'll show you a loser.",
+      "speaker": "Donald Trump",
+      "context": "Personal mantra"
+    },
+    {
+      "id": 45,
+      "quote": "I operate on the physics approach to analysis.",
+      "speaker": "Elon Musk",
+      "context": "TED interview on first-principles reasoning"
+    },
+    {
+      "id": 46,
+      "quote": "I'm going to be one of the biggest real estate developers of all time.",
+      "speaker": "Ye",
+      "context": "Zane Lowe interview, 2019"
+    },
+    {
+      "id": 47,
+      "quote": "Sometimes by losing a battle you find a new way to win the war.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal"
+    },
+    {
+      "id": 48,
+      "quote": "I don't spend my time pontificating about high-concept things; I spend my time solving engineering and manufacturing problems.",
+      "speaker": "Elon Musk",
+      "context": "Earnings call quote"
+    },
+    {
+      "id": 49,
+      "quote": "Just stop lying about shit. Just stop lying.",
+      "speaker": "Ye",
+      "context": "Social media rant"
+    },
+    {
+      "id": 50,
+      "quote": "I like thinking big. If you're going to be thinking anything, you might as well think big.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal"
+    },
+    {
+      "id": 51,
+      "quote": "If you need inspiring words, don't do it.",
+      "speaker": "Elon Musk",
+      "context": "Advice to entrepreneurs"
+    },
+    {
+      "id": 52,
+      "quote": "I am the glitch.",
+      "speaker": "Ye",
+      "context": "Tweet, 2020"
+    },
+    {
+      "id": 53,
+      "quote": "I keep forgetting that you're still alive.",
+      "speaker": "Elon Musk",
+      "context": "Reply tweet to Bernie Sanders, 2021"
+    },
+    {
+      "id": 54,
+      "quote": "Anyone who thinks my story is anywhere near over is sadly mistaken.",
+      "speaker": "Donald Trump",
+      "context": "Recurring public line"
+    },
+    {
+      "id": 55,
+      "quote": "People always say you can't please everybody. I think that's a cop-out. Why not attempt it?",
+      "speaker": "Ye",
+      "context": "Interview quote"
+    },
+    {
+      "id": 56,
+      "quote": "To our knowledge, we are the only life that exists.",
+      "speaker": "Elon Musk",
+      "context": "Multi-planetary argument in interviews"
+    },
+    {
+      "id": 57,
+      "quote": "I think I am actually humble. I think I'm much more humble than you would understand.",
+      "speaker": "Donald Trump",
+      "context": "60 Minutes interview, 2015"
+    },
+    {
+      "id": 58,
+      "quote": "I'm ten years ahead of your mentality.",
+      "speaker": "Ye",
+      "context": "Sway in the Morning interview, 2013"
+    },
+    {
+      "id": 59,
+      "quote": "It's always good to be underestimated.",
+      "speaker": "Donald Trump",
+      "context": "The Art of the Deal"
+    },
+    {
+      "id": 60,
+      "quote": "Patience is a virtue, and I'm learning patience. It's a tough lesson.",
+      "speaker": "Elon Musk",
+      "context": "Interview about production delays"
+    },
+    {
+      "id": 61,
+      "quote": "I am the least racist person you have ever interviewed.",
+      "speaker": "Donald Trump",
+      "context": "Press interview line"
+    },
+    {
+      "id": 62,
+      "quote": "I leave my emojis bart simpson color.",
+      "speaker": "Ye",
+      "context": "Tweet, 2018"
+    },
+    {
+      "id": 63,
+      "quote": "I could either watch it happen or be a part of it.",
+      "speaker": "Elon Musk",
+      "context": "Reason for entering tech/aerospace"
+    },
+    {
+      "id": 64,
+      "quote": "My biggest mistake is probably weighing too much on someone's talent and not someone's personality.",
+      "speaker": "Elon Musk",
+      "context": "Hiring-practice reflection"
+    },
+    {
+      "id": 65,
+      "quote": "Every time somebody said I made a mistake, they do the polls and my numbers go up.",
+      "speaker": "Donald Trump",
+      "context": "Campaign boast"
+    },
+    {
+      "id": 66,
+      "quote": "I think most people can learn a lot more than they think they can.",
+      "speaker": "Elon Musk",
+      "context": "Interview quote"
+    },
+    {
+      "id": 67,
+      "quote": "God is using me to show off.",
+      "speaker": "Ye",
+      "context": "Lakewood Church speech, 2019"
+    },
+    {
+      "id": 68,
+      "quote": "When something is important enough, you do it even if the odds are not in your favor.",
+      "speaker": "Elon Musk",
+      "context": "Interview quote on startup risk"
+    },
+    {
+      "id": 69,
+      "quote": "My Twitter has become so powerful that I can actually make my enemies tell the truth.",
+      "speaker": "Donald Trump",
+      "context": "Tweet, 2012"
+    },
+    {
+      "id": 70,
+      "quote": "I will be the leader of a company that ends up being worth billions of dollars, because I got the answers.",
+      "speaker": "Ye",
+      "context": "Sway interview prediction, 2013"
+    }
+  ]
+}
