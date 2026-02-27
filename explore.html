@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>GuessTheSpeaker | Explorar Modos</title>
-    <meta name="description"
-        content="Explora diferentes modos de quiz en GuessTheSpeaker. Practica con distintas temáticas y desbloquea nuevos retos." />
+    <meta name="description" content="Explora diferentes modos de quiz en GuessTheSpeaker." />
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="explore.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,25 +16,76 @@
 </head>
 
 <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
 
-    <header class="ex-header">
-        <div class="ex-header-inner">
-            <a class="ex-brand" href="index.html">
-                <span class="ex-brand-mark">GS</span>
-                <span class="ex-brand-name">GuessTheSpeaker</span>
-            </a>
-            <div class="ex-header-actions">
-                <select id="ex-theme-select" class="ex-theme-select" aria-label="Tema visual">
-                    <option value="light">Claro</option>
-                    <option value="soft-night">Suave</option>
-                    <option value="sunset">Atardecer</option>
-                    <option value="mint">Menta</option>
-                    <option value="midnight">Noche</option>
-                </select>
-                <a class="ex-back" href="index.html">← Volver a la partida</a>
+    <header class="topbar">
+        <a class="brand" href="index.html#daily">
+            <span class="brand-mark">GS</span>
+            <span class="brand-name">GuessTheSpeaker</span>
+        </a>
+        <nav class="nav">
+            <a href="index.html#daily">Partida diaria</a>
+            <a href="estadisticas.html">Estadisticas</a>
+            <a href="explore.html">Explorar</a>
+        </nav>
+        <div class="topbar-actions">
+            <button id="social-toggle" class="btn-social-pill" type="button">Social</button>
+            <div class="profile-menu-wrap">
+                <button id="profile-avatar-btn" class="profile-pill-btn" type="button" aria-expanded="false"
+                    aria-haspopup="true">
+                    <span id="header-tier-icon" class="tier-icon" aria-hidden="true">🥉</span>
+                    <svg class="avatar-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true">
+                        <circle cx="18" cy="18" r="18" fill="url(#av-grad)" />
+                        <circle cx="18" cy="14" r="6" fill="#fff" opacity="0.85" />
+                        <path d="M6 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff" opacity="0.85" />
+                        <defs>
+                            <linearGradient id="av-grad" x1="0" y1="0" x2="36" y2="36">
+                                <stop stop-color="#e2e8f0" />
+                                <stop offset="1" stop-color="#94a3b8" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span id="header-profile-name" class="profile-name">You</span>
+                </button>
+                <div id="profile-dropdown" class="profile-dropdown settings-menu" aria-hidden="true">
+                    <div class="pd-header" style="justify-content: center; padding: 12px;">
+                        <h4 style="margin: 0; color: var(--ink); font-size: 1.1rem;">Ajustes</h4>
+                    </div>
+                    <hr class="pd-divider" />
+                    <label class="pd-row">
+                        <span class="pd-row-label">Tema</span>
+                        <select id="top-theme-select" class="pd-theme-select" aria-label="Tema visual"></select>
+                    </label>
+                    <hr class="pd-divider" />
+                    <div class="pd-row-vert" style="padding: 10px 16px;">
+                        <label for="profile-name-input-menu" class="pd-row-label"
+                            style="display: block; margin-bottom: 8px;">Nombre de jugador</label>
+                        <div class="profile-edit-row" style="display: flex; gap: 8px;">
+                            <input id="profile-name-input-menu" type="text" maxlength="18" placeholder="Tu nombre"
+                                style="flex: 1; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); font-size: 0.9rem;" />
+                            <button id="profile-save-menu" class="btn btn-outline" type="button"
+                                style="padding: 6px 12px; font-size: 0.9rem;">Guardar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
+
+    <aside id="social-drawer" class="social-drawer" aria-hidden="true">
+        <div class="social-drawer-head">
+            <h3>Social</h3>
+            <button id="social-close" class="btn btn-outline" type="button">Cerrar</button>
+        </div>
+        <div class="profile-row">
+            <input id="friend-name-input" type="text" maxlength="18" placeholder="Nombre de amigo" />
+            <button id="friend-add" class="btn btn-outline" type="button">Agregar</button>
+        </div>
+        <ul id="friends-list" class="history-list"></ul>
+    </aside>
+    <div id="social-backdrop" class="social-backdrop" hidden></div>
 
     <section class="ex-hero">
         <h1>Explorar Modos</h1>
@@ -45,147 +96,19 @@
         <!-- Rendered by JS -->
     </main>
 
-    <footer class="ex-footer">
+    <footer class="footer">
         <p>© 2026 GuessTheSpeaker</p>
     </footer>
 
-    <script>
-        const THEME_KEY = "gts_profile_v4:theme";
-        const THEME_IDS = new Set(["light", "soft-night", "sunset", "mint", "midnight"]);
-
-        function applySavedTheme() {
-            const storedTheme = localStorage.getItem(THEME_KEY);
-            const nextTheme = THEME_IDS.has(storedTheme) ? storedTheme : "light";
-            document.body.setAttribute("data-theme", nextTheme);
+    <immersive id="quiz-data">
+        {
+        "title": "Fallback",
+        "language": "English",
+        "questions": [{"id": 1, "quote": "I alone can fix it.", "speaker": "Donald Trump", "context": "Fallback"}]
         }
+    </immersive>
 
-        function initThemeControl() {
-            const select = document.getElementById("ex-theme-select");
-            if (!select) return;
-            const activeTheme = document.body.getAttribute("data-theme") || "light";
-            select.value = THEME_IDS.has(activeTheme) ? activeTheme : "light";
-            select.addEventListener("change", () => {
-                const nextTheme = THEME_IDS.has(select.value) ? select.value : "light";
-                document.body.setAttribute("data-theme", nextTheme);
-                localStorage.setItem(THEME_KEY, nextTheme);
-            });
-        }
-
-        /* ── Shared data (mirrors script.js catalog) ── */
-        const QUIZ_CATALOG = {
-            categories: [
-                {
-                    id: "politics",
-                    name: "Pol\u00edtica & Poder",
-                    icon: "",
-                    quizzes: [
-                        { id: "classic", label: "Trump vs Hitler vs Ye", file: "question-bank.json", free: true },
-                        { id: "tye", label: "Trump vs Elon vs Ye", file: "question-bank-trump-elon-ye.json", free: true }
-                    ]
-                },
-                {
-                    id: "tech",
-                    name: "Tech Titans",
-                    icon: "",
-                    quizzes: [
-                        { id: "ejz", label: "Elon vs Jobs vs Zuck", file: "question-bank-elon-jobs-zuck.json", free: true }
-                    ]
-                }
-            ]
-        };
-
-        function hashString(value) {
-            let hash = 2166136261;
-            for (let i = 0; i < value.length; i++) {
-                hash ^= value.charCodeAt(i);
-                hash = Math.imul(hash, 16777619);
-            }
-            return hash >>> 0;
-        }
-
-        function toDateKey(date) {
-            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-        }
-
-        function getDailyQuizId() {
-            const allIds = [];
-            QUIZ_CATALOG.categories.forEach(c => c.quizzes.forEach(q => allIds.push(q.id)));
-            const hash = hashString(`daily-quiz-rotation:${toDateKey(new Date())}`);
-            return allIds[hash % allIds.length];
-        }
-
-        function getPlayerLevel() {
-            try {
-                const allIds = [];
-                QUIZ_CATALOG.categories.forEach(c => c.quizzes.forEach(q => allIds.push(q.id)));
-                // Check all quiz profiles for max XP
-                let maxXp = 0;
-                allIds.forEach(id => {
-                    try {
-                        const raw = localStorage.getItem(`gts_profile_v4:${id}`);
-                        if (raw) {
-                            const p = JSON.parse(raw);
-                            if ((p.xp || 0) > maxXp) maxXp = p.xp;
-                        }
-                    } catch (e) { /* skip */ }
-                });
-                return Math.floor(maxXp / 100) + 1;
-            } catch (e) { return 1; }
-        }
-
-        function renderExplore() {
-            const grid = document.getElementById("explore-grid");
-            if (!grid) return;
-
-            const dailyId = getDailyQuizId();
-            const playerLevel = getPlayerLevel();
-            let globalIndex = 0;
-
-            grid.innerHTML = QUIZ_CATALOG.categories.map(cat => {
-                const cards = cat.quizzes.map(q => {
-                    globalIndex++;
-                    const unlocked = q.free || playerLevel >= (q.unlockLevel || 999);
-                    const isDaily = q.id === dailyId;
-                    const lockTag = q.free ? "GRATIS" : (unlocked ? "DESBLOQUEADO" : `🔒 Lv.${q.unlockLevel || "?"}`);
-                    const tagClass = q.free ? "tag-free" : (unlocked ? "tag-unlocked" : "tag-locked");
-
-                    return `
-            <button class="ex-card${unlocked ? "" : " is-locked"}${isDaily ? " is-daily" : ""}"
-                    data-quiz="${q.id}" data-category="${cat.id}"
-                    ${unlocked ? "" : "disabled"} type="button">
-              <div class="card-art"></div>
-              ${isDaily ? '<span class="card-daily-badge">HOY</span>' : ""}
-              <span class="card-number">${globalIndex}</span>
-              <div class="card-content">
-                <span class="card-tag ${tagClass}">${lockTag}</span>
-                <span class="card-label">${q.label}</span>
-              </div>
-            </button>
-          `;
-                }).join("");
-
-                return `
-          <div class="ex-category">
-            <h3 class="ex-cat-title">${cat.name}</h3>
-            <div class="ex-row">${cards}</div>
-          </div>
-        `;
-            }).join("");
-
-            // Click handler: navigate to main page with quiz param for practice
-            grid.querySelectorAll(".ex-card:not(.is-locked)").forEach(card => {
-                card.addEventListener("click", () => {
-                    const quizId = card.dataset.quiz;
-                    if (quizId) {
-                        window.location.href = `index.html?practice=${quizId}`;
-                    }
-                });
-            });
-        }
-        applySavedTheme();
-        initThemeControl();
-        renderExplore();
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

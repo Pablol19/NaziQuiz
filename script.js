@@ -1943,35 +1943,48 @@ function renderExplorePanel() {
   if (!exploreGrid) return;
 
   const playerLevel = getLevelInfo(appState.profile.xp).level;
+  let globalIndex = 0;
 
   exploreGrid.innerHTML = QUIZ_CATALOG.categories.map(cat => {
     const cards = cat.quizzes.map(q => {
+      globalIndex++;
       const unlocked = isQuizUnlocked(q, playerLevel);
       const isDaily = q.id === appState.quizId;
       const lockTag = q.free ? 'GRATIS' : (unlocked ? 'DESBLOQUEADO' : `\uD83D\uDD12 Lv.${q.unlockLevel || '?'}`);
       const tagClass = q.free ? 'tag-free' : (unlocked ? 'tag-unlocked' : 'tag-locked');
       return `
-        <button class="explore-card${unlocked ? '' : ' is-locked'}${isDaily ? ' is-daily' : ''}" 
-                data-quiz="${q.id}" ${unlocked ? '' : 'disabled'} type="button">
-          <span class="card-tag ${tagClass}">${lockTag}</span>
+        <button class="ex-card${unlocked ? '' : ' is-locked'}${isDaily ? ' is-daily' : ''}" 
+                data-quiz="${q.id}" data-category="${cat.id}" ${unlocked ? '' : 'disabled'} type="button">
+          <div class="card-art"></div>
           ${isDaily ? '<span class="card-daily-badge">HOY</span>' : ''}
-          <span class="card-label">${q.label}</span>
+          <span class="card-number">${globalIndex}</span>
+          <div class="card-content">
+            <span class="card-tag ${tagClass}">${lockTag}</span>
+            <span class="card-label">${q.label}</span>
+          </div>
         </button>
       `;
     }).join('');
 
     return `
-      <div class="explore-category">
-        <h3 class="explore-cat-title">${cat.name}</h3>
-        <div class="explore-row">${cards}</div>
+      <div class="ex-category">
+        <h3 class="ex-cat-title">${cat.name}</h3>
+        <div class="ex-row">${cards}</div>
       </div>
     `;
   }).join('');
 
-  exploreGrid.querySelectorAll('.explore-card:not(.is-locked)').forEach(card => {
+  const isExplorePage = window.location.pathname.includes('explore.html');
+
+  exploreGrid.querySelectorAll('.ex-card:not(.is-locked)').forEach(card => {
     card.addEventListener('click', () => {
       const quizId = card.dataset.quiz;
-      if (quizId) startExploreMatch(quizId);
+      if (!quizId) return;
+      if (isExplorePage) {
+        window.location.href = `index.html?practice=${quizId}`;
+      } else {
+        startExploreMatch(quizId);
+      }
     });
   });
 }
@@ -2344,6 +2357,7 @@ async function init() {
   renderHistory();
   renderWeeklyLeague();
   renderHomePrimarySection(false);
+  renderExplorePanel();
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
