@@ -142,25 +142,71 @@ immersive {
   position: relative;
 }
 
-.profile-avatar-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+.profile-pill-btn {
+  background: #ffffff;
   border: 2px solid var(--line);
-  background: transparent;
+  border-radius: 999px;
+  padding: 6px 16px 6px 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.profile-pill-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.profile-pill-btn:active {
+  transform: scale(0.97);
+}
+
+.profile-pill-btn .tier-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 300ms ease, box-shadow 300ms ease, transform 200ms ease;
-  padding: 0;
-  overflow: hidden;
+  font-size: 1rem;
+  color: #fff;
+  background: var(--line);
+}
+
+.profile-pill-btn .profile-name {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 1.05rem;
+}
+
+.btn-social-pill {
+  background: #e0e7ff;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-weight: 500;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease;
+}
+
+.btn-social-pill:hover {
+  background: #c7d2fe;
+  transform: scale(1.05);
+}
+
+.settings-menu {
+  width: 280px;
 }
 
 .avatar-svg {
-  width: 100%;
-  height: 100%;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  background: #f1f5f9;
 }
 
 .pd-avatar-svg {
@@ -170,39 +216,45 @@ immersive {
   flex-shrink: 0;
 }
 
-.profile-avatar-btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 4px 14px rgba(18, 24, 38, 0.1);
-}
-
-.profile-avatar-btn:active {
-  transform: scale(0.96);
-}
-
-/* League tier borders for avatar */
-.profile-avatar-btn.tier-bronze {
+/* League tier borders & colors for profile pill */
+.profile-pill-btn.tier-bronze {
   border-color: #cd7f32;
-  box-shadow: 0 0 8px rgba(205, 127, 50, 0.3);
 }
 
-.profile-avatar-btn.tier-silver {
-  border-color: #a8a9ad;
-  box-shadow: 0 0 10px rgba(168, 169, 173, 0.35);
+.profile-pill-btn.tier-bronze .tier-icon {
+  background: linear-gradient(135deg, #cd7f32, #8b5a2b);
 }
 
-.profile-avatar-btn.tier-gold {
-  border-color: #ffd700;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+.profile-pill-btn.tier-silver {
+  border-color: #94a3b8;
 }
 
-.profile-avatar-btn.tier-platinum {
-  border-color: #5ce1e6;
-  box-shadow: 0 0 14px rgba(92, 225, 230, 0.4);
+.profile-pill-btn.tier-silver .tier-icon {
+  background: linear-gradient(135deg, #cbd5e1, #64748b);
 }
 
-.profile-avatar-btn.tier-diamond {
-  border-color: #b9f2ff;
-  box-shadow: 0 0 18px rgba(185, 242, 255, 0.5);
+.profile-pill-btn.tier-gold {
+  border-color: #d97706;
+}
+
+.profile-pill-btn.tier-gold .tier-icon {
+  background: linear-gradient(135deg, #fbbf24, #b45309);
+}
+
+.profile-pill-btn.tier-platinum {
+  border-color: #10b981;
+}
+
+.profile-pill-btn.tier-platinum .tier-icon {
+  background: linear-gradient(135deg, #6ee7b7, #059669);
+}
+
+.profile-pill-btn.tier-diamond {
+  border-color: #8b5cf6;
+}
+
+.profile-pill-btn.tier-diamond .tier-icon {
+  background: linear-gradient(135deg, #c084fc, #4f46e5);
 }
 
 /* ── Profile Dropdown Menu ── */

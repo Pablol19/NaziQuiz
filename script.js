@@ -2107,40 +2107,47 @@ function initRankingControls() {
 }
 
 function initProfileControls() {
-  if (!profileNameInput || !profileSaveButton) return;
-  profileNameInput.value = appState.profile.displayName || "You";
-  profileSaveButton.addEventListener("click", () => {
-    const next = (profileNameInput.value || "").trim().slice(0, 18);
+  const nameInput = document.getElementById("profile-name-input-menu");
+  const saveBtn = document.getElementById("profile-save-menu");
+  if (!nameInput || !saveBtn) return;
+  nameInput.value = appState.profile.displayName || "You";
+  saveBtn.addEventListener("click", () => {
+    const next = (nameInput.value || "").trim().slice(0, 18);
     appState.profile.displayName = next || "You";
     saveProfile();
     renderProfileChip();
     rerenderCompetitiveViews();
-    profileSaveButton.textContent = "Guardado";
+    saveBtn.textContent = "Guardado";
     setTimeout(() => {
-      profileSaveButton.textContent = "Guardar";
+      saveBtn.textContent = "Guardar";
     }, 900);
   });
 }
 
 function renderProfileChip() {
   const name = appState.profile.displayName || "You";
-  if (profileNameChip) profileNameChip.textContent = name;
 
-  // Update dropdown level
-  const pdLevel = document.querySelector("#pd-level");
-  if (pdLevel) {
-    const li = getLevelInfo(appState.profile.xp);
-    pdLevel.textContent = `Lv. ${li.level}`;
-  }
+  const headerNameSpan = document.getElementById("header-profile-name");
+  if (headerNameSpan) headerNameSpan.textContent = name;
 
-  // League tier border on avatar button
+  // League tier border and icon on avatar button
   const avatarBtn = document.querySelector("#profile-avatar-btn");
+  const tierIconSpan = document.getElementById("header-tier-icon");
+
   if (avatarBtn) {
     const li = getLevelInfo(appState.profile.xp);
     const tier = getLeagueTier(li.level);
     avatarBtn.classList.remove("tier-bronze", "tier-silver", "tier-gold", "tier-platinum", "tier-diamond");
+
     if (tier && tier.cssClass) {
       avatarBtn.classList.add(tier.cssClass.replace('tier-', 'tier-'));
+      if (tierIconSpan) {
+        if (tier.cssClass.includes("bronze")) tierIconSpan.textContent = "🥉";
+        else if (tier.cssClass.includes("silver")) tierIconSpan.textContent = "🥈";
+        else if (tier.cssClass.includes("gold")) tierIconSpan.textContent = "🥇";
+        else if (tier.cssClass.includes("platinum")) tierIconSpan.textContent = "💠";
+        else if (tier.cssClass.includes("diamond")) tierIconSpan.textContent = "💎";
+      }
     }
   }
 }
@@ -2188,16 +2195,6 @@ function initProfileDropdown() {
       dropdown.setAttribute("aria-hidden", "true");
     }
   });
-
-  // Social from dropdown
-  const pdSocial = document.querySelector("#pd-social-btn");
-  if (pdSocial) {
-    pdSocial.addEventListener("click", () => {
-      dropdown.classList.remove("is-open");
-      avatarBtn.setAttribute("aria-expanded", "false");
-      openSocialDrawer();
-    });
-  }
 }
 
 function initTopThemeControl() {

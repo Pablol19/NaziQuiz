@@ -29,41 +29,28 @@
     </nav>
     <div class="topbar-actions">
       <button id="dev-reset-btn" class="btn btn-outline" type="button" title="Reiniciar partida diaria (Dev)"
-        style="padding: 6px 10px; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4);">🔄</button>
-      <button id="social-toggle" class="btn btn-outline" type="button">Social</button>
+        style="padding: 6px 10px; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4); display: none;">🔄</button>
+      <button id="social-toggle" class="btn-social-pill" type="button">Social</button>
       <div class="profile-menu-wrap">
-        <button id="profile-avatar-btn" class="profile-avatar-btn" type="button" aria-expanded="false"
+        <button id="profile-avatar-btn" class="profile-pill-btn" type="button" aria-expanded="false"
           aria-haspopup="true">
+          <span id="header-tier-icon" class="tier-icon" aria-hidden="true">🥉</span>
           <svg class="avatar-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="18" cy="18" r="18" fill="url(#av-grad)" />
             <circle cx="18" cy="14" r="6" fill="#fff" opacity="0.85" />
             <path d="M6 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff" opacity="0.85" />
             <defs>
               <linearGradient id="av-grad" x1="0" y1="0" x2="36" y2="36">
-                <stop stop-color="#667eea" />
-                <stop offset="1" stop-color="#764ba2" />
+                <stop stop-color="#e2e8f0" />
+                <stop offset="1" stop-color="#94a3b8" />
               </linearGradient>
             </defs>
           </svg>
+          <span id="header-profile-name" class="profile-name">You</span>
         </button>
-        <div id="profile-dropdown" class="profile-dropdown" aria-hidden="true">
-          <div class="pd-header">
-            <svg class="pd-avatar-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true">
-              <circle cx="18" cy="18" r="18" fill="url(#av-grad2)" />
-              <circle cx="18" cy="14" r="6" fill="#fff" opacity="0.85" />
-              <path d="M6 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff" opacity="0.85" />
-              <defs>
-                <linearGradient id="av-grad2" x1="0" y1="0" x2="36" y2="36">
-                  <stop stop-color="#667eea" />
-                  <stop offset="1" stop-color="#764ba2" />
-                </linearGradient>
-              </defs>
-            </svg>
-            <div class="pd-info">
-              <strong id="pd-name">You</strong>
-              <span id="pd-level" class="pd-level">Lv. 1</span>
-            </div>
+        <div id="profile-dropdown" class="profile-dropdown settings-menu" aria-hidden="true">
+          <div class="pd-header" style="justify-content: center; padding: 12px;">
+            <h4 style="margin: 0; color: var(--ink); font-size: 1.1rem;">Ajustes</h4>
           </div>
           <hr class="pd-divider" />
           <label class="pd-row">
@@ -71,8 +58,18 @@
             <select id="top-theme-select" class="pd-theme-select" aria-label="Tema visual"></select>
           </label>
           <hr class="pd-divider" />
+          <div class="pd-row-vert" style="padding: 10px 16px;">
+            <label for="profile-name-input-menu" class="pd-row-label" style="display: block; margin-bottom: 8px;">Nombre
+              de jugador</label>
+            <div class="profile-edit-row" style="display: flex; gap: 8px;">
+              <input id="profile-name-input-menu" type="text" maxlength="18" placeholder="Tu nombre"
+                style="flex: 1; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); font-size: 0.9rem;" />
+              <button id="profile-save-menu" class="btn btn-outline" type="button"
+                style="padding: 6px 12px; font-size: 0.9rem;">Guardar</button>
+            </div>
+          </div>
+          <hr class="pd-divider" />
           <a class="pd-row pd-link" href="estadisticas.html">📊 Estadísticas</a>
-          <button class="pd-row pd-link" id="pd-social-btn" type="button">👥 Social</button>
         </div>
       </div>
     </div>
@@ -88,13 +85,6 @@
       <button id="friend-add" class="btn btn-outline" type="button">Agregar</button>
     </div>
     <ul id="friends-list" class="history-list"></ul>
-    <hr />
-    <label for="profile-name-input">Nombre de jugador</label>
-    <div class="profile-row">
-      <input id="profile-name-input" type="text" maxlength="18" placeholder="Tu nombre" />
-      <button id="profile-save" class="btn btn-outline" type="button">Guardar</button>
-    </div>
-    <button id="avatar-pro" class="btn btn-outline" type="button" disabled>Cambiar avatar (Proximamente · Pro)</button>
   </aside>
   <div id="social-backdrop" class="social-backdrop" hidden></div>
 
