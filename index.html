@@ -78,81 +78,106 @@
     <section id="ranking" class="panel">
       <div class="module-head">
         <h3>Ranking</h3>
-        <p>Top 5 del dia en Global o Amigos.</p>
+        <p id="ranking-view-hint">Top 5 del dia en Global o Amigos.</p>
       </div>
-      <div class="hero-metrics">
-        <span class="metric-pill">Jugadores hoy: <strong id="players-today">-</strong></span>
-        <span class="metric-pill metric-risk">Tu racha se reinicia en <strong id="reset-timer">--:--:--</strong></span>
-        <span id="return-prompt" class="metric-pill">Ventana de subida abierta: hoy puedes escalar el ranking.</span>
+      <div id="ranking-view-mode" class="quiz-segmented" role="tablist" aria-label="Vista de ranking">
+        <button type="button" class="quiz-tab is-active" data-view="daily">Diario</button>
+        <button type="button" class="quiz-tab" data-view="weekly">Liga semanal</button>
       </div>
-      <div class="ranking-controls">
-        <div id="ranking-mode" class="quiz-segmented" role="tablist" aria-label="Modo de ranking">
-          <button type="button" class="quiz-tab is-active" data-mode="global">Global</button>
-          <button type="button" class="quiz-tab" data-mode="friends">Amigos</button>
+      <div id="ranking-daily-view">
+        <div class="hero-metrics">
+          <span class="metric-pill">Jugadores hoy: <strong id="players-today">-</strong></span>
+          <span class="metric-pill metric-risk">Tu racha se reinicia en <strong id="reset-timer">--:--:--</strong></span>
+          <span id="return-prompt" class="metric-pill">Ventana de subida abierta: hoy puedes escalar el ranking.</span>
         </div>
-        <div class="private-room">
-          <input id="room-code" type="text" maxlength="10" placeholder="Sala privada" />
-          <button id="apply-room" class="btn btn-outline" type="button">Aplicar</button>
-        </div>
-        <span id="percentile-chip" class="percentile-chip">Percentil: --</span>
-        <div class="ranking-search">
-          <input id="ranking-search-input" type="text" maxlength="24" placeholder="Buscar jugador..." />
-          <button id="ranking-search-btn" class="btn btn-outline" type="button">Buscar</button>
-        </div>
-      </div>
-      <p id="ranking-search-result" class="ranking-search-result">Busca un jugador para ver su posicion en este ranking.</p>
-      <div class="table-wrap">
-        <table class="leaderboard" aria-label="Ranking top 5">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Jugador</th>
-              <th>Aciertos</th>
-              <th>Tiempo</th>
-            </tr>
-          </thead>
-          <tbody id="leaderboard-body"></tbody>
-        </table>
-      </div>
-      <div class="hero-panel">
-        <article id="streak-stat-card" class="stat-card">
-          <p>Racha actual</p>
-          <strong id="stat-streak">0</strong>
-          <span id="streak-fire" class="streak-fire">Sin fuego</span>
-        </article>
-        <article class="stat-card">
-          <p>Mejor racha</p>
-          <strong id="stat-best-streak">0</strong>
-        </article>
-        <article class="stat-card">
-          <p>Precision total</p>
-          <strong id="stat-accuracy">0%</strong>
-        </article>
-        <article class="stat-card">
-          <p>Posicion estimada</p>
-          <strong id="stat-rank">--</strong>
-        </article>
-        <article class="stat-card">
-          <p>Percentil hoy</p>
-          <strong id="stat-percentile">--</strong>
-        </article>
-        <article class="stat-card">
-          <p>Escudo mensual</p>
-          <strong id="stat-shield">Disponible</strong>
-        </article>
-        <article class="stat-card">
-          <p>Nivel</p>
-          <strong id="stat-level">Lv.1</strong>
-          <span id="stat-xp" class="streak-fire">0/100 XP</span>
-          <div class="xp-meter">
-            <div id="xp-bar" class="xp-bar"></div>
+        <div class="ranking-controls">
+          <div id="ranking-mode" class="quiz-segmented" role="tablist" aria-label="Modo de ranking">
+            <button type="button" class="quiz-tab is-active" data-mode="global">Global</button>
+            <button type="button" class="quiz-tab" data-mode="friends">Amigos</button>
           </div>
-        </article>
-        <article class="stat-card">
-          <p>Delta ranking</p>
-          <strong id="stat-rank-delta">--</strong>
-        </article>
+          <div class="private-room">
+            <input id="room-code" type="text" maxlength="10" placeholder="Sala privada" />
+            <button id="apply-room" class="btn btn-outline" type="button">Aplicar</button>
+          </div>
+          <span id="percentile-chip" class="percentile-chip">Percentil: --</span>
+          <div class="ranking-search">
+            <input id="ranking-search-input" type="text" maxlength="24" placeholder="Buscar jugador..." />
+            <button id="ranking-search-btn" class="btn btn-outline" type="button">Buscar</button>
+          </div>
+        </div>
+        <p id="ranking-search-result" class="ranking-search-result">Busca un jugador para ver su posicion en este ranking.</p>
+        <div class="table-wrap">
+          <table class="leaderboard" aria-label="Ranking top 5">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Jugador</th>
+                <th>Aciertos</th>
+                <th>Tiempo</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body"></tbody>
+          </table>
+        </div>
+        <div class="hero-panel">
+          <article id="streak-stat-card" class="stat-card">
+            <p>Racha actual</p>
+            <strong id="stat-streak">0</strong>
+            <span id="streak-fire" class="streak-fire">Sin fuego</span>
+          </article>
+          <article class="stat-card">
+            <p>Mejor racha</p>
+            <strong id="stat-best-streak">0</strong>
+          </article>
+          <article class="stat-card">
+            <p>Precision total</p>
+            <strong id="stat-accuracy">0%</strong>
+          </article>
+          <article class="stat-card">
+            <p>Posicion estimada</p>
+            <strong id="stat-rank">--</strong>
+          </article>
+          <article class="stat-card">
+            <p>Percentil hoy</p>
+            <strong id="stat-percentile">--</strong>
+          </article>
+          <article class="stat-card">
+            <p>Escudo mensual</p>
+            <strong id="stat-shield">Disponible</strong>
+          </article>
+          <article class="stat-card">
+            <p>Nivel</p>
+            <strong id="stat-level">Lv.1</strong>
+            <span id="stat-xp" class="streak-fire">0/100 XP</span>
+            <div class="xp-meter">
+              <div id="xp-bar" class="xp-bar"></div>
+            </div>
+          </article>
+          <article class="stat-card">
+            <p>Delta ranking</p>
+            <strong id="stat-rank-delta">--</strong>
+          </article>
+        </div>
       </div>
+      <section id="weekly-league" class="weekly-league is-hidden" aria-label="Liga semanal">
+        <div class="weekly-league-head">
+          <h4>Liga semanal (7 dias)</h4>
+          <p>Puntos acumulados de esta semana.</p>
+        </div>
+        <div id="weekly-league-summary" class="weekly-league-summary"></div>
+        <div class="table-wrap">
+          <table class="leaderboard weekly-league-table" aria-label="Tabla de liga semanal">
+            <thead>
+              <tr>
+                <th>Dia</th>
+                <th>Puntos</th>
+                <th>Acumulado</th>
+              </tr>
+            </thead>
+            <tbody id="weekly-league-table"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
 
     <section id="history" class="panel">

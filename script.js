@@ -38,12 +38,18 @@ const percentileChipNode = document.querySelector("#percentile-chip");
 const comebackPromptNode = document.querySelector("#comeback-prompt");
 const returnPromptNode = document.querySelector("#return-prompt");
 const trendChartNode = document.querySelector("#score-trend-chart");
+const rankingViewNode = document.querySelector("#ranking-view-mode");
 const rankingModeNode = document.querySelector("#ranking-mode");
+const rankingDailyViewNode = document.querySelector("#ranking-daily-view");
+const weeklyLeagueNode = document.querySelector("#weekly-league");
+const rankingViewHintNode = document.querySelector("#ranking-view-hint");
 const roomCodeNode = document.querySelector("#room-code");
 const applyRoomNode = document.querySelector("#apply-room");
 const rankingSearchInput = document.querySelector("#ranking-search-input");
 const rankingSearchButton = document.querySelector("#ranking-search-btn");
 const rankingSearchResultNode = document.querySelector("#ranking-search-result");
+const weeklyLeagueSummaryNode = document.querySelector("#weekly-league-summary");
+const weeklyLeagueTableNode = document.querySelector("#weekly-league-table");
 const weeklySummaryNode = document.querySelector("#weekly-summary");
 const personalRecordsNode = document.querySelector("#personal-records");
 const uxSummaryNode = document.querySelector("#ux-summary");
@@ -96,6 +102,7 @@ const appState = {
   rankDelta: null,
   leaderboardRows: [],
   dailyMission: null,
+  rankingView: "daily",
   rankingMode: "global",
   roomCode: "",
   practiceMode: false
@@ -194,6 +201,15 @@ function getYesterdayKey(todayKey) {
   const date = new Date(parts[0], parts[1] - 1, parts[2]);
   date.setDate(date.getDate() - 1);
   return toDateKey(date);
+}
+
+function getStartOfWeek(dateKey) {
+  const date = parseDateKey(dateKey);
+  const weekdayMonFirst = (date.getDay() + 6) % 7;
+  const monday = new Date(date);
+  monday.setDate(date.getDate() - weekdayMonFirst);
+  monday.setHours(0, 0, 0, 0);
+  return monday;
 }
 
 function formatDate(dateKey) {
@@ -1024,12 +1040,31 @@ function finishDailyMatch() {
   clearSessionState();
 
   appState.nearMiss = Boolean(ranking.myRank && ranking.myRank === ranking.top10Cut + 1);
+  const rankDeltaText =
+    appState.rankDelta === null || appState.rankDelta === 0
+      ? "Sin cambio de posicion"
+      : appState.rankDelta > 0
+        ? `Subiste ${appState.rankDelta} puesto(s)`
+        : `Bajaste ${Math.abs(appState.rankDelta)} puesto(s)`;
+  const yesterdayDelta = getYesterdayDeltaPercent(result.percent);
+  const yesterdayDeltaClass = yesterdayDelta === null ? "" : yesterdayDelta > 0 ? "delta-up" : yesterdayDelta < 0 ? "delta-down" : "";
+  const yesterdayDeltaText =
+    yesterdayDelta === null
+      ? "Sin referencia de ayer"
+      : `${yesterdayDelta > 0 ? "+" : ""}${yesterdayDelta}%`;
 
   dailyGameNode.innerHTML = `
     <div class="daily-finish">
       <h4>Partida terminada</h4>
       <p>Hoy hiciste <strong>${result.score}/${result.total}</strong> (${result.percent}%).</p>
       <p>Tiempo: <strong>${result.durationSec}s</strong>. Vuelve manana para mantener tu ventaja.</p>
+      <p>Posicion: <strong>${result.rank ? `#${result.rank}` : "--"}</strong></p>
+      <p>Ranking: <strong>${rankDeltaText}</strong></p>
+      <p>Racha actual: <strong>${appState.profile.streakCurrent}</strong> dia(s)</p>
+      <p>Vs ayer: <strong class="${yesterdayDeltaClass}">${yesterdayDeltaText}</strong></p>
+      <div class="finish-streak-meter">
+        <div class="finish-streak-bar is-cold"><span id="finish-streak-fill" style="width:0%"></span></div>
+      </div>
       <p>XP ganado: <strong>+${xpGain}</strong>${missionDone ? " (incluye bonus de mision)" : ""}.</p>
       ${appState.nearMiss ? `<p><strong>Near miss:</strong> te falto 1 puesto para entrar en el top 10%.</p>` : ""}
       <p>Mystery bonus desbloqueado: <strong>${result.reward}</strong>.</p>
@@ -1081,11 +1116,13 @@ function finishDailyMatch() {
       }
     });
   }
+  animateFinishStreakBar(appState.profile.streakCurrent);
 
   renderProfileStats(ranking.myRank);
   renderDailyStatus();
   renderInsights();
   renderHistory();
+  renderWeeklyLeague();
 }
 
 function startDailyMatch() {
@@ -1339,6 +1376,81 @@ function runRankingSearch() {
   rankingSearchResultNode.textContent = `${label}: puesto #${foundRank} en ${modeLabel} (${foundRow.score}/${appState.dailyQuestions.length}).`;
 }
 
+function getYesterdayDeltaPercent(todayPercent) {
+  const yesterdayKey = getYesterdayKey(appState.todayKey);
+  const yesterday = appState.profile.history.find((entry) => entry.date === yesterdayKey);
+  if (!yesterday) return null;
+  return todayPercent - yesterday.percent;
+}
+
+function getFinishStreakVisual(streak) {
+  if (streak >= 30) return { pct: 100, tone: "onfire" };
+  if (streak >= 14) {
+    const pct = Math.round(((streak - 14) / (30 - 14)) * 100);
+    return { pct: Math.max(8, Math.min(100, pct)), tone: "onfire" };
+  }
+  if (streak >= 7) {
+    const pct = Math.round(((streak - 7) / (14 - 7)) * 100);
+    return { pct: Math.max(8, Math.min(100, pct)), tone: "hot" };
+  }
+  if (streak >= 3) {
+    const pct = Math.round(((streak - 3) / (7 - 3)) * 100);
+    return { pct: Math.max(8, Math.min(100, pct)), tone: "warm" };
+  }
+  const pct = Math.round((Math.max(0, streak) / 3) * 100);
+  return { pct: Math.max(8, Math.min(100, pct)), tone: "cold" };
+}
+
+function animateFinishStreakBar(streak) {
+  const bar = document.querySelector("#finish-streak-fill");
+  if (!bar) return;
+  const meter = bar.parentElement;
+  const visual = getFinishStreakVisual(streak);
+  if (meter) {
+    meter.classList.remove("is-cold", "is-warm", "is-hot", "is-onfire");
+    meter.classList.add(`is-${visual.tone}`);
+  }
+  bar.style.width = "0%";
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      bar.style.width = `${visual.pct}%`;
+    }, 120);
+  });
+}
+
+function renderWeeklyLeague() {
+  if (!weeklyLeagueTableNode || !weeklyLeagueSummaryNode) return;
+  const start = getStartOfWeek(appState.todayKey);
+  const labels = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
+  const byDate = new Map((appState.profile.history || []).map((entry) => [entry.date, entry]));
+  const rows = [];
+  let cumulative = 0;
+  let best = null;
+
+  for (let i = 0; i < 7; i += 1) {
+    const day = new Date(start);
+    day.setDate(start.getDate() + i);
+    const key = toDateKey(day);
+    const entry = byDate.get(key);
+    const points = entry ? entry.score * 10 + (entry.score === entry.total ? 20 : 0) : 0;
+    cumulative += points;
+    if (!best || points > best.points) best = { points, key, label: labels[i] };
+    rows.push({ label: labels[i], key, points, cumulative });
+  }
+
+  weeklyLeagueTableNode.innerHTML = rows
+    .map((row) => `<tr><td>${row.label} · ${row.key.slice(8, 10)}/${row.key.slice(5, 7)}</td><td>${row.points}</td><td>${row.cumulative}</td></tr>`)
+    .join("");
+
+  const total = rows.reduce((acc, row) => acc + row.points, 0);
+  const bestText = best && best.points > 0 ? `${best.label} (${best.points} pts)` : "--";
+  weeklyLeagueSummaryNode.innerHTML = `
+    <span>Total semana: <strong>${total}</strong></span>
+    <span>Mejor dia: <strong>${bestText}</strong></span>
+    <span>Objetivo sugerido: <strong>500</strong></span>
+  `;
+}
+
 function renderConsistencyHeatmap() {
   if (!heatmapNode) return;
   const cells = [];
@@ -1560,6 +1672,7 @@ function renderHistory() {
     renderNextAchievementCard();
     renderTrendChart();
     renderPersonalRecords();
+    renderWeeklyLeague();
     return;
   }
 
@@ -1576,6 +1689,7 @@ function renderHistory() {
   renderNextAchievementCard();
   renderTrendChart();
   renderPersonalRecords();
+  renderWeeklyLeague();
 }
 
 function initQuizSelector() {
@@ -1599,7 +1713,25 @@ function rerenderCompetitiveViews() {
   appState.rankDelta = computeRankDelta(ranking.myRank);
   renderProfileStats(ranking.myRank);
   renderInsights();
-  runRankingSearch();
+  if (appState.rankingView === "daily") runRankingSearch();
+}
+
+function saveRankingPref() {
+  localStorage.setItem(
+    getRankingPrefKey(),
+    JSON.stringify({ mode: appState.rankingMode, roomCode: appState.roomCode, view: appState.rankingView })
+  );
+}
+
+function renderRankingViewMode() {
+  if (rankingDailyViewNode) rankingDailyViewNode.classList.toggle("is-hidden", appState.rankingView !== "daily");
+  if (weeklyLeagueNode) weeklyLeagueNode.classList.toggle("is-hidden", appState.rankingView !== "weekly");
+  if (rankingViewHintNode) {
+    rankingViewHintNode.textContent =
+      appState.rankingView === "daily"
+        ? "Top 5 del dia en Global o Amigos."
+        : "Progreso acumulado de esta semana.";
+  }
 }
 
 function initRankingControls() {
@@ -1609,9 +1741,25 @@ function initRankingControls() {
       const pref = JSON.parse(prefRaw);
       if (pref && (pref.mode === "global" || pref.mode === "friends")) appState.rankingMode = pref.mode;
       if (pref && typeof pref.roomCode === "string") appState.roomCode = pref.roomCode;
+      if (pref && (pref.view === "daily" || pref.view === "weekly")) appState.rankingView = pref.view;
     } catch (error) {
       // ignore
     }
+  }
+
+  if (rankingViewNode) {
+    const tabs = [...rankingViewNode.querySelectorAll(".quiz-tab")];
+    tabs.forEach((tab) => {
+      tab.classList.toggle("is-active", tab.dataset.view === appState.rankingView);
+      tab.addEventListener("click", () => {
+        const view = tab.dataset.view;
+        if (!view || view === appState.rankingView) return;
+        appState.rankingView = view;
+        tabs.forEach((item) => item.classList.toggle("is-active", item.dataset.view === view));
+        saveRankingPref();
+        renderRankingViewMode();
+      });
+    });
   }
 
   if (rankingModeNode) {
@@ -1623,9 +1771,9 @@ function initRankingControls() {
         if (!mode || mode === appState.rankingMode) return;
         appState.rankingMode = mode;
         tabs.forEach((item) => item.classList.toggle("is-active", item.dataset.mode === mode));
-        localStorage.setItem(getRankingPrefKey(), JSON.stringify({ mode: appState.rankingMode, roomCode: appState.roomCode }));
+        saveRankingPref();
         rerenderCompetitiveViews();
-        runRankingSearch();
+        if (appState.rankingView === "daily") runRankingSearch();
       });
     });
   }
@@ -1634,9 +1782,9 @@ function initRankingControls() {
   if (applyRoomNode) {
     applyRoomNode.addEventListener("click", () => {
       appState.roomCode = (roomCodeNode ? roomCodeNode.value : "").trim().toUpperCase();
-      localStorage.setItem(getRankingPrefKey(), JSON.stringify({ mode: appState.rankingMode, roomCode: appState.roomCode }));
+      saveRankingPref();
       rerenderCompetitiveViews();
-      runRankingSearch();
+      if (appState.rankingView === "daily") runRankingSearch();
     });
   }
 
@@ -1646,6 +1794,8 @@ function initRankingControls() {
       if (event.key === "Enter") runRankingSearch();
     });
   }
+
+  renderRankingViewMode();
 }
 
 function initProfileControls() {
@@ -1782,6 +1932,7 @@ async function init() {
   renderProfileStats(ranking.myRank);
   renderInsights();
   renderHistory();
+  renderWeeklyLeague();
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
