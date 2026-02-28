@@ -1078,6 +1078,7 @@ function onAnswer(button) {
   const question = appState.dailyQuestions[currentIndex];
   const picked = question.options[Number(button.dataset.index)];
   const correct = question.options.find((option) => option.isCorrect);
+  const isMobile = window.innerWidth <= 760;
 
   if (picked.isCorrect) {
     appState.score += 1;
@@ -1102,28 +1103,70 @@ function onAnswer(button) {
     } else if (optionButton === button && !picked.isCorrect) {
       optionButton.classList.add("is-wrong");
     } else {
-      // Dim non-selected, non-correct options
       optionButton.classList.add("is-dimmed");
     }
   });
 
-  const feedback = dailyGameNode.querySelector("#daily-feedback");
-  if (feedback) {
-    feedback.innerHTML = `
-      <p class="daily-result ${picked.isCorrect ? "ok" : "bad"}">${picked.isCorrect ? "Correcto" : "Incorrecto"}.</p>
-      <p><strong>Respuesta:</strong> ${correct.name}. ${correct.rationale}</p>
-      ${picked.isCorrect ? "" : `<p><strong>Tu eleccion:</strong> ${picked.rationale}</p>`}
-    `;
-  }
+  if (isMobile) {
+    // ── Mobile: Phased flow ──
+    // Hide the "Siguiente" button entirely on mobile
+    const nextBtn = dailyGameNode.querySelector("#daily-next");
+    if (nextBtn) nextBtn.style.display = "none";
 
-  const nextBtn = dailyGameNode.querySelector("#daily-next");
-  if (nextBtn) nextBtn.disabled = false;
+    // Phase 1 (1s): show correct/wrong highlights
+    setTimeout(() => {
+      // Phase 2: collapse options & quote, show rationale only
+      const optionsContainer = dailyGameNode.querySelector(".daily-options");
+      const quoteEl = dailyGameNode.querySelector(".daily-quote");
+      const headEl = dailyGameNode.querySelector(".daily-head");
+      const progressEl = dailyGameNode.querySelector(".progress-wrap");
 
-  setTimeout(() => {
-    if (appState.inProgress && appState.locked && appState.questionIndex === currentIndex) {
-      onNextQuestion();
+      if (optionsContainer) optionsContainer.style.display = "none";
+      if (quoteEl) quoteEl.style.display = "none";
+      if (headEl) headEl.style.display = "none";
+      if (progressEl) progressEl.style.display = "none";
+
+      const feedback = dailyGameNode.querySelector("#daily-feedback");
+      if (feedback) {
+        feedback.innerHTML = `
+          <p class="daily-result ${picked.isCorrect ? "ok" : "bad"}" style="font-size:1.3rem;margin-bottom:8px;">
+            ${picked.isCorrect ? "✅ Correcto" : "❌ Incorrecto"}
+          </p>
+          <p style="font-size:1rem;line-height:1.5;">
+            <strong>${correct.name}.</strong> ${correct.rationale}
+          </p>
+        `;
+        feedback.classList.add("mobile-rationale-visible");
+      }
+    }, 1000);
+
+    // Phase 3 (3.5s total): auto-advance
+    setTimeout(() => {
+      if (appState.inProgress && appState.locked && appState.questionIndex === currentIndex) {
+        onNextQuestion();
+      }
+    }, 3500);
+
+  } else {
+    // ── Desktop: classic flow ──
+    const feedback = dailyGameNode.querySelector("#daily-feedback");
+    if (feedback) {
+      feedback.innerHTML = `
+        <p class="daily-result ${picked.isCorrect ? "ok" : "bad"}">${picked.isCorrect ? "Correcto" : "Incorrecto"}.</p>
+        <p><strong>Respuesta:</strong> ${correct.name}. ${correct.rationale}</p>
+        ${picked.isCorrect ? "" : `<p><strong>Tu eleccion:</strong> ${picked.rationale}</p>`}
+      `;
     }
-  }, ANSWER_TRANSITION_MS);
+
+    const nextBtn = dailyGameNode.querySelector("#daily-next");
+    if (nextBtn) nextBtn.disabled = false;
+
+    setTimeout(() => {
+      if (appState.inProgress && appState.locked && appState.questionIndex === currentIndex) {
+        onNextQuestion();
+      }
+    }, ANSWER_TRANSITION_MS);
+  }
 }
 
 function onNextQuestion() {
@@ -1268,31 +1311,33 @@ function finishDailyMatch() {
   dailyGameNode.innerHTML = `
     <div class="daily-finish">
       <h4>Partida terminada</h4>
-      <p>Hoy hiciste <strong>${result.score}/${result.total}</strong> (${result.percent}%).</p>
-      <p>Tiempo: <strong>${result.durationSec}s</strong>. Vuelve manana para mantener tu ventaja.</p>
-      <p>Posicion: <strong>${result.rank ? `#${result.rank}` : "--"}</strong></p>
-      <p>Ranking: <strong>${rankDeltaText}</strong></p>
-      <p>Racha actual: <strong>${appState.profile.streakCurrent}</strong> dia(s)</p>
-      <p>Vs ayer: <strong class="${yesterdayDeltaClass}">${yesterdayDeltaText}</strong></p>
-      <div class="finish-mini-summary">
-        <div class="mini-item">
-          <span>Precision total</span>
-          <strong>${getAccuracy()}%</strong>
+      <div class="finish-score-hero">
+        <span class="finish-big-score">${result.score}/${result.total}</span>
+        <span class="finish-percent">${result.percent}%</span>
+      </div>
+      <div class="finish-stats-row">
+        <div class="finish-stat">
+          <span class="finish-stat-label">Posición</span>
+          <strong>${result.rank ? `#${result.rank}` : "--"}</strong>
         </div>
-        <div class="mini-item">
-          <span>Nivel</span>
-          <strong>Lv.${getLevelInfo(appState.profile.xp).level}</strong>
-          <div class="mini-xp"><span style="width:${getLevelInfo(appState.profile.xp).xpInLevel}%"></span></div>
+        <div class="finish-stat">
+          <span class="finish-stat-label">Racha</span>
+          <strong>${appState.profile.streakCurrent} 🔥</strong>
+        </div>
+        <div class="finish-stat">
+          <span class="finish-stat-label">Tiempo</span>
+          <strong>${result.durationSec}s</strong>
+        </div>
+        <div class="finish-stat">
+          <span class="finish-stat-label">XP</span>
+          <strong>+${xpGain}</strong>
         </div>
       </div>
-      <div class="finish-streak-meter">
-        <div class="finish-streak-bar is-cold"><span id="finish-streak-fill" style="width:0%"></span></div>
+      <p class="finish-hint">Vuelve mañana para mantener tu racha.</p>
+      <div class="finish-actions">
+        <button id="share-result" class="btn btn-outline" type="button">Copiar resultado</button>
+        <button id="share-visual" class="btn btn-primary" type="button">Compartir</button>
       </div>
-      <p>XP ganado: <strong>+${xpGain}</strong>${missionDone ? " (incluye bonus de mision)" : ""}.</p>
-      ${appState.nearMiss ? `<p><strong>Near miss:</strong> te falto 1 puesto para entrar en el top 10%.</p>` : ""}
-      <p>Mystery bonus desbloqueado: <strong>${result.reward}</strong>.</p>
-      <button id="share-result" class="btn btn-outline" type="button">Copiar texto</button>
-      <button id="share-visual" class="btn btn-outline" type="button">Compartir visual</button>
     </div>
   `;
 
