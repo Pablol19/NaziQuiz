@@ -31,7 +31,7 @@
 
     <div class="topbar-actions">
       <button id="dev-reset-btn" class="btn btn-outline" type="button" title="Reiniciar partida diaria (Dev)"
-        style="padding: 6px 10px; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4); display: none;">🔄</button>
+        style="padding: 6px 10px; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4);">🔄</button>
       <button id="social-toggle" class="btn-social-pill" type="button">Social</button>
       <div class="profile-menu-wrap">
         <button id="profile-avatar-btn" class="profile-pill-btn" type="button" aria-expanded="false"
@@ -103,37 +103,38 @@
     </section>
 
     <section id="ranking" class="panel is-hidden">
-      <div class="panel-head">
-        <div>
-          <h2>Ranking</h2>
-          <!-- Removed hint for simplicity -->
+      <div class="panel-head ranking-header-inline">
+        <h2>Ranking</h2>
+        <div id="ranking-view-mode" class="quiz-segmented" role="tablist" aria-label="Vista de ranking">
+          <button type="button" class="quiz-tab is-active" data-view="daily">Hoy</button>
+          <button type="button" class="quiz-tab" data-view="weekly">Semana</button>
         </div>
       </div>
-      <div id="ranking-view-mode" class="quiz-segmented" role="tablist" aria-label="Vista de ranking">
-        <button type="button" class="quiz-tab is-active" data-view="daily">Hoy</button>
-        <button type="button" class="quiz-tab" data-view="weekly">Semana</button>
-      </div>
+
       <div id="ranking-daily-view">
-        <div class="hero-metrics">
-          <span class="metric-pill">Jugadores: <strong id="players-today">-</strong></span>
-          <span class="metric-pill metric-risk">Reinicio: <strong id="reset-timer">--:--:--</strong></span>
-        </div>
-        <div class="ranking-controls">
+        <div class="ranking-toolbar">
           <div id="ranking-mode" class="quiz-segmented" role="tablist" aria-label="Modo de ranking">
             <button type="button" class="quiz-tab is-active" data-mode="global">Global</button>
             <button type="button" class="quiz-tab" data-mode="friends">Amigos</button>
           </div>
+          <div class="hero-metrics">
+            <span class="metric-pill">Jugadores: <strong id="players-today">-</strong></span>
+            <span class="metric-pill metric-risk">Reinicio: <strong id="reset-timer">--:--:--</strong></span>
+          </div>
+        </div>
+        <div class="ranking-search-bar">
+          <input id="ranking-search-input" type="text" maxlength="24" placeholder="Buscar jugador..." />
+          <button id="ranking-search-btn" class="btn btn-outline" type="button">Buscar</button>
+        </div>
+        <p id="ranking-search-result" class="ranking-search-result"></p>
+        <!-- Hidden but still functional -->
+        <div class="ranking-controls" style="display:none;">
           <div class="private-room">
             <input id="room-code" type="text" maxlength="10" placeholder="Sala privada" />
             <button id="apply-room" class="btn btn-outline" type="button">Aplicar</button>
           </div>
           <span id="percentile-chip" class="percentile-chip">Percentil: --</span>
-          <div class="ranking-search">
-            <input id="ranking-search-input" type="text" maxlength="24" placeholder="Buscar jugador..." />
-            <button id="ranking-search-btn" class="btn btn-outline" type="button">Buscar</button>
-          </div>
         </div>
-        <p id="ranking-search-result" class="ranking-search-result"></p>
         <div class="table-wrap">
           <table class="leaderboard" aria-label="Ranking top 5">
             <thead>

@@ -685,16 +685,21 @@ immersive {
 }
 
 .nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  gap: 18px;
+  gap: 20px;
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
 .nav a {
   text-decoration: none;
   color: var(--ink-soft);
-  font-weight: 600;
+  transition: color 150ms ease;
   position: relative;
-  transition: color 200ms ease;
+  padding-bottom: 4px;
 }
 
 .nav a::after {
@@ -1032,29 +1037,29 @@ h1 {
   pointer-events: none;
 }
 
-#ranking .panel-head {
-  justify-content: center;
-  text-align: center;
-  margin-bottom: 24px;
+#ranking .panel-head.ranking-header-inline {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
   z-index: 1;
 }
 
-#ranking .panel-head>div {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#ranking .panel-head.ranking-header-inline #ranking-view-mode {
+  position: absolute;
+  left: 0;
+  margin-bottom: 0;
 }
 
 #ranking .panel-head h2 {
-  font-size: 2.5rem;
+  font-size: 2.1rem;
   background: linear-gradient(135deg, #2563eb, #9333ea);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 #ranking #ranking-view-hint {
@@ -1064,7 +1069,7 @@ h1 {
 
 #ranking .quiz-segmented {
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(199, 210, 254, 0.6);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.02);
@@ -1081,8 +1086,9 @@ h1 {
 }
 
 #ranking .hero-metrics {
-  justify-content: center;
-  margin-bottom: 12px;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  gap: 6px;
 }
 
 #ranking .metric-pill {
@@ -1090,20 +1096,46 @@ h1 {
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 2px 10px rgba(79, 70, 229, 0.08);
   color: #312e81;
+  font-size: 0.82rem;
+  padding: 6px 10px;
 }
 
-#ranking .ranking-controls {
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 12px 20px;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+.ranking-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ranking-toolbar .quiz-segmented {
+  margin-bottom: 0;
+}
+
+.ranking-search-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ranking-search-bar input {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.ranking-search-bar .btn {
+  padding: 8px 16px;
+  font-size: 0.85rem;
 }
 
 #ranking .hero-panel {
-  gap: 16px;
-  margin-top: 20px;
+  display: none;
 }
 
 #ranking .stat-card {
@@ -2787,6 +2819,7 @@ h1 {
     position: fixed;
     bottom: 0;
     left: 0;
+    transform: none;
     right: 0;
     z-index: 50;
     display: flex;
@@ -2834,6 +2867,8 @@ h1 {
   /* ── Homepage specific overides ── */
   body.home-page {
     padding-bottom: 90px;
+    overflow: hidden;
+    height: 100dvh;
   }
 
   body.home-page .explore-banner {
@@ -3043,40 +3078,63 @@ h1 {
     font-size: 0.95rem;
   }
 
-  .hero-metrics {
-    display: grid;
-    grid-template-columns: 1fr;
+  /* ── Ranking Mobile Ultra-Compact ── */
+  #ranking {
+    padding: 10px 12px;
+  }
+
+  #ranking .panel-head {
+    margin-bottom: 4px;
+  }
+
+  #ranking .panel-head h2 {
+    font-size: 1.4rem;
+  }
+
+  #ranking .quiz-segmented {
+    margin-bottom: 8px;
+    padding: 2px;
+  }
+
+  #ranking .quiz-tab {
+    padding: 4px;
+    font-size: 0.85rem;
+  }
+
+  .ranking-toolbar {
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+    justify-content: center;
+  }
+
+  .ranking-toolbar .hero-metrics {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0;
     gap: 6px;
   }
 
-  .metric-pill {
-    width: 100%;
-    font-size: 0.84rem;
-  }
-
-  .ranking-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .ranking-search {
-    margin-left: 0;
-    width: 100%;
-  }
-
-  #ranking-search-input {
-    flex: 1;
+  #ranking .metric-pill {
     width: auto;
-    min-width: 0;
+    font-size: 0.75rem;
+    padding: 4px 8px;
   }
 
-  .private-room {
-    width: 100%;
+  .ranking-search-bar {
+    margin-bottom: 8px;
   }
 
-  #room-code {
-    flex: 1;
-    min-width: 0;
+  .ranking-search-bar input {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .ranking-search-bar .btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
   }
 
   .weekly-league-summary {
