@@ -23,8 +23,12 @@
       <span class="brand-name">GuessTheSpeaker</span>
     </div>
 
-    <!-- The original nav is removed from index.html because mobile uses the Explore banner as footer, 
-         and desktop can use an alternate or clean layout -->
+    <nav class="nav">
+      <a href="index.html" class="is-active">Partida diaria</a>
+      <a href="explore.html">Jugar</a>
+      <a href="estadisticas.html">Estadisticas</a>
+    </nav>
+
     <div class="topbar-actions">
       <button id="dev-reset-btn" class="btn btn-outline" type="button" title="Reiniciar partida diaria (Dev)"
         style="padding: 6px 10px; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4); display: none;">🔄</button>
@@ -186,9 +190,7 @@
 
   </main>
 
-  <footer class="footer">
-    <p>© 2026 GuessTheSpeaker</p>
-  </footer>
+
 
   <immersive id="quiz-data">
     {

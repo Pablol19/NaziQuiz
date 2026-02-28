@@ -852,16 +852,16 @@ h1 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #6366f1, #d946ef, #60a5fa, #a78bfa);
+  background: linear-gradient(135deg, #1b2742, #365fcf, #4a2c6d, #1b2742);
   background-size: 300% 300%;
   color: #fff;
   border: none;
-  box-shadow: 0 6px 16px rgba(192, 132, 252, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  animation: shineBg 8s ease-in-out infinite alternate;
+  box-shadow: 0 8px 18px rgba(54, 95, 207, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  animation: shineBg 12s ease-in-out infinite alternate;
 }
 
 .btn-primary:hover {
-  box-shadow: 0 8px 24px rgba(192, 132, 252, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 24px rgba(54, 95, 207, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
 }
 
