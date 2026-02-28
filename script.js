@@ -1341,6 +1341,12 @@ function finishDailyMatch() {
     </div>
   `;
 
+  if (!appState.practiceMode && window.innerWidth > 760) {
+    setTimeout(() => {
+      renderHomePrimarySection(true);
+    }, 3500);
+  }
+
   const shareButton = document.querySelector("#share-result");
   if (shareButton) {
     shareButton.addEventListener("click", async () => {

@@ -2866,9 +2866,14 @@ h1 {
 
   /* ── Homepage specific overides ── */
   body.home-page {
-    padding-bottom: 90px;
-    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100dvh;
+    overflow: hidden;
+    touch-action: none;
+    padding-bottom: 90px;
   }
 
   body.home-page .explore-banner {
@@ -3076,6 +3081,57 @@ h1 {
     margin-top: 8px;
     padding: 12px 14px;
     font-size: 0.95rem;
+  }
+
+  /* ── Finish Match Summary Ultra-Compact ── */
+  .daily-finish {
+    padding: 10px;
+  }
+
+  .daily-finish h4 {
+    margin-bottom: 2px;
+    font-size: 1.2rem;
+  }
+
+  .finish-score-hero {
+    margin: 6px 0 10px;
+    gap: 0;
+  }
+
+  .finish-big-score {
+    font-size: 2.2rem;
+  }
+
+  .finish-percent {
+    font-size: 0.95rem;
+  }
+
+  .finish-stats-row {
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .finish-stat {
+    padding: 6px 4px;
+  }
+
+  .finish-stat-label {
+    font-size: 0.65rem;
+    margin-bottom: 2px;
+  }
+
+  .finish-stat strong {
+    font-size: 0.95rem;
+  }
+
+  .finish-hint {
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+  }
+
+  .finish-actions .btn {
+    padding: 8px 10px;
+    font-size: 0.85rem;
   }
 
   /* ── Ranking Mobile Ultra-Compact ── */
