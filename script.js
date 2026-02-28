@@ -8,17 +8,17 @@ const QUIZ_CATALOG = {
   categories: [
     {
       id: "politics",
-      name: "🏛️ Política & Poder",
+      name: "Política & Poder",
       quizzes: [
         { id: "classic", label: "Trump vs Hitler vs Ye", file: "question-bank.json", free: true },
-        { id: "tye", label: "Trump vs Elon vs Ye", file: "question-bank-trump-elon-ye.json", free: true }
+        { id: "tye", label: "Trump vs Elon vs Ye", file: "question-bank-trump-elon-ye.json", free: true, image: "imagenes/trump-elon-ye.jpg" }
       ]
     },
     {
       id: "tech",
-      name: "💻 Tech Titans",
+      name: "Tech Titans",
       quizzes: [
-        { id: "ejz", label: "Elon vs Jobs vs Zuck", file: "question-bank-elon-jobs-zuck.json", free: true }
+        { id: "ejz", label: "Elon vs Jobs vs Zuck", file: "question-bank-elon-jobs-zuck.json", free: true, image: "imagenes/elon-jobs-zuck.jpg" }
       ]
     }
   ]
@@ -1041,7 +1041,6 @@ function renderQuestion() {
       <p>Puntaje actual: ${appState.score}</p>
     </div>
     <div class="progress-wrap"><div class="progress-bar" style="width:${progress}%"></div></div>
-    <p class="daily-theme">${question.theme}</p>
     <blockquote class="daily-quote">"${question.quote}"</blockquote>
     <div class="daily-options">
       ${question.options
@@ -1960,12 +1959,12 @@ function renderExplorePanel() {
       return `
         <button class="ex-card${unlocked ? '' : ' is-locked'}${isDaily ? ' is-daily' : ''}" 
                 data-quiz="${q.id}" data-category="${cat.id}" ${unlocked ? '' : 'disabled'} type="button">
-          <div class="card-art"></div>
+          <div class="card-art">
+            ${q.image ? `<img src="${q.image}" alt="${q.label}" loading="lazy" />` : ''}
+          </div>
           ${isDaily ? '<span class="card-daily-badge">HOY</span>' : ''}
-          <span class="card-number">${globalIndex}</span>
           <div class="card-content">
             <span class="card-tag ${tagClass}">${lockTag}</span>
-            <span class="card-label">${q.label}</span>
           </div>
         </button>
       `;

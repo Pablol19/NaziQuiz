@@ -13,20 +13,18 @@
     rel="stylesheet" />
 </head>
 
-<body>
+<body class="home-page">
   <div class="bg-orb orb-a"></div>
   <div class="bg-orb orb-b"></div>
 
   <header class="topbar">
-    <a class="brand" href="#daily">
+    <div class="brand">
       <span class="brand-mark">GS</span>
       <span class="brand-name">GuessTheSpeaker</span>
-    </a>
-    <nav class="nav">
-      <a href="#daily">Partida diaria</a>
-      <a href="explore.html">Jugar</a>
-      <a href="estadisticas.html">Estadisticas</a>
-    </nav>
+    </div>
+
+    <!-- The original nav is removed from index.html because mobile uses the Explore banner as footer, 
+         and desktop can use an alternate or clean layout -->
     <div class="topbar-actions">
       <button id="dev-reset-btn" class="btn btn-outline" type="button" title="Reiniciar partida diaria (Dev)"
         style="padding: 6px 10px; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4); display: none;">🔄</button>
