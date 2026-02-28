@@ -1340,10 +1340,15 @@ function finishDailyMatch() {
       </div>
     </div>
   `;
+  // Show explore banner again after finishing
+  const exploreBanner = document.querySelector('.explore-banner');
+  if (exploreBanner) exploreBanner.style.display = '';
 
+  // Desktop: auto-switch to Ranking after 3.5s
   if (!appState.practiceMode && window.innerWidth > 760) {
     setTimeout(() => {
-      renderHomePrimarySection(true);
+      dailySectionNode.classList.add('is-hidden');
+      rankingSectionNode.classList.remove('is-hidden');
     }, 3500);
   }
 
@@ -1410,6 +1415,10 @@ function startDailyMatch() {
     renderLockedState();
     return;
   }
+
+  // Hide explore banner during gameplay
+  const exploreBanner = document.querySelector('.explore-banner');
+  if (exploreBanner) exploreBanner.style.display = 'none';
 
   trackMetric("ctaClicks", 1);
   trackMetric("startsOfficial", 1);
@@ -2115,9 +2124,8 @@ function initRankingControls() {
   if (prefRaw) {
     try {
       const pref = JSON.parse(prefRaw);
-      if (pref && (pref.mode === "global" || pref.mode === "friends")) appState.rankingMode = pref.mode;
+      // Ignores saved .mode ("global"/"friends") and .view ("daily"/"weekly") to force defaults.
       if (pref && typeof pref.roomCode === "string") appState.roomCode = pref.roomCode;
-      if (pref && (pref.view === "daily" || pref.view === "weekly")) appState.rankingView = pref.view;
     } catch (error) {
       // ignore
     }

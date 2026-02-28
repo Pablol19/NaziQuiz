@@ -33,12 +33,12 @@
 .ex-category {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
 }
 
 .ex-cat-title {
     font-family: var(--font-title);
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 400;
     color: #1e293b;
     padding-left: 28px;
@@ -52,7 +52,7 @@
     content: '';
     display: block;
     width: 5px;
-    height: 24px;
+    height: 20px;
     background: linear-gradient(180deg, #4f46e5, #ec4899);
     border-radius: 4px;
 }
@@ -60,10 +60,10 @@
 /* ── Horizontal Scroll Row ── */
 .ex-row {
     display: flex;
-    gap: 18px;
+    gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 12px 28px 24px;
+    padding: 8px 28px 10px;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -75,9 +75,9 @@
 /* ── Card ── */
 .ex-card {
     flex-shrink: 0;
-    width: 185px;
-    height: 265px;
-    border-radius: 20px;
+    width: 135px;
+    height: 195px;
+    border-radius: 18px;
     border: 1px solid rgba(199, 210, 254, 0.5);
     background: #ffffff;
     position: relative;
@@ -293,13 +293,13 @@
 
     .ex-grid {
         padding-bottom: 80px;
-        gap: 24px;
+        gap: 16px;
     }
 
     .ex-card {
-        width: 140px;
-        height: 200px;
-        border-radius: 14px;
+        width: 105px;
+        height: 150px;
+        border-radius: 12px;
     }
 
     .ex-card .card-number {
