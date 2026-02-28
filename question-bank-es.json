@@ -1,0 +1,426 @@
+{
+    "title": "¿Quién lo dijo? Trump, Hitler, o Ye",
+    "language": "Spanish",
+    "questions": [
+        {
+            "id": 1,
+            "quote": "Lo siento por los perdedores y los odiadores, pero mi coeficiente intelectual es uno de los más altos, ¡y todos vosotros lo sabéis! Por favor, no os sintáis estúpidos o inseguros, no es vuestra culpa.",
+            "speaker": "Donald Trump",
+            "context": "Tuit, 2013"
+        },
+        {
+            "id": 2,
+            "quote": "Mediante el uso hábil y sostenido de la propaganda, uno puede hacer que un pueblo vea incluso el cielo como el infierno o una vida extremadamente miserable como el paraíso.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 3,
+            "quote": "Estoy un poco adormilado esta noche pero cuando me despierte voy a hacer 'death con 3' en EL PUEBLO JUDÍO.",
+            "speaker": "Ye",
+            "context": "Tuit, 2022"
+        },
+        {
+            "id": 4,
+            "quote": "Yo soy el elegido.",
+            "speaker": "Donald Trump",
+            "context": "Declaraciones ante la prensa en la Casa Blanca, 2019"
+        },
+        {
+            "id": 5,
+            "quote": "Las llamadas clases intelectuales miran con infinita condescendencia a todo aquel que no haya sido arrastrado por las escuelas obligatorias.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 6,
+            "quote": "Si dijera que no soy un genio, simplemente te estaría mintiendo a ti y a mí mismo.",
+            "speaker": "Ye",
+            "context": "Jimmy Kimmel Live!, 2013"
+        },
+        {
+            "id": 7,
+            "quote": "Todo lo que sé sobre imanes es esto: dame un vaso de agua, déjame verterlo sobre los imanes, y ese es el final de los imanes.",
+            "speaker": "Donald Trump",
+            "context": "Mitin en Iowa, 2024"
+        },
+        {
+            "id": 8,
+            "quote": "Al vencedor nunca se le preguntará si dijo la verdad.",
+            "speaker": "Adolf Hitler",
+            "context": "Discurso a comandantes militares, 1939"
+        },
+        {
+            "id": 9,
+            "quote": "Yo soy un dios. Os acabo de decir quién creo que soy. Un dios.",
+            "speaker": "Ye",
+            "context": "Entrevista en Reuters, 2009"
+        },
+        {
+            "id": 10,
+            "quote": "Cuando alguien te desafíe, devuélvele el golpe. Sé brutal, sé duro.",
+            "speaker": "Donald Trump",
+            "context": "Filosofía personal detallada en sus libros"
+        },
+        {
+            "id": 11,
+            "quote": "La receptividad de las masas es muy limitada, su inteligencia es pequeña, pero su poder para olvidar es enorme.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 12,
+            "quote": "Siento que estoy demasiado ocupado escribiendo la historia como para leerla.",
+            "speaker": "Ye",
+            "context": "Entrevista de Zane Lowe, 2019"
+        },
+        {
+            "id": 13,
+            "quote": "Ningún político en la historia, y digo esto con gran certeza, ha sido tratado peor o de forma más injusta.",
+            "speaker": "Donald Trump",
+            "context": "Discurso en la Academia de la Guardia Costera, 2017"
+        },
+        {
+            "id": 14,
+            "quote": "Voy por el camino que la Providencia me dicta con la seguridad de un sonámbulo.",
+            "speaker": "Adolf Hitler",
+            "context": "Discurso de Múnich, 1936"
+        },
+        {
+            "id": 15,
+            "quote": "Es una mafia mediática judía clandestina.",
+            "speaker": "Ye",
+            "context": "Entrevista en NewsNation, 2022"
+        },
+        {
+            "id": 16,
+            "quote": "Amo a los pobremente educados.",
+            "speaker": "Donald Trump",
+            "context": "Discurso de victoria en Nevada, 2016"
+        },
+        {
+            "id": 17,
+            "quote": "Los obstáculos no existen para rendirse a ellos, sino sólo para ser rotos.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 18,
+            "quote": "Soy innegable, indudablemente, el mayor artista humano de todos los tiempos.",
+            "speaker": "Ye",
+            "context": "Entrevista en BBC Radio 1, 2013"
+        },
+        {
+            "id": 19,
+            "quote": "Creo que disculparse es algo genial, pero tienes que estar equivocado.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal, 1987"
+        },
+        {
+            "id": 20,
+            "quote": "Solo aquel que posee a la juventud, gana el futuro.",
+            "speaker": "Adolf Hitler",
+            "context": "Discurso sobre la juventud, 1935"
+        },
+        {
+            "id": 21,
+            "quote": "Cuando oyes hablar de la esclavitud por 400 años... Eso suena como una elección.",
+            "speaker": "Ye",
+            "context": "Entrevista en la sede de TMZ, 2018"
+        },
+        {
+            "id": 22,
+            "quote": "No vienen a por mí. Vienen a por vosotros: yo solo estoy interponiéndome en su camino.",
+            "speaker": "Donald Trump",
+            "context": "Eslogan de campaña tuiteado en 2019"
+        },
+        {
+            "id": 23,
+            "quote": "La condena al fracaso de una nación puede evitarse únicamente mediante una tormenta de pasión desbordante.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 24,
+            "quote": "Mi ego es un truco para mantenerme cuerdo.",
+            "speaker": "Ye",
+            "context": "Varias entrevistas comentando sobre su salud mental"
+        },
+        {
+            "id": 25,
+            "quote": "Tengo instinto (gut) y mi instinto me dice más a veces de lo que el cerebro de cualquier otro me podrá decir jamás.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista en el Washington Post, 2018"
+        },
+        {
+            "id": 26,
+            "quote": "La fuerza no yace en la defensa sino en el ataque.",
+            "speaker": "Adolf Hitler",
+            "context": "Discurso militar, 1939"
+        },
+        {
+            "id": 27,
+            "quote": "Pasaré a la historia como la voz de esta generación.",
+            "speaker": "Ye",
+            "context": "Entrevista en InfoWars, 2022"
+        },
+        {
+            "id": 28,
+            "quote": "Solo yo puedo arreglarlo.",
+            "speaker": "Donald Trump",
+            "context": "Discurso de aceptación del RNC, 2016"
+        },
+        {
+            "id": 29,
+            "quote": "No importa la verdad, sino la victoria.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 30,
+            "quote": "Todo ser humano tiene algo de valor que aportar a la sociedad, especialmente Hitler.",
+            "speaker": "Ye",
+            "context": "Entrevista en InfoWars, 2022"
+        },
+        {
+            "id": 31,
+            "quote": "Yo soy vuestra retribución.",
+            "speaker": "Donald Trump",
+            "context": "Discurso en CPAC, 2023"
+        },
+        {
+            "id": 32,
+            "quote": "Las amplias masas de una nación... caen víctimas de la gran mentira con más facilidad que de la pequeña mentira.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 33,
+            "quote": "Amo al pueblo judío, pero también amo a los nazis.",
+            "speaker": "Ye",
+            "context": "Entrevista en InfoWars, 2022"
+        },
+        {
+            "id": 34,
+            "quote": "Lo que separa a los ganadores de los perdedores es la forma en que una persona reacciona ante cada nuevo giro del destino.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal, 1987"
+        },
+        {
+            "id": 35,
+            "quote": "Cualquiera que vea y pinte el cielo verde o los campos azules debería ser esterilizado.",
+            "speaker": "Adolf Hitler",
+            "context": "Discurso contra el arte moderno, 1937"
+        },
+        {
+            "id": 36,
+            "quote": "Soy un genio creativo y no hay otra forma de decirlo.",
+            "speaker": "Ye",
+            "context": "Jimmy Kimmel Live!, 2013"
+        },
+        {
+            "id": 37,
+            "quote": "Están envenenando la sangre de nuestro país.",
+            "speaker": "Donald Trump",
+            "context": "Mitin de New Hampshire, 2023"
+        },
+        {
+            "id": 38,
+            "quote": "Todas las grandes culturas del pasado perecieron solo porque la raza que antes era creadora murió a causa del envenenamiento de su sangre.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 39,
+            "quote": "Puedo decir cosas antisemitas y Adidas jamás me repudiaría. ¿Y qué?",
+            "speaker": "Ye",
+            "context": "Podcast Drink Champs, 2022"
+        },
+        {
+            "id": 40,
+            "quote": "Apelo a las fantasías de las personas... Por eso una pequeña hipérbole nunca está de más.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal, 1987"
+        },
+        {
+            "id": 41,
+            "quote": "Las palabras construyen puentes hacia regiones inexploradas.",
+            "speaker": "Adolf Hitler",
+            "context": "Discurso sobre la retórica y la propaganda"
+        },
+        {
+            "id": 42,
+            "quote": "En realidad no puedo ser antisemita porque la gente negra en realidad también es judía.",
+            "speaker": "Ye",
+            "context": "Tuit, 2022"
+        },
+        {
+            "id": 43,
+            "quote": "Cualquier persona judía que vote a los Demócratas odia su religión.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista con Sebastian Gorka, 2024"
+        },
+        {
+            "id": 44,
+            "quote": "¿Existió alguna forma de inmundicia o escándalo... en la cual por lo menos no hubiera participado un judío?",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 45,
+            "quote": "Los medios judíos me han vetado.",
+            "speaker": "Ye",
+            "context": "Podcast Drink Champs, 2022"
+        },
+        {
+            "id": 46,
+            "quote": "Erradicaremos a los comunistas, marxistas, fascistas y los matones de extrema izquierda que viven como plagas dentro de los confines de nuestro país.",
+            "speaker": "Donald Trump",
+            "context": "Mitin del Día de los Veteranos, 2023"
+        },
+        {
+            "id": 47,
+            "quote": "El líder genial debe tener la habilidad de hacer que oponentes diferentes parezcan pertenecer siempre a una misma categoría.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 48,
+            "quote": "La sociedad ha puesto tantas barreras... que es casi imposible que salga un pensamiento puro.",
+            "speaker": "Ye",
+            "context": "Entrevista en BBC Radio 1, 2013"
+        },
+        {
+            "id": 49,
+            "quote": "¡Los judíos tienen que organizarse y apreciar lo que tienen en Israel, antes de que sea demasiado tarde!",
+            "speaker": "Donald Trump",
+            "context": "Publicación en Truth Social, 2022"
+        },
+        {
+            "id": 50,
+            "quote": "Cualquier fuerza que no nazca de una base firme y espiritual, será vacilante e incierta.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 51,
+            "quote": "Soy un orgulloso no-lector de libros.",
+            "speaker": "Donald Trump",
+            "context": "Varios mítines en 2024"
+        },
+        {
+            "id": 52,
+            "quote": "El gran y fallecido Hannibal Lecter. Es un hombre maravilloso. A menudo invitaba a comer a un amigo a cenar.",
+            "speaker": "Donald Trump",
+            "context": "Cena de recaudación, 2019"
+        },
+        {
+            "id": 53,
+            "quote": "Sé que menos personas se convencen por la palabra escrita que por la palabra hablada.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 54,
+            "quote": "Yo soy el nuevo Moisés.",
+            "speaker": "Ye",
+            "context": "Audio filtrado de SNL, 2016"
+        },
+        {
+            "id": 55,
+            "quote": "Si tienes un molino de viento cerca de tu casa... su ruido causa cáncer.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista, New York Post, 2011"
+        },
+        {
+            "id": 56,
+            "quote": "Tan pronto como la propia propaganda admite siquiera un atisbo de razón en el bando contrario, la semilla de la duda... ha sido sembrada.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 57,
+            "quote": "Soy un cincuenta por ciento más influyente que Stanley Kubrick, el Apóstol Pablo, Pablo Picasso... y Escobar.",
+            "speaker": "Ye",
+            "context": "Festival Cannes Lions, 2014"
+        },
+        {
+            "id": 58,
+            "quote": "Mis dedos son largos y hermosos, como ha quedado bien documentado, al igual que otras varias partes de mi cuerpo.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista de la revista Playboy, 1990"
+        },
+        {
+            "id": 59,
+            "quote": "El arte de leer y estudiar consiste en recordar lo esencial y olvidar lo que no lo es.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 60,
+            "quote": "Soy como un recipiente, y Dios me ha elegido para ser la voz y el conector.",
+            "speaker": "Ye",
+            "context": "Discurso en la Universidad de Oxford, 2015"
+        },
+        {
+            "id": 61,
+            "quote": "Creo que si este país se vuelve un poco más amable o gentil, literalmente dejaría de existir.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista de la revista Playboy, 1990"
+        },
+        {
+            "id": 62,
+            "quote": "Creo hoy en día que mi conducta concuerda con la voluntad del Creador Todopoderoso.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 63,
+            "quote": "Tenemos los recursos como civilización para encontrar una utopía, pero estamos liderados por los más codiciosos y los menos nobles.",
+            "speaker": "Ye",
+            "context": "Discurso en la Universidad de Oxford, 2015"
+        },
+        {
+            "id": 64,
+            "quote": "¿Sabes lo que es el uranio, verdad? Es esta cosa llamada armas nucleares. Y otras cosas.",
+            "speaker": "Donald Trump",
+            "context": "Rueda de prensa, 2017"
+        },
+        {
+            "id": 65,
+            "quote": "Siempre es más difícil luchar contra la fe que luchar contra el conocimiento.",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 66,
+            "quote": "Soy tan creíble y tan influyente y tan relevante que voy a cambiar las cosas.",
+            "speaker": "Ye",
+            "context": "Entrevista en BBC Radio 1, 2013"
+        },
+        {
+            "id": 67,
+            "quote": "Mi mayor cualidad, con diferencia, es mi temperamento. Tengo un temperamento triunfador.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista MSNBC, 2016"
+        },
+        {
+            "id": 68,
+            "quote": "Todos los grandes movimientos son movimientos populares. Son la erupción volcánica de las pasiones humanas...",
+            "speaker": "Adolf Hitler",
+            "context": "Mein Kampf, 1925"
+        },
+        {
+            "id": 69,
+            "quote": "Me va bastante bien para ser un genio.",
+            "speaker": "Ye",
+            "context": "Múltiples entrevistas casuales"
+        },
+        {
+            "id": 70,
+            "quote": "Me consulto a mí mismo, antes que a nadie, porque tengo muy buen cerebro y he dicho muchas cosas.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista de prensa, 2017"
+        }
+    ]
+}

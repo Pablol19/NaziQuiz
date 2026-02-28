@@ -1,0 +1,426 @@
+{
+    "title": "¿Quién lo dijo? Elon, Jobs o Zuck",
+    "language": "Spanish",
+    "questions": [
+        {
+            "id": 1,
+            "quote": "El mayor riesgo es no asumir ningún riesgo.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Mantra sobre el riesgo en startups."
+        },
+        {
+            "id": 2,
+            "quote": "Estamos aquí para dejar una marca en el universo. Si no, ¿para qué estar aquí?",
+            "speaker": "Steve Jobs",
+            "context": "Cita de liderazgo de Apple, ampliamente citada."
+        },
+        {
+            "id": 3,
+            "quote": "Digo algo y normalmente ocurre. Quizá no a tiempo, pero normalmente ocurre.",
+            "speaker": "Elon Musk",
+            "context": "Citado en entrevistas sobre plazos a largo plazo."
+        },
+        {
+            "id": 4,
+            "quote": "Confían en mí. Idiotas.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Mensajes instantáneos filtrados de la era de Harvard, 2004."
+        },
+        {
+            "id": 5,
+            "quote": "Los verdaderos artistas lanzan productos.",
+            "speaker": "Steve Jobs",
+            "context": "Cita de cultura del equipo Mac, años 80."
+        },
+        {
+            "id": 6,
+            "quote": "Soy repugnantemente pro-humano.",
+            "speaker": "Elon Musk",
+            "context": "Comentarios en entrevista sobre IA y el futuro humano."
+        },
+        {
+            "id": 7,
+            "quote": "Una ardilla muriendo en tu jardín delantero puede ser más relevante para tus intereses ahora mismo que gente muriendo en África.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Explicación del News Feed de Facebook, 2006."
+        },
+        {
+            "id": 8,
+            "quote": "Cambiaría toda mi tecnología por una tarde con Sócrates.",
+            "speaker": "Steve Jobs",
+            "context": "Cita de entrevista en Newsweek, 2001."
+        },
+        {
+            "id": 9,
+            "quote": "Mi mentalidad es la de un samurái. Preferiría hacerme el seppuku a fracasar.",
+            "speaker": "Elon Musk",
+            "context": "Comentarios a inversores en la época inicial de la startup."
+        },
+        {
+            "id": 10,
+            "quote": "Muévete rápido y rompe cosas.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Lema inicial de la empresa Facebook."
+        },
+        {
+            "id": 11,
+            "quote": "Muchas veces, la gente no sabe lo que quiere hasta que se lo enseñas.",
+            "speaker": "Steve Jobs",
+            "context": "Filosofía de producto en entrevistas."
+        },
+        {
+            "id": 12,
+            "quote": "Quien controla los memes, controla el universo.",
+            "speaker": "Elon Musk",
+            "context": "Tuit, 2020."
+        },
+        {
+            "id": 13,
+            "quote": "Hecho es mejor que perfecto.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Eslogan en un muro inicial de Facebook."
+        },
+        {
+            "id": 14,
+            "quote": "La innovación distingue a un líder de un seguidor.",
+            "speaker": "Steve Jobs",
+            "context": "Cita de la era de conferencias de Apple."
+        },
+        {
+            "id": 15,
+            "quote": "Empezar un negocio es como comer cristal y mirar al abismo.",
+            "speaker": "Elon Musk",
+            "context": "Entrevista sobre el sufrimiento en startups."
+        },
+        {
+            "id": 16,
+            "quote": "No construimos servicios para ganar dinero; ganamos dinero para construir mejores servicios.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Carta a inversores sobre misión y monetización."
+        },
+        {
+            "id": 17,
+            "quote": "Sé un estándar de calidad. Algunas personas no están acostumbradas a un entorno donde se espera la excelencia.",
+            "speaker": "Steve Jobs",
+            "context": "Cita de gestión extraída de biografías y entrevistas."
+        },
+        {
+            "id": 18,
+            "quote": "No pierdo el tiempo pontificando sobre cosas de alto concepto; invierto mi tiempo resolviendo problemas de ingeniería y fabricación.",
+            "speaker": "Elon Musk",
+            "context": "Comentarios centrados en la fabricación en entrevistas."
+        },
+        {
+            "id": 19,
+            "quote": "Las ideas no surgen completamente formadas. Sólo se aclaran a medida que trabajas en ellas.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Discurso de graduación en Harvard, 2017."
+        },
+        {
+            "id": 20,
+            "quote": "Decidir qué no hacer es tan importante como decidir qué hacer.",
+            "speaker": "Steve Jobs",
+            "context": "Filosofía del enfoque, entrevistas de Apple."
+        },
+        {
+            "id": 21,
+            "quote": "El fracaso es una opción aquí. Si las cosas no fallan, no estás innovando lo suficiente.",
+            "speaker": "Elon Musk",
+            "context": "Citado en entrevistas aeroespaciales y de fabricación."
+        },
+        {
+            "id": 22,
+            "quote": "A la gente no le importa lo que dices, le importa lo que construyes.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Comentarios fundacionales centrados en producto."
+        },
+        {
+            "id": 23,
+            "quote": "Quiero dejar una marca en el universo.",
+            "speaker": "Steve Jobs",
+            "context": "Variante de la cita del universo de Jobs."
+        },
+        {
+            "id": 24,
+            "quote": "Creo que es posible que personas ordinarias elijan ser extraordinarias.",
+            "speaker": "Elon Musk",
+            "context": "Cita de entrevista sobre la ambición."
+        },
+        {
+            "id": 25,
+            "quote": "Averiguar cuál es la próxima gran tendencia nos dice en qué centrarnos.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Comentarios de entrevista sobre crecimiento y estrategia."
+        },
+        {
+            "id": 26,
+            "quote": "Manténganse hambrientos, manténganse alocados.",
+            "speaker": "Steve Jobs",
+            "context": "Discurso de graduación de Stanford, 2005."
+        },
+        {
+            "id": 27,
+            "quote": "Podía ver cómo ocurría o ser parte de ello.",
+            "speaker": "Elon Musk",
+            "context": "Comentarios sobre motivación inicial al unirse a industrias clave."
+        },
+        {
+            "id": 28,
+            "quote": "En un mundo que cambia tan rápido, la única estrategia garantizada a fracasar es no tomar riesgos.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Famosa cita del fundador sobre el riesgo."
+        },
+        {
+            "id": 29,
+            "quote": "La calidad es más importante que la cantidad. Un 'home run' es mucho mejor que dos dobles.",
+            "speaker": "Steve Jobs",
+            "context": "Cita sobre calidad del producto, entrevistas."
+        },
+        {
+            "id": 30,
+            "quote": "Opero con el enfoque de la física para el análisis.",
+            "speaker": "Elon Musk",
+            "context": "Explicación de primeros principios en entrevistas."
+        },
+        {
+            "id": 31,
+            "quote": "La pregunta no es '¿qué queremos saber de la gente?'. Es '¿qué quiere contar la gente sobre sí misma?'.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Comentarios tempranos sobre la filosofía de Facebook."
+        },
+        {
+            "id": 32,
+            "quote": "No puedes conectar los puntos mirando hacia adelante; solo puedes conectarlos mirando hacia atrás.",
+            "speaker": "Steve Jobs",
+            "context": "Discurso de graduación de Stanford, 2005."
+        },
+        {
+            "id": 33,
+            "quote": "La paciencia es una virtud y estoy aprendiendo a tener paciencia. Es una dura lección.",
+            "speaker": "Elon Musk",
+            "context": "Comentarios en entrevista durante retrasos de producción."
+        },
+        {
+            "id": 34,
+            "quote": "Nada influye más en la gente que la recomendación de un amigo de confianza.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Filosofía del grafo social de Facebook."
+        },
+        {
+            "id": 35,
+            "quote": "Estoy tan orgulloso de muchas de las cosas que no hemos hecho como de las que hemos hecho.",
+            "speaker": "Steve Jobs",
+            "context": "Comentarios de WWDC sobre enfoque y contención."
+        },
+        {
+            "id": 36,
+            "quote": "Si te levantas por la mañana y piensas que el futuro va a ser mejor, es un día brillante. Si no, no lo es.",
+            "speaker": "Elon Musk",
+            "context": "Cita de optimismo en entrevistas."
+        },
+        {
+            "id": 37,
+            "quote": "Si haces primero las cosas que son más fáciles, entonces puedes llegar a progresar mucho.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Comentarios sobre proceso de ingeniería."
+        },
+        {
+            "id": 38,
+            "quote": "Las cosas no tienen que cambiar el mundo para ser importantes.",
+            "speaker": "Steve Jobs",
+            "context": "Reflexiones sobre el impacto del producto."
+        },
+        {
+            "id": 39,
+            "quote": "Preferiría ser optimista y equivocarme que pesimista y estar en lo cierto.",
+            "speaker": "Elon Musk",
+            "context": "Cita en entrevista pública sobre mentalidad."
+        },
+        {
+            "id": 40,
+            "quote": "Buscamos personas que estén apasionadas por algo.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Filosofía de contratación en entrevistas."
+        },
+        {
+            "id": 41,
+            "quote": "A veces, cuando innovas, cometes errores. Lo mejor es admitirlos rápidamente.",
+            "speaker": "Steve Jobs",
+            "context": "Conferencia WWDC, era de MobileMe."
+        },
+        {
+            "id": 42,
+            "quote": "No creo empresas por el mero hecho de crearlas, sino para lograr que las cosas se hagan.",
+            "speaker": "Elon Musk",
+            "context": "Entrevista, construcción de empresa enfocada en misiones."
+        },
+        {
+            "id": 43,
+            "quote": "Algunas personas sueñan con el éxito, mientras que otras se despiertan y trabajan duro en ello.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Cita motivacional comúnmente atribuida a su entorno startup."
+        },
+        {
+            "id": 44,
+            "quote": "Estoy convencido de que la mitad de lo que separa a los emprendedores exitosos de los no exitosos es la pura perseverancia.",
+            "speaker": "Steve Jobs",
+            "context": "Entrevista sobre el emprendimiento."
+        },
+        {
+            "id": 45,
+            "quote": "Simplemente deja de decir m*erdas. Deja de mentir.",
+            "speaker": "Elon Musk",
+            "context": "Declaraciones públicas a críticos en redes sociales."
+        },
+        {
+            "id": 46,
+            "quote": "Al darle a la gente el poder de compartir, estamos haciendo que el mundo sea más transparente.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Era de la declaración de misión de Facebook."
+        },
+        {
+            "id": 47,
+            "quote": "Los detalles importan, vale la pena esperar para hacerlo bien.",
+            "speaker": "Steve Jobs",
+            "context": "Filosofía de diseño en entrevistas de la época de Apple."
+        },
+        {
+            "id": 48,
+            "quote": "Si necesitas palabras de inspiración, no lo hagas.",
+            "speaker": "Elon Musk",
+            "context": "Consejo a emprendedores, entrevista."
+        },
+        {
+            "id": 49,
+            "quote": "Nuestro objetivo no es construir una plataforma, es cruzar todas ellas.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Comentarios sobre estrategia en años de expansión."
+        },
+        {
+            "id": 50,
+            "quote": "La única forma de hacer un gran trabajo es amar lo que haces.",
+            "speaker": "Steve Jobs",
+            "context": "Discurso de graduación de Stanford, 2005."
+        },
+        {
+            "id": 51,
+            "quote": "Yo soy el fallo en el sistema (el glitch).",
+            "speaker": "Elon Musk",
+            "context": "Publicación al estilo teoría de simulación en redes."
+        },
+        {
+            "id": 52,
+            "quote": "Estoy aquí para construir algo a largo plazo. Cualquier otra cosa es una distracción.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Carta fundacional sobre enfoque a largo plazo."
+        },
+        {
+            "id": 53,
+            "quote": "Si no lo has encontrado aún, sigue buscando. No te conformes.",
+            "speaker": "Steve Jobs",
+            "context": "Discurso de graduación de Stanford, 2005."
+        },
+        {
+            "id": 54,
+            "quote": "Sigo olvidando que sigues vivo.",
+            "speaker": "Elon Musk",
+            "context": "Respuesta en tuit, 2021."
+        },
+        {
+            "id": 55,
+            "quote": "Si trabajas en algo que te gusta y te apasiona, no necesitas tener un plan maestro.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Consejos en entrevistas/Q&A."
+        },
+        {
+            "id": 56,
+            "quote": "No tenemos la oportunidad de hacer tantas cosas, y cada una de ellas debería ser realmente excelente.",
+            "speaker": "Steve Jobs",
+            "context": "Cita sobre enfoque de producto en keynotes/entrevistas."
+        },
+        {
+            "id": 57,
+            "quote": "Por lo que sabemos, somos la única vida que existe.",
+            "speaker": "Elon Musk",
+            "context": "Argumento sobre expansión interplanetaria, entrevistas."
+        },
+        {
+            "id": 58,
+            "quote": "Mi objetivo nunca fue simplemente crear una empresa. Fue construir algo que realmente marcara un gran cambio en el mundo.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Marco de misión en comunicaciones fundacionales."
+        },
+        {
+            "id": 59,
+            "quote": "Las personas mayores se sientan y preguntan, '¿Qué es esto?', pero el chico pregunta, '¿Qué puedo hacer con esto?'",
+            "speaker": "Steve Jobs",
+            "context": "Comentarios sobre curiosidad y tecnología."
+        },
+        {
+            "id": 60,
+            "quote": "Creo que deberían haber regulaciones... en la medida en que afecten negativamente el bienestar público.",
+            "speaker": "Elon Musk",
+            "context": "Comentarios sobre IA en entrevistas públicas."
+        },
+        {
+            "id": 61,
+            "quote": "Estamos construyendo la nueva infraestructura para el mundo.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Plataforma e infraestructura en declaraciones públicas."
+        },
+        {
+            "id": 62,
+            "quote": "Tu tiempo es limitado, así que no lo desperdicies viviendo la vida de otro.",
+            "speaker": "Steve Jobs",
+            "context": "Discurso de graduación de Stanford, 2005."
+        },
+        {
+            "id": 63,
+            "quote": "La gente trabaja mejor cuando sabe cuál es su meta y el por qué.",
+            "speaker": "Elon Musk",
+            "context": "Principio de gestión en entrevistas/correos."
+        },
+        {
+            "id": 64,
+            "quote": "Adquieres reputación de estabilidad si te mantienes estable durante años.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Comentarios de liderazgo sobre consistencia en el tiempo."
+        },
+        {
+            "id": 65,
+            "quote": "No se trata de cultura pop y no se trata de engañar a la gente.",
+            "speaker": "Steve Jobs",
+            "context": "Filosofía de innovación en entrevistas."
+        },
+        {
+            "id": 66,
+            "quote": "Cuando algo es lo suficientemente importante, lo haces a pesar de que las probabilidades no estén a tu favor.",
+            "speaker": "Elon Musk",
+            "context": "Cita de entrevista sobre perseverancia."
+        },
+        {
+            "id": 67,
+            "quote": "Literalmente lo codifiqué en mi habitación de residencia y lo lancé desde allí.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Historia sobre el origen como fundador."
+        },
+        {
+            "id": 68,
+            "quote": "La muerte es posiblemente el mejor invento único de la Vida.",
+            "speaker": "Steve Jobs",
+            "context": "Discurso de graduación de Stanford, 2005."
+        },
+        {
+            "id": 69,
+            "quote": "A algunas personas no les gustan los cambios, pero tienes que adoptar el cambio si la alternativa es el desastre.",
+            "speaker": "Elon Musk",
+            "context": "Entrevista sobre cambio y disrupción."
+        },
+        {
+            "id": 70,
+            "quote": "Creo que la gente tiene este deseo nuclear de expresar quiénes son.",
+            "speaker": "Mark Zuckerberg",
+            "context": "Filosofía del producto y la expresión social."
+        }
+    ]
+}

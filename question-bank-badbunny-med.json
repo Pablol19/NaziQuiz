@@ -1,0 +1,510 @@
+{
+    "title": "Guess the Song: Bad Bunny Medium Level",
+    "language": "English",
+    "questions": [
+        {
+            "id": 1,
+            "quote": "Penthouse con vista al mar, es lo único que tengo pa’ poder pasar",
+            "options": [
+                {
+                    "name": "Otra Noche en Miami",
+                    "isCorrect": true
+                },
+                {
+                    "name": "RLNDT",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Ni Bien Ni Mal",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "quote": "Hoy salí pa’ la calle suelto, sin sentimientos",
+            "options": [
+                {
+                    "name": "Una Vez",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Vete",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Ignorantes",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "quote": "Yo no quiero que me extrañe’, yo lo que quiero e’ que me olvide’",
+            "options": [
+                {
+                    "name": "Un Verano Sin Ti",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Bye Me Fui",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Haciendo que me amas",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "quote": "Mami, me tienes a la patá’, te pienso en la cabaña",
+            "options": [
+                {
+                    "name": "A Tu Merced",
+                    "isCorrect": true
+                },
+                {
+                    "name": "La Santa",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Safaera",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "quote": "Yo no soy un santo, yo nunca te prometí",
+            "options": [
+                {
+                    "name": "La Santa",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Ignorantes",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Que Malo",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "quote": "El sol salió, el agua está ready para un chapuzón",
+            "options": [
+                {
+                    "name": "El Apagón",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Después de la Playa",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Enséñame a Bailar",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "quote": "Si tú me lo pide’ yo me porto bonito",
+            "options": [
+                {
+                    "name": "Me Porto Bonito",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Tarot",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Efecto",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "quote": "A mí me gusta el arte, a ti te gusta el party",
+            "options": [
+                {
+                    "name": "Party",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Tarot",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Un Ratito",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "quote": "Tengo la salsa, tengo el pique",
+            "options": [
+                {
+                    "name": "Booker T",
+                    "isCorrect": true
+                },
+                {
+                    "name": "25/8",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Chambea",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "quote": "Mami, tú ere’ mi sol, mi luna y mis estrellas",
+            "options": [
+                {
+                    "name": "Trellas",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Ojitos Lindos",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Un Coco",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "quote": "Me gustan las de treinta y las de veinte",
+            "options": [
+                {
+                    "name": "Tití Me Preguntó",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Safaera",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Me Porto Bonito",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "quote": "Yo no soy un rapero, yo soy un artista",
+            "options": [
+                {
+                    "name": "Booker T",
+                    "isCorrect": true
+                },
+                {
+                    "name": "25/8",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Chambea",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "quote": "No quiero que más nadie me hable de amor",
+            "options": [
+                {
+                    "name": "Ignorantes",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Vete",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Amorfoda",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "quote": "Dime qué pasó, qué nos pasó",
+            "options": [
+                {
+                    "name": "Vete",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Ignorantes",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Bye Me Fui",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "quote": "A mí no me importa lo que digan los demás",
+            "options": [
+                {
+                    "name": "Estamos Bien",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Ni Bien Ni Mal",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Yo Perreo Sola",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "quote": "Diez en punto en mi reloj, recordándome de ti",
+            "options": [
+                {
+                    "name": "Otra Noche en Miami",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Si Estuviésemos Juntos",
+                    "isCorrect": false
+                },
+                {
+                    "name": "RLNDT",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "quote": "Tengo el clóset lleno ’e ropa, pero me siento desnudo",
+            "options": [
+                {
+                    "name": "RLNDT",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Caro",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Pero Ya No",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "quote": "A veces siento que no soy yo, que no soy el mismo",
+            "options": [
+                {
+                    "name": "RLNDT",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Ni Bien Ni Mal",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Si Estuviésemos Juntos",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "quote": "Yo no soy perfecto, pero trato de serlo pa’ ti",
+            "options": [
+                {
+                    "name": "Haciendo que me amas",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Ignorantes",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Vete",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "quote": "Sorry por ser yo, ey, y no ser el hombre que te merecías",
+            "options": [
+                {
+                    "name": "Un Verano Sin Ti",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Bye Me Fui",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Haciendo que me amas",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "quote": "Llegó soliá, salió sin la’ amiga’, revelá’",
+            "options": [
+                {
+                    "name": "Soliá",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Bichiyal",
+                    "isCorrect": false
+                },
+                {
+                    "name": "La Santa",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "quote": "Mami, tú eres la jefa, la que controla el bloque",
+            "options": [
+                {
+                    "name": "Bichiyal",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Safaera",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Yo Perreo Sola",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "quote": "Tú eres mi medicina, mi cura pa’l dolor",
+            "options": [
+                {
+                    "name": "Un Coco",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Ojitos Lindos",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Efecto",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "quote": "Te vo’ a dar con euforia, tú ere’ mi Zendaya",
+            "options": [
+                {
+                    "name": "Dos Mil 16",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Tarot",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Un Ratito",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 25,
+            "quote": "Yo no te pido que te quedes, solo que no te vayas",
+            "options": [
+                {
+                    "name": "Bye Me Fui",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Ignorantes",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Vete",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 26,
+            "quote": "La calle bota fuego, fuego, fuego",
+            "options": [
+                {
+                    "name": "Puesto Pa’ Guerrial",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Safaera",
+                    "isCorrect": false
+                },
+                {
+                    "name": "El Apagón",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 27,
+            "quote": "Mami, tú estás dura, tú pareces una escultura",
+            "options": [
+                {
+                    "name": "Safaera",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Bichiyal",
+                    "isCorrect": false
+                },
+                {
+                    "name": "La Santa",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": 28,
+            "quote": "Yo no soy celoso, pero dime quién es ese cabrón",
+            "options": [
+                {
+                    "name": "Yo No Soy Celoso",
+                    "isCorrect": true
+                },
+                {
+                    "name": "Efecto",
+                    "isCorrect": false
+                },
+                {
+                    "name": "Tarot",
+                    "isCorrect": false
+                }
+            ]
+        }
+    ]
+}

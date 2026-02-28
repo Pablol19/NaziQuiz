@@ -10,15 +10,34 @@ const QUIZ_CATALOG = {
       id: "politics",
       name: "Política & Poder",
       quizzes: [
-        { id: "classic", label: "Trump vs Hitler vs Ye", file: "question-bank.json", free: true },
-        { id: "tye", label: "Trump vs Elon vs Ye", file: "question-bank-trump-elon-ye.json", free: true, image: "imagenes/trump-elon-ye.jpg" }
+        { id: "classic", label: "Trump vs Hitler vs Ye", file: { en: "question-bank.json", es: "question-bank-es.json" }, free: true },
+        { id: "tye", label: "Trump vs Elon vs Ye", file: { en: "question-bank-trump-elon-ye.json", es: "question-bank-trump-elon-ye-es.json" }, free: true, image: "imagenes/trump-elon-ye.jpg" }
       ]
     },
     {
       id: "tech",
       name: "Tech Titans",
       quizzes: [
-        { id: "ejz", label: "Elon vs Jobs vs Zuck", file: "question-bank-elon-jobs-zuck.json", free: true, image: "imagenes/elon-jobs-zuck.jpg" }
+        { id: "ejz", label: "Elon vs Jobs vs Zuck", file: { en: "question-bank-elon-jobs-zuck.json", es: "question-bank-elon-jobs-zuck-es.json" }, free: true, image: "imagenes/elon-jobs-zuck.jpg" },
+        { id: "esl", label: "Elon vs Stark vs Luthor", file: { en: "question-bank-elon-stark-luthor.json", es: "question-bank-elon-stark-luthor-es.json" }, free: true }
+      ]
+    },
+    {
+      id: "music",
+      name: "Cantantes",
+      quizzes: [
+        {
+          id: "badbunny_group",
+          label: "Bad Bunny",
+          isGroup: true,
+          free: true,
+          image: "imagenes/bad-bunny.jpg",
+          levels: [
+            { id: "bb_easy", label: "Fácil", file: { en: "question-bank-badbunny-easy.json", es: "question-bank-badbunny-easy-es.json" }, free: true },
+            { id: "bb_med", label: "Medio", file: { en: "question-bank-badbunny-med-es.json", es: "question-bank-badbunny-med-es.json" }, free: true },
+            { id: "bb_hard", label: "Difícil", file: { en: "question-bank-badbunny-hard-es.json", es: "question-bank-badbunny-hard-es.json" }, free: true }
+          ]
+        }
       ]
     }
   ]
@@ -26,9 +45,17 @@ const QUIZ_CATALOG = {
 
 // Derived flat lookup for backward compatibility
 const QUIZ_CONFIGS = {};
+const QUIZ_GROUPS = {};
 QUIZ_CATALOG.categories.forEach(cat => {
   cat.quizzes.forEach(q => {
-    QUIZ_CONFIGS[q.id] = { label: q.label, file: q.file };
+    if (q.isGroup) {
+      QUIZ_GROUPS[q.id] = q;
+      q.levels.forEach(lvl => {
+        QUIZ_CONFIGS[lvl.id] = { label: `${q.label} - ${lvl.label}`, file: lvl.file };
+      });
+    } else {
+      QUIZ_CONFIGS[q.id] = { label: q.label, file: q.file };
+    }
   });
 });
 
@@ -48,6 +75,13 @@ const THEME_OPTIONS = [
 ];
 const THEME_IDS = new Set(THEME_OPTIONS.map((option) => option.id));
 
+const LANG_KEY = `${STORAGE_KEY_BASE}:lang`;
+const LANG_OPTIONS = [
+  { id: "es", label: "Español" },
+  { id: "en", label: "English" }
+];
+const LANG_IDS = new Set(LANG_OPTIONS.map((option) => option.id));
+
 function getSavedTheme() {
   const stored = localStorage.getItem(THEME_KEY);
   return THEME_IDS.has(stored) ? stored : "light";
@@ -57,6 +91,18 @@ function applyTheme(themeId) {
   const next = THEME_IDS.has(themeId) ? themeId : "light";
   if (document.body) document.body.setAttribute("data-theme", next);
   localStorage.setItem(THEME_KEY, next);
+}
+
+function getSavedLang() {
+  const stored = localStorage.getItem(LANG_KEY);
+  return LANG_IDS.has(stored) ? stored : "es";
+}
+
+function applyLang(langId) {
+  const next = LANG_IDS.has(langId) ? langId : "es";
+  localStorage.setItem(LANG_KEY, next);
+  if (document.documentElement) document.documentElement.setAttribute("lang", next);
+  window.location.reload();
 }
 
 /* ── Subtle SFX Engine (Web Audio API) ── */
@@ -190,6 +236,7 @@ const friendNameInput = document.querySelector("#friend-name-input");
 const friendAddButton = document.querySelector("#friend-add");
 const friendsListNode = document.querySelector("#friends-list");
 const topThemeSelect = document.querySelector("#top-theme-select");
+const topLangSelect = document.querySelector("#top-lang-select");
 
 const statStreak = document.querySelector("#stat-streak");
 const statBestStreak = document.querySelector("#stat-best-streak");
@@ -235,10 +282,12 @@ const appState = {
 };
 
 applyTheme(getSavedTheme());
+if (document.documentElement) document.documentElement.setAttribute("lang", getSavedLang());
 
 function getDailyQuizId(dateKey) {
   const hash = hashString(`daily-quiz-rotation:${dateKey}`);
-  return ALL_QUIZ_IDS[hash % ALL_QUIZ_IDS.length];
+  const VALID_DAILY_IDS = ALL_QUIZ_IDS.filter((id) => id !== "bb_hard" && id !== "bb_expert");
+  return VALID_DAILY_IDS[hash % VALID_DAILY_IDS.length];
 }
 
 function isQuizUnlocked(quizEntry, playerLevel) {
@@ -487,8 +536,9 @@ function normalizeQuizData(rawData) {
 
 async function loadQuizData(quizId) {
   const quizConfig = QUIZ_CONFIGS[quizId] || QUIZ_CONFIGS[DEFAULT_QUIZ_ID];
+  const lang = getSavedLang();
   try {
-    const response = await fetch(quizConfig.file, { cache: "no-store" });
+    const response = await fetch(quizConfig.file[lang], { cache: "no-store" });
     if (response.ok) {
       const remoteData = await response.json();
       const normalizedRemote = normalizeQuizData(remoteData);
@@ -2018,12 +2068,13 @@ function renderExplorePanel() {
       const tagClass = q.free ? 'tag-free' : (unlocked ? 'tag-unlocked' : 'tag-locked');
       return `
         <button class="ex-card${unlocked ? '' : ' is-locked'}${isDaily ? ' is-daily' : ''}" 
-                data-quiz="${q.id}" data-category="${cat.id}" ${unlocked ? '' : 'disabled'} type="button">
+                data-quiz="${q.id}" data-is-group="${Boolean(q.isGroup)}" data-category="${cat.id}" ${unlocked ? '' : 'disabled'} type="button">
           <div class="card-art">
             ${q.image ? `<img src="${q.image}" alt="${q.label}" loading="lazy" />` : ''}
           </div>
           ${isDaily ? '<span class="card-daily-badge">HOY</span>' : ''}
           <div class="card-content">
+            ${q.image ? '' : `<h4 class="card-label">${q.label}</h4>`}
             <span class="card-tag ${tagClass}">${lockTag}</span>
           </div>
         </button>
@@ -2043,7 +2094,14 @@ function renderExplorePanel() {
   exploreGrid.querySelectorAll('.ex-card:not(.is-locked)').forEach(card => {
     card.addEventListener('click', () => {
       const quizId = card.dataset.quiz;
+      const isGroup = card.dataset.isGroup === "true";
       if (!quizId) return;
+
+      if (isGroup && QUIZ_GROUPS[quizId]) {
+        showLevelModal(QUIZ_GROUPS[quizId], isExplorePage);
+        return;
+      }
+
       if (isExplorePage) {
         window.location.href = `index.html?practice=${quizId}`;
       } else {
@@ -2051,6 +2109,56 @@ function renderExplorePanel() {
       }
     });
   });
+}
+
+function showLevelModal(groupConfig, isExplorePage) {
+  const backdrop = document.createElement('div');
+  backdrop.className = 'social-backdrop';
+  backdrop.style.display = 'flex';
+  backdrop.style.alignItems = 'center';
+  backdrop.style.justifyContent = 'center';
+  backdrop.style.zIndex = '9999';
+
+  const modal = document.createElement('div');
+  modal.className = 'social-drawer';
+  modal.style.position = 'relative';
+  modal.style.transform = 'none';
+  modal.style.width = '90%';
+  modal.style.maxWidth = '320px';
+  modal.style.padding = '24px';
+  modal.style.borderRadius = '24px';
+
+  let levelButtons = groupConfig.levels.map(lvl => {
+    return `<button class="btn btn-outline" style="width: 100%; margin-bottom: 8px; justify-content: center;" data-lvl="${lvl.id}">${lvl.label}</button>`;
+  }).join('');
+
+  modal.innerHTML = `
+    <div style="text-align: center; margin-bottom: 16px;">
+      <h3 style="margin:0 0 4px 0;">Nivel de Dificultad</h3>
+      <p style="margin:0; font-size: 0.9rem; color: var(--text-muted);">${groupConfig.label}</p>
+    </div>
+    ${levelButtons}
+    <button class="btn" id="close-lvl-modal" style="width: 100%; margin-top: 8px; justify-content: center; background: var(--bg-card); color: var(--ink);">Cancelar</button>
+  `;
+
+  backdrop.appendChild(modal);
+  document.body.appendChild(backdrop);
+  backdrop.hidden = false;
+
+  modal.querySelectorAll('button[data-lvl]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedLvl = btn.dataset.lvl;
+      backdrop.remove();
+      if (isExplorePage) {
+        window.location.href = `index.html?practice=${selectedLvl}`;
+      } else {
+        startExploreMatch(selectedLvl);
+      }
+    });
+  });
+
+  modal.querySelector('#close-lvl-modal').addEventListener('click', () => backdrop.remove());
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) backdrop.remove(); });
 }
 
 async function startExploreMatch(quizId) {
@@ -2284,6 +2392,17 @@ function initTopThemeControl() {
   });
 }
 
+function initTopLangControl() {
+  if (!topLangSelect) return;
+  topLangSelect.innerHTML = LANG_OPTIONS
+    .map((option) => `<option value="${option.id}">${option.label}</option>`)
+    .join("");
+  topLangSelect.value = getSavedLang();
+  topLangSelect.addEventListener("change", () => {
+    applyLang(topLangSelect.value);
+  });
+}
+
 function renderFriendsList() {
   if (!friendsListNode) return;
   const friends = Array.isArray(appState.profile.friends) ? appState.profile.friends : [];
@@ -2373,14 +2492,18 @@ async function init() {
 
   appState.quizData = await loadQuizData(appState.quizId);
   if (!appState.quizData || !Array.isArray(appState.quizData.questions) || !appState.quizData.questions.length) {
-    if (dailyGameNode) dailyGameNode.textContent = "No se pudo cargar la partida diaria.";
-    return;
+    if (dailyGameNode) dailyGameNode.innerHTML = "<p>No hay preguntas disponibles para hoy.</p>";
+    appState.dailyQuestions = [];
+    appState.playerCount = randomPlayersCount();
+    // Allow init to continue so Explore works even if Daily is empty/broken
+  } else {
+    appState.dailyQuestions = buildDailyQuestionSet();
+    appState.playerCount = randomPlayersCount();
   }
 
   appState.todayKey = toDateKey(new Date());
   appState.profile = loadProfile();
   recoverAbandonIfNeeded();
-  appState.dailyQuestions = buildDailyQuestionSet();
   appState.todayResult = getTodayResult();
   appState.dailyMission = getDailyMission(appState.todayKey);
   appState.playerCount = randomPlayersCount();
@@ -2389,6 +2512,7 @@ async function init() {
   initRankingControls();
   initProfileControls();
   initTopThemeControl();
+  initTopLangControl();
   initProfileDropdown();
   renderProfileChip();
   initSocialPanel();

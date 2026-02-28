@@ -1,0 +1,426 @@
+{
+    "title": "Who said it? Elon, Stark, or Luthor",
+    "language": "English",
+    "questions": [
+        {
+            "id": 1,
+            "quote": "Peace means having a bigger stick than the other guy.",
+            "speaker": "Tony Stark",
+            "context": "Explaining his defense philosophy in the first Iron Man film."
+        },
+        {
+            "id": 2,
+            "quote": "I would like to die on Mars. Just not on impact.",
+            "speaker": "Elon Musk",
+            "context": "His famous, morbid quip about SpaceX's goals."
+        },
+        {
+            "id": 3,
+            "quote": "Do you know the oldest lie in America? It's that power can be innocent.",
+            "speaker": "Lex Luthor",
+            "context": "Spoken to a senator in Batman v Superman."
+        },
+        {
+            "id": 4,
+            "quote": "There's a billion-to-one chance we're living in base reality.",
+            "speaker": "Elon Musk",
+            "context": "Discussing simulation theory at a tech conference."
+        },
+        {
+            "id": 5,
+            "quote": "I successfully privatized world peace.",
+            "speaker": "Tony Stark",
+            "context": "Bragging to Congress in Iron Man 2."
+        },
+        {
+            "id": 6,
+            "quote": "Some people can read War and Peace and come away thinking it's a simple adventure story. Others can read the ingredients on a chewing gum wrapper and unlock the secrets of the universe.",
+            "speaker": "Lex Luthor",
+            "context": "Gene Hackman's iconic line in the 1978 Superman film."
+        },
+        {
+            "id": 7,
+            "quote": "I am a free speech absolutist.",
+            "speaker": "Elon Musk",
+            "context": "His tweet regarding social media moderation."
+        },
+        {
+            "id": 8,
+            "quote": "Sometimes you gotta run before you can walk.",
+            "speaker": "Tony Stark",
+            "context": "Testing his early flight thrusters in Iron Man."
+        },
+        {
+            "id": 9,
+            "quote": "If man won't kill God, the Devil will do it!",
+            "speaker": "Lex Luthor",
+            "context": "Creating Doomsday in Batman v Superman."
+        },
+        {
+            "id": 10,
+            "quote": "I think it is possible for ordinary people to choose to be extraordinary.",
+            "speaker": "Elon Musk",
+            "context": "An inspirational quote from an interview."
+        },
+        {
+            "id": 11,
+            "quote": "Is it better to be feared or respected? I say, is it too much to ask for both?",
+            "speaker": "Tony Stark",
+            "context": "Presenting the Jericho missile in Iron Man."
+        },
+        {
+            "id": 12,
+            "quote": "Devils don't come from hell beneath us. No, they come from the sky.",
+            "speaker": "Lex Luthor",
+            "context": "Looking at a painting of angels and demons in Batman v Superman."
+        },
+        {
+            "id": 13,
+            "quote": "Who controls the memes, controls the Universe.",
+            "speaker": "Elon Musk",
+            "context": "A tech-bro philosophy tweeted in 2020."
+        },
+        {
+            "id": 14,
+            "quote": "We create our own demons.",
+            "speaker": "Tony Stark",
+            "context": "The opening narration of Iron Man 3."
+        },
+        {
+            "id": 15,
+            "quote": "If God is all-powerful, He cannot be all good. And if He is all good, then He cannot be all-powerful.",
+            "speaker": "Lex Luthor",
+            "context": "His theological argument against Superman in BvS."
+        },
+        {
+            "id": 16,
+            "quote": "I’m nauseatingly pro-human.",
+            "speaker": "Elon Musk",
+            "context": "Defending his stance on human survival and AI."
+        },
+        {
+            "id": 17,
+            "quote": "I told you, I don't want to join your super-secret boy band.",
+            "speaker": "Tony Stark",
+            "context": "Rejecting Nick Fury's Avengers initiative in Iron Man 2."
+        },
+        {
+            "id": 18,
+            "quote": "God is tribal. God takes sides.",
+            "speaker": "Lex Luthor",
+            "context": "More of his theology from Batman v Superman."
+        },
+        {
+            "id": 19,
+            "quote": "If I die under mysterious circumstances, it’s been nice knowin ya.",
+            "speaker": "Elon Musk",
+            "context": "A paranoid tweet posted during tensions with Russia."
+        },
+        {
+            "id": 20,
+            "quote": "My armor, it was never a distraction or a hobby, it was a cocoon.",
+            "speaker": "Tony Stark",
+            "context": "Explaining his PTSD coping mechanism in Iron Man 3."
+        },
+        {
+            "id": 21,
+            "quote": "The bittersweet pain among men is having knowledge with no power.",
+            "speaker": "Lex Luthor",
+            "context": "Complaining about politicians in Batman v Superman."
+        },
+        {
+            "id": 22,
+            "quote": "I am an alien.",
+            "speaker": "Elon Musk",
+            "context": "A literal, contextless tweet from 2021."
+        },
+        {
+            "id": 23,
+            "quote": "You're missing the point. There's no throne. There is no version of this where you come out on top.",
+            "speaker": "Tony Stark",
+            "context": "Threatening Loki in The Avengers."
+        },
+        {
+            "id": 24,
+            "quote": "The bell's already been rung. And they've heard it. Out in the dark. Among the stars.",
+            "speaker": "Lex Luthor",
+            "context": "His terrifying final warning in Batman v Superman."
+        },
+        {
+            "id": 25,
+            "quote": "My mind is a storm... I don't think most people would want to be me.",
+            "speaker": "Elon Musk",
+            "context": "Describing his brain on the Joe Rogan podcast."
+        },
+        {
+            "id": 26,
+            "quote": "Everything I've done, everything I'll do today, everything I'll ever do, I do to protect this world.",
+            "speaker": "Tony Stark",
+            "context": "Explaining his motivation in the MCU."
+        },
+        {
+            "id": 27,
+            "quote": "You're a flying god who is too stupid to see the strings.",
+            "speaker": "Lex Luthor",
+            "context": "Insulting Superman's naivety."
+        },
+        {
+            "id": 28,
+            "quote": "I operate on the physics approach to analysis.",
+            "speaker": "Elon Musk",
+            "context": "Describing his First Principles thinking."
+        },
+        {
+            "id": 29,
+            "quote": "It's not about me. It's not about you. It's about the legacy we leave behind.",
+            "speaker": "Tony Stark",
+            "context": "Discussing the future of Stark Industries."
+        },
+        {
+            "id": 30,
+            "quote": "To see a god bleed... what a privilege.",
+            "speaker": "Lex Luthor",
+            "context": "Enjoying the use of Kryptonite."
+        },
+        {
+            "id": 31,
+            "quote": "I am the glitch.",
+            "speaker": "Elon Musk",
+            "context": "A surreal joke he tweeted."
+        },
+        {
+            "id": 32,
+            "quote": "I know I said no more surprises, but I gotta say, I was really hoping to pull off one last one.",
+            "speaker": "Tony Stark",
+            "context": "Recording his final message in Avengers: Endgame."
+        },
+        {
+            "id": 33,
+            "quote": "I am the greatest criminal mind of our time!",
+            "speaker": "Lex Luthor",
+            "context": "Gene Hackman's classic boast in 1978's Superman."
+        },
+        {
+            "id": 34,
+            "quote": "Just stop lying about sh*t. Just stop lying.",
+            "speaker": "Elon Musk",
+            "context": "Tweeting angrily at media or critics."
+        },
+        {
+            "id": 35,
+            "quote": "Following's not really my style.",
+            "speaker": "Tony Stark",
+            "context": "Dismissing Captain America's orders in The Avengers."
+        },
+        {
+            "id": 36,
+            "quote": "Mankind must be allowed to achieve its own destiny, free from the interference of alien overlords.",
+            "speaker": "Lex Luthor",
+            "context": "His core comic book motivation against aliens."
+        },
+        {
+            "id": 37,
+            "quote": "Some people don't like change, but you need to embrace change if the alternative is disaster.",
+            "speaker": "Elon Musk",
+            "context": "A 2014 quote about his relentless push for disruption."
+        },
+        {
+            "id": 38,
+            "quote": "I don't like people handing me things.",
+            "speaker": "Tony Stark",
+            "context": "His famous, quirky pet peeve from the MCU."
+        },
+        {
+            "id": 39,
+            "quote": "Mind over muscle.",
+            "speaker": "Lex Luthor",
+            "context": "His classic mantra proving brain beats brawn."
+        },
+        {
+            "id": 40,
+            "quote": "I keep forgetting that you're still alive.",
+            "speaker": "Elon Musk",
+            "context": "Infamously tweeted to Senator Bernie Sanders."
+        },
+        {
+            "id": 41,
+            "quote": "I see a suit of armor around the world.",
+            "speaker": "Tony Stark",
+            "context": "His paranoid pitch for the Ultron program."
+        },
+        {
+            "id": 42,
+            "quote": "No matter how much you try to save the world, it always manages to find a new way to destroy itself.",
+            "speaker": "Lex Luthor",
+            "context": "A classic comic book justification for his villainy."
+        },
+        {
+            "id": 43,
+            "quote": "To our knowledge, we are the only life that exists.",
+            "speaker": "Elon Musk",
+            "context": "Discussing the Fermi paradox."
+        },
+        {
+            "id": 44,
+            "quote": "They say that the best weapon is the one you never have to fire.",
+            "speaker": "Tony Stark",
+            "context": "Presenting weapons in Iron Man."
+        },
+        {
+            "id": 45,
+            "quote": "It's not about power. It's about the intellect. Power is just a side effect.",
+            "speaker": "Lex Luthor",
+            "context": "A philosophical comic book quote."
+        },
+        {
+            "id": 46,
+            "quote": "If you need inspiring words, don't do it.",
+            "speaker": "Elon Musk",
+            "context": "His blunt, anti-motivational advice."
+        },
+        {
+            "id": 47,
+            "quote": "I prefer the weapon you only have to fire once.",
+            "speaker": "Tony Stark",
+            "context": "Presenting the Jericho missile."
+        },
+        {
+            "id": 48,
+            "quote": "I've spent my whole life proving that human ingenuity can overcome any obstacle, even a god.",
+            "speaker": "Lex Luthor",
+            "context": "His eternal struggle against the Man of Steel."
+        },
+        {
+            "id": 49,
+            "quote": "I could either watch it happen or be a part of it.",
+            "speaker": "Elon Musk",
+            "context": "Explaining why he got involved in aerospace."
+        },
+        {
+            "id": 50,
+            "quote": "You know, it's moments like these when I realize what a superhero I am.",
+            "speaker": "Tony Stark",
+            "context": "Being sarcastic while saving people in Iron Man 3."
+        },
+        {
+            "id": 51,
+            "quote": "People don't want to think. They want to be told what to think.",
+            "speaker": "Lex Luthor",
+            "context": "His cynical view of the general public."
+        },
+        {
+            "id": 52,
+            "quote": "When something is important enough, you do it even if the odds are not in your favor.",
+            "speaker": "Elon Musk",
+            "context": "Justifying his risky business ventures."
+        },
+        {
+            "id": 53,
+            "quote": "I'm just not the hero type. Clearly.",
+            "speaker": "Tony Stark",
+            "context": "Downplaying his own virtue in Iron Man."
+        },
+        {
+            "id": 54,
+            "quote": "We don't have to rely on aliens to save us. We can save ourselves.",
+            "speaker": "Lex Luthor",
+            "context": "The core of his xenophobic ideology."
+        },
+        {
+            "id": 55,
+            "quote": "My biggest mistake is probably weighing too much on someone's talent and not someone's personality.",
+            "speaker": "Elon Musk",
+            "context": "Reflecting on his hiring practices."
+        },
+        {
+            "id": 56,
+            "quote": "Sometimes the best we can do is to start over.",
+            "speaker": "Tony Stark",
+            "context": "Before destroying his suits in Iron Man 3."
+        },
+        {
+            "id": 57,
+            "quote": "Everything you do is a muscle reflex. My brain is my muscle.",
+            "speaker": "Lex Luthor",
+            "context": "Explaining his superiority in the comics."
+        },
+        {
+            "id": 58,
+            "quote": "I think most people can learn a lot more than they think they can.",
+            "speaker": "Elon Musk",
+            "context": "His philosophy on human potential."
+        },
+        {
+            "id": 59,
+            "quote": "I'm sorry, Earth is closed today. You better pack it up and get out of here.",
+            "speaker": "Tony Stark",
+            "context": "Insulting Ebony Maw in Avengers: Infinity War."
+        },
+        {
+            "id": 60,
+            "quote": "What are we without our intellect? We're just animals.",
+            "speaker": "Lex Luthor",
+            "context": "A philosophical justification for his ego."
+        },
+        {
+            "id": 61,
+            "quote": "Patience is a virtue, and I'm learning patience. It's a tough lesson.",
+            "speaker": "Elon Musk",
+            "context": "Admitting a flaw during a difficult production period."
+        },
+        {
+            "id": 62,
+            "quote": "I have a plan: Attack.",
+            "speaker": "Tony Stark",
+            "context": "His highly tactical suggestion in The Avengers."
+        },
+        {
+            "id": 63,
+            "quote": "Boys! We're not here to fight. We're here to conquer.",
+            "speaker": "Lex Luthor",
+            "context": "Kevin Spacey's line in Superman Returns."
+        },
+        {
+            "id": 64,
+            "quote": "I don't spend my time pontificating about high-concept things; I spend my time solving engineering and manufacturing problems.",
+            "speaker": "Elon Musk",
+            "context": "Defending his hands-on approach to factory floors."
+        },
+        {
+            "id": 65,
+            "quote": "I am a futurist.",
+            "speaker": "Tony Stark",
+            "context": "A classic descriptor of himself from Marvel Comics."
+        },
+        {
+            "id": 66,
+            "quote": "I don't want to destroy the world. I want to save it from itself.",
+            "speaker": "Lex Luthor",
+            "context": "His ultimate, twisted rationalization."
+        },
+        {
+            "id": 67,
+            "quote": "Starting a business is like eating glass and staring into the abyss.",
+            "speaker": "Elon Musk",
+            "context": "His dark analogy for entrepreneurship."
+        },
+        {
+            "id": 68,
+            "quote": "If we can't protect the Earth, you can be damn well sure we'll avenge it.",
+            "speaker": "Tony Stark",
+            "context": "Threatening Loki in The Avengers."
+        },
+        {
+            "id": 69,
+            "quote": "I’m not trying to be anyone’s savior. I’m just trying to think about the future and not be sad.",
+            "speaker": "Elon Musk",
+            "context": "A rare moment of grounded humility."
+        },
+        {
+            "id": 70,
+            "quote": "I was born with an intellect that is a curse as much as it is a gift.",
+            "speaker": "Lex Luthor",
+            "context": "A comic book quote about the burden of genius."
+        }
+    ]
+}

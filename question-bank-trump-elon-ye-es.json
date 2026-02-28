@@ -1,0 +1,426 @@
+{
+    "title": "¿Quién lo dijo? Trump, Elon, o Ye",
+    "language": "Spanish",
+    "questions": [
+        {
+            "id": 1,
+            "quote": "Sé más sobre fabricación que nadie que viva en la tierra actualmente.",
+            "speaker": "Elon Musk",
+            "context": "Entrevista con Chris Anderson en TED, 2022"
+        },
+        {
+            "id": 2,
+            "quote": "Tenemos los recursos como civilización para encontrar una utopía, pero estamos liderados por los más codiciosos y los menos nobles.",
+            "speaker": "Ye",
+            "context": "Discurso en Oxford Guild Society, 2015"
+        },
+        {
+            "id": 3,
+            "quote": "Nadie sabe más sobre tecnología que yo.",
+            "speaker": "Donald Trump",
+            "context": "Afirmación en mitin de campaña"
+        },
+        {
+            "id": 4,
+            "quote": "Si muero en circunstancias misteriosas, ha sido un placer conoceros.",
+            "speaker": "Elon Musk",
+            "context": "Tuit, mayo de 2022"
+        },
+        {
+            "id": 5,
+            "quote": "Siento que estoy demasiado ocupado escribiendo la historia como para leerla.",
+            "speaker": "Ye",
+            "context": "Entrevista en Reuters, 2009"
+        },
+        {
+            "id": 6,
+            "quote": "El virus mental 'woke' o es derrotado o ya nada más importa.",
+            "speaker": "Elon Musk",
+            "context": "Tuiteado frecuentemente desde 2022"
+        },
+        {
+            "id": 7,
+            "quote": "Solo yo puedo arreglarlo.",
+            "speaker": "Donald Trump",
+            "context": "Discurso de aceptación en la Convención RNC, 2016"
+        },
+        {
+            "id": 8,
+            "quote": "Hay una entre mil millones de posibilidades de que vivamos en la realidad base.",
+            "speaker": "Elon Musk",
+            "context": "Comentarios de teoría de la simulación en Code Conference, 2016"
+        },
+        {
+            "id": 9,
+            "quote": "Yo soy el elegido.",
+            "speaker": "Donald Trump",
+            "context": "Declaraciones en el césped de la Casa Blanca, 2019"
+        },
+        {
+            "id": 10,
+            "quote": "Yo soy un dios. Os acabo de decir quién creo que soy. Un dios.",
+            "speaker": "Ye",
+            "context": "Entrevista en BBC Radio 1 / Zane Lowe, 2013"
+        },
+        {
+            "id": 11,
+            "quote": "Soy un extraterrestre.",
+            "speaker": "Elon Musk",
+            "context": "Tuit, febrero de 2021"
+        },
+        {
+            "id": 12,
+            "quote": "Todo lo que sé sobre imanes es esto: dame un vaso de agua, déjame verterlo sobre los imanes, y ese es el final de los imanes.",
+            "speaker": "Donald Trump",
+            "context": "Mitin de campaña en Iowa, 2024"
+        },
+        {
+            "id": 13,
+            "quote": "Si dijera que no soy un genio, simplemente te estaría mintiendo a ti y a mí mismo.",
+            "speaker": "Ye",
+            "context": "Jimmy Kimmel Live!, 2013"
+        },
+        {
+            "id": 14,
+            "quote": "Los pronombres apestan.",
+            "speaker": "Elon Musk",
+            "context": "Tuit, julio de 2020"
+        },
+        {
+            "id": 15,
+            "quote": "Estoy un poco adormilado esta noche pero cuando me despierte voy a hacer 'death con 3' en EL PUEBLO JUDÍO.",
+            "speaker": "Ye",
+            "context": "Tuit, octubre de 2022"
+        },
+        {
+            "id": 16,
+            "quote": "Mi mente es una tormenta... no creo que la mayoría de la gente quisiera ser yo.",
+            "speaker": "Elon Musk",
+            "context": "Podcast Joe Rogan Experience, 2023"
+        },
+        {
+            "id": 17,
+            "quote": "Soy una persona muy inteligente. No tienen que decirme lo mismo con las mismas palabras todos y cada uno de los días.",
+            "speaker": "Donald Trump",
+            "context": "Fox News Sunday, 2016"
+        },
+        {
+            "id": 18,
+            "quote": "La sociedad ha puesto tantas barreras... que es casi imposible que salga un pensamiento puro.",
+            "speaker": "Ye",
+            "context": "Entrevista en BBC Radio 1, 2013"
+        },
+        {
+            "id": 19,
+            "quote": "Creo que disculparse es algo genial, pero tienes que estar equivocado.",
+            "speaker": "Donald Trump",
+            "context": "The Tonight Show, 2015"
+        },
+        {
+            "id": 20,
+            "quote": "Apelo a las fantasías de las personas... Por eso una pequeña hipérbole nunca está de más.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal, 1987"
+        },
+        {
+            "id": 21,
+            "quote": "Yo soy el nuevo Moisés.",
+            "speaker": "Ye",
+            "context": "Tuit, septiembre de 2020"
+        },
+        {
+            "id": 22,
+            "quote": "Me va bastante bien para ser un genio.",
+            "speaker": "Ye",
+            "context": "Cita en entrevista"
+        },
+        {
+            "id": 23,
+            "quote": "¿Sabes lo que es el uranio, verdad? Es esta cosa llamada armas nucleares. Y otras cosas.",
+            "speaker": "Donald Trump",
+            "context": "Rueda de prensa, 2017"
+        },
+        {
+            "id": 24,
+            "quote": "Creo que es posible que personas ordinarias elijan ser extraordinarias.",
+            "speaker": "Elon Musk",
+            "context": "Entrevista, 2012"
+        },
+        {
+            "id": 25,
+            "quote": "Mi ego es mi truco para mantenerme cuerdo.",
+            "speaker": "Ye",
+            "context": "Cita en entrevista"
+        },
+        {
+            "id": 26,
+            "quote": "Nadie tiene mayor respeto por la inteligencia que yo.",
+            "speaker": "Donald Trump",
+            "context": "Declaración en entrevista/campaña"
+        },
+        {
+            "id": 27,
+            "quote": "A algunas personas no les gustan los cambios, pero tienes que adoptar el cambio si la alternativa es el desastre.",
+            "speaker": "Elon Musk",
+            "context": "Cita sobre innovación, 2014"
+        },
+        {
+            "id": 28,
+            "quote": "En realidad no puedo ser antisemita porque la gente negra en realidad también es judía.",
+            "speaker": "Ye",
+            "context": "Tuit, octubre de 2022"
+        },
+        {
+            "id": 29,
+            "quote": "Mis dedos son largos y hermosos, como ha quedado bien documentado, al igual que otras varias partes de mi cuerpo.",
+            "speaker": "Donald Trump",
+            "context": "Cita en el New York Post"
+        },
+        {
+            "id": 30,
+            "quote": "Tengo instinto (gut) y mi instinto me dice más a veces de lo que el cerebro de cualquier otro me podrá decir jamás.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista, 2018"
+        },
+        {
+            "id": 31,
+            "quote": "Quien controla los memes, controla el Universo.",
+            "speaker": "Elon Musk",
+            "context": "Tuit, junio de 2020"
+        },
+        {
+            "id": 32,
+            "quote": "Parte de mi belleza se debe a que soy muy rico.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista en Good Morning America, 2011"
+        },
+        {
+            "id": 33,
+            "quote": "Me doy cuenta de que mi sitio y posición en la historia es que pasaré a ella como la voz de esta generación.",
+            "speaker": "Ye",
+            "context": "Alarde en una entrevista a principios de su carrera"
+        },
+        {
+            "id": 34,
+            "quote": "A veces la gente escribe novelas y son demasiado farragosos y muy egocéntricos.",
+            "speaker": "Ye",
+            "context": "Entrevista en Reuters, 2009"
+        },
+        {
+            "id": 35,
+            "quote": "Soy repugnantemente pro-humano.",
+            "speaker": "Elon Musk",
+            "context": "Cita en entrevista sobre IA/futuro de la humanidad"
+        },
+        {
+            "id": 36,
+            "quote": "Creo que la única diferencia entre yo y los otros candidatos es que yo soy más honesto y mis mujeres son más guapas.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista sobre la campaña para el Partido Reformista, 1999"
+        },
+        {
+            "id": 37,
+            "quote": "Mi mentalidad es la de un samurái. Preferiría hacerme el seppuku a fracasar.",
+            "speaker": "Elon Musk",
+            "context": "Cita en una era de presión inicial en la empresa"
+        },
+        {
+            "id": 38,
+            "quote": "Intento aprender del pasado, pero planeo el futuro concentrándome exclusivamente en el presente.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal, 1987"
+        },
+        {
+            "id": 39,
+            "quote": "No puedes mirar si un vaso está medio lleno o vacío si está rebosando.",
+            "speaker": "Ye",
+            "context": "Tuit, 2010"
+        },
+        {
+            "id": 40,
+            "quote": "Si te levantas por la mañana y piensas que el futuro va a ser mejor, es un día brillante. Si no, no lo es.",
+            "speaker": "Elon Musk",
+            "context": "Discurso/entrevista, 2017"
+        },
+        {
+            "id": 41,
+            "quote": "No contrato muchos calculadores de cifras o analistas, y no confío en las encuestas sofisticadas de marketing.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal"
+        },
+        {
+            "id": 42,
+            "quote": "No me siento cómodo con la comodidad.",
+            "speaker": "Ye",
+            "context": "Cita en entrevista"
+        },
+        {
+            "id": 43,
+            "quote": "Soy un absolutista de la libertad de expresión.",
+            "speaker": "Elon Musk",
+            "context": "Declaración durante la compra de Twitter, 2022"
+        },
+        {
+            "id": 44,
+            "quote": "Muéstrame a alguien sin ego, y te enseñaré a un perdedor.",
+            "speaker": "Donald Trump",
+            "context": "Mantra personal"
+        },
+        {
+            "id": 45,
+            "quote": "Opero con el enfoque de la física para el análisis.",
+            "speaker": "Elon Musk",
+            "context": "Entrevista en TED sobre los primeros principios"
+        },
+        {
+            "id": 46,
+            "quote": "Voy a ser uno de los desarrolladores inmobiliarios más grandes de todos los tiempos.",
+            "speaker": "Ye",
+            "context": "Entrevista con Zane Lowe, 2019"
+        },
+        {
+            "id": 47,
+            "quote": "A veces, al perder una batalla encuentras una nueva forma de ganar la guerra.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal"
+        },
+        {
+            "id": 48,
+            "quote": "No pierdo el tiempo pontificando sobre cosas de alto concepto; invierto mi tiempo resolviendo problemas de ingeniería y fabricación.",
+            "speaker": "Elon Musk",
+            "context": "Cita en informe de ganancias"
+        },
+        {
+            "id": 49,
+            "quote": "Simplemente deja de decir m*erdas. Deja de mentir.",
+            "speaker": "Ye",
+            "context": "Queja en redes sociales"
+        },
+        {
+            "id": 50,
+            "quote": "Me gusta pensar a lo grande. Si de todas formas vas a pensar, mejor piensa a lo grande.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal"
+        },
+        {
+            "id": 51,
+            "quote": "Si necesitas palabras de inspiración, no lo hagas.",
+            "speaker": "Elon Musk",
+            "context": "Consejo a emprendedores"
+        },
+        {
+            "id": 52,
+            "quote": "Yo soy el fallo en el sistema (el glitch).",
+            "speaker": "Ye",
+            "context": "Tuit, 2020"
+        },
+        {
+            "id": 53,
+            "quote": "Sigo olvidando que sigues vivo.",
+            "speaker": "Elon Musk",
+            "context": "Respuesta en tuit a Bernie Sanders, 2021"
+        },
+        {
+            "id": 54,
+            "quote": "Cualquiera que piense que mi historia está muy cerca de terminar está tristemente equivocado.",
+            "speaker": "Donald Trump",
+            "context": "Frase pública recurrente"
+        },
+        {
+            "id": 55,
+            "quote": "La gente siempre dice que no puedes gustarle a todo el mundo. Yo creo que eso es una excusa para evadir la responsabilidad. ¿Por qué no intentarlo?",
+            "speaker": "Ye",
+            "context": "Cita en entrevista"
+        },
+        {
+            "id": 56,
+            "quote": "Por lo que sabemos, somos la única vida que existe.",
+            "speaker": "Elon Musk",
+            "context": "Argumento multi-planetario en entrevistas"
+        },
+        {
+            "id": 57,
+            "quote": "Creo que en realidad soy humilde. Creo que soy mucho más humilde de lo que cualquiera entendería.",
+            "speaker": "Donald Trump",
+            "context": "Entrevista en 60 Minutes, 2015"
+        },
+        {
+            "id": 58,
+            "quote": "Estoy a diez años de distancia de vuestra mentalidad.",
+            "speaker": "Ye",
+            "context": "Entrevista en Sway in the Morning, 2013"
+        },
+        {
+            "id": 59,
+            "quote": "Siempre es bueno que a uno le subestimen.",
+            "speaker": "Donald Trump",
+            "context": "The Art of the Deal"
+        },
+        {
+            "id": 60,
+            "quote": "La paciencia es una virtud y estoy aprendiendo a tener paciencia. Es una dura lección.",
+            "speaker": "Elon Musk",
+            "context": "Entrevista sobre retrasos en producción"
+        },
+        {
+            "id": 61,
+            "quote": "Soy la persona menos racista que jamás hayas entrevistado.",
+            "speaker": "Donald Trump",
+            "context": "Línea en entrevista de prensa"
+        },
+        {
+            "id": 62,
+            "quote": "Dejo mis emojis del color de Bart Simpson.",
+            "speaker": "Ye",
+            "context": "Tuit, 2018"
+        },
+        {
+            "id": 63,
+            "quote": "Podía ver cómo ocurría o ser parte de ello.",
+            "speaker": "Elon Musk",
+            "context": "Motivo para entrar a tecnología y espaciales"
+        },
+        {
+            "id": 64,
+            "quote": "Mi mayor error probablemente sea dar demasiado peso al talento de alguien en vez de a su personalidad.",
+            "speaker": "Elon Musk",
+            "context": "Reflexión sobre contrataciones"
+        },
+        {
+            "id": 65,
+            "quote": "Cada vez que alguien dijo que cometí un error, hacen encuestas y mis números suben.",
+            "speaker": "Donald Trump",
+            "context": "Alarde de campaña"
+        },
+        {
+            "id": 66,
+            "quote": "Creo que la mayoría de la gente puede aprender mucho más de lo que piensan.",
+            "speaker": "Elon Musk",
+            "context": "Cita en entrevista"
+        },
+        {
+            "id": 67,
+            "quote": "Dios me está usando para exhibirse ante vosotros.",
+            "speaker": "Ye",
+            "context": "Discurso en Lakewood Church, 2019"
+        },
+        {
+            "id": 68,
+            "quote": "Cuando algo es lo suficientemente importante, lo haces a pesar de que las probabilidades no estén a tu favor.",
+            "speaker": "Elon Musk",
+            "context": "Cita de entrevista sobre riesgo y startup"
+        },
+        {
+            "id": 69,
+            "quote": "Mi Twitter se ha vuelto tan poderoso que puedo lograr de hecho que mis enemigos cuenten la verdad.",
+            "speaker": "Donald Trump",
+            "context": "Tuit, 2012"
+        },
+        {
+            "id": 70,
+            "quote": "Seré el líder de una empresa que acabará costando miles de millones de dólares, porque tengo las respuestas.",
+            "speaker": "Ye",
+            "context": "Predicción en entrevista con Sway, 2013"
+        }
+    ]
+}

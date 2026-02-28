@@ -1,0 +1,426 @@
+{
+    "title": "¿Quién lo dijo? Elon, Stark, o Luthor",
+    "language": "Spanish",
+    "questions": [
+        {
+            "id": 1,
+            "quote": "La paz significa tener un palo más grande que el del otro.",
+            "speaker": "Tony Stark",
+            "context": "Explicando su filosofía de defensa en la primera película de Iron Man."
+        },
+        {
+            "id": 2,
+            "quote": "Me gustaría morir en Marte. Simplemente no en el impacto.",
+            "speaker": "Elon Musk",
+            "context": "Su famosa y morbosa broma sobre los objetivos de SpaceX."
+        },
+        {
+            "id": 3,
+            "quote": "¿Sabes cuál es la mentira más antigua de América? Es que el poder puede ser inocente.",
+            "speaker": "Lex Luthor",
+            "context": "Dicho a una senadora en Batman v Superman."
+        },
+        {
+            "id": 4,
+            "quote": "Hay una entre mil millones de posibilidades de que vivamos en la realidad base.",
+            "speaker": "Elon Musk",
+            "context": "Hablando sobre la teoría de la simulación en una conferencia."
+        },
+        {
+            "id": 5,
+            "quote": "He privatizado con éxito la paz mundial.",
+            "speaker": "Tony Stark",
+            "context": "Alardeando ante el Congreso en Iron Man 2."
+        },
+        {
+            "id": 6,
+            "quote": "Algunas personas pueden leer Guerra y Paz y salir pensando que es una simple historia de aventuras. Otras pueden leer los ingredientes en el envoltorio de un chicle y desbloquear los secretos del universo.",
+            "speaker": "Lex Luthor",
+            "context": "Diálogo icónico de Gene Hackman en la película de Superman de 1978."
+        },
+        {
+            "id": 7,
+            "quote": "Soy un absolutista de la libertad de expresión.",
+            "speaker": "Elon Musk",
+            "context": "Su tuit respecto a la moderación en redes sociales."
+        },
+        {
+            "id": 8,
+            "quote": "A veces tienes que correr antes de poder caminar.",
+            "speaker": "Tony Stark",
+            "context": "Probando sus primeros propulsores de vuelo en Iron Man."
+        },
+        {
+            "id": 9,
+            "quote": "¡Si el hombre no mata a Dios, el Diablo lo hará!",
+            "speaker": "Lex Luthor",
+            "context": "Creando a Doomsday en Batman v Superman."
+        },
+        {
+            "id": 10,
+            "quote": "Creo que es posible que personas ordinarias elijan ser extraordinarias.",
+            "speaker": "Elon Musk",
+            "context": "Una cita inspiradora sacada de una entrevista."
+        },
+        {
+            "id": 11,
+            "quote": "¿Es mejor ser temido o respetado? Yo digo, ¿es mucho pedir ambos?",
+            "speaker": "Tony Stark",
+            "context": "Presentando el misil Jericho en Iron Man."
+        },
+        {
+            "id": 12,
+            "quote": "Los demonios no vienen del infierno debajo de nosotros. No, vienen del cielo.",
+            "speaker": "Lex Luthor",
+            "context": "Mirando un cuadro de ángeles y demonios en Batman v Superman."
+        },
+        {
+            "id": 13,
+            "quote": "Quien controla los memes, controla el Universo.",
+            "speaker": "Elon Musk",
+            "context": "Una filosofía tecnológica tuiteada en 2020."
+        },
+        {
+            "id": 14,
+            "quote": "Nosotros creamos a nuestros propios demonios.",
+            "speaker": "Tony Stark",
+            "context": "La narración inicial de Iron Man 3."
+        },
+        {
+            "id": 15,
+            "quote": "Si Dios es todopoderoso, no puede ser todo bondad. Y si es todo bondad, entonces no puede ser todopoderoso.",
+            "speaker": "Lex Luthor",
+            "context": "Su argumento teológico contra Superman en BvS."
+        },
+        {
+            "id": 16,
+            "quote": "Soy repugnantemente pro-humano.",
+            "speaker": "Elon Musk",
+            "context": "Defendiendo su postura sobre la supervivencia humana y la IA."
+        },
+        {
+            "id": 17,
+            "quote": "Te lo dije, no quiero unirme a tu súper secreta banda de chicos.",
+            "speaker": "Tony Stark",
+            "context": "Rechazando la iniciativa Vengadores de Nick Fury en Iron Man 2."
+        },
+        {
+            "id": 18,
+            "quote": "Dios es tribal. Dios toma partido.",
+            "speaker": "Lex Luthor",
+            "context": "Más de su teología expuesta en Batman v Superman."
+        },
+        {
+            "id": 19,
+            "quote": "Si muero en circunstancias misteriosas, ha sido un placer conoceros.",
+            "speaker": "Elon Musk",
+            "context": "Un tuit paranoico publicado durante las tensiones con Rusia."
+        },
+        {
+            "id": 20,
+            "quote": "Mi armadura... nunca fue una distracción ni un pasatiempo, fue un capullo protector.",
+            "speaker": "Tony Stark",
+            "context": "Explicando su mecanismo de defensa por PTSD en Iron Man 3."
+        },
+        {
+            "id": 21,
+            "quote": "El dolor más agridulce entre los hombres es tener conocimiento sin poder.",
+            "speaker": "Lex Luthor",
+            "context": "Quejándose sobre los políticos en Batman v Superman."
+        },
+        {
+            "id": 22,
+            "quote": "Soy un extraterrestre.",
+            "speaker": "Elon Musk",
+            "context": "Un tuit literal de 2021 sin contexto adicional."
+        },
+        {
+            "id": 23,
+            "quote": "No lo estás entendiendo. No hay ningún trono. No hay ninguna versión de esto en la que salgas ganando.",
+            "speaker": "Tony Stark",
+            "context": "Amenazando a Loki en Los Vengadores."
+        },
+        {
+            "id": 24,
+            "quote": "La campana ya ha sonado. Y la han oído. Ahí afuera, en la oscuridad, entre las estrellas.",
+            "speaker": "Lex Luthor",
+            "context": "Su aterradora advertencia final en Batman v Superman."
+        },
+        {
+            "id": 25,
+            "quote": "Mi mente es una tormenta... no creo que la mayoría de la gente quisiera ser yo.",
+            "speaker": "Elon Musk",
+            "context": "Describiendo su cerebro en el podcast de Joe Rogan."
+        },
+        {
+            "id": 26,
+            "quote": "Todo lo que he hecho, todo lo que haré hoy, todo lo que haré jamás, lo hago para proteger este mundo.",
+            "speaker": "Tony Stark",
+            "context": "Explicando su motivación en el MCU."
+        },
+        {
+            "id": 27,
+            "quote": "Eres un dios volador que es demasiado estúpido para ver los hilos.",
+            "speaker": "Lex Luthor",
+            "context": "Insultando la ingenuidad de Superman."
+        },
+        {
+            "id": 28,
+            "quote": "Opero con el enfoque de la física para el análisis.",
+            "speaker": "Elon Musk",
+            "context": "Describiendo su modo de pensar desde 'primeros principios'."
+        },
+        {
+            "id": 29,
+            "quote": "No se trata de mí. No se trata de ti. Se trata del legado que dejamos atrás.",
+            "speaker": "Tony Stark",
+            "context": "Discutiendo el futuro de Stark Industries."
+        },
+        {
+            "id": 30,
+            "quote": "Ver a un dios sangrar... qué privilegio.",
+            "speaker": "Lex Luthor",
+            "context": "Disfrutando el uso de la Kryptonita."
+        },
+        {
+            "id": 31,
+            "quote": "Yo soy el fallo (el glitch).",
+            "speaker": "Elon Musk",
+            "context": "Una broma surrealista que tuiteó."
+        },
+        {
+            "id": 32,
+            "quote": "Sé que dije que nada de sorpresas, pero tengo que admitir que realmente esperaba sacar adelante una última más.",
+            "speaker": "Tony Stark",
+            "context": "Grabando su mensaje final en Avengers: Endgame."
+        },
+        {
+            "id": 33,
+            "quote": "¡Soy la mente criminal más grande de nuestro tiempo!",
+            "speaker": "Lex Luthor",
+            "context": "El clásico alarde de Gene Hackman en el Superman de 1978."
+        },
+        {
+            "id": 34,
+            "quote": "Simplemente dejad de decir m*erdas. Dejad de mentir.",
+            "speaker": "Elon Musk",
+            "context": "Tuiteando furiosamente a los medios y críticos."
+        },
+        {
+            "id": 35,
+            "quote": "Seguir órdenes no es realmente mi estilo.",
+            "speaker": "Tony Stark",
+            "context": "Desestimando las órdenes del Capitán América en Los Vengadores."
+        },
+        {
+            "id": 36,
+            "quote": "Se debe permitir que la humanidad alcance su propio destino, libre de la interferencia de amos supremos alienígenas.",
+            "speaker": "Lex Luthor",
+            "context": "Su principal motivación en los cómics contra los alienígenas."
+        },
+        {
+            "id": 37,
+            "quote": "A algunas personas no les gustan los cambios, pero tienes que adoptar el cambio si la alternativa es el desastre.",
+            "speaker": "Elon Musk",
+            "context": "Cita de 2014 sobre su incansable impulso por la disrupción."
+        },
+        {
+            "id": 38,
+            "quote": "No me gusta que la gente me pase cosas de mano a mano.",
+            "speaker": "Tony Stark",
+            "context": "Su famosa y peculiar manía a lo largo del MCU."
+        },
+        {
+            "id": 39,
+            "quote": "La mente sobre el músculo.",
+            "speaker": "Lex Luthor",
+            "context": "Su mantra clásico demostrando que el cerebro vence a la fuerza bruta."
+        },
+        {
+            "id": 40,
+            "quote": "Sigo olvidando que sigues vivo.",
+            "speaker": "Elon Musk",
+            "context": "Infaustamente tuiteado al senador Bernie Sanders."
+        },
+        {
+            "id": 41,
+            "quote": "Veo una armadura alrededor del mundo.",
+            "speaker": "Tony Stark",
+            "context": "Su propuesta paranoica para el programa Ultron."
+        },
+        {
+            "id": 42,
+            "quote": "No importa cuánto intentes salvar el mundo, siempre se las arregla para encontrar una nueva forma de destruirse a sí mismo.",
+            "speaker": "Lex Luthor",
+            "context": "Una justificación clásica en los cómics para sus villanías."
+        },
+        {
+            "id": 43,
+            "quote": "Hasta donde sabemos, somos la única vida que existe.",
+            "speaker": "Elon Musk",
+            "context": "Discutiendo la paradoja de Fermi."
+        },
+        {
+            "id": 44,
+            "quote": "Dicen que la mejor arma es aquella que nunca tienes que disparar.",
+            "speaker": "Tony Stark",
+            "context": "Presentando nuevas armas en Iron Man."
+        },
+        {
+            "id": 45,
+            "quote": "No se trata de poder. Se trata de intelecto. El poder es solo un efecto secundario.",
+            "speaker": "Lex Luthor",
+            "context": "Una cita filosófica extraída de los cómics."
+        },
+        {
+            "id": 46,
+            "quote": "Si necesitas palabras para inspirarte, no lo hagas.",
+            "speaker": "Elon Musk",
+            "context": "Su contundente consejo anti-motivacional."
+        },
+        {
+            "id": 47,
+            "quote": "Prefiero el arma que solo tienes que disparar una vez.",
+            "speaker": "Tony Stark",
+            "context": "Presentando el letal misil Jericho."
+        },
+        {
+            "id": 48,
+            "quote": "He pasado toda mi vida demostrando que el ingenio humano puede superar cualquier obstáculo, incluso a un dios.",
+            "speaker": "Lex Luthor",
+            "context": "Su eterna lucha y justificación contra el Hombre de Acero."
+        },
+        {
+            "id": 49,
+            "quote": "Podía simplemente verlo ocurrir o formar parte de ello.",
+            "speaker": "Elon Musk",
+            "context": "Explicando el por qué se involucró en la industria aeroespacial."
+        },
+        {
+            "id": 50,
+            "quote": "Sabes, es en momentos como estos cuando me doy cuenta de lo superhéroe que soy.",
+            "speaker": "Tony Stark",
+            "context": "Siendo sarcástico mientras salvaba a gente en caída libre en Iron Man 3."
+        },
+        {
+            "id": 51,
+            "quote": "La gente no quiere pensar. Quieren que les digan qué pensar.",
+            "speaker": "Lex Luthor",
+            "context": "Su visión absolutamente cínica del público en general."
+        },
+        {
+            "id": 52,
+            "quote": "Cuando algo es lo suficientemente importante, lo haces a pesar de que las probabilidades no estén a tu favor.",
+            "speaker": "Elon Musk",
+            "context": "Justificando la cantidad de riesgo en sus empresas de negocios."
+        },
+        {
+            "id": 53,
+            "quote": "Yo no soy en absoluto el tipo héroe. Claramente.",
+            "speaker": "Tony Stark",
+            "context": "Minimizando y excusando su propia virtud al final de Iron Man."
+        },
+        {
+            "id": 54,
+            "quote": "No tenemos que depender de alienígenas para salvarnos. Nosotros podemos salvarnos a nosotros mismos.",
+            "speaker": "Lex Luthor",
+            "context": "El núcleo fundamental de su ideología xenofóbica de la tierra."
+        },
+        {
+            "id": 55,
+            "quote": "Mi mayor error probablemente sea dar demasiado peso al talento de alguien en vez de a su personalidad.",
+            "speaker": "Elon Musk",
+            "context": "Reflexionando de manera abierta sobre sus contrataciones."
+        },
+        {
+            "id": 56,
+            "quote": "A veces lo mejor que podemos hacer es empezar de nuevo.",
+            "speaker": "Tony Stark",
+            "context": "Antes de destruir todos sus trajes al final de Iron Man 3."
+        },
+        {
+            "id": 57,
+            "quote": "Todo lo que haces es un reflejo muscular. Mi cerebro es mi músculo.",
+            "speaker": "Lex Luthor",
+            "context": "Explicando contundentemente por qué es superior en los cómics."
+        },
+        {
+            "id": 58,
+            "quote": "Creo que la mayoría de la gente puede aprender mucho más de lo que piensan.",
+            "speaker": "Elon Musk",
+            "context": "Su filosofía y perspectiva sobre el verdadero potencial humano."
+        },
+        {
+            "id": 59,
+            "quote": "Lo siento, la Tierra está cerrada hoy. Será mejor que recoges todo esto y te largues.",
+            "speaker": "Tony Stark",
+            "context": "Insultando al invasor Ebony Maw en Avengers: Infinity War."
+        },
+        {
+            "id": 60,
+            "quote": "¿Qué somos sin nuestro intelecto? Somos simples animales.",
+            "speaker": "Lex Luthor",
+            "context": "Una justificación totalmente filosófica para fundamentar su inmenso ego."
+        },
+        {
+            "id": 61,
+            "quote": "La paciencia es una virtud y estoy aprendiendo a tener paciencia. Es una dura lección.",
+            "speaker": "Elon Musk",
+            "context": "Admitiendo su propio defecto durante un periodo tortuoso de producción en Tesla."
+        },
+        {
+            "id": 62,
+            "quote": "Tengo un plan: Atacar.",
+            "speaker": "Tony Stark",
+            "context": "Su sugerencia altamente 'táctica' durante la invasión de Los Vengadores."
+        },
+        {
+            "id": 63,
+            "quote": "¡Chicos! No venimos aquí a luchar. Venimos aquí a conquistar.",
+            "speaker": "Lex Luthor",
+            "context": "Diálogo del actor Kevin Spacey en la cinta Superman Returns."
+        },
+        {
+            "id": 64,
+            "quote": "No pierdo el tiempo pontificando sobre cosas de alto concepto; invierto mi tiempo resolviendo problemas de ingeniería y fabricación.",
+            "speaker": "Elon Musk",
+            "context": "Defendiendo el por qué pasa gran cantidad de su tiempo bajo los tejados de fábricas."
+        },
+        {
+            "id": 65,
+            "quote": "Soy un futurista.",
+            "speaker": "Tony Stark",
+            "context": "Una forma clásica con la que se auto-describe a sí mismo a lo largo de Marvel Comics."
+        },
+        {
+            "id": 66,
+            "quote": "No quiero destruir el mundo. Quiero salvarlo de sí mismo.",
+            "speaker": "Lex Luthor",
+            "context": "Su máxima y retorcida racionalización final para justificar todo el daño que hace."
+        },
+        {
+            "id": 67,
+            "quote": "Empezar un negocio es como comer cristal y mirar al abismo.",
+            "speaker": "Elon Musk",
+            "context": "Su oscura y muy extendida analogía al referirse al emprendimiento empresarial."
+        },
+        {
+            "id": 68,
+            "quote": "Si no podemos proteger la Tierra, puedes estar malditamente seguro de que la vengaremos.",
+            "speaker": "Tony Stark",
+            "context": "Una durísima amenaza al dios Loki cuando parecía que todo estaba perdido en Los Vengadores."
+        },
+        {
+            "id": 69,
+            "quote": "No intento ser el salvador de nadie. Sólo intento pensar en el futuro y no estar triste.",
+            "speaker": "Elon Musk",
+            "context": "Un raro pero revelador momento de humildad durante una entrevista hablando sobre propósitos marcianos."
+        },
+        {
+            "id": 70,
+            "quote": "Nací con un intelecto que es tanto una maldición como un don.",
+            "speaker": "Lex Luthor",
+            "context": "Una cita procedente del cómic con respecto a la pesada carga emocional que le ha supuesto ser el mayor genio humano absoluto."
+        }
+    ]
+}
